@@ -1,5 +1,6 @@
 package problem.models.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import problem.car.visitor.IVisitor;
@@ -15,6 +16,13 @@ public class Class implements IClass {
 	
 	public Class(String name) {
 		this.name = name;
+		this.methods = new ArrayList<IMethod>();
+		this.fields = new ArrayList<IField>();
+	}
+
+	public Class() {
+		this.methods = new ArrayList<IMethod>();
+		this.fields = new ArrayList<IField>();
 	}
 
 	@Override
@@ -41,6 +49,11 @@ public class Class implements IClass {
 	@Override
 	public void addMethod(IMethod m) {
 		this.methods.add(m);
+	}
+
+	@Override
+	public void addField(IField f) {
+		this.fields.add(f);
 	}
 
 }

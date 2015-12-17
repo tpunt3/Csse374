@@ -12,21 +12,18 @@ import problem.models.impl.Model;
 public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	private Model model;
 	private ClassVisitor decorated;
-	
 	private IClass clazz;
 	
 	public ClassMethodVisitor(int api) {
 		super(api);
+		this.clazz = null;
 	}
 
 	public ClassMethodVisitor(int api, ClassVisitor decorated, Model m) {
 		super(api, decorated);
 		this.model = m;
 		this.decorated = decorated;
-		
-		if(decorated instanceof IClazzGetter){
-			this.clazz = ((ClassMethodVisitor) decorated).getClazz();
-		}
+		this.clazz = null;
 	}
 
 	@Override
@@ -44,6 +41,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		// current class
 		// What is a good way for the code to remember what the current class
 		// is?
+		this.clazz = this.getClazz();
 		IClass current = this.model.getClazz(this.clazz.getName());
 		Method m = new Method(signature, accessLevel);
 		current.addMethod(m);
@@ -92,6 +90,9 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 
 	@Override
 	public IClass getClazz() {
+		if(decorated instanceof IClazzGetter){
+			return ((IClazzGetter) decorated).getClazz();
+		}
 		return this.clazz;
 	}
 }

@@ -1,5 +1,6 @@
 package problem.models.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,12 +17,11 @@ public class Model implements IModel, ITraverser{
 //	private Map<String, IClass> stringToClass = new HashMap<String, IClass>();
 	
 	public Model(){
-		
+		this.classes = new ArrayList<IClass>();
 	}
 
 	public Model(Collection<IClass> classes) {
 		this.classes = classes;
-		
 	}
 
 	@Override
@@ -40,12 +40,11 @@ public class Model implements IModel, ITraverser{
 	
 	public void addClazz(IClass clazz){
 		classes.add(clazz);
-		//stringToClass.put(clazz.getName(), classes.);
 	}
 	
 	public IClass getClazz(String key){
 		for(IClass clazz : classes){
-			if(clazz.getName() == key){
+			if(clazz.getName().equals(key)){
 				return clazz;
 			}
 		}

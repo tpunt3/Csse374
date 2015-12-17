@@ -15,6 +15,7 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 	public ClassDeclarationVisitor(int api, Model m) {
 		super(api);
 		this.model = m;
+		this.clazz = new Class();
 	}
 
 	@Override
@@ -26,7 +27,6 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 		// TODO: construct an internal representation of the class for later use
 		// by decorators
 		
-		// TODO: ...
 		this.clazz = new Class(name);
 		this.model.addClazz(clazz);
 		

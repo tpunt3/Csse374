@@ -47,5 +47,7 @@ public class DesignParser {
 			// visit the class
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		}
+		
+		System.out.println(model.getClasses().toString());
 	}
 }
