@@ -5,14 +5,18 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
+import problem.models.api.IClass;
 import problem.models.impl.Field;
+import problem.models.impl.Model;
 
-public class ClassFieldVisitor extends ClassVisitor {
+public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
+	private IClass clazz;
+	
 	public ClassFieldVisitor(int api) {
 		super(api);
 	}
 
-	public ClassFieldVisitor(int api, ClassVisitor decorated) {
+	public ClassFieldVisitor(int api, ClassVisitor decorated, Model m) {
 		super(api, decorated);
 	}
 
@@ -50,5 +54,11 @@ public class ClassFieldVisitor extends ClassVisitor {
 		// method.
 		
 		return level;
+	}
+
+	@Override
+	public IClass getClazz() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

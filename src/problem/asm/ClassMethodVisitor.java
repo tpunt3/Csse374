@@ -5,15 +5,27 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
+import problem.models.api.IClass;
 import problem.models.impl.Method;
+import problem.models.impl.Model;
 
-public class ClassMethodVisitor extends ClassVisitor {
+public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
+	private Model model;
+	private ClassVisitor decorated;
+	
+	private IClass clazz;
+	
 	public ClassMethodVisitor(int api) {
 		super(api);
 	}
 
-	public ClassMethodVisitor(int api, ClassVisitor decorated) {
+	public ClassMethodVisitor(int api, ClassVisitor decorated, Model m) {
 		super(api, decorated);
+		this.model = m;
+		this.decorated = decorated;
+		
+		ClassDeclarationVisitor v = (ClassDeclarationVisitor)decorated;
+		this.clazz = v.getClazz();
 	}
 
 	@Override
@@ -33,6 +45,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		// is?
 		
 		Method m = new Method(signature, accessLevel);
+		
 		
 		return toDecorate;
 	}
@@ -74,5 +87,11 @@ public class ClassMethodVisitor extends ClassVisitor {
 			// TODO: ADD this information to your representation of the current
 			// method.
 		}
+	}
+
+	@Override
+	public IClass getClazz() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

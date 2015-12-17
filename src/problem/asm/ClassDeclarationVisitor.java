@@ -1,12 +1,20 @@
 package problem.asm;
 
 import java.util.Arrays;
+
+import problem.models.api.IClass;
 import problem.models.impl.Class;
+import problem.models.impl.Model;
+
 import org.objectweb.asm.ClassVisitor;
 
-public class ClassDeclarationVisitor extends ClassVisitor {
-	public ClassDeclarationVisitor(int api) {
+public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGetter {
+	private Model model;
+	private IClass clazz;
+	
+	public ClassDeclarationVisitor(int api, Model m) {
 		super(api);
+		this.model = m;
 	}
 
 	@Override
@@ -18,7 +26,14 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		// TODO: construct an internal representation of the class for later use
 		// by decorators
 		
-		Class c = new Class(name);
+		// TODO: ...
+		this.clazz = new Class(name);
+		this.model.getClasses().add(clazz);
+		
 		super.visit(version, access, name, signature, superName, interfaces);
+	}
+	
+	public IClass getClazz() {
+		return this.clazz;
 	}
 }
