@@ -38,4 +38,9 @@ public class Class implements IClass {
 		return this.fields;
 	}
 
+	@Override
+	public void addMethod(IMethod m) {
+		this.methods.add(m);
+	}
+
 }

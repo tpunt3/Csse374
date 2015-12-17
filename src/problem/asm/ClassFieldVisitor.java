@@ -18,6 +18,10 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 
 	public ClassFieldVisitor(int api, ClassVisitor decorated, Model m) {
 		super(api, decorated);
+		
+		if(decorated instanceof IClazzGetter){
+			this.clazz = ((ClassFieldVisitor) decorated).getClazz();
+		}
 	}
 
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
@@ -32,6 +36,7 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 		accessLevel = addAccessLevel(access);
 		
 		Field f = new Field(type,accessLevel);
+		
 		
 		return toDecorate;
 	};
@@ -58,7 +63,6 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 
 	@Override
 	public IClass getClazz() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.clazz;
 	}
 }

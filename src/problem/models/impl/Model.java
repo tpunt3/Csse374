@@ -13,7 +13,7 @@ import problem.models.api.IModel;
 public class Model implements IModel, ITraverser{
 	
 	private Collection<IClass> classes;
-	private Map<String, IClass> stringToClass = new HashMap<String, IClass>();
+//	private Map<String, IClass> stringToClass = new HashMap<String, IClass>();
 	
 	public Model(){
 		
@@ -35,6 +35,20 @@ public class Model implements IModel, ITraverser{
 	}
 	
 	public String toString(){
+		return null;
+	}
+	
+	public void addClazz(IClass clazz){
+		classes.add(clazz);
+		//stringToClass.put(clazz.getName(), classes.);
+	}
+	
+	public IClass getClazz(String key){
+		for(IClass clazz : classes){
+			if(clazz.getName() == key){
+				return clazz;
+			}
+		}
 		return null;
 	}
 

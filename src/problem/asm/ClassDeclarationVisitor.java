@@ -28,7 +28,7 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 		
 		// TODO: ...
 		this.clazz = new Class(name);
-		this.model.getClasses().add(clazz);
+		this.model.addClazz(clazz);
 		
 		super.visit(version, access, name, signature, superName, interfaces);
 	}

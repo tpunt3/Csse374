@@ -24,8 +24,9 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		this.model = m;
 		this.decorated = decorated;
 		
-		ClassDeclarationVisitor v = (ClassDeclarationVisitor)decorated;
-		this.clazz = v.getClazz();
+		if(decorated instanceof IClazzGetter){
+			this.clazz = ((ClassMethodVisitor) decorated).getClazz();
+		}
 	}
 
 	@Override
@@ -43,9 +44,9 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		// current class
 		// What is a good way for the code to remember what the current class
 		// is?
-		
+		IClass current = this.model.getClazz(this.clazz.getName());
 		Method m = new Method(signature, accessLevel);
-		
+		current.addMethod(m);
 		
 		return toDecorate;
 	}
@@ -91,7 +92,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 
 	@Override
 	public IClass getClazz() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.clazz;
 	}
 }
