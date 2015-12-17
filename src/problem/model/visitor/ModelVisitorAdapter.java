@@ -1,0 +1,50 @@
+package problem.model.visitor;
+
+import problem.models.api.IClass;
+import problem.models.api.IField;
+import problem.models.api.IMethod;
+import problem.models.api.IModel;
+
+public class ModelVisitorAdapter implements IModelVisitor{
+
+	public ModelVisitorAdapter() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void preVisit(IModel m) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IModel m) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IClass c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IMethod m) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IField f) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void postVisit(IModel m) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
