@@ -1,5 +1,6 @@
 package problem.models.api;
 
 public interface IRelation extends IElement{
-	public String getRelations();
+	public String getSuperClass();
+	public String[] getInterfaces();
 }
