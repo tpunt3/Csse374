@@ -8,7 +8,6 @@ import problem.models.api.IModel;
 public class ModelVisitorAdapter implements IModelVisitor{
 
 	public ModelVisitorAdapter() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -38,37 +37,31 @@ public class ModelVisitorAdapter implements IModelVisitor{
 
 	@Override
 	public void visit(IMethod m) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void visit(IField f) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void preVisit(IMethod m) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void preVisit(IField f) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void postVisit(IMethod m) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void postVisit(IField f) {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -11,6 +11,10 @@ import problem.models.api.IModel;
 public class ModelGVOutputStream extends ModelVisitorAdapter{
 
 	OutputStream out;
+	
+	public ModelGVOutputStream() {
+		
+	}
 
 	public ModelGVOutputStream(OutputStream out) {
 		this.out = out;
@@ -23,7 +27,6 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 	
 	@Override
 	public void visit(IModel m) {
-		// TODO Auto-generated method stub
 		super.visit(m);
 	}
 
@@ -53,13 +56,11 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 
 	@Override
 	public void visit(IMethod m) {
-		// TODO Auto-generated method stub
 		super.visit(m);
 	}
 
 	@Override
 	public void postVisit(IMethod m) {
-		// TODO Auto-generated method stub
 		super.postVisit(m);
 	}
 
@@ -74,12 +75,9 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 
 	@Override
 	public void postVisit(IField f) {
-		// TODO Auto-generated method stub
 		super.postVisit(f);
 	}
 
-	public ModelGVOutputStream() {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 }
