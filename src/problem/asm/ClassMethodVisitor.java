@@ -31,7 +31,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		String accessLevel;
 		// TODO: delete the line below
-		System.out.println("method " + name);
+//		System.out.println("method " + name);
 		// TODO: create an internal representation of the current method and
 		// pass it to the methods below
 		accessLevel = addAccessLevel(access);
@@ -62,7 +62,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		}
 		
 		// TODO: delete the next line
-		System.out.println("access level: " + level);
+//		System.out.println("access level: " + level);
 		// TODO: ADD this information to your representation of the current
 		// method.
 		
@@ -72,7 +72,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	void addReturnType(String desc) {
 		String returnType = Type.getReturnType(desc).getClassName();
 		// TODO: delete the next line
-		System.out.println("return type: " + returnType);
+//		System.out.println("return type: " + returnType);
 		// TODO: ADD this information to your representation of the current
 		// method.
 	}
@@ -82,7 +82,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		for (int i = 0; i < args.length; i++) {
 			String arg = args[i].getClassName();
 			// TODO: delete the next line
-			System.out.println("arg " + i + ": " + arg);
+//			System.out.println("arg " + i + ": " + arg);
 			// TODO: ADD this information to your representation of the current
 			// method.
 		}

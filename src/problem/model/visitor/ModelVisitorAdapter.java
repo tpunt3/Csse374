@@ -13,20 +13,27 @@ public class ModelVisitorAdapter implements IModelVisitor{
 
 	@Override
 	public void preVisit(IModel m) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void visit(IModel m) {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void postVisit(IModel m) {
+	}
+
+	@Override
+	public void preVisit(IClass c) {
 	}
 
 	@Override
 	public void visit(IClass c) {
-		// TODO Auto-generated method stub
-		
+	}
+	
+	@Override
+	public void postVisit(IClass c) {
 	}
 
 	@Override
@@ -42,18 +49,6 @@ public class ModelVisitorAdapter implements IModelVisitor{
 	}
 
 	@Override
-	public void postVisit(IModel m) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void preVisit(IClass c) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void preVisit(IMethod m) {
 		// TODO Auto-generated method stub
 		
@@ -61,12 +56,6 @@ public class ModelVisitorAdapter implements IModelVisitor{
 
 	@Override
 	public void preVisit(IField f) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void postVisit(IClass c) {
 		// TODO Auto-generated method stub
 		
 	}
