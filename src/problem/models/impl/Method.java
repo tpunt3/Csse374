@@ -1,6 +1,7 @@
 package problem.models.impl;
 
 import problem.car.visitor.IVisitor;
+import problem.model.visitor.IModelVisitor;
 import problem.models.api.IMethod;
 
 public class Method implements IMethod {
@@ -14,11 +15,6 @@ public class Method implements IMethod {
 	}
 
 	@Override
-	public void accept(IVisitor v) {
-
-	}
-
-	@Override
 	public String getSignature() {
 		return this.signature;
 	}
@@ -26,6 +22,12 @@ public class Method implements IMethod {
 	@Override
 	public String getAccess() {
 		return this.access;
+	}
+
+	@Override
+	public void accept(IModelVisitor v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

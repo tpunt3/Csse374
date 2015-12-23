@@ -1,6 +1,6 @@
 package problem.models.impl;
 
-import problem.car.visitor.IVisitor;
+import problem.model.visitor.IModelVisitor;
 import problem.models.api.IRelation;
 
 public class Relation implements IRelation{
@@ -24,12 +24,7 @@ public class Relation implements IRelation{
 		this.superClass = superClass;
 		this.interfaces = i;
 	}
-
-	@Override
-	public void accept(IVisitor v) {
-		
-	}
-
+	
 	@Override
 	public String getSuperClass() {
 		return this.superClass;
@@ -38,6 +33,12 @@ public class Relation implements IRelation{
 	@Override
 	public String[] getInterfaces() {
 		return this.interfaces;
+	}
+
+	@Override
+	public void accept(IModelVisitor v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

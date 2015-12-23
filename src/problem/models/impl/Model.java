@@ -7,11 +7,13 @@ import java.util.Map;
 
 import problem.car.visitor.ITraverser;
 import problem.car.visitor.IVisitor;
+import problem.model.visitor.IModelTraverser;
+import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IElement;
 import problem.models.api.IModel;
 
-public class Model implements IModel, ITraverser{
+public class Model implements IModel{
 	
 	private Collection<IClass> classes;
 //	private Map<String, IClass> stringToClass = new HashMap<String, IClass>();
@@ -30,7 +32,7 @@ public class Model implements IModel, ITraverser{
 	}
 
 	@Override
-	public void accept(IVisitor v) {
+	public void accept(IModelVisitor v) {
 		
 	}
 	

@@ -1,6 +1,7 @@
 package problem.models.impl;
 
 import problem.car.visitor.IVisitor;
+import problem.model.visitor.IModelVisitor;
 import problem.models.api.IField;
 
 public class Field implements IField{
@@ -16,11 +17,6 @@ public class Field implements IField{
 	}
 
 	@Override
-	public void accept(IVisitor v) {
-		
-	}
-
-	@Override
 	public String getType() {
 		return this.type;
 	}
@@ -28,6 +24,12 @@ public class Field implements IField{
 	@Override
 	public String getAccess() {
 		return this.access;
+	}
+
+	@Override
+	public void accept(IModelVisitor v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

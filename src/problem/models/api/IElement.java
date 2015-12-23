@@ -1,8 +1,7 @@
 package problem.models.api;
 
-import problem.car.visitor.ITraverser;
-import problem.car.visitor.IVisitor;
+import problem.model.visitor.IModelTraverser;
 
-public interface IElement extends ITraverser {
+public interface IElement extends IModelTraverser {
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import problem.car.visitor.IVisitor;
+import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
@@ -27,12 +28,6 @@ public class Class implements IClass {
 		this.methods = new ArrayList<IMethod>();
 		this.fields = new ArrayList<IField>();
 		this.relations = new ArrayList<IRelation>();
-	}
-
-	@Override
-	public void accept(IVisitor v) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -68,6 +63,12 @@ public class Class implements IClass {
 	@Override
 	public void addRelation(IRelation r) {
 		this.relations.add(r);
+	}
+
+	@Override
+	public void accept(IModelVisitor v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
