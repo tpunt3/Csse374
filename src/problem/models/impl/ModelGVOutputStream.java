@@ -1,6 +1,9 @@
 package problem.models.impl;
 
+import java.io.IOException;
 import java.io.OutputStream;
+
+import javax.management.RuntimeErrorException;
 
 import problem.model.visitor.ModelVisitorAdapter;
 import problem.models.api.IClass;
@@ -15,6 +18,15 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 	public ModelGVOutputStream() {
 		
 	}
+	
+	private void write(String s) {
+		try{
+			s=s+"\n";
+			out.write(s.getBytes());
+		} catch (IOException e){
+			new RuntimeException(e);
+		}
+	}
 
 	public ModelGVOutputStream(OutputStream out) {
 		this.out = out;
@@ -23,6 +35,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 	@Override
 	public void preVisit(IModel m) {
 		String s = "digraph model{\n" + "rankdir = BT;";
+		this.write(s);
 	}
 	
 	@Override
@@ -33,21 +46,25 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 	@Override
 	public void postVisit(IModel m) {
 		String s = "}";
+		this.write(s);
 	}
 	
 	@Override
 	public void preVisit(IClass c) {
-		String s = c.getName() + " [\n" + "shape=\"record\",";
+		String s = String.format("%s[\n shape = \"record\",", c.getName());
+		this.write(s);
 	}
 
 	@Override
 	public void visit(IClass c) {
-		String s = "label = " + c.getName() + "| ";
+		String s = String.format("label = \"{%s|", c.getName());
+		this.write(s);
 	}
 
 	@Override
 	public void postVisit(IClass c) {
 		String s = "]";
+		this.write(s);
 	}
 
 	@Override
@@ -70,7 +87,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 
 	@Override
 	public void visit(IField f) {
-		String s = f.getAccess() + " " + f.getType();
+		String s = String.format("%s %s", f.getAccess(), f.getType());
 	}
 
 	@Override
