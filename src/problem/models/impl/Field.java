@@ -1,6 +1,5 @@
 package problem.models.impl;
 
-import problem.car.visitor.IVisitor;
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IField;
 

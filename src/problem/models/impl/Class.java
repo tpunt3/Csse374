@@ -3,7 +3,6 @@ package problem.models.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import problem.car.visitor.IVisitor;
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IField;

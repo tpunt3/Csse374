@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import problem.car.visitor.ITraverser;
-import problem.car.visitor.IVisitor;
 import problem.model.visitor.IModelTraverser;
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;
