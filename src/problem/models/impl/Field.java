@@ -7,12 +7,22 @@ public class Field implements IField{
 	
 	private String type;
 	private String access;
-	
+	private String name;
 	
 
-	public Field(String type, String access) {
+	public Field(String type, String name, String access) {
 		this.type = type;
+		this.name = name;
 		this.access = access;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -27,8 +37,9 @@ public class Field implements IField{
 
 	@Override
 	public void accept(IModelVisitor v) {
-		// TODO Auto-generated method stub
-		
+		v.preVisit(this);
+		v.visit(this);
+		v.postVisit(this);
 	}
 
 }

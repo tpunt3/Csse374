@@ -15,9 +15,12 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 
 	OutputStream out;
 	
-	public ModelGVOutputStream() {
-		
-	}
+	public ModelGVOutputStream() {}
+	
+	public ModelGVOutputStream(OutputStream out) {
+		super();
+		this.out = out;
+	}	
 	
 	private void write(String s) {
 		try{
@@ -27,10 +30,6 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 			new RuntimeException(e);
 		}
 	}
-
-	public ModelGVOutputStream(OutputStream out) {
-		this.out = out;
-	}	
 
 	@Override
 	public void preVisit(IModel m) {
@@ -57,7 +56,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 
 	@Override
 	public void visit(IClass c) {
-		String s = String.format("label = \"{%s|", c.getName());
+		String s = String.format("label = \"{%s| ", c.getName());
 		this.write(s);
 	}
 
@@ -73,7 +72,8 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 
 	@Override
 	public void visit(IMethod m) {
-		super.visit(m);
+		String s = String.format("%s %s", m.getAccess(), m.getSignature());
+		this.write(s);
 	}
 
 	@Override
@@ -87,12 +87,12 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 
 	@Override
 	public void visit(IField f) {
-		String s = String.format("%s %s", f.getAccess(), f.getType());
+		String s = String.format("%s %s" + ":" +" %s\\l", f.getAccess(), f.getName(), f.getType());
+		this.write(s);
 	}
 
 	@Override
 	public void postVisit(IField f) {
-		super.postVisit(f);
 	}
 
 	

@@ -31,7 +31,11 @@ public class Model implements IModel{
 
 	@Override
 	public void accept(IModelVisitor v) {
-		
+		v.preVisit(this);
+		for(IClass c : this.classes){
+			c.accept(v);
+		}
+		v.postVisit(this);
 	}
 	
 	public String toString(){

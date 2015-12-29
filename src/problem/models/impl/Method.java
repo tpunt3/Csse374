@@ -25,8 +25,9 @@ public class Method implements IMethod {
 
 	@Override
 	public void accept(IModelVisitor v) {
-		// TODO Auto-generated method stub
-		
+		v.preVisit(this);
+		v.visit(this);
+		v.postVisit(this);
 	}
 
 }

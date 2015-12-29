@@ -35,7 +35,7 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 		this.clazz = this.getClazz();
 		
 		IClass current = this.model.getClazz(this.clazz.getName());
-		Field f = new Field(type,accessLevel);
+		Field f = new Field(type, name, accessLevel);
 		current.addField(f);
 		
 		return toDecorate;

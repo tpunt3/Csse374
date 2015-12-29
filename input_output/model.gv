@@ -1,0 +1,30 @@
+digraph model{
+rankdir = BT;
+puzzle/Creator[
+ shape = "record",
+label = "{puzzle/Creator| 
+public null
+public null
+]
+problem/AppLauncher[
+ shape = "record",
+label = "{problem/AppLauncher| 
+private watcher: java.nio.file.WatchService\l
+private dir: java.nio.file.Path\l
+private stop: boolean\l
+private processes: java.util.List\l
+private handlers: java.util.List\l
+private stringToAppHandler: java.util.Map\l
+default (Ljava/nio/file/Path;Ljava/util/Map<Ljava/lang/String;Lproblem/IExtensionHandler;>;)V
+public null
+protected null
+public null
+public null
+public null
+public null
+public null
+public null
+public null
+protected null
+]
+}

@@ -1,11 +1,17 @@
 package problem.asm;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
+import problem.model.visitor.IModelTraverser;
+import problem.model.visitor.IModelVisitor;
 import problem.models.impl.Model;
+import problem.models.impl.ModelGVOutputStream;
 
 public class DesignParser {
 	
@@ -46,6 +52,13 @@ public class DesignParser {
 			// Tell the Reader to use our (heavily decorated) ClassVisitor to
 			// visit the class
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			
+			//this is what they do in CarApp???
+			OutputStream out = new FileOutputStream("input_output/model.gv");
+			IModelVisitor gvWriter = new ModelGVOutputStream(out);
+			IModelTraverser traverser = (IModelTraverser)model;
+			traverser.accept(gvWriter);
+			out.close();
 		}
 		
 		System.out.println(model.getClasses().toString());
