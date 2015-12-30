@@ -8,6 +8,16 @@ public class Method implements IMethod {
 	private String signature;
 	private String access;
 	private String name;
+	private String args;
+	private String returnType;
+	
+	public String getReturnType(){
+		return returnType;
+	}
+
+	public String getArgs() {
+		return args;
+	}
 
 	@Override
 	public String getName() {
@@ -18,15 +28,11 @@ public class Method implements IMethod {
 		this.name = name;
 	}
 
-	public Method(String signature, String access, String name) {
-		this.signature = signature;
+	public Method(String access, String name, String args, String returnType) {
 		this.access = access;
 		this.name = name;
-	}
-
-	@Override
-	public String getSignature() {
-		return this.signature;
+		this.args = args;
+		this.returnType = returnType;
 	}
 
 	@Override

@@ -3,8 +3,8 @@ rankdir = BT;
 puzzle/Creator[
  shape = "record",
 label = "{puzzle/Creator| 
-public <init> void
-public main void
++<init>() : void\l
++main(String[]) : void\l
 ]
 problem/AppLauncher[
  shape = "record",
@@ -13,18 +13,18 @@ private watcher: java.nio.file.WatchService\l
 private dir: java.nio.file.Path\l
 private stop: boolean\l
 private processes: java.util.List\l
-private handlers: java.util.List\l
-private stringToAppHandler: java.util.Map\l
-default <init> void
-public run void
-protected clearEverything void
-public stopGracefully void
-public isRunning boolean
-public getApplicationsCount int
-public handleDirectoryEvent void
-public main void
-public registerHandler void
-public removeHandler void
-protected notifyHandlers void
+private handlerMap: java.util.HashMap\l
+private handlerCollection: java.util.Collection\l
+~<init>(Path) : void\l
++run() : void\l
+#clearEverything() : void\l
++stopGracefully() : void\l
++isRunning() : boolean\l
++getApplicationsCount() : int\l
++handleDirectoryEvent(String; Path) : void\l
++main(String[]) : void\l
++registerHandler(IHandler) : void\l
++removeHandler(IHandler) : void\l
+#notifyHandlers(String; String) : void\l
 ]
 }

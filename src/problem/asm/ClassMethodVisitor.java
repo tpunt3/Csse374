@@ -1,5 +1,7 @@
 package problem.asm;
 
+import java.util.ArrayList;
+
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -35,7 +37,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		// pass it to the methods below
 		accessLevel = addAccessLevel(access);
 		String returnType = addReturnType(desc);
-		addArguments(desc);
+		String args = addArguments(desc);
 		// TODO: add the current method to your internal representation of the
 		// current class
 		// What is a good way for the code to remember what the current class
@@ -43,7 +45,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		
 		this.clazz = this.getClazz();
 		IClass current = this.model.getClazz(this.clazz.getName());
-		Method m = new Method(returnType, accessLevel, name);
+		Method m = new Method(accessLevel, name, args, returnType);
 		current.addMethod(m);
 		
 		return toDecorate;
@@ -52,13 +54,17 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	String addAccessLevel(int access) {
 		String level = "";
 		if ((access & Opcodes.ACC_PUBLIC) != 0) {
-			level = "public";
+			//public
+			level = "+";
 		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
-			level = "protected";
+			//protected
+			level = "#";
 		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
-			level = "private";
+			//private
+			level = "-";
 		} else {
-			level = "default";
+			//default
+			level = "~";
 		}
 		return level;
 	}
@@ -68,15 +74,20 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		return returnType;
 	}
 
-	void addArguments(String desc) {
+	String addArguments(String desc) {
+		String argList = "";
 		Type[] args = Type.getArgumentTypes(desc);
 		for (int i = 0; i < args.length; i++) {
 			String arg = args[i].getClassName();
-			// TODO: delete the next line
-//			System.out.println("arg " + i + ": " + arg);
-			// TODO: ADD this information to your representation of the current
-			// method.
+			String[] splitArg = arg.split("\\.");
+			arg = splitArg[splitArg.length-1];
+			if(args.length > 1 && i < args.length -1){
+				argList += arg + "; ";
+			} else{
+				argList += arg;
+			}
 		}
+		return argList;
 	}
 
 	@Override
