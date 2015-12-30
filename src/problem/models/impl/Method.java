@@ -7,10 +7,21 @@ public class Method implements IMethod {
 
 	private String signature;
 	private String access;
+	private String name;
 
-	public Method(String signature, String access) {
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Method(String signature, String access, String name) {
 		this.signature = signature;
 		this.access = access;
+		this.name = name;
 	}
 
 	@Override

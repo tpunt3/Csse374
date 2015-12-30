@@ -43,7 +43,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		// is?
 		this.clazz = this.getClazz();
 		IClass current = this.model.getClazz(this.clazz.getName());
-		Method m = new Method(signature, accessLevel);
+		Method m = new Method(signature, accessLevel, name);
 		current.addMethod(m);
 		
 		return toDecorate;
