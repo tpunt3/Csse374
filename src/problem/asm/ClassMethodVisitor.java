@@ -30,20 +30,20 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		String accessLevel;
-		// TODO: delete the line below
-//		System.out.println("method " + name);
+		
 		// TODO: create an internal representation of the current method and
 		// pass it to the methods below
 		accessLevel = addAccessLevel(access);
-		addReturnType(desc);
+		String returnType = addReturnType(desc);
 		addArguments(desc);
 		// TODO: add the current method to your internal representation of the
 		// current class
 		// What is a good way for the code to remember what the current class
 		// is?
+		
 		this.clazz = this.getClazz();
 		IClass current = this.model.getClazz(this.clazz.getName());
-		Method m = new Method(signature, accessLevel, name);
+		Method m = new Method(returnType, accessLevel, name);
 		current.addMethod(m);
 		
 		return toDecorate;
@@ -60,21 +60,12 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		} else {
 			level = "default";
 		}
-		
-		// TODO: delete the next line
-//		System.out.println("access level: " + level);
-		// TODO: ADD this information to your representation of the current
-		// method.
-		
 		return level;
 	}
 
-	void addReturnType(String desc) {
+	String addReturnType(String desc) {
 		String returnType = Type.getReturnType(desc).getClassName();
-		// TODO: delete the next line
-//		System.out.println("return type: " + returnType);
-		// TODO: ADD this information to your representation of the current
-		// method.
+		return returnType;
 	}
 
 	void addArguments(String desc) {
