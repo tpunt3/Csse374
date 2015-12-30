@@ -5,7 +5,7 @@ shape = "record",
 label = "{puzzle/Creator| 
 +<init>() : void\l
 +main(String[]) : void\l
-]
+"]
 problem/AppLauncher[
 shape = "record",
 label = "{problem/AppLauncher| 
@@ -15,6 +15,7 @@ label = "{problem/AppLauncher|
 -processes: List\l
 -handlerMap: HashMap\l
 -handlerCollection: Collection\l
+|
 ~<init>(Path) : void\l
 +run() : void\l
 #clearEverything() : void\l
@@ -26,5 +27,5 @@ label = "{problem/AppLauncher|
 +registerHandler(IHandler) : void\l
 +removeHandler(IHandler) : void\l
 #notifyHandlers(String; String) : void\l
-]
+"]
 }

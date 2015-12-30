@@ -62,7 +62,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 
 	@Override
 	public void postVisit(IClass c) {
-		String s = "]";
+		String s = "\"]";
 		this.write(s);
 	}
 
@@ -95,6 +95,10 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 	public void postVisit(IField f) {
 	}
 
+	public void intermediateVisit(IClass c){
+		String s = "|";
+		this.write(s);
+	}
 	
 
 }

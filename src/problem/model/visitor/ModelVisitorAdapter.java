@@ -65,4 +65,9 @@ public class ModelVisitorAdapter implements IModelVisitor{
 		
 	}
 
+	@Override
+	public void intermediateVisit(IClass C) {
+		
+	}
+
 }

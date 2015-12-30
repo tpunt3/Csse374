@@ -20,4 +20,6 @@ public interface IModelVisitor {
 	public void postVisit(IClass c);
 	public void postVisit(IMethod m);
 	public void postVisit(IField f);
+	
+	public void intermediateVisit(IClass C);
 }

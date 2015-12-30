@@ -71,6 +71,11 @@ public class Class implements IClass {
 		for(IField f : this.fields){
 			f.accept(v);
 		}
+		
+		if(!this.fields.isEmpty()){
+			v.intermediateVisit(this);
+		}
+		
 		for(IMethod m : this.methods){
 			m.accept(v);
 		}
