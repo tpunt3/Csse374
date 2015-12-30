@@ -1,20 +1,20 @@
 digraph model{
 rankdir = BT;
 puzzle/Creator[
- shape = "record",
+shape = "record",
 label = "{puzzle/Creator| 
 +<init>() : void\l
 +main(String[]) : void\l
 ]
 problem/AppLauncher[
- shape = "record",
+shape = "record",
 label = "{problem/AppLauncher| 
-private watcher: java.nio.file.WatchService\l
-private dir: java.nio.file.Path\l
-private stop: boolean\l
-private processes: java.util.List\l
-private handlerMap: java.util.HashMap\l
-private handlerCollection: java.util.Collection\l
+-watcher: WatchService\l
+-dir: Path\l
+-stop: boolean\l
+-processes: List\l
+-handlerMap: HashMap\l
+-handlerCollection: Collection\l
 ~<init>(Path) : void\l
 +run() : void\l
 #clearEverything() : void\l

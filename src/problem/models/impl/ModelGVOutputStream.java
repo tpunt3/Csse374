@@ -50,7 +50,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 	
 	@Override
 	public void preVisit(IClass c) {
-		String s = String.format("%s[\n shape = \"record\",", c.getName());
+		String s = String.format("%s[\nshape = \"record\",", c.getName());
 		this.write(s);
 	}
 
@@ -87,7 +87,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter{
 
 	@Override
 	public void visit(IField f) {
-		String s = String.format("%s %s" + ":" +" %s\\l", f.getAccess(), f.getName(), f.getType());
+		String s = String.format("%s%s" + ":" +" %s\\l", f.getAccess(), f.getName(), f.getType());
 		this.write(s);
 	}
 
