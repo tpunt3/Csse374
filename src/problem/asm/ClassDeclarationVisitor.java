@@ -28,7 +28,10 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 		
 		this.clazz = new Class(name);
 		IRelation r = new Relation(superName, interfaces);
+		r.addSuperClass(name, superName);
+		r.addInterfaces(name, interfaces);
 		this.clazz.addRelation(r);
+		this.model.addRelation(r);
 		this.model.addClazz(clazz);
 		
 		super.visit(version, access, name, signature, superName, interfaces);

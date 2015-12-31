@@ -8,4 +8,5 @@ public interface IModel extends IModelTraverser{
 	public Collection<IClass> getClasses();
 	public void addClazz(IClass c);
 	public IClass getClazz(String s);
+	public Collection getRelations();
 }

@@ -4,6 +4,7 @@ import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
 import problem.models.api.IModel;
+import problem.models.api.IRelation;
 
 public class ModelVisitorAdapter implements IModelVisitor{
 
@@ -67,6 +68,38 @@ public class ModelVisitorAdapter implements IModelVisitor{
 
 	@Override
 	public void intermediateVisit(IClass C) {
+		
+	}
+
+	@Override
+	public void preVisit(IRelation r) {
+		
+	}
+
+	@Override
+	public void visit(IRelation r) {
+		
+	}
+
+	@Override
+	public void postVisit(IRelation r) {
+	}
+
+	@Override
+	public void visitRelations(IModel m) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitSuperclasses(IClass c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitInterfaces(IClass c) {
+		// TODO Auto-generated method stub
 		
 	}
 

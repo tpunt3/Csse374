@@ -10,18 +10,33 @@ import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IElement;
 import problem.models.api.IModel;
+import problem.models.api.IRelation;
 
 public class Model implements IModel{
 	
 	private Collection<IClass> classes;
-	
+	private Collection<IRelation> relations;
 	
 	public Model(){
 		this.classes = new ArrayList<IClass>();
+		this.relations = new ArrayList<IRelation>();
 	}
 
 	public Model(Collection<IClass> classes) {
 		this.classes = classes;
+		this.relations = new ArrayList<IRelation>();
+	}
+
+	public Collection<IRelation> getRelations() {
+		return relations;
+	}
+
+	public void setRelations(Collection<IRelation> relations) {
+		this.relations = relations;
+	}
+	
+	public void addRelation(IRelation r){
+		this.relations.add(r);
 	}
 
 	@Override
@@ -35,6 +50,7 @@ public class Model implements IModel{
 		for(IClass c : this.classes){
 			c.accept(v);
 		}
+		v.visitRelations(this);
 		v.postVisit(this);
 	}
 	

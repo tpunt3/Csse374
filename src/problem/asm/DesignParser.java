@@ -17,7 +17,8 @@ public class DesignParser {
 	
 	public static final String[] CLASSES= {
 		"puzzle.Creator",
-		"problem.AppLauncher"			
+		"problem.AppLauncher"
+		//TODO: figure out how to call this on itself
 	};
 	
 	/**
