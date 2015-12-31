@@ -8,7 +8,6 @@ import java.util.Map;
 import problem.model.visitor.IModelTraverser;
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;
-import problem.models.api.IElement;
 import problem.models.api.IModel;
 import problem.models.api.IRelation;
 

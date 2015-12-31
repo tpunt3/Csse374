@@ -2,7 +2,9 @@ package problem.models.api;
 
 import java.util.Map;
 
-public interface IRelation extends IElement{
+import problem.model.visitor.IModelTraverser;
+
+public interface IRelation extends IModelTraverser{
 	public String getSuperClass();
 	public Map<String, String[]> getInterfaces();
 	public Map<String, String> getSuperClasses();

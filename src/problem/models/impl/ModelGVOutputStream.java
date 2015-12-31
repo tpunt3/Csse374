@@ -106,38 +106,51 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 	}
 
 	@Override
-	public void visit(IRelation r) {
-		// TODO Auto-generated method stub
-		super.visit(r);
-	}
-
-	@Override
 	public void visitRelations(IModel m) {
 		ArrayList<IRelation> relations = (ArrayList<IRelation>) m.getRelations();
 		String s = "edge [ arrowhead = \"empty\" ]";
+		this.write(s);
 		for (IRelation r : relations) {
-			Set<String> keys = r.getSuperClasses().keySet();
-			for (String k : keys) {
-				s += "\n" + k + "->" + r.getSuperClasses().get(k);
-			}
+			this.visitSuperClasses(r);
 		}
 
-		String t = "edge [ arrowhead = \"empty\" \nline = \"dashed\" ]";
+		String t = "edge [ arrowhead = \"empty\", style = \"dashed\" ]";
+		this.write(t);
 		for (IRelation r : relations) {
-			Set<String> keys = r.getInterfaces().keySet();
-			for (String k : keys) {
-				if (r.getInterfaces().get(k).length > 0) {
-					t += "\n" + k + " -> "+r.getInterfaces().get(k)[0];
+			this.visitInterfaces(r);
+		}
+	}
 
-					for (int i = 1; i < r.getInterfaces().get(k).length; i++) {
-						t += ", " + r.getInterfaces().get(k)[i];
-					}
+	@Override
+	public void visitSuperClasses(IRelation r) {
+		String s = "";
+
+		Set<String> keys = r.getSuperClasses().keySet();
+		for (String k : keys) {
+			s += "\n" + k + " -> " + r.getSuperClasses().get(k);
+		}
+		
+		if (s != "") {
+			this.write(s);
+		}
+	}
+
+	@Override
+	public void visitInterfaces(IRelation r) {
+		String s = "";
+		Set<String> keys = r.getInterfaces().keySet();
+		for (String k : keys) {
+			if (r.getInterfaces().get(k).length > 0) {
+				s += "\n" + k + " -> " + r.getInterfaces().get(k)[0];
+
+				for (int i = 1; i < r.getInterfaces().get(k).length; i++) {
+					s += ", " + r.getInterfaces().get(k)[i];
 				}
 			}
 		}
-
-		this.write(s);
-		this.write(t);
+		if (s != "") {
+			this.write(s);
+		}
 	}
 
 	@Override

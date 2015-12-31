@@ -1,6 +1,8 @@
 package problem.models.api;
 
-public interface IMethod extends IElement{
+import problem.model.visitor.IModelTraverser;
+
+public interface IMethod extends IModelTraverser{
 	public String getAccess();
 	public String getName();
 	public String getArgs();

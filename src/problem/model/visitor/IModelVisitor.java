@@ -17,7 +17,8 @@ public interface IModelVisitor {
 	public void visit(IClass c);
 	public void visit(IMethod m);
 	public void visit(IField f);
-	public void visit(IRelation r);
+	public void visitSuperClasses(IRelation r);
+	public void visitInterfaces(IRelation r);
 	
 	public void postVisit(IModel m);
 	public void postVisit(IClass c);
@@ -26,8 +27,6 @@ public interface IModelVisitor {
 	public void postVisit(IRelation r);
 	
 	public void visitRelations(IModel m);
-	public void visitSuperclasses(IClass c);
-	public void visitInterfaces(IClass c);
 	
 	public void intermediateVisit(IClass C);
 }

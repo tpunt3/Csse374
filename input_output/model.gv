@@ -29,9 +29,11 @@ label = "{problem/AppLauncher|
 # notifyHandlers(String) : void\l
 }"]
 edge [ arrowhead = "empty" ]
-puzzle/Creator->java/lang/Object
-problem/AppLauncher->java/lang/Thread
-edge [ arrowhead = "empty" 
-line = "dashed" ]
+
+puzzle/Creator -> java/lang/Object
+
+problem/AppLauncher -> java/lang/Thread
+edge [ arrowhead = "empty", style = "dashed" ]
+
 problem/AppLauncher -> problem/IAppLauncher
 }

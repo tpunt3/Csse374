@@ -74,10 +74,17 @@ public class ModelVisitorAdapter implements IModelVisitor{
 	@Override
 	public void preVisit(IRelation r) {
 		
+	}	
+	
+	@Override
+	public void visitSuperClasses(IRelation r) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void visit(IRelation r) {
+	public void visitInterfaces(IRelation r) {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -87,20 +94,5 @@ public class ModelVisitorAdapter implements IModelVisitor{
 
 	@Override
 	public void visitRelations(IModel m) {
-		// TODO Auto-generated method stub
-		
 	}
-
-	@Override
-	public void visitSuperclasses(IClass c) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitInterfaces(IClass c) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
