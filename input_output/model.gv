@@ -3,9 +3,9 @@ rankdir = BT;
 puzzle/Creator[
 shape = "record",
 label = "{puzzle/Creator| 
-+<init>() : void\l
-+main(String[]) : void\l
-"]
++ <init>() : void\l
++ main(String[]) : void\l
+}"]
 problem/AppLauncher[
 shape = "record",
 label = "{problem/AppLauncher| 
@@ -13,19 +13,19 @@ label = "{problem/AppLauncher|
 -dir: Path\l
 -stop: boolean\l
 -processes: List\l
--handlerMap: HashMap\l
--handlerCollection: Collection\l
+-handlers: List\l
+-stringToAppHandler: Map\l
 |
-~<init>(Path) : void\l
-+run() : void\l
-#clearEverything() : void\l
-+stopGracefully() : void\l
-+isRunning() : boolean\l
-+getApplicationsCount() : int\l
-+handleDirectoryEvent(String; Path) : void\l
-+main(String[]) : void\l
-+registerHandler(IHandler) : void\l
-+removeHandler(IHandler) : void\l
-#notifyHandlers(String; String) : void\l
-"]
+~ <init>(Path; Map) : void\l
++ run() : void\l
+# clearEverything() : void\l
++ stopGracefully() : void\l
++ isRunning() : boolean\l
++ getApplicationsCount() : int\l
++ handleDirectoryEvent(String; Path) : void\l
++ main(String[]) : void\l
++ registerHandler(IHandler) : void\l
++ removeHandler(IHandler) : void\l
+# notifyHandlers(String) : void\l
+}"]
 }

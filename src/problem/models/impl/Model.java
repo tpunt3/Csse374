@@ -14,7 +14,7 @@ import problem.models.api.IModel;
 public class Model implements IModel{
 	
 	private Collection<IClass> classes;
-//	private Map<String, IClass> stringToClass = new HashMap<String, IClass>();
+	
 	
 	public Model(){
 		this.classes = new ArrayList<IClass>();

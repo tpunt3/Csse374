@@ -22,15 +22,12 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-		// TODO: delete the line below
-//		System.out.println("Class: " + name + " extends " + superName + " implements " + Arrays.toString(interfaces));
 		
-//		System.out.println("-----------------------------");
 		// TODO: construct an internal representation of the class for later use
 		// by decorators
 		
 		this.clazz = new Class(name);
-		IRelation r = new Relation(interfaces);
+		IRelation r = new Relation(superName, interfaces);
 		this.clazz.addRelation(r);
 		this.model.addClazz(clazz);
 		
