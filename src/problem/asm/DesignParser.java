@@ -1,7 +1,9 @@
 package problem.asm;
 
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 import org.objectweb.asm.ClassReader;
@@ -60,6 +62,17 @@ public class DesignParser {
 			IModelTraverser traverser = (IModelTraverser)model;
 			traverser.accept(gvWriter);
 			out.close();
+			
+			ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+			builder.redirectErrorStream(true);
+			Process p = builder.start();
+			String line;
+			BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+	        while (true) {
+	            line = r.readLine();
+	            if (line == null) { break; }
+	            System.out.println(line);
+	        }
 		}
 		
 		System.out.println(model.getClasses().toString());

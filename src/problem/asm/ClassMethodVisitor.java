@@ -43,6 +43,9 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		// What is a good way for the code to remember what the current class
 		// is?
 		
+		name = name.replace("<", "");
+		name = name.replace(">", "");
+		
 		this.clazz = this.getClazz();
 		IClass current = this.model.getClazz(this.clazz.getName());
 		Method m = new Method(accessLevel, name, args, returnType);

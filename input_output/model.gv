@@ -1,39 +1,14 @@
 digraph model{
 rankdir = BT;
-puzzle/Creator[
-shape = "record",
-label = "{puzzle/Creator| 
-+ <init>() : void\l
-+ main(String[]) : void\l
-}"]
-problem/AppLauncher[
-shape = "record",
-label = "{problem/AppLauncher| 
--watcher: WatchService\l
--dir: Path\l
--stop: boolean\l
--processes: List\l
--handlers: List\l
--stringToAppHandler: Map\l
-|
-~ <init>(Path; Map) : void\l
-+ run() : void\l
-# clearEverything() : void\l
-+ stopGracefully() : void\l
-+ isRunning() : boolean\l
-+ getApplicationsCount() : int\l
-+ handleDirectoryEvent(String; Path) : void\l
-+ main(String[]) : void\l
-+ registerHandler(IHandler) : void\l
-+ removeHandler(IHandler) : void\l
-# notifyHandlers(String) : void\l
-}"]
-edge [ arrowhead = "empty" ]
+Creator [
+shape="record",
+label = "{Creator| + init() : void\l+ main(String[]) : void\l}"
+];
+AppLauncher [
+shape="record",
+label = "{AppLauncher| -watcher: WatchService\l-dir: Path\l-stop: boolean\l-processes: List\l-handlerMap: HashMap\l-handlerCollection: Collection\l|~ init(Path) : void\l+ run() : void\l# clearEverything() : void\l+ stopGracefully() : void\l+ isRunning() : boolean\l+ getApplicationsCount() : int\l+ handleDirectoryEvent(String; Path) : void\l+ main(String[]) : void\l+ registerHandler(IHandler) : void\l+ removeHandler(IHandler) : void\l# notifyHandlers(String; String) : void\l}"
+];
 
-puzzle/Creator -> java/lang/Object
-
-problem/AppLauncher -> java/lang/Thread
-edge [ arrowhead = "empty", style = "dashed" ]
-
-problem/AppLauncher -> problem/IAppLauncher
-}
+Creator -> Object [arrowhead = "empty" ];
+AppLauncher -> Thread [arrowhead = "empty" ];
+AppLauncher -> IApplicationLauncher [arrowhead = "empty", style = "dashed" ];}

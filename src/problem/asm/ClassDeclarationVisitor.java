@@ -26,6 +26,9 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 		// TODO: construct an internal representation of the class for later use
 		// by decorators
 		
+		String[] nameSplit = name.split("/");
+		name = nameSplit[nameSplit.length -1];
+		System.out.println(name);
 		this.clazz = new Class(name);
 		IRelation r = new Relation(superName, interfaces);
 		r.addSuperClass(name, superName);

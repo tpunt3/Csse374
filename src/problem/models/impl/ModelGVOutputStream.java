@@ -17,6 +17,7 @@ import problem.models.api.IRelation;
 public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	OutputStream out;
+	StringBuilder s;
 
 	public ModelGVOutputStream() {
 	}
@@ -28,7 +29,6 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	private void write(String s) {
 		try {
-			s = s + "\n";
 			out.write(s.getBytes());
 		} catch (IOException e) {
 			new RuntimeException(e);
@@ -37,7 +37,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	@Override
 	public void preVisit(IModel m) {
-		String s = "digraph model{\n" + "rankdir = BT;";
+		String s = "digraph model{\n" + "rankdir = BT;\n";
 		this.write(s);
 	}
 
@@ -54,7 +54,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	@Override
 	public void preVisit(IClass c) {
-		String s = String.format("%s[\nshape = \"record\",", c.getName());
+		String s = String.format("%s [\nshape=\"record\",\n", c.getName());
 		this.write(s);
 	}
 
@@ -66,7 +66,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	@Override
 	public void postVisit(IClass c) {
-		String s = "}\"]";
+		String s = "}\"\n];\n";
 		this.write(s);
 	}
 
@@ -108,14 +108,11 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 	@Override
 	public void visitRelations(IModel m) {
 		ArrayList<IRelation> relations = (ArrayList<IRelation>) m.getRelations();
-		String s = "edge [ arrowhead = \"empty\" ]";
-		this.write(s);
+
 		for (IRelation r : relations) {
 			this.visitSuperClasses(r);
 		}
-
-		String t = "edge [ arrowhead = \"empty\", style = \"dashed\" ]";
-		this.write(t);
+		
 		for (IRelation r : relations) {
 			this.visitInterfaces(r);
 		}
@@ -127,7 +124,11 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 		Set<String> keys = r.getSuperClasses().keySet();
 		for (String k : keys) {
-			s += "\n" + k + " -> " + r.getSuperClasses().get(k);
+			String superClass = r.getSuperClasses().get(k);
+			String[] superSplit = superClass.split("/");
+			superClass = superSplit[superSplit.length -1];
+			s += "\n" + k + " -> " + superClass;
+			s+= " [arrowhead = \"empty\" ];";
 		}
 		
 		if (s != "") {
@@ -141,11 +142,18 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 		Set<String> keys = r.getInterfaces().keySet();
 		for (String k : keys) {
 			if (r.getInterfaces().get(k).length > 0) {
-				s += "\n" + k + " -> " + r.getInterfaces().get(k)[0];
+				String superClass = r.getInterfaces().get(k)[0];
+				String[] superSplit = superClass.split("/");
+				superClass = superSplit[superSplit.length -1];
+				s += "\n" + k + " -> " + superClass;
 
 				for (int i = 1; i < r.getInterfaces().get(k).length; i++) {
-					s += ", " + r.getInterfaces().get(k)[i];
+					String interfaceName = r.getInterfaces().get(k)[i];
+					String[] interfaceSplit = interfaceName.split("/");
+					interfaceName = interfaceSplit[interfaceSplit.length -1];
+					s += ", " + interfaceName;
 				}
+				s+= " [arrowhead = \"empty\", style = \"dashed\" ];";
 			}
 		}
 		if (s != "") {
