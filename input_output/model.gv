@@ -4,11 +4,14 @@ Creator [
 shape="record",
 label = "{Creator| + init() : void\l+ main(String[]) : void\l}"
 ];
+
 AppLauncher [
 shape="record",
 label = "{AppLauncher| -watcher: WatchService\l-dir: Path\l-stop: boolean\l-processes: List\l-handlerMap: HashMap\l-handlerCollection: Collection\l|~ init(Path) : void\l+ run() : void\l# clearEverything() : void\l+ stopGracefully() : void\l+ isRunning() : boolean\l+ getApplicationsCount() : int\l+ handleDirectoryEvent(String; Path) : void\l+ main(String[]) : void\l+ registerHandler(IHandler) : void\l+ removeHandler(IHandler) : void\l# notifyHandlers(String; String) : void\l}"
 ];
 
-Creator -> Object [arrowhead = "empty" ];
-AppLauncher -> Thread [arrowhead = "empty" ];
-AppLauncher -> IApplicationLauncher [arrowhead = "empty", style = "dashed" ];}
+//writing relations between classes now
+Creator -> Object [arrowhead = "empty"];
+AppLauncher -> Thread [arrowhead = "empty"];
+AppLauncher -> IApplicationLauncher [arrowhead = "empty", style = "dashed"];
+}

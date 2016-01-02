@@ -48,7 +48,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	@Override
 	public void postVisit(IModel m) {
-		String s = "}";
+		String s = "\n}";
 		this.write(s);
 	}
 
@@ -66,7 +66,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	@Override
 	public void postVisit(IClass c) {
-		String s = "}\"\n];\n";
+		String s = "}\"\n];\n\n";
 		this.write(s);
 	}
 
@@ -101,7 +101,6 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	@Override
 	public void preVisit(IRelation r) {
-		// TODO Auto-generated method stub
 		super.preVisit(r);
 	}
 
@@ -109,6 +108,9 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 	public void visitRelations(IModel m) {
 		ArrayList<IRelation> relations = (ArrayList<IRelation>) m.getRelations();
 
+		String comment = "//writing relations between classes now";
+		this.write(comment);
+		
 		for (IRelation r : relations) {
 			this.visitSuperClasses(r);
 		}
@@ -128,7 +130,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 			String[] superSplit = superClass.split("/");
 			superClass = superSplit[superSplit.length -1];
 			s += "\n" + k + " -> " + superClass;
-			s+= " [arrowhead = \"empty\" ];";
+			s+= " [arrowhead = \"empty\"];";
 		}
 		
 		if (s != "") {
@@ -153,7 +155,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 					interfaceName = interfaceSplit[interfaceSplit.length -1];
 					s += ", " + interfaceName;
 				}
-				s+= " [arrowhead = \"empty\", style = \"dashed\" ];";
+				s+= " [arrowhead = \"empty\", style = \"dashed\"];";
 			}
 		}
 		if (s != "") {
