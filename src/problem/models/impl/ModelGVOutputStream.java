@@ -60,7 +60,12 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	@Override
 	public void visit(IClass c) {
-		String s = String.format("label = \"{%s| ", c.getName());
+		String s;
+		if(!c.getIsClass()){
+		s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
+		}else{
+			s = String.format("label = \"{%s| ", c.getName());
+		}
 		this.write(s);
 	}
 
@@ -110,11 +115,11 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 		String comment = "//writing relations between classes now";
 		this.write(comment);
-		
+
 		for (IRelation r : relations) {
 			this.visitSuperClasses(r);
 		}
-		
+
 		for (IRelation r : relations) {
 			this.visitInterfaces(r);
 		}
@@ -128,11 +133,11 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 		for (String k : keys) {
 			String superClass = r.getSuperClasses().get(k);
 			String[] superSplit = superClass.split("/");
-			superClass = superSplit[superSplit.length -1];
+			superClass = superSplit[superSplit.length - 1];
 			s += "\n" + k + " -> " + superClass;
-			s+= " [arrowhead = \"empty\"];";
+			s += " [arrowhead = \"empty\"];";
 		}
-		
+
 		if (s != "") {
 			this.write(s);
 		}
@@ -146,16 +151,16 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 			if (r.getInterfaces().get(k).length > 0) {
 				String superClass = r.getInterfaces().get(k)[0];
 				String[] superSplit = superClass.split("/");
-				superClass = superSplit[superSplit.length -1];
+				superClass = superSplit[superSplit.length - 1];
 				s += "\n" + k + " -> " + superClass;
 
 				for (int i = 1; i < r.getInterfaces().get(k).length; i++) {
 					String interfaceName = r.getInterfaces().get(k)[i];
 					String[] interfaceSplit = interfaceName.split("/");
-					interfaceName = interfaceSplit[interfaceSplit.length -1];
+					interfaceName = interfaceSplit[interfaceSplit.length - 1];
 					s += ", " + interfaceName;
 				}
-				s+= " [arrowhead = \"empty\", style = \"dashed\"];";
+				s += " [arrowhead = \"empty\", style = \"dashed\"];";
 			}
 		}
 		if (s != "") {

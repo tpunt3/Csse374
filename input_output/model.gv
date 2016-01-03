@@ -27,17 +27,17 @@ label = "{FirstASM| +myField: String\l|~ clinit() : void\l+ init() : void\l+ mai
 
 IClazzGetter [
 shape="record",
-label = "{IClazzGetter| + getClazz() : problem.models.api.IClass\l}"
+label = "{\<\<interface\>\>\nIClazzGetter| + getClazz() : problem.models.api.IClass\l}"
 ];
 
 IModelTraverser [
 shape="record",
-label = "{IModelTraverser| + accept(IModelVisitor) : void\l}"
+label = "{\<\<interface\>\>\nIModelTraverser| + accept(IModelVisitor) : void\l}"
 ];
 
 IModelVisitor [
 shape="record",
-label = "{IModelVisitor| + preVisit(IModel) : void\l+ preVisit(IClass) : void\l+ preVisit(IMethod) : void\l+ preVisit(IField) : void\l+ preVisit(IRelation) : void\l+ visit(IModel) : void\l+ visit(IClass) : void\l+ visit(IMethod) : void\l+ visit(IField) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IModel) : void\l+ postVisit(IClass) : void\l+ postVisit(IMethod) : void\l+ postVisit(IField) : void\l+ postVisit(IRelation) : void\l+ visitRelations(IModel) : void\l+ intermediateVisit(IClass) : void\l}"
+label = "{\<\<interface\>\>\nIModelVisitor| + preVisit(IModel) : void\l+ preVisit(IClass) : void\l+ preVisit(IMethod) : void\l+ preVisit(IField) : void\l+ preVisit(IRelation) : void\l+ visit(IModel) : void\l+ visit(IClass) : void\l+ visit(IMethod) : void\l+ visit(IField) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IModel) : void\l+ postVisit(IClass) : void\l+ postVisit(IMethod) : void\l+ postVisit(IField) : void\l+ postVisit(IRelation) : void\l+ visitRelations(IModel) : void\l+ intermediateVisit(IClass) : void\l}"
 ];
 
 ModelVisitorAdapter [
@@ -47,32 +47,32 @@ label = "{ModelVisitorAdapter| + init() : void\l+ preVisit(IModel) : void\l+ vis
 
 IClass [
 shape="record",
-label = "{IClass| + getName() : java.lang.String\l+ getMethods() : java.util.Collection\l+ getFields() : java.util.Collection\l+ getRelations() : java.util.Collection\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ addRelation(IRelation) : void\l}"
+label = "{\<\<interface\>\>\nIClass| + getName() : java.lang.String\l+ getMethods() : java.util.Collection\l+ getFields() : java.util.Collection\l+ getRelations() : java.util.Collection\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ addRelation(IRelation) : void\l+ getIsClass() : boolean\l}"
 ];
 
 IField [
 shape="record",
-label = "{IField| + getType() : java.lang.String\l+ getAccess() : java.lang.String\l+ getName() : java.lang.String\l}"
+label = "{\<\<interface\>\>\nIField| + getType() : java.lang.String\l+ getAccess() : java.lang.String\l+ getName() : java.lang.String\l}"
 ];
 
 IMethod [
 shape="record",
-label = "{IMethod| + getAccess() : java.lang.String\l+ getName() : java.lang.String\l+ getArgs() : java.lang.String\l+ getReturnType() : java.lang.String\l}"
+label = "{\<\<interface\>\>\nIMethod| + getAccess() : java.lang.String\l+ getName() : java.lang.String\l+ getArgs() : java.lang.String\l+ getReturnType() : java.lang.String\l}"
 ];
 
 IModel [
 shape="record",
-label = "{IModel| + getClasses() : java.util.Collection\l+ addClazz(IClass) : void\l+ getClazz(String) : problem.models.api.IClass\l+ getRelations() : java.util.Collection\l}"
+label = "{\<\<interface\>\>\nIModel| + getClasses() : java.util.Collection\l+ addClazz(IClass) : void\l+ getClazz(String) : problem.models.api.IClass\l+ getRelations() : java.util.Collection\l}"
 ];
 
 IRelation [
 shape="record",
-label = "{IRelation| + getSuperClass() : java.lang.String\l+ getInterfaces() : java.util.Map\l+ getSuperClasses() : java.util.Map\l+ addSuperClass(String; String) : void\l+ addInterfaces(String; String[]) : void\l}"
+label = "{\<\<interface\>\>\nIRelation| + getSuperClass() : java.lang.String\l+ getInterfaces() : java.util.Map\l+ getSuperClasses() : java.util.Map\l+ addSuperClass(String; String) : void\l+ addInterfaces(String; String[]) : void\l}"
 ];
 
 Class [
 shape="record",
-label = "{Class| -name: String\l-methods: Collection\l-fields: Collection\l-relations: Collection\l|+ init(String) : void\l+ init() : void\l+ getName() : java.lang.String\l+ getMethods() : java.util.Collection\l+ getFields() : java.util.Collection\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getRelations() : java.util.Collection\l+ addRelation(IRelation) : void\l+ accept(IModelVisitor) : void\l}"
+label = "{Class| -name: String\l-methods: Collection\l-fields: Collection\l-relations: Collection\l-isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : java.lang.String\l+ getMethods() : java.util.Collection\l+ getFields() : java.util.Collection\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getRelations() : java.util.Collection\l+ addRelation(IRelation) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l}"
 ];
 
 Field [

@@ -12,4 +12,5 @@ public interface IClass extends IModelTraverser {
 	public void addMethod(IMethod m);
 	public void addField(IField f);
 	public void addRelation(IRelation r);
+	public boolean getIsClass();
 }

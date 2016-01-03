@@ -15,8 +15,10 @@ public class Class implements IClass {
 	private Collection<IMethod> methods;
 	private Collection<IField> fields;
 	private Collection<IRelation> relations;
+	private boolean isClass;
 	
-	public Class(String name) {
+	public Class(String name, boolean isClass) {
+		this.isClass = isClass;
 		this.name = name;
 		this.methods = new ArrayList<IMethod>();
 		this.fields = new ArrayList<IField>();
@@ -80,6 +82,11 @@ public class Class implements IClass {
 			m.accept(v);
 		}
 		v.postVisit(this);
+	}
+
+	@Override
+	public boolean getIsClass() {
+		return this.isClass;
 	}
 
 }
