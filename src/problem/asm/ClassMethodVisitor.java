@@ -33,15 +33,9 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		String accessLevel;
 		
-		// TODO: create an internal representation of the current method and
-		// pass it to the methods below
 		accessLevel = addAccessLevel(access);
 		String returnType = addReturnType(desc);
 		String args = addArguments(desc);
-		// TODO: add the current method to your internal representation of the
-		// current class
-		// What is a good way for the code to remember what the current class
-		// is?
 		
 		name = name.replace("<", "");
 		name = name.replace(">", "");

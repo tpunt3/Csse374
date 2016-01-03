@@ -19,25 +19,25 @@ public class DesignParser {
 	
 	public static final String[] CLASSES= {
 		"problem.asm.ClassDeclarationVisitor",
-			"problem.asm.ClassFieldVisitor",
-			"problem.asm.ClassMethodVisitor",
-			"problem.asm.DesignParser",
-			"problem.asm.FirstASM",
-			"problem.asm.IClazzGetter",
-			"problem.model.visitor.IModelTraverser",
-			"problem.model.visitor.IModelVisitor",
-			"problem.model.visitor.ModelVisitorAdapter",
-			"problem.models.api.IClass",
-			"problem.models.api.IField",
-			"problem.models.api.IMethod",
-			"problem.models.api.IModel",
-			"problem.models.api.IRelation",
-			"problem.models.impl.Class",
-			"problem.models.impl.Field",
-			"problem.models.impl.Method",
-			"problem.models.impl.Model",
-			"problem.models.impl.ModelGVOutputStream",
-			"problem.models.impl.Relation"
+		"problem.asm.ClassFieldVisitor",
+		"problem.asm.ClassMethodVisitor",
+		"problem.asm.DesignParser",
+		"problem.asm.FirstASM",
+		"problem.asm.IClazzGetter",
+		"problem.model.visitor.IModelTraverser",
+		"problem.model.visitor.IModelVisitor",
+		"problem.model.visitor.ModelVisitorAdapter",
+		"problem.models.api.IClass",
+		"problem.models.api.IField",
+		"problem.models.api.IMethod",
+		"problem.models.api.IModel",
+		"problem.models.api.IRelation",
+		"problem.models.impl.Class",
+		"problem.models.impl.Field",
+		"problem.models.impl.Method",
+		"problem.models.impl.Model",
+		"problem.models.impl.ModelGVOutputStream",
+		"problem.models.impl.Relation"
 	};
 	
 	/**
@@ -81,7 +81,8 @@ public class DesignParser {
 			out.close();
 			
 			//runs DOT on our .gv file. This might need to be moved?
-			ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+			//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+			ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 			builder.redirectErrorStream(true);
 			Process p = builder.start();
 			String line;
