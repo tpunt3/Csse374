@@ -1,0 +1,10 @@
+digraph model{
+rankdir = BT;
+EmptyClass [
+shape="record",
+label = "{EmptyClass| + init() : void\l}"
+];
+
+//writing relations between classes now
+EmptyClass -> Object [arrowhead = "empty"];
+}
