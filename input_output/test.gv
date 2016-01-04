@@ -1,10 +1,10 @@
 digraph model{
 rankdir = BT;
-FieldClass [
+MethodClass [
 shape="record",
-label = "{FieldClass| + testString: String\l- testInt: int\l# testBoolean: boolean\l|+ init() : void\l}"
+label = "{MethodClass| + init() : void\l+ doStuff() : void\l+ doStuffWithArgs(String; int) : void\l}"
 ];
 
 //writing relations between classes now
-FieldClass -> Object [arrowhead = "empty"];
+MethodClass -> Object [arrowhead = "empty"];
 }

@@ -63,7 +63,7 @@ public class GVTesting {
 		}
 		System.out.println(file);
 		
-		String gv = "";
+		String gv = "digraph model{rankdir = BT;FieldClass [shape=\"record\",label = \"{FieldClass| + testString: String\\"+"l- testInt: int\\"+"l# testBoolean: boolean\\"+"l|+ init() : void\\"+"l}\"];//writing relations between classes nowFieldClass -> Object [arrowhead = \"empty\"];}";
 		
 		System.out.println(gv);
 		assertEquals(gv, file); 
@@ -74,9 +74,26 @@ public class GVTesting {
 
 	@Test
 	public final void testClassWithMethod() throws IOException {
-		String[] classes = { "problem.test.classes.EmptyClass" };
+		String[] classes = { "problem.test.classes.MethodClass" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
+		BufferedReader buffer = new BufferedReader(reader);
+		
+
+		String file = "";
+		String line = "";
+		while ((line = buffer.readLine()) != null) {
+			file += line;
+		}
+		System.out.println(file);
+		
+		String gv = "digraph model{rankdir = BT;MethodClass [shape=\"record\",label = \"{MethodClass| + init() : void\\"+"l+ doStuff() : void\\"+"l+ doStuffWithArgs(String; int) : void\\"+"l}\"];//writing relations between classes nowMethodClass -> Object [arrowhead = \"empty\"];}";
+		
+		System.out.println(gv);
+		assertEquals(gv, file); 
+		
+		buffer.close();
+		reader.close();
 	}
 
 	@Test
