@@ -155,16 +155,44 @@ public class GVTesting {
 
 	@Test
 	public final void testInterfaceWithSuperClass() throws IOException {
-		String[] classes = { "problem.test.classes.EmptyClass" };
+		String[] classes = { "problem.test.classes.IInterfaceWithSuperClass" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
+		BufferedReader buffer = new BufferedReader(reader);
+
+		String file = "";
+		String line = "";
+		while ((line = buffer.readLine()) != null) {
+			file += line;
+		}
+		
+		String gv = "digraph model{rankdir = BT;IInterfaceWithSuperClass [shape=\"record\",label = \"{\\"+"<\\"+"<interface\\"+">\\"+">\\nIInterfaceWithSuperClass| }\"];//writing relations between classes nowIInterfaceWithSuperClass -> IInterface [arrowhead = \"empty\"];}";
+	
+		assertEquals(gv, file); 
+		
+		buffer.close();
+		reader.close();
 	}
 
 	@Test
 	public final void testClassWithEverything() throws IOException {
-		String[] classes = { "problem.test.classes.EmptyClass" };
+		String[] classes = { "problem.test.classes.ClassWithEverything" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
+		BufferedReader buffer = new BufferedReader(reader);
+
+		String file = "";
+		String line = "";
+		while ((line = buffer.readLine()) != null) {
+			file += line;
+		}
+		
+		String gv = "digraph model{rankdir = BT;ClassWithEverything [shape=\"record\",label = \"{ClassWithEverything| - name: String\\"+"l|+ init() : void\\"+"l+ setName(String) : void\\"+"l+ getName() : java.lang.String\\"+"l}\"];//writing relations between classes nowClassWithEverything -> EmptyClass [arrowhead = \"empty\"];ClassWithEverything -> IInterface [arrowhead = \"empty\", style = \"dashed\"];}";
+	
+		assertEquals(gv, file); 
+		
+		buffer.close();
+		reader.close();
 	}
 
 }
