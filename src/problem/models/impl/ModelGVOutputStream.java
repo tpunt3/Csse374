@@ -96,7 +96,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	@Override
 	public void visit(IField f) {
-		String s = String.format("%s%s" + ":" + " %s\\l", f.getAccess(), f.getName(), f.getType());
+		String s = String.format("%s %s" + ":" + " %s\\l", f.getAccess(), f.getName(), f.getType());
 		this.write(s);
 	}
 

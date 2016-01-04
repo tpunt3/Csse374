@@ -50,9 +50,26 @@ public class GVTesting {
 
 	@Test
 	public final void testClassWithField() throws IOException {
-		String[] classes = { "problem.test.classes.EmptyClass" };
+		String[] classes = { "problem.test.classes.FieldClass" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
+		BufferedReader buffer = new BufferedReader(reader);
+		
+
+		String file = "";
+		String line = "";
+		while ((line = buffer.readLine()) != null) {
+			file += line;
+		}
+		System.out.println(file);
+		
+		String gv = "";
+		
+		System.out.println(gv);
+		assertEquals(gv, file); 
+		
+		buffer.close();
+		reader.close();
 	}
 
 	@Test

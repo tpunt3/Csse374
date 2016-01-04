@@ -4,13 +4,16 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>320</y>
+      <x>104</x>
+      <y>360</y>
       <w>328</w>
-      <h>128</h>
+      <h>168</h>
     </coordinates>
     <panel_attributes>ClassMethodVisitor
 --
+-Model: model
+-ClassVisitor: decorated
+-IClass: clazz
 --
 +ClassMethodVisitor(int): ctor
 +ClassMethodVisitor(int, org.objectweb.asm.ClassVisitor): ctor
@@ -18,6 +21,7 @@
 ~addAccessLevel(int): void
 ~addReturnType(java.lang.String): void
 ~addArguments(java.lang.String): void
++getClazz(): IClass
 --
 </panel_attributes>
     <additional_attributes/>
@@ -25,8 +29,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>688</x>
-      <y>48</y>
+      <x>712</x>
+      <y>88</y>
       <w>168</w>
       <h>96</h>
     </coordinates>
@@ -44,8 +48,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>496</x>
-      <y>48</y>
+      <x>520</x>
+      <y>88</y>
       <w>160</w>
       <h>96</h>
     </coordinates>
@@ -63,13 +67,16 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>128</x>
-      <y>208</y>
+      <x>152</x>
+      <y>240</y>
       <w>232</w>
-      <h>88</h>
+      <h>112</h>
     </coordinates>
     <panel_attributes>ClassFieldVisitor
 --
+-Model: model
+-IClass: clazz
+-ClassVisitor: decorated
 --
 +ClassFieldVisitor(int): ctor
 +ClassFieldVisitor(): ctor
@@ -81,13 +88,15 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>160</x>
-      <y>112</y>
+      <x>184</x>
+      <y>136</y>
       <w>184</w>
-      <h>72</h>
+      <h>88</h>
     </coordinates>
     <panel_attributes>ClassDeclarationVisitor
 --
+-Model: model
+-IClass: clazz
 --
 +ClassDeclarationVisitor(int): ctor
 +visit(): void
@@ -98,8 +107,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>56</x>
-      <y>56</y>
+      <x>80</x>
+      <y>96</y>
       <w>80</w>
       <h>24</h>
     </coordinates>
@@ -109,8 +118,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>352</x>
-      <y>24</y>
+      <x>376</x>
+      <y>64</y>
       <w>96</w>
       <h>56</h>
     </coordinates>
@@ -123,8 +132,8 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>80</x>
-      <y>72</y>
+      <x>104</x>
+      <y>112</y>
       <w>24</w>
       <h>264</h>
     </coordinates>
@@ -134,8 +143,8 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>80</x>
-      <y>136</y>
+      <x>104</x>
+      <y>176</y>
       <w>96</w>
       <h>24</h>
     </coordinates>
@@ -145,8 +154,8 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>80</x>
-      <y>240</y>
+      <x>104</x>
+      <y>280</y>
       <w>64</w>
       <h>24</h>
     </coordinates>
@@ -156,8 +165,8 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>392</x>
-      <y>72</y>
+      <x>416</x>
+      <y>112</y>
       <w>24</w>
       <h>264</h>
     </coordinates>
@@ -167,8 +176,8 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>136</y>
+      <x>360</x>
+      <y>176</y>
       <w>80</w>
       <h>24</h>
     </coordinates>
@@ -178,8 +187,8 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>352</x>
-      <y>240</y>
+      <x>376</x>
+      <y>280</y>
       <w>64</w>
       <h>24</h>
     </coordinates>
@@ -189,8 +198,8 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>712</x>
-      <y>192</y>
+      <x>736</x>
+      <y>232</y>
       <w>160</w>
       <h>56</h>
     </coordinates>
@@ -203,8 +212,8 @@ IModelTraverser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>920</x>
-      <y>0</y>
+      <x>944</x>
+      <y>24</y>
       <w>152</w>
       <h>192</h>
     </coordinates>
@@ -228,17 +237,18 @@ IModelVisitor
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>920</x>
-      <y>240</y>
-      <w>152</w>
-      <h>184</h>
+      <x>928</x>
+      <y>256</y>
+      <w>192</w>
+      <h>256</h>
     </coordinates>
-    <panel_attributes>ModelVisiorAdapter
+    <panel_attributes>ModelVisitorAdapter
 --
 +preVisit(IModel m): void
 +preVisit(IClass c): void
 +preVisit(IMethod m): void
 +preVisit(IField f): void
++preVisit(IRelation r): void
 +visit(IModel m): void
 +visit(IClass c): void
 +visit(IMethod m): void
@@ -246,25 +256,30 @@ IModelVisitor
 +postVisit(IModel m): void
 +postVisit(IClass c): void
 +postVisit(IMethod m): void
-+postVisit(IField f): void</panel_attributes>
++postVisit(IField f): void
++postVisit(IRelation r): void
++intermediateVisit(IClass c): void
++visitSuperClasses(IRelation r): void
++visitInterfaces(IRelation r): void
++visitRelations(IModel m): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>992</x>
-      <y>184</y>
+      <x>1016</x>
+      <y>208</y>
       <w>24</w>
-      <h>72</h>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>288</x>
-      <y>520</y>
+      <x>312</x>
+      <y>560</y>
       <w>192</w>
       <h>152</h>
     </coordinates>
@@ -279,6 +294,7 @@ IClass
 +addMethod(IMethod m): void
 +addField(IField f): void
 +addRelation(IRelation r): void
++getIsClass(): boolean
 --
 </panel_attributes>
     <additional_attributes/>
@@ -286,8 +302,8 @@ IClass
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1152</x>
-      <y>520</y>
+      <x>1176</x>
+      <y>560</y>
       <w>184</w>
       <h>96</h>
     </coordinates>
@@ -298,6 +314,7 @@ IModel
 +getClasses(): Collection&lt;IClass&gt;
 +addClazz(IClass c): void
 +getClazz(String s): IClass
++getRelations(): Collection
 --
 </panel_attributes>
     <additional_attributes/>
@@ -305,8 +322,8 @@ IModel
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>896</x>
-      <y>520</y>
+      <x>960</x>
+      <y>560</y>
       <w>144</w>
       <h>88</h>
     </coordinates>
@@ -316,6 +333,7 @@ IField
 --
 +getType(): String
 +getAccess(): String
++getName(): String
 --
 </panel_attributes>
     <additional_attributes/>
@@ -323,17 +341,19 @@ IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>520</y>
+      <x>544</x>
+      <y>560</y>
       <w>160</w>
-      <h>88</h>
+      <h>104</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 IMethod
 --
 --
-+getSignature(): String
 +getAccess(): String
++getName(): String
++getArgs(): String
++getReturnType(): String
 --
 </panel_attributes>
     <additional_attributes/>
@@ -341,10 +361,10 @@ IMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>712</x>
-      <y>520</y>
-      <w>160</w>
-      <h>88</h>
+      <x>728</x>
+      <y>560</y>
+      <w>200</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 IRelation
@@ -352,6 +372,9 @@ IRelation
 --
 +getSuperClass(): String
 +getInterfaces(): String[]
++getSuperClasses():
++addSuperClass(String, String): void
++addInterfaces(String, String[]): void
 --
 </panel_attributes>
     <additional_attributes/>
@@ -359,17 +382,19 @@ IRelation
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1168</x>
-      <y>192</y>
+      <x>1184</x>
+      <y>176</y>
       <w>256</w>
-      <h>232</h>
+      <h>328</h>
     </coordinates>
     <panel_attributes>ModelGVOutputStream
 --
 ~out: OutputStream
+~s: StringBuilder
 --
 +ModelGVOutputStream(): ctor
 +ModelGVOutputStream(OutputStream out): ctor
+-write(String s): void
 +preVisit(IModel m): void
 +visit(IModel m): void
 +postVisit(IModel m): void
@@ -382,16 +407,21 @@ IRelation
 +preVisit(IField f): void
 +visit(IField f): void
 +postVisit(IField f): void
---</panel_attributes>
++preVisit(IRelation r): void
++postVisit(IRelation r): void
++intermediateVisit(IClass c): void
++visitSuperClasses(IRelation r): void
++visitInterfaces(IRelation r): void
++visitRelations(IModel m): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>288</x>
-      <y>744</y>
-      <w>192</w>
-      <h>208</h>
+      <x>304</x>
+      <y>784</y>
+      <w>200</w>
+      <h>248</h>
     </coordinates>
     <panel_attributes>Class
 --
@@ -399,6 +429,7 @@ IRelation
 -methods: Collection&lt;IMethod&gt;
 -fields: Collection&lt;IField&gt;
 -relations: Collection&lt;IRelation&gt;
+-isClass: boolean
 --
 +Class(String name): ctor
 +Class(): ctor
@@ -410,19 +441,22 @@ IRelation
 +addField(IField f): void
 +getRelations(): Collection&lt;IRelation&gt;
 +addRelation(IRelation r): void
++getIsClass(): boolean
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>672</x>
-      <y>832</y>
-      <w>232</w>
-      <h>160</h>
+      <x>712</x>
+      <y>896</y>
+      <w>288</w>
+      <h>216</h>
     </coordinates>
     <panel_attributes>Relation
 --
+-subclassToSuperclass: Map&lt;String, String&gt;
+-subclassToInterface:Map&lt;String, String[]&gt;
 -superClass: String
 -interfaces: String[]
 --
@@ -432,7 +466,10 @@ IRelation
 +Relation(String superClass, String[] i): ctor
 +accept(IVisitor v): void
 +getSuperClass(): String
++getSuperClasses(): Map&lt;String, String&gt;
 +getInterfaces(): String[]
++addInterfaces(String, String): void
++setSubclassToInterface(Map&lt;String, String[]&gt;): void
 --
 </panel_attributes>
     <additional_attributes/>
@@ -440,17 +477,20 @@ IRelation
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1120</x>
-      <y>680</y>
+      <x>1144</x>
+      <y>720</y>
       <w>216</w>
-      <h>152</h>
+      <h>176</h>
     </coordinates>
     <panel_attributes>Model
 --
 -classes: Collection&lt;IClass&gt;
+-relations: Collection&lt;IRelation&gt;
 --
 +Model(): ctor
 +Model(Collection&lt;IClass&gt; classes): ctor
++getRelations(): Collection&lt;IRelation&gt;
++addRelation(IRelation): void
 +getClasses(): Collection&lt;IClass&gt;
 +accept(IVisitor v): void
 +toString(): String
@@ -463,8 +503,8 @@ IRelation
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>872</x>
-      <y>680</y>
+      <x>920</x>
+      <y>720</y>
       <w>208</w>
       <h>128</h>
     </coordinates>
@@ -472,6 +512,7 @@ IRelation
 --
 -type: String
 -access: String
+-name: String
 --
 +Field(String type, String access): ctor
 +accept(IVisitor v): void
@@ -484,20 +525,25 @@ IRelation
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>496</x>
-      <y>680</y>
+      <x>520</x>
+      <y>704</y>
       <w>240</w>
-      <h>128</h>
+      <h>176</h>
     </coordinates>
     <panel_attributes>Method
 --
--signature: String
 -access: String
+-name: String
+-args: String
+-returnType: String
 --
 +Method(String signature, String access): ctor
 +accept(IVisitor v): void
-+getSignature(): String
 +getAccess(): String
++getReturnType(): String
++getArgs(): String
++getName(): String
++setName(String name): void
 --
 </panel_attributes>
     <additional_attributes/>
@@ -505,19 +551,19 @@ IRelation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1064</x>
-      <y>328</y>
-      <w>120</w>
+      <x>1112</x>
+      <y>344</y>
+      <w>88</w>
       <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>376</x>
-      <y>664</y>
+      <x>400</x>
+      <y>704</y>
       <w>24</w>
       <h>96</h>
     </coordinates>
@@ -527,30 +573,30 @@ IRelation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
-      <y>600</y>
+      <x>616</x>
+      <y>656</y>
       <w>24</w>
-      <h>96</h>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>784</x>
-      <y>600</y>
+      <x>824</x>
+      <y>672</y>
       <w>24</w>
-      <h>248</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;290.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;280.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1216</x>
-      <y>608</y>
+      <x>1240</x>
+      <y>648</y>
       <w>24</w>
       <h>88</h>
     </coordinates>
@@ -560,8 +606,8 @@ IRelation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>600</y>
+      <x>1024</x>
+      <y>640</y>
       <w>24</w>
       <h>96</h>
     </coordinates>
@@ -571,8 +617,8 @@ IRelation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>760</x>
-      <y>240</y>
+      <x>800</x>
+      <y>280</y>
       <w>24</w>
       <h>296</h>
     </coordinates>
@@ -582,8 +628,8 @@ IRelation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>760</x>
-      <y>480</y>
+      <x>784</x>
+      <y>520</y>
       <w>520</w>
       <h>56</h>
     </coordinates>
@@ -593,8 +639,8 @@ IRelation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>416</x>
-      <y>480</y>
+      <x>440</x>
+      <y>520</y>
       <w>368</w>
       <h>56</h>
     </coordinates>
@@ -604,8 +650,8 @@ IRelation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
-      <y>480</y>
+      <x>616</x>
+      <y>520</y>
       <w>24</w>
       <h>56</h>
     </coordinates>
@@ -615,8 +661,8 @@ IRelation
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>968</x>
-      <y>480</y>
+      <x>1032</x>
+      <y>520</y>
       <w>24</w>
       <h>56</h>
     </coordinates>

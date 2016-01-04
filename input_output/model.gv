@@ -2,27 +2,27 @@ digraph model{
 rankdir = BT;
 ClassDeclarationVisitor [
 shape="record",
-label = "{ClassDeclarationVisitor| -model: Model\l-clazz: IClass\l|+ init(int; Model) : void\l+ visit(int; int; String; String; String; String[]) : void\l+ getClazz() : problem.models.api.IClass\l}"
+label = "{ClassDeclarationVisitor| - model: Model\l- clazz: IClass\l|+ init(int; Model) : void\l+ visit(int; int; String; String; String; String[]) : void\l+ getClazz() : problem.models.api.IClass\l}"
 ];
 
 ClassFieldVisitor [
 shape="record",
-label = "{ClassFieldVisitor| -model: Model\l-clazz: IClass\l-decorated: ClassVisitor\l|+ init(int; ClassVisitor; Model) : void\l+ visitField(int; String; String; String; Object) : org.objectweb.asm.FieldVisitor\l~ addAccessLevel(int) : java.lang.String\l+ getClazz() : problem.models.api.IClass\l}"
+label = "{ClassFieldVisitor| - model: Model\l- clazz: IClass\l- decorated: ClassVisitor\l|+ init(int; ClassVisitor; Model) : void\l+ visitField(int; String; String; String; Object) : org.objectweb.asm.FieldVisitor\l~ addAccessLevel(int) : java.lang.String\l+ getClazz() : problem.models.api.IClass\l}"
 ];
 
 ClassMethodVisitor [
 shape="record",
-label = "{ClassMethodVisitor| -model: Model\l-decorated: ClassVisitor\l-clazz: IClass\l|+ init(int) : void\l+ init(int; ClassVisitor; Model) : void\l+ visitMethod(int; String; String; String; String[]) : org.objectweb.asm.MethodVisitor\l~ addAccessLevel(int) : java.lang.String\l~ addReturnType(String) : java.lang.String\l~ addArguments(String) : java.lang.String\l+ getClazz() : problem.models.api.IClass\l}"
+label = "{ClassMethodVisitor| - model: Model\l- decorated: ClassVisitor\l- clazz: IClass\l|+ init(int) : void\l+ init(int; ClassVisitor; Model) : void\l+ visitMethod(int; String; String; String; String[]) : org.objectweb.asm.MethodVisitor\l~ addAccessLevel(int) : java.lang.String\l~ addReturnType(String) : java.lang.String\l~ addArguments(String) : java.lang.String\l+ getClazz() : problem.models.api.IClass\l}"
 ];
 
 DesignParser [
 shape="record",
-label = "{DesignParser| +CLASSES: String[]\l|~ clinit() : void\l+ init() : void\l+ main(String[]) : void\l}"
+label = "{DesignParser| + CLASSES: String[]\l|~ clinit() : void\l+ init() : void\l+ main(String[]) : void\l}"
 ];
 
 FirstASM [
 shape="record",
-label = "{FirstASM| +myField: String\l|~ clinit() : void\l+ init() : void\l+ main(String[]) : void\l}"
+label = "{FirstASM| + myField: String\l|~ clinit() : void\l+ init() : void\l+ main(String[]) : void\l}"
 ];
 
 IClazzGetter [
@@ -72,32 +72,32 @@ label = "{\<\<interface\>\>\nIRelation| + getSuperClass() : java.lang.String\l+ 
 
 Class [
 shape="record",
-label = "{Class| -name: String\l-methods: Collection\l-fields: Collection\l-relations: Collection\l-isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : java.lang.String\l+ getMethods() : java.util.Collection\l+ getFields() : java.util.Collection\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getRelations() : java.util.Collection\l+ addRelation(IRelation) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l}"
+label = "{Class| - name: String\l- methods: Collection\l- fields: Collection\l- relations: Collection\l- isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : java.lang.String\l+ getMethods() : java.util.Collection\l+ getFields() : java.util.Collection\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getRelations() : java.util.Collection\l+ addRelation(IRelation) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l}"
 ];
 
 Field [
 shape="record",
-label = "{Field| -type: String\l-access: String\l-name: String\l|+ init(String; String; String) : void\l+ getName() : java.lang.String\l+ setName(String) : void\l+ getType() : java.lang.String\l+ getAccess() : java.lang.String\l+ accept(IModelVisitor) : void\l}"
+label = "{Field| - type: String\l- access: String\l- name: String\l|+ init(String; String; String) : void\l+ getName() : java.lang.String\l+ setName(String) : void\l+ getType() : java.lang.String\l+ getAccess() : java.lang.String\l+ accept(IModelVisitor) : void\l}"
 ];
 
 Method [
 shape="record",
-label = "{Method| -signature: String\l-access: String\l-name: String\l-args: String\l-returnType: String\l|+ getReturnType() : java.lang.String\l+ getArgs() : java.lang.String\l+ getName() : java.lang.String\l+ setName(String) : void\l+ init(String; String; String; String) : void\l+ getAccess() : java.lang.String\l+ accept(IModelVisitor) : void\l}"
+label = "{Method| - signature: String\l- access: String\l- name: String\l- args: String\l- returnType: String\l|+ getReturnType() : java.lang.String\l+ getArgs() : java.lang.String\l+ getName() : java.lang.String\l+ setName(String) : void\l+ init(String; String; String; String) : void\l+ getAccess() : java.lang.String\l+ accept(IModelVisitor) : void\l}"
 ];
 
 Model [
 shape="record",
-label = "{Model| -classes: Collection\l-relations: Collection\l|+ init() : void\l+ init(Collection) : void\l+ getRelations() : java.util.Collection\l+ setRelations(Collection) : void\l+ addRelation(IRelation) : void\l+ getClasses() : java.util.Collection\l+ accept(IModelVisitor) : void\l+ toString() : java.lang.String\l+ addClazz(IClass) : void\l+ getClazz(String) : problem.models.api.IClass\l}"
+label = "{Model| - classes: Collection\l- relations: Collection\l|+ init() : void\l+ init(Collection) : void\l+ getRelations() : java.util.Collection\l+ setRelations(Collection) : void\l+ addRelation(IRelation) : void\l+ getClasses() : java.util.Collection\l+ accept(IModelVisitor) : void\l+ toString() : java.lang.String\l+ addClazz(IClass) : void\l+ getClazz(String) : problem.models.api.IClass\l}"
 ];
 
 ModelGVOutputStream [
 shape="record",
-label = "{ModelGVOutputStream| ~out: OutputStream\l~s: StringBuilder\l|+ init() : void\l+ init(OutputStream) : void\l- write(String) : void\l+ preVisit(IModel) : void\l+ visit(IModel) : void\l+ postVisit(IModel) : void\l+ preVisit(IClass) : void\l+ visit(IClass) : void\l+ postVisit(IClass) : void\l+ preVisit(IMethod) : void\l+ visit(IMethod) : void\l+ postVisit(IMethod) : void\l+ preVisit(IField) : void\l+ visit(IField) : void\l+ postVisit(IField) : void\l+ preVisit(IRelation) : void\l+ visitRelations(IModel) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IRelation) : void\l+ intermediateVisit(IClass) : void\l}"
+label = "{ModelGVOutputStream| ~ out: OutputStream\l~ s: StringBuilder\l|+ init() : void\l+ init(OutputStream) : void\l- write(String) : void\l+ preVisit(IModel) : void\l+ visit(IModel) : void\l+ postVisit(IModel) : void\l+ preVisit(IClass) : void\l+ visit(IClass) : void\l+ postVisit(IClass) : void\l+ preVisit(IMethod) : void\l+ visit(IMethod) : void\l+ postVisit(IMethod) : void\l+ preVisit(IField) : void\l+ visit(IField) : void\l+ postVisit(IField) : void\l+ preVisit(IRelation) : void\l+ visitRelations(IModel) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IRelation) : void\l+ intermediateVisit(IClass) : void\l}"
 ];
 
 Relation [
 shape="record",
-label = "{Relation| -subclassToSuperclass: Map\l-subclassToInterface: Map\l-superClass: String\l-interfaces: String[]\l|+ init() : void\l+ init(String) : void\l+ init(String[]) : void\l+ init(String; String[]) : void\l+ getSuperClass() : java.lang.String\l+ accept(IModelVisitor) : void\l+ getSuperClasses() : java.util.Map\l+ addSuperClass(String; String) : void\l+ addInterfaces(String; String[]) : void\l+ getInterfaces() : java.util.Map\l+ setSubclassToInterface(Map) : void\l}"
+label = "{Relation| - subclassToSuperclass: Map\l- subclassToInterface: Map\l- superClass: String\l- interfaces: String[]\l|+ init() : void\l+ init(String) : void\l+ init(String[]) : void\l+ init(String; String[]) : void\l+ getSuperClass() : java.lang.String\l+ accept(IModelVisitor) : void\l+ getSuperClasses() : java.util.Map\l+ addSuperClass(String; String) : void\l+ addInterfaces(String; String[]) : void\l+ getInterfaces() : java.util.Map\l+ setSubclassToInterface(Map) : void\l}"
 ];
 
 //writing relations between classes now

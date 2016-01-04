@@ -8,7 +8,6 @@ public class Field implements IField{
 	private String type;
 	private String access;
 	private String name;
-	
 
 	public Field(String type, String name, String access) {
 		this.type = type;

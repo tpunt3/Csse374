@@ -5,7 +5,6 @@ import problem.models.api.IMethod;
 
 public class Method implements IMethod {
 
-	private String signature;
 	private String access;
 	private String name;
 	private String args;
