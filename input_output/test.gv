@@ -1,10 +1,11 @@
 digraph model{
 rankdir = BT;
-MethodClass [
+ClassWithInterface [
 shape="record",
-label = "{MethodClass| + init() : void\l+ doStuff() : void\l+ doStuffWithArgs(String; int) : void\l}"
+label = "{ClassWithInterface| + init() : void\l}"
 ];
 
 //writing relations between classes now
-MethodClass -> Object [arrowhead = "empty"];
+ClassWithInterface -> Object [arrowhead = "empty"];
+ClassWithInterface -> IInterface [arrowhead = "empty", style = "dashed"];
 }
