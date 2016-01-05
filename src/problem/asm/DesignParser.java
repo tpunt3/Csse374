@@ -76,7 +76,7 @@ public class DesignParser {
 			
 			// DECORATE field visitor with method visitor
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, model);
-			
+						
 			// TODO: add more DECORATORS here in later milestones to accomplish
 			// specific tasks
 			// Tell the Reader to use our (heavily decorated) ClassVisitor to

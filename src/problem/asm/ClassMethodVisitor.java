@@ -31,6 +31,8 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
+		MethodVisitor mine = new MyMethodVisitor(Opcodes.ASM5, toDecorate, this.model);
+		
 		String accessLevel;
 		
 		accessLevel = addAccessLevel(access);
@@ -45,7 +47,8 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		Method m = new Method(accessLevel, name, args, returnType);
 		current.addMethod(m);
 		
-		return toDecorate;
+		//return toDecorate;
+		return mine;
 	}
 
 	String addAccessLevel(int access) {

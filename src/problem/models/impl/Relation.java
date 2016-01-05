@@ -35,16 +35,9 @@ public class Relation implements IRelation{
 	public String getSuperClass() {
 		return this.superClass;
 	}
-
-//	@Override
-//	public String[] getInterfaces() {
-//		return this.interfaces;
-//	}
-
+	
 	@Override
 	public void accept(IModelVisitor v) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
