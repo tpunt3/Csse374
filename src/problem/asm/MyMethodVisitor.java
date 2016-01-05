@@ -2,6 +2,7 @@ package problem.asm;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Type;
 
 import problem.models.api.IClass;
 import problem.models.impl.Model;
@@ -19,29 +20,44 @@ public class MyMethodVisitor extends MethodVisitor {
 	}
 
 	@Override
-	public void visitFieldInsn(int arg0, String arg1, String arg2, String arg3) {
+	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
 		// TODO Auto-generated method stub
-		super.visitFieldInsn(arg0, arg1, arg2, arg3);
+		super.visitFieldInsn(opcode, owner, name, desc);
 	}
 
 	@Override
-	public void visitMethodInsn(int arg0, String arg1, String arg2, String arg3, boolean arg4) {
-		// TODO Auto-generated method stub
-		super.visitMethodInsn(arg0, arg1, arg2, arg3, arg4);
+	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
+		super.visitMethodInsn(opcode,owner, name, desc, itf);
+		
+		String[] args = addArguments(desc);
+		
 	}
 
 	@Override
-	public void visitTypeInsn(int arg0, String arg1) {
+	public void visitTypeInsn(int opcode, String type) {
 		// TODO Auto-generated method stub
-		super.visitTypeInsn(arg0, arg1);
+		super.visitTypeInsn(opcode, type);
 	}
 
 	@Override
-	public void visitVarInsn(int arg0, int arg1) {
+	public void visitVarInsn(int opcode, int var) {
 		// TODO Auto-generated method stub
-		super.visitVarInsn(arg0, arg1);
+		super.visitVarInsn(opcode, var);
 	}
 	
+	String[] addArguments(String desc) {
+		String argList = "";
+		Type[] args = Type.getArgumentTypes(desc);
+		String[] argClassList = new String[args.length];
+		for (int i = 0; i < args.length; i++) {
+			String arg = args[i].getClassName();
+			String[] splitArg = arg.split("\\.");
+			argClassList[i] = splitArg[splitArg.length-1];
+
+		}
+		//return argList;
+		return argClassList;
+	}
 	
 
 }
