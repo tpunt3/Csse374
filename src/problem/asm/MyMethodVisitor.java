@@ -21,7 +21,6 @@ public class MyMethodVisitor extends MethodVisitor {
 
 	@Override
 	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
-		// TODO Auto-generated method stub
 		super.visitFieldInsn(opcode, owner, name, desc);
 	}
 
@@ -35,13 +34,11 @@ public class MyMethodVisitor extends MethodVisitor {
 
 	@Override
 	public void visitTypeInsn(int opcode, String type) {
-		// TODO Auto-generated method stub
 		super.visitTypeInsn(opcode, type);
 	}
 
 	@Override
 	public void visitVarInsn(int opcode, int var) {
-		// TODO Auto-generated method stub
 		super.visitVarInsn(opcode, var);
 	}
 	
@@ -55,7 +52,6 @@ public class MyMethodVisitor extends MethodVisitor {
 			argClassList[i] = splitArg[splitArg.length-1];
 
 		}
-		//return argList;
 		return argClassList;
 	}
 	
