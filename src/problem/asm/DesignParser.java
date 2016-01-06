@@ -12,8 +12,10 @@ import org.objectweb.asm.Opcodes;
 
 import problem.model.visitor.IModelTraverser;
 import problem.model.visitor.IModelVisitor;
+import problem.models.api.IRelation;
 import problem.models.impl.Model;
 import problem.models.impl.ModelGVOutputStream;
+import problem.models.impl.Relation;
 
 public class DesignParser {
 	
@@ -91,8 +93,8 @@ public class DesignParser {
 			out.close();
 			
 			//runs DOT on our .gv file. This might need to be moved?
-			//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
-			ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+			ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+			//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 			builder.redirectErrorStream(true);
 			Process p = builder.start();
 			String line;

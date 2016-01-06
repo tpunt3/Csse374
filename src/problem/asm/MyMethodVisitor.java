@@ -1,5 +1,7 @@
 package problem.asm;
 
+import java.util.ArrayList;
+
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
@@ -14,17 +16,14 @@ public class MyMethodVisitor extends MethodVisitor{
 	private Model model;
 	private IClass clazz;
 	private MethodVisitor decorated;
+	private ArrayList<String> arguments;
 
-	public MyMethodVisitor(int api, MethodVisitor decorated, Model m) {
+	public MyMethodVisitor(int api, MethodVisitor decorated, Model m, IClass clazz) {
 		super(api, decorated);
 		this.model = m;
-		this.clazz = null;
+		this.clazz = clazz;
 		this.decorated = decorated;
-	}
-
-	@Override
-	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
-		super.visitFieldInsn(opcode, owner, name, desc);
+		this.arguments = new ArrayList<String>();
 	}
 
 	@Override
@@ -39,6 +38,24 @@ public class MyMethodVisitor extends MethodVisitor{
 		r.addUses(owner, args);
 		this.model.addRelation(r);
 		
+	}
+	
+
+	@Override
+	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
+		super.visitFieldInsn(opcode, owner, name, desc);
+		
+		//if owner is the class we are in, then we can automatically add it as an associations arrow, 
+		//because that is stronger than a uses
+		
+		String fieldType = getType(desc);
+		String[] splitArg = fieldType.split("\\.");
+		fieldType = splitArg[splitArg.length-1];
+		
+		
+		if(this.arguments.contains(fieldType)){
+			System.out.println(fieldType);
+		}
 	}
 
 	@Override
@@ -60,9 +77,15 @@ public class MyMethodVisitor extends MethodVisitor{
 			String[] splitArg = arg.split("\\.");
 			
 			argClassList[i] = splitArg[splitArg.length-1];
-
+			this.arguments.add(splitArg[splitArg.length-1]);
 		}
 		return argClassList;
+	}
+	
+	String getType(String desc){
+		Type type = Type.getType(desc);
+		String t = type.getClassName();
+		return t;
 	}
 	
 

@@ -15,8 +15,10 @@ import problem.asm.ClassFieldVisitor;
 import problem.asm.ClassMethodVisitor;
 import problem.model.visitor.IModelTraverser;
 import problem.model.visitor.IModelVisitor;
+import problem.models.api.IRelation;
 import problem.models.impl.Model;
 import problem.models.impl.ModelGVOutputStream;
+import problem.models.impl.Relation;
 
 public class TestDesignParser {
 	

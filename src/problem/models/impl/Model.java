@@ -35,6 +35,9 @@ public class Model implements IModel{
 	}
 	
 	public void addRelation(IRelation r){
+		for(IRelation rel : this.relations){
+			
+		}
 		this.relations.add(r);
 	}
 

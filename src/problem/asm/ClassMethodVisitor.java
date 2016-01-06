@@ -8,8 +8,10 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 import problem.models.api.IClass;
+import problem.models.api.IRelation;
 import problem.models.impl.Method;
 import problem.models.impl.Model;
+import problem.models.impl.Relation;
 
 public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	private Model model;
@@ -31,7 +33,10 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		MethodVisitor mine = new MyMethodVisitor(Opcodes.ASM5, toDecorate, this.model);
+		
+		this.clazz = this.getClazz();
+		IClass current = this.model.getClazz(this.clazz.getName());
+		MethodVisitor mine = new MyMethodVisitor(Opcodes.ASM5, toDecorate, this.model, this.clazz);
 		
 		String accessLevel;
 		
@@ -41,9 +46,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		
 		name = name.replace("<", "");
 		name = name.replace(">", "");
-		
-		this.clazz = this.getClazz();
-		IClass current = this.model.getClazz(this.clazz.getName());
+
 		Method m = new Method(accessLevel, name, args, returnType);
 		current.addMethod(m);
 		
