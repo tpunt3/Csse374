@@ -37,15 +37,31 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 		this.clazz = new Class(name, isClass);
 		IRelation r;
 		if (!isClass && interfaces.length > 0) {
-			r = new Relation(RelationType.interfaces, interfaces);
-			r.addSuperClass(name, interfaces[0]);
+
+			String[] split = interfaces[0].split("/");
+			interfaces[0] = split[split.length-1];
+			
+			r = new Relation(name, interfaces[0], RelationType.interfaces);
+			this.clazz.addRelation(r);
+			this.model.addRelation(r);
 		} else {			
-			r = new Relation(superName, interfaces);
-			r.addSuperClass(name, superName);
-			r.addInterfaces(name, interfaces);
+			for(String s : interfaces){
+				
+				String[] split = s.split("/");
+				s = split[split.length-1];
+				
+				r = new Relation(name, s, RelationType.interfaces);		
+				this.clazz.addRelation(r);
+				this.model.addRelation(r);
+			}
+			
+
+			String[] split = superName.split("/");
+			superName = split[split.length-1];
+			r = new Relation(name, superName, RelationType.superclass);
+			this.clazz.addRelation(r);
+			this.model.addRelation(r);
 		}
-		this.clazz.addRelation(r);
-		this.model.addRelation(r);
 		this.model.addClazz(clazz);
 
 		super.visit(version, access, name, signature, superName, interfaces);

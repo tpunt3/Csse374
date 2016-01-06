@@ -5,18 +5,19 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import problem.asm.DesignParser;
 import problem.model.visitor.IModelTraverser;
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IModel;
 import problem.models.api.IRelation;
 
-public class Model implements IModel{
-	
+public class Model implements IModel {
+
 	private Collection<IClass> classes;
-	private Collection<IRelation> relations;
-	
-	public Model(){
+	private ArrayList<IRelation> relations;
+
+	public Model() {
 		this.classes = new ArrayList<IClass>();
 		this.relations = new ArrayList<IRelation>();
 	}
@@ -26,19 +27,40 @@ public class Model implements IModel{
 		this.relations = new ArrayList<IRelation>();
 	}
 
-	public Collection<IRelation> getRelations() {
+	public ArrayList<IRelation> getRelations() {
 		return relations;
 	}
 
-	public void setRelations(Collection<IRelation> relations) {
+	public void setRelations(ArrayList<IRelation> relations) {
 		this.relations = relations;
 	}
-	
-	public void addRelation(IRelation r){
-		for(IRelation rel : this.relations){
+
+	public void addRelation(IRelation r) {
+
+		boolean inClasses = false;
+		for (String s : DesignParser.CLASSES) {
 			
+			String[] split = s.split("\\.");
+			s = split[split.length-1];
+			
+			if (r.getRelatedClass().equals(s)) {
+				inClasses = true;
+			}
 		}
-		this.relations.add(r);
+
+		if (inClasses) {
+			if (this.relations.size() == 0) {
+				this.relations.add(r);
+				return;
+			}
+
+			for (int i = 0; i < this.relations.size(); i++) {
+				if (r.equals(this.relations.get(i))) {
+					return;
+				}
+			}
+			this.relations.add(r);
+		}
 	}
 
 	@Override
@@ -49,24 +71,24 @@ public class Model implements IModel{
 	@Override
 	public void accept(IModelVisitor v) {
 		v.preVisit(this);
-		for(IClass c : this.classes){
+		for (IClass c : this.classes) {
 			c.accept(v);
 		}
 		v.visitRelations(this);
 		v.postVisit(this);
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return null;
 	}
-	
-	public void addClazz(IClass clazz){
+
+	public void addClazz(IClass clazz) {
 		classes.add(clazz);
 	}
-	
-	public IClass getClazz(String key){
-		for(IClass clazz : classes){
-			if(clazz.getName().equals(key)){
+
+	public IClass getClazz(String key) {
+		for (IClass clazz : classes) {
+			if (clazz.getName().equals(key)) {
 				return clazz;
 			}
 		}

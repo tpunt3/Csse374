@@ -15,6 +15,7 @@ import problem.models.api.IField;
 import problem.models.api.IMethod;
 import problem.models.api.IModel;
 import problem.models.api.IRelation;
+import problem.models.api.RelationType;
 
 public class ModelGVOutputStream extends ModelVisitorAdapter {
 
@@ -119,26 +120,29 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 		this.write(comment);
 
 		for (IRelation r : relations) {
-			this.visitSuperClasses(r);
-		}
-
-		for (IRelation r : relations) {
-			this.visitInterfaces(r);
-		}
-
-		for (IRelation r : relations) {
-			this.visitUses(r);
-		}
-
-		for (IRelation r : relations) {
-			this.visitAssociations(r);
+			switch(r.getType()){
+			case association:
+				visitAssociations(r);
+				break;
+			case uses:
+				visitUses(r);
+				break;
+			case superclass:
+				visitSuperClasses(r);
+				break;
+			case interfaces:
+				visitInterfaces(r);
+				break;
+			}
 		}
 	}
 
 	private void visitAssociations(IRelation r) {
-		String s = "";
+		String s = "";		
 
-		Set<String> keys = r.getAssociations().keySet();
+		s += "\n" + r.getName() + " -> " + r.getRelatedClass() + " [arrowhead = \"vee\"];";
+
+		/*Set<String> keys = r.getAssociations().keySet();
 		for (String k : keys) {
 			if (r.getAssociations().get(k).length > 0) {
 				String usedClass = r.getUses().get(k)[0];
@@ -146,16 +150,19 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 				usedClass = usedSplit[usedSplit.length - 1];
 				s += "\n" + k + " -> " + usedClass + " [arrowhead = \"vee\"];";
 			}
-		}
-		if (s != "") {
-			this.write(s);
-		}
+		}*/
+		this.write(s);
+//		if (s != "") {
+//			this.write(s);
+//		}
 
 	}
 
 	private void visitUses(IRelation r) {
 		String s = "";
 
+		s += "\n" + r.getName() + " -> " + r.getRelatedClass() + " [arrowhead = \"vee\", style = \"dashed\"];";
+		/*
 		Set<String> keys = r.getUses().keySet();
 		for (String k : keys) {
 			if (r.getUses().get(k).length > 0) {
@@ -164,12 +171,13 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 				usedClass = usedSplit[usedSplit.length - 1];
 				s += "\n" + k + " -> " + usedClass + " [arrowhead = \"vee\", style = \"dashed\"];";
 			}
-		}
-		if (s != "")
-
-		{
-			this.write(s);
-		}
+		}*/
+		
+		this.write(s);
+//		
+//		if (s != ""){
+//			this.write(s);
+//		}
 
 	}
 
@@ -177,6 +185,13 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 	public void visitSuperClasses(IRelation r) {
 		String s = "";
 
+
+		String[] relatedSplit = r.getRelatedClass().split("/");
+		String split = relatedSplit[relatedSplit.length-1];
+		
+		s += "\n" + r.getName() + " -> " + split +  " [arrowhead = \"empty\"];";
+		
+		/*
 		Set<String> keys = r.getSuperClasses().keySet();
 		for (String k : keys) {
 			String superClass = r.getSuperClasses().get(k);
@@ -188,11 +203,19 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 		if (s != "") {
 			this.write(s);
-		}
+		}*/
+		this.write(s);
 	}
 
 	@Override
 	public void visitInterfaces(IRelation r) {
+		
+
+		String[] relatedSplit = r.getRelatedClass().split("/");
+		String split = relatedSplit[relatedSplit.length-1];
+		
+		String s = "\n" + r.getName() + " -> " + split + " [arrowhead = \"empty\", style = \"dashed\"];";
+		/*
 		String s = "";
 		Set<String> keys = r.getInterfaces().keySet();
 		for (String k : keys) {
@@ -205,7 +228,8 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 		}
 		if (s != "") {
 			this.write(s);
-		}
+		}*/
+		this.write(s);
 	}
 
 	@Override

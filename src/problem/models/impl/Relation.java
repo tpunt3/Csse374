@@ -8,49 +8,49 @@ import problem.models.api.IRelation;
 import problem.models.api.RelationType;
 
 public class Relation implements IRelation {
-
-	private Map<String, String> subclassToSuperclass = new HashMap<String, String>();
-	private Map<String, String[]> subclassToInterface = new HashMap<String, String[]>();
-	private Map<String, String[]> subclassToUses = new HashMap<String, String[]>();
-	private Map<String, String[]> subclassToAssociations = new HashMap<String, String[]>();
-
-	private String superClass;
-	private String[] interfaces;
-	private String[] uses;
-	private String[] associations;
+	
+	private String name;
+	private String relatedClass;
+	private RelationType type;
 
 	public Relation() {
 
 	}
-
-	public Relation(RelationType type, String[] relation) {
-		switch (type) {
-		case superclass:
-			this.superClass = relation[0];
-			break;
-		case interfaces:
-			this.interfaces = relation;
-			break;
-		case uses:
-			this.uses = relation;
-			break;
-		case association:
-			this.associations = relation;
-		}
-	}
-
-//	public Relation(String[] interfaces) {
-//		this.interfaces = interfaces;
-//	}
-//
-	public Relation(String superClass, String[] i) {
-		this.superClass = superClass;
-		this.interfaces = i;
+	
+	public Relation(String name, String relatedClass, RelationType type){
+		this.name = name;
+		this.relatedClass = relatedClass;
+		this.type = type;
 	}
 
 	@Override
-	public String getSuperClass() {
-		return this.superClass;
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Override
+	public String getRelatedClass() {
+		return relatedClass;
+	}
+
+	@Override
+	public void setRelatedClass(String relatedClass) {
+		this.relatedClass = relatedClass;
+	}
+
+	@Override
+	public RelationType getType() {
+		return type;
+	}
+
+	@Override
+	public void setType(RelationType type) {
+		this.type = type;
 	}
 
 	@Override
@@ -58,45 +58,36 @@ public class Relation implements IRelation {
 	}
 
 	@Override
-	public Map<String, String> getSuperClasses() {
-		return this.subclassToSuperclass;
-	}
-
-	public void addSuperClass(String key, String value) {
-		this.subclassToSuperclass.put(key, value);
-	}
-
-	@Override
-	public void addInterfaces(String name, String[] interfaceName) {
-		this.subclassToInterface.put(name, interfaceName);
-	}
-
-	public Map<String, String[]> getInterfaces() {
-		return subclassToInterface;
-	}
-
-	public void setSubclassToInterface(Map<String, String[]> subclassToInterface) {
-		this.subclassToInterface = subclassToInterface;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((relatedClass == null) ? 0 : relatedClass.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
 	}
 
 	@Override
-	public Map<String, String[]> getUses() {
-		return this.subclassToUses;
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Relation other = (Relation) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (relatedClass == null) {
+			if (other.relatedClass != null)
+				return false;
+		} else if (!relatedClass.equals(other.relatedClass))
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
 	}
-
-	@Override
-	public Map<String, String[]> getAssociations() {
-		return this.subclassToAssociations;
-	}
-
-	@Override
-	public void addUses(String name, String[] usesName) {
-		this.subclassToUses.put(name, usesName);
-	}
-
-	@Override
-	public void addAssociations(String name, String[] associationsName) {
-
-	}
-
 }

@@ -62,7 +62,7 @@ label = "{\<\<interface\>\>\nIModel| + getClasses() : java.util.Collection\l+ ad
 
 IRelation [
 shape="record",
-label = "{\<\<interface\>\>\nIRelation| + getSuperClass() : java.lang.String\l+ getInterfaces() : java.util.Map\l+ getSuperClasses() : java.util.Map\l+ getUses() : java.util.Map\l+ getAssociations() : java.util.Map\l+ addSuperClass(String; String) : void\l+ addInterfaces(String; String[]) : void\l+ addUses(String; String[]) : void\l+ addAssociations(String; String[]) : void\l}"
+label = "{\<\<interface\>\>\nIRelation| + setName(String) : void\l+ getName() : java.lang.String\l+ setRelatedClass(String) : void\l+ getRelatedClass() : java.lang.String\l+ setType(RelationType) : void\l+ getType() : problem.models.api.RelationType\l}"
 ];
 
 Class [
@@ -82,184 +82,72 @@ label = "{Method| - access: String\l- name: String\l- args: String\l- returnType
 
 Model [
 shape="record",
-label = "{Model| - classes: Collection\l- relations: Collection\l|+ init() : void\l+ init(Collection) : void\l+ getRelations() : java.util.Collection\l+ setRelations(Collection) : void\l+ addRelation(IRelation) : void\l+ getClasses() : java.util.Collection\l+ accept(IModelVisitor) : void\l+ toString() : java.lang.String\l+ addClazz(IClass) : void\l+ getClazz(String) : problem.models.api.IClass\l}"
+label = "{Model| - classes: Collection\l- relations: ArrayList\l|+ init() : void\l+ init(Collection) : void\l+ getRelations() : java.util.ArrayList\l+ setRelations(ArrayList) : void\l+ addRelation(IRelation) : void\l+ getClasses() : java.util.Collection\l+ accept(IModelVisitor) : void\l+ toString() : java.lang.String\l+ addClazz(IClass) : void\l+ getClazz(String) : problem.models.api.IClass\l+ getRelations() : java.util.Collection\l}"
 ];
 
 ModelGVOutputStream [
 shape="record",
-label = "{ModelGVOutputStream| ~ out: OutputStream\l~ s: StringBuilder\l|+ init() : void\l+ init(OutputStream) : void\l- write(String) : void\l+ preVisit(IModel) : void\l+ visit(IModel) : void\l+ postVisit(IModel) : void\l+ preVisit(IClass) : void\l+ visit(IClass) : void\l+ postVisit(IClass) : void\l+ preVisit(IMethod) : void\l+ visit(IMethod) : void\l+ postVisit(IMethod) : void\l+ preVisit(IField) : void\l+ visit(IField) : void\l+ postVisit(IField) : void\l+ preVisit(IRelation) : void\l+ visitRelations(IModel) : void\l- visitAssociations(IRelation) : void\l- visitUses(IRelation) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IRelation) : void\l+ intermediateVisit(IClass) : void\l}"
+label = "{ModelGVOutputStream| ~ out: OutputStream\l~ s: StringBuilder\l- $SWITCH_TABLE$problem$models$api$RelationType: int[]\l|+ init() : void\l+ init(OutputStream) : void\l- write(String) : void\l+ preVisit(IModel) : void\l+ visit(IModel) : void\l+ postVisit(IModel) : void\l+ preVisit(IClass) : void\l+ visit(IClass) : void\l+ postVisit(IClass) : void\l+ preVisit(IMethod) : void\l+ visit(IMethod) : void\l+ postVisit(IMethod) : void\l+ preVisit(IField) : void\l+ visit(IField) : void\l+ postVisit(IField) : void\l+ preVisit(IRelation) : void\l+ visitRelations(IModel) : void\l- visitAssociations(IRelation) : void\l- visitUses(IRelation) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IRelation) : void\l+ intermediateVisit(IClass) : void\l~ $SWITCH_TABLE$problem$models$api$RelationType() : int[]\l}"
 ];
 
 Relation [
 shape="record",
-label = "{Relation| - subclassToSuperclass: Map\l- subclassToInterface: Map\l- subclassToUses: Map\l- subclassToAssociations: Map\l- superClass: String\l- interfaces: String[]\l- uses: String[]\l- associations: String[]\l- $SWITCH_TABLE$problem$models$api$RelationType: int[]\l|+ init() : void\l+ init(RelationType; String[]) : void\l+ init(String; String[]) : void\l+ getSuperClass() : java.lang.String\l+ accept(IModelVisitor) : void\l+ getSuperClasses() : java.util.Map\l+ addSuperClass(String; String) : void\l+ addInterfaces(String; String[]) : void\l+ getInterfaces() : java.util.Map\l+ setSubclassToInterface(Map) : void\l+ getUses() : java.util.Map\l+ getAssociations() : java.util.Map\l+ addUses(String; String[]) : void\l+ addAssociations(String; String[]) : void\l~ $SWITCH_TABLE$problem$models$api$RelationType() : int[]\l}"
+label = "{Relation| - name: String\l- relatedClass: String\l- type: RelationType\l|+ init() : void\l+ init(String; String; RelationType) : void\l+ getName() : java.lang.String\l+ setName(String) : void\l+ getRelatedClass() : java.lang.String\l+ setRelatedClass(String) : void\l+ getType() : problem.models.api.RelationType\l+ setType(RelationType) : void\l+ accept(IModelVisitor) : void\l+ hashCode() : int\l+ equals(Object) : boolean\l}"
 ];
 
 //writing relations between classes now
-ClassDeclarationVisitor -> ClassVisitor [arrowhead = "empty"];
-ClassFieldVisitor -> ClassVisitor [arrowhead = "empty"];
-ClassMethodVisitor -> ClassVisitor [arrowhead = "empty"];
-DesignParser -> Object [arrowhead = "empty"];
-IClazzGetter -> Object [arrowhead = "empty"];
-IModelTraverser -> Object [arrowhead = "empty"];
-IModelVisitor -> Object [arrowhead = "empty"];
-ModelVisitorAdapter -> Object [arrowhead = "empty"];
-IClass -> IModelTraverser [arrowhead = "empty"];
-IField -> IModelTraverser [arrowhead = "empty"];
-IMethod -> IModelTraverser [arrowhead = "empty"];
-IModel -> IModelTraverser [arrowhead = "empty"];
-IRelation -> IModelTraverser [arrowhead = "empty"];
-Class -> Object [arrowhead = "empty"];
-Field -> Object [arrowhead = "empty"];
-Method -> Object [arrowhead = "empty"];
-Model -> Object [arrowhead = "empty"];
-ModelGVOutputStream -> ModelVisitorAdapter [arrowhead = "empty"];
-Relation -> Object [arrowhead = "empty"];
 ClassDeclarationVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
+ClassDeclarationVisitor -> Model [arrowhead = "vee"];
+ClassDeclarationVisitor -> Class [arrowhead = "vee"];
+ClassDeclarationVisitor -> IClass [arrowhead = "vee"];
+ClassDeclarationVisitor -> Relation [arrowhead = "vee"];
+ClassDeclarationVisitor -> IRelation [arrowhead = "vee", style = "dashed"];
+ClassDeclarationVisitor -> IClass [arrowhead = "vee", style = "dashed"];
 ClassFieldVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
+ClassFieldVisitor -> Model [arrowhead = "vee"];
+ClassFieldVisitor -> IClass [arrowhead = "vee"];
+ClassFieldVisitor -> Field [arrowhead = "vee"];
+ClassFieldVisitor -> IField [arrowhead = "vee", style = "dashed"];
+ClassFieldVisitor -> IClazzGetter [arrowhead = "vee"];
 ClassMethodVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
+ClassMethodVisitor -> IClass [arrowhead = "vee"];
+ClassMethodVisitor -> Model [arrowhead = "vee"];
+ClassMethodVisitor -> Model [arrowhead = "vee", style = "dashed"];
+ClassMethodVisitor -> IClass [arrowhead = "vee", style = "dashed"];
+ClassMethodVisitor -> Method [arrowhead = "vee"];
+ClassMethodVisitor -> IMethod [arrowhead = "vee", style = "dashed"];
+ClassMethodVisitor -> IClazzGetter [arrowhead = "vee"];
+DesignParser -> Model [arrowhead = "vee"];
+DesignParser -> ClassDeclarationVisitor [arrowhead = "vee"];
+DesignParser -> Model [arrowhead = "vee", style = "dashed"];
+DesignParser -> ClassFieldVisitor [arrowhead = "vee"];
+DesignParser -> ClassMethodVisitor [arrowhead = "vee"];
+DesignParser -> ModelGVOutputStream [arrowhead = "vee"];
+DesignParser -> IModelVisitor [arrowhead = "vee", style = "dashed"];
 ModelVisitorAdapter -> IModelVisitor [arrowhead = "empty", style = "dashed"];
+IClass -> IModelTraverser [arrowhead = "empty", style = "dashed"];
+IField -> IModelTraverser [arrowhead = "empty", style = "dashed"];
+IMethod -> IModelTraverser [arrowhead = "empty", style = "dashed"];
+IModel -> IModelTraverser [arrowhead = "empty", style = "dashed"];
+IRelation -> IModelTraverser [arrowhead = "empty", style = "dashed"];
 Class -> IClass [arrowhead = "empty", style = "dashed"];
+Class -> IClass [arrowhead = "vee", style = "dashed"];
+Class -> IField [arrowhead = "vee"];
+Class -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Class -> IMethod [arrowhead = "vee"];
 Field -> IField [arrowhead = "empty", style = "dashed"];
+Field -> IField [arrowhead = "vee", style = "dashed"];
 Method -> IMethod [arrowhead = "empty", style = "dashed"];
+Method -> IMethod [arrowhead = "vee", style = "dashed"];
 Model -> IModel [arrowhead = "empty", style = "dashed"];
-Relation -> IRelation [arrowhead = "empty", style = "dashed"];
-ClassVisitor -> int [arrowhead = "vee"];
-String -> String [arrowhead = "vee"];
-Class -> String [arrowhead = "vee"];
-Relation -> RelationType [arrowhead = "vee"];
-IRelation -> String [arrowhead = "vee"];
-Relation -> String [arrowhead = "vee"];
-IRelation -> String [arrowhead = "vee"];
-IRelation -> String [arrowhead = "vee"];
-IClass -> IRelation [arrowhead = "vee"];
-Model -> IRelation [arrowhead = "vee"];
+Model -> IModel [arrowhead = "vee", style = "dashed"];
 Model -> IClass [arrowhead = "vee"];
-ClassVisitor -> int [arrowhead = "vee"];
-ClassVisitor -> int [arrowhead = "vee"];
-ClassVisitor -> int [arrowhead = "vee"];
-Type -> String [arrowhead = "vee"];
-String -> String [arrowhead = "vee"];
-ClassFieldVisitor -> int [arrowhead = "vee"];
-Model -> String [arrowhead = "vee"];
-Field -> String [arrowhead = "vee"];
-IClass -> IField [arrowhead = "vee"];
-ClassVisitor -> int [arrowhead = "vee"];
-ClassVisitor -> int [arrowhead = "vee"];
-ClassVisitor -> int [arrowhead = "vee"];
-Model -> String [arrowhead = "vee"];
-MyMethodVisitor -> int [arrowhead = "vee"];
-ClassMethodVisitor -> int [arrowhead = "vee"];
-ClassMethodVisitor -> String [arrowhead = "vee"];
-ClassMethodVisitor -> String [arrowhead = "vee"];
-String -> CharSequence [arrowhead = "vee"];
-String -> CharSequence [arrowhead = "vee"];
-Method -> String [arrowhead = "vee"];
-IClass -> IMethod [arrowhead = "vee"];
-Type -> String [arrowhead = "vee"];
-Type -> String [arrowhead = "vee"];
-String -> String [arrowhead = "vee"];
-String -> Object [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-String -> Object [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-ClassReader -> String [arrowhead = "vee"];
-ClassDeclarationVisitor -> int [arrowhead = "vee"];
-ClassFieldVisitor -> int [arrowhead = "vee"];
-ClassMethodVisitor -> int [arrowhead = "vee"];
-ClassReader -> ClassVisitor [arrowhead = "vee"];
-FileOutputStream -> String [arrowhead = "vee"];
-ModelGVOutputStream -> OutputStream [arrowhead = "vee"];
-IModelTraverser -> IModelVisitor [arrowhead = "vee"];
-ProcessBuilder -> String[] [arrowhead = "vee"];
-ProcessBuilder -> boolean [arrowhead = "vee"];
-InputStreamReader -> InputStream [arrowhead = "vee"];
-BufferedReader -> Reader [arrowhead = "vee"];
-PrintStream -> String [arrowhead = "vee"];
-Collection -> Object [arrowhead = "vee"];
-Collection -> Object [arrowhead = "vee"];
-Collection -> Object [arrowhead = "vee"];
-IModelVisitor -> IClass [arrowhead = "vee"];
-IModelVisitor -> IClass [arrowhead = "vee"];
-IField -> IModelVisitor [arrowhead = "vee"];
-IModelVisitor -> IClass [arrowhead = "vee"];
-IMethod -> IModelVisitor [arrowhead = "vee"];
-IModelVisitor -> IClass [arrowhead = "vee"];
-IModelVisitor -> IField [arrowhead = "vee"];
-IModelVisitor -> IField [arrowhead = "vee"];
-IModelVisitor -> IField [arrowhead = "vee"];
-IModelVisitor -> IMethod [arrowhead = "vee"];
-IModelVisitor -> IMethod [arrowhead = "vee"];
-IModelVisitor -> IMethod [arrowhead = "vee"];
-Collection -> Object [arrowhead = "vee"];
-IModelVisitor -> IModel [arrowhead = "vee"];
-IClass -> IModelVisitor [arrowhead = "vee"];
-IModelVisitor -> IModel [arrowhead = "vee"];
-IModelVisitor -> IModel [arrowhead = "vee"];
-Collection -> Object [arrowhead = "vee"];
-String -> Object [arrowhead = "vee"];
-OutputStream -> byte[] [arrowhead = "vee"];
-RuntimeException -> Throwable [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
-ModelVisitorAdapter -> IModel [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
-String -> String [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
-String -> String [arrowhead = "vee"];
-String -> String [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
-String -> String [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
-ModelVisitorAdapter -> IMethod [arrowhead = "vee"];
-String -> String [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
-ModelVisitorAdapter -> IRelation [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
+Model -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> ModelVisitorAdapter [arrowhead = "empty"];
+ModelGVOutputStream -> IModel [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IMethod [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IRelation [arrowhead = "vee", style = "dashed"];
 ModelGVOutputStream -> IRelation [arrowhead = "vee"];
-ModelGVOutputStream -> IRelation [arrowhead = "vee"];
-ModelGVOutputStream -> IRelation [arrowhead = "vee"];
-ModelGVOutputStream -> IRelation [arrowhead = "vee"];
-Map -> Object [arrowhead = "vee"];
-Map -> Object [arrowhead = "vee"];
-String -> String [arrowhead = "vee"];
-String -> Object [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
-Map -> Object [arrowhead = "vee"];
-String -> String [arrowhead = "vee"];
-String -> Object [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-String -> Object [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
-Map -> Object [arrowhead = "vee"];
-Map -> Object [arrowhead = "vee"];
-String -> String [arrowhead = "vee"];
-String -> Object [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-StringBuilder -> String [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
-ModelVisitorAdapter -> IRelation [arrowhead = "vee"];
-ModelGVOutputStream -> String [arrowhead = "vee"];
-Map -> Object [arrowhead = "vee"];
-Map -> Object [arrowhead = "vee"];
-Map -> Object [arrowhead = "vee"];
+Relation -> IRelation [arrowhead = "empty", style = "dashed"];
+Relation -> Relation [arrowhead = "vee"];
 }

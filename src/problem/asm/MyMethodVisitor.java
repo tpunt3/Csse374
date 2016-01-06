@@ -30,9 +30,10 @@ public class MyMethodVisitor extends MethodVisitor {
 		super.visitMethodInsn(opcode, owner, name, desc, itf);
 		String[] args = getArguments(desc);
 		
-		IRelation r = new Relation(RelationType.uses, args);
-		r.addUses(this.clazz.getName(), args);
-		this.model.addRelation(r);
+		for(String s : args){
+			IRelation r = new Relation(this.clazz.getName(), s, RelationType.uses);
+			this.model.addRelation(r);
+		}
 
 	}
 
@@ -51,11 +52,10 @@ public class MyMethodVisitor extends MethodVisitor {
 		String[] splitField = fieldType.split("\\.");
 		fieldType = splitField[splitField.length - 1];
 
-		String[] association = { fieldType };
 		if (owner.equals(this.clazz.getName())) {
 			// create relation for assocation
-			IRelation r = new Relation(RelationType.association, association);
-			r.addAssociations(owner, association);
+			IRelation r = new Relation(owner, fieldType, RelationType.association);
+			this.model.addRelation(r);
 		}
 	}
 
@@ -67,12 +67,10 @@ public class MyMethodVisitor extends MethodVisitor {
 		type = typeSplit[typeSplit.length - 1];
 
 
-		System.out.println(type);
+		//System.out.println(type);
 		// create relation for association
-		String[] association = { type };
-		IRelation r = new Relation(RelationType.association, association);
-		r.addAssociations(this.clazz.getName(), association);
-
+		IRelation r = new Relation(this.clazz.getName(), type, RelationType.association);
+		this.model.addRelation(r);
 	}
 
 	@Override
