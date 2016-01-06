@@ -3,6 +3,8 @@ package problem.models.impl;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.management.RuntimeErrorException;
@@ -61,9 +63,9 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 	@Override
 	public void visit(IClass c) {
 		String s;
-		if(!c.getIsClass()){
-		s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
-		}else{
+		if (!c.getIsClass()) {
+			s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
+		} else {
 			s = String.format("label = \"{%s| ", c.getName());
 		}
 		this.write(s);
@@ -123,6 +125,38 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 		for (IRelation r : relations) {
 			this.visitInterfaces(r);
 		}
+
+		for (IRelation r : relations) {
+			this.visitUses(r);
+		}
+
+		for (IRelation r : relations) {
+			this.visitAssociations(r);
+		}
+	}
+
+	private void visitAssociations(IRelation r) {
+
+	}
+
+	private void visitUses(IRelation r) {
+		String s = "";
+
+		Set<String> keys = r.getUses().keySet();
+		for (String k : keys) {
+			if (r.getUses().get(k).length > 0) {
+				String usedClass = r.getUses().get(k)[0];
+				String[] usedSplit = usedClass.split("/");
+				usedClass = usedSplit[usedSplit.length - 1];
+				s += "\n" + k + " -> " + usedClass + " [arrowhead = \"vee\"];";
+			}
+		}
+		if (s != "")
+
+		{
+			this.write(s);
+		}
+
 	}
 
 	@Override
@@ -152,15 +186,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 				String superClass = r.getInterfaces().get(k)[0];
 				String[] superSplit = superClass.split("/");
 				superClass = superSplit[superSplit.length - 1];
-				s += "\n" + k + " -> " + superClass;
-
-				for (int i = 1; i < r.getInterfaces().get(k).length; i++) {
-					String interfaceName = r.getInterfaces().get(k)[i];
-					String[] interfaceSplit = interfaceName.split("/");
-					interfaceName = interfaceSplit[interfaceSplit.length - 1];
-					s += ", " + interfaceName;
-				}
-				s += " [arrowhead = \"empty\", style = \"dashed\"];";
+				s += "\n" + k + " -> " + superClass + " [arrowhead = \"empty\", style = \"dashed\"];";
 			}
 		}
 		if (s != "") {

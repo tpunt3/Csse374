@@ -9,7 +9,7 @@ import problem.models.api.IField;
 import problem.models.api.IMethod;
 import problem.models.api.IRelation;
 
-public class Class implements IClass {
+public class Class implements IClass{
 	
 	private String name;
 	private Collection<IMethod> methods;

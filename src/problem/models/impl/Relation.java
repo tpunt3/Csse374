@@ -91,13 +91,11 @@ public class Relation implements IRelation {
 
 	@Override
 	public void addUses(String name, String[] usesName) {
-		// TODO Auto-generated method stub
-
+		this.subclassToUses.put(name, usesName);
 	}
 
 	@Override
 	public void addAssociations(String name, String[] associationsName) {
-		// TODO Auto-generated method stub
 
 	}
 
