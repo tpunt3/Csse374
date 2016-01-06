@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import problem.models.api.IClass;
 import problem.models.api.IRelation;
+import problem.models.api.RelationType;
 import problem.models.impl.Class;
 import problem.models.impl.Model;
 import problem.models.impl.Relation;
@@ -36,7 +37,7 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 		this.clazz = new Class(name, isClass);
 		IRelation r;
 		if (!isClass && interfaces.length > 0) {
-			r = new Relation(interfaces[0]);
+			r = new Relation(RelationType.interfaces, interfaces);
 			r.addSuperClass(name, interfaces[0]);
 		} else {			
 			r = new Relation(superName, interfaces);
