@@ -41,8 +41,9 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 			String[] split = interfaces[0].split("/");
 			interfaces[0] = split[split.length-1];
 			
-			r = new Relation(name, interfaces[0], RelationType.interfaces);
-			this.clazz.addRelation(r);
+			r = new Relation(name, interfaces[0], RelationType.superclass);
+			System.out.println(interfaces[0]);
+			//this.clazz.addRelation(r);
 			this.model.addRelation(r);
 		} else {			
 			for(String s : interfaces){
@@ -51,7 +52,7 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 				s = split[split.length-1];
 				
 				r = new Relation(name, s, RelationType.interfaces);		
-				this.clazz.addRelation(r);
+				//this.clazz.addRelation(r);
 				this.model.addRelation(r);
 			}
 			
@@ -59,7 +60,7 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 			String[] split = superName.split("/");
 			superName = split[split.length-1];
 			r = new Relation(name, superName, RelationType.superclass);
-			this.clazz.addRelation(r);
+			//this.clazz.addRelation(r);
 			this.model.addRelation(r);
 		}
 		this.model.addClazz(clazz);

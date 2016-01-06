@@ -42,7 +42,7 @@ label = "{ModelVisitorAdapter| + init() : void\l+ preVisit(IModel) : void\l+ vis
 
 IClass [
 shape="record",
-label = "{\<\<interface\>\>\nIClass| + getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ getRelations() : IRelation\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ addRelation(IRelation) : void\l+ getIsClass() : boolean\l}"
+label = "{\<\<interface\>\>\nIClass| + getName() : String\l+ getMethods() : Collection\l+ getFields() : Collection\l+ getRelations() : Collection\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ addRelation(IRelation) : void\l+ getIsClass() : boolean\l}"
 ];
 
 IField [
@@ -57,7 +57,7 @@ label = "{\<\<interface\>\>\nIMethod| + getAccess() : String\l+ getName() : Stri
 
 IModel [
 shape="record",
-label = "{\<\<interface\>\>\nIModel| + getClasses() : IClass\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l+ getRelations() : IRelation\l}"
+label = "{\<\<interface\>\>\nIModel| + getClasses() : Collection\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l+ getRelations() : ArrayList\l}"
 ];
 
 IRelation [
@@ -67,7 +67,7 @@ label = "{\<\<interface\>\>\nIRelation| + setName(String) : void\l+ getName() : 
 
 Class [
 shape="record",
-label = "{Class| - name: String\l- methods: IMethod\l- fields: IField\l- relations: IRelation\l- isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getRelations() : IRelation\l+ addRelation(IRelation) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l}"
+label = "{Class| - name: String\l- methods: IMethod\l- fields: IField\l- relations: IRelation\l- isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : String\l+ getMethods() : Collection\l+ getFields() : Collection\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getRelations() : Collection\l+ addRelation(IRelation) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l}"
 ];
 
 Field [
@@ -82,7 +82,7 @@ label = "{Method| - access: String\l- name: String\l- args: String\l- returnType
 
 Model [
 shape="record",
-label = "{Model| - classes: IClass\l- relations: IRelation\l|+ init() : void\l+ init(Collection) : IClass\l+ getRelations() : IRelation\l+ setRelations(ArrayList) : IRelation\l+ addRelation(IRelation) : void\l+ getClasses() : IClass\l+ accept(IModelVisitor) : void\l+ toString() : String\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l}"
+label = "{Model| - classes: IClass\l- relations: IRelation\l|+ init() : void\l+ init(Collection) : void\l+ getRelations() : ArrayList\l+ setRelations(ArrayList) : void\l+ addRelation(IRelation) : void\l+ getClasses() : Collection\l+ accept(IModelVisitor) : void\l+ toString() : String\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l}"
 ];
 
 ModelGVOutputStream [
@@ -101,49 +101,63 @@ ClassDeclarationVisitor -> Model [arrowhead = "vee"];
 ClassDeclarationVisitor -> Class [arrowhead = "vee"];
 ClassDeclarationVisitor -> IClass [arrowhead = "vee"];
 ClassDeclarationVisitor -> Relation [arrowhead = "vee"];
-ClassDeclarationVisitor -> IRelation [arrowhead = "vee", style = "dashed"];
 ClassFieldVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
 ClassFieldVisitor -> Model [arrowhead = "vee"];
 ClassFieldVisitor -> IClass [arrowhead = "vee"];
 ClassFieldVisitor -> Field [arrowhead = "vee"];
-ClassFieldVisitor -> IField [arrowhead = "vee", style = "dashed"];
 ClassFieldVisitor -> IClazzGetter [arrowhead = "vee"];
 ClassMethodVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
 ClassMethodVisitor -> IClass [arrowhead = "vee"];
 ClassMethodVisitor -> Model [arrowhead = "vee"];
+ClassMethodVisitor -> Relation [arrowhead = "vee"];
 ClassMethodVisitor -> Method [arrowhead = "vee"];
-ClassMethodVisitor -> IMethod [arrowhead = "vee", style = "dashed"];
 ClassMethodVisitor -> IClazzGetter [arrowhead = "vee"];
 DesignParser -> Model [arrowhead = "vee"];
 DesignParser -> ClassDeclarationVisitor [arrowhead = "vee"];
 DesignParser -> ClassFieldVisitor [arrowhead = "vee"];
 DesignParser -> ClassMethodVisitor [arrowhead = "vee"];
 DesignParser -> ModelGVOutputStream [arrowhead = "vee"];
-DesignParser -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+IModelTraverser -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IModel [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IClass [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IMethod [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IField [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IRelation [arrowhead = "vee", style = "dashed"];
 ModelVisitorAdapter -> IModelVisitor [arrowhead = "empty", style = "dashed"];
-IClass -> IModelTraverser [arrowhead = "empty", style = "dashed"];
-IField -> IModelTraverser [arrowhead = "empty", style = "dashed"];
-IMethod -> IModelTraverser [arrowhead = "empty", style = "dashed"];
-IModel -> IModelTraverser [arrowhead = "empty", style = "dashed"];
-IRelation -> IModelTraverser [arrowhead = "empty", style = "dashed"];
+ModelVisitorAdapter -> IModel [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IClass [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IMethod [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IField [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IRelation [arrowhead = "vee", style = "dashed"];
+IClass -> IModelTraverser [arrowhead = "empty"];
+IClass -> IMethod [arrowhead = "vee", style = "dashed"];
+IClass -> IField [arrowhead = "vee", style = "dashed"];
+IClass -> IRelation [arrowhead = "vee", style = "dashed"];
+IField -> IModelTraverser [arrowhead = "empty"];
+IMethod -> IModelTraverser [arrowhead = "empty"];
+IModel -> IModelTraverser [arrowhead = "empty"];
+IModel -> IClass [arrowhead = "vee", style = "dashed"];
+IRelation -> IModelTraverser [arrowhead = "empty"];
 Class -> IClass [arrowhead = "empty", style = "dashed"];
-Class -> IClass [arrowhead = "vee", style = "dashed"];
-Class -> IField [arrowhead = "vee"];
+Class -> IRelation [arrowhead = "vee", style = "dashed"];
 Class -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Class -> IField [arrowhead = "vee"];
 Class -> IMethod [arrowhead = "vee"];
 Field -> IField [arrowhead = "empty", style = "dashed"];
-Field -> IField [arrowhead = "vee", style = "dashed"];
+Field -> IModelVisitor [arrowhead = "vee", style = "dashed"];
 Method -> IMethod [arrowhead = "empty", style = "dashed"];
-Method -> IMethod [arrowhead = "vee", style = "dashed"];
+Method -> IModelVisitor [arrowhead = "vee", style = "dashed"];
 Model -> IModel [arrowhead = "empty", style = "dashed"];
 Model -> IRelation [arrowhead = "vee"];
-Model -> IModel [arrowhead = "vee", style = "dashed"];
-Model -> IClass [arrowhead = "vee"];
 Model -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Model -> IClass [arrowhead = "vee"];
 ModelGVOutputStream -> ModelVisitorAdapter [arrowhead = "empty"];
 ModelGVOutputStream -> IModel [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IClass [arrowhead = "vee", style = "dashed"];
 ModelGVOutputStream -> IMethod [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IField [arrowhead = "vee", style = "dashed"];
 ModelGVOutputStream -> IRelation [arrowhead = "vee"];
 Relation -> IRelation [arrowhead = "empty", style = "dashed"];
+Relation -> IModelVisitor [arrowhead = "vee", style = "dashed"];
 Relation -> Relation [arrowhead = "vee"];
 }

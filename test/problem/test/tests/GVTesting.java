@@ -39,7 +39,7 @@ public class GVTesting {
 			file += line;
 		}
 		
-		String gv = "digraph model{rankdir = BT;EmptyClass [shape=\"record\",label = \"{EmptyClass| + init() : void\\"+"l}\"];//writing relations between classes nowEmptyClass -> Object [arrowhead = \"empty\"];}";
+		String gv = "digraph model{rankdir = BT;EmptyClass [shape=\"record\",label = \"{EmptyClass| + init() : void\\"+"l}\"];//writing relations between classes now}";
 		assertEquals(gv, file); 
 		
 		buffer.close();
@@ -60,7 +60,7 @@ public class GVTesting {
 			file += line;
 		}
 		
-		String gv = "digraph model{rankdir = BT;FieldClass [shape=\"record\",label = \"{FieldClass| + testString: String\\"+"l- testInt: int\\"+"l# testBoolean: boolean\\"+"l|+ init() : void\\"+"l}\"];//writing relations between classes nowFieldClass -> Object [arrowhead = \"empty\"];}";
+		String gv = "digraph model{rankdir = BT;FieldClass [shape=\"record\",label = \"{FieldClass| + testString: String\\"+"l- testInt: int\\"+"l# testBoolean: boolean\\"+"l|+ init() : void\\"+"l}\"];//writing relations between classes now}";
 		
 		assertEquals(gv, file); 
 		
@@ -82,7 +82,7 @@ public class GVTesting {
 			file += line;
 		}
 		
-		String gv = "digraph model{rankdir = BT;MethodClass [shape=\"record\",label = \"{MethodClass| + init() : void\\"+"l+ doStuff() : void\\"+"l+ doStuffWithArgs(String; int) : void\\"+"l}\"];//writing relations between classes nowMethodClass -> Object [arrowhead = \"empty\"];}";
+		String gv = "digraph model{rankdir = BT;MethodClass [shape=\"record\",label = \"{MethodClass| + init() : void\\"+"l+ doStuff() : void\\"+"l+ doStuffWithArgs(String; int) : void\\"+"l}\"];//writing relations between classes now}";
 		
 		assertEquals(gv, file); 
 		
@@ -103,7 +103,7 @@ public class GVTesting {
 			file += line;
 		}
 		
-		String gv = "digraph model{rankdir = BT;FieldAndMethodClass [shape=\"record\",label = \"{FieldAndMethodClass| + testString: String\\"+"l- testInt: int\\"+"l# testBoolean: boolean\\"+"l|+ init() : void\\"+"l+ doStuff() : void\\"+"l+ doStuffWithArgs(String; int) : void\\"+"l}\"];//writing relations between classes nowFieldAndMethodClass -> Object [arrowhead = \"empty\"];}";
+		String gv = "digraph model{rankdir = BT;FieldAndMethodClass [shape=\"record\",label = \"{FieldAndMethodClass| + testString: String\\"+"l- testInt: int\\"+"l# testBoolean: boolean\\"+"l|+ init() : void\\"+"l+ doStuff() : void\\"+"l+ doStuffWithArgs(String; int) : void\\"+"l}\"];//writing relations between classes now}";
 		
 		assertEquals(gv, file); 
 		
@@ -124,7 +124,7 @@ public class GVTesting {
 			file += line;
 		}
 		
-		String gv = "digraph model{rankdir = BT;ClassWithSuperClass [shape=\"record\",label = \"{ClassWithSuperClass| + init() : void\\"+"l}\"];//writing relations between classes nowClassWithSuperClass -> EmptyClass [arrowhead = \"empty\"];}";
+		String gv = "digraph model{rankdir = BT;ClassWithSuperClass [shape=\"record\",label = \"{ClassWithSuperClass| + init() : void\\"+"l}\"];//writing relations between classes now}";
 		
 		assertEquals(gv, file); 
 		
@@ -145,7 +145,7 @@ public class GVTesting {
 			file += line;
 		}
 		
-		String gv = "digraph model{rankdir = BT;ClassWithInterface [shape=\"record\",label = \"{ClassWithInterface| + init() : void\\"+"l}\"];//writing relations between classes nowClassWithInterface -> Object [arrowhead = \"empty\"];ClassWithInterface -> IInterface [arrowhead = \"empty\", style = \"dashed\"];}";
+		String gv = "digraph model{rankdir = BT;ClassWithInterface [shape=\"record\",label = \"{ClassWithInterface| + init() : void\\"+"l}\"];//writing relations between classes nowClassWithInterface -> IInterface [arrowhead = \"empty\", style = \"dashed\"];}";
 	
 		assertEquals(gv, file); 
 		
@@ -155,7 +155,8 @@ public class GVTesting {
 
 	@Test
 	public final void testInterfaceWithSuperClass() throws IOException {
-		String[] classes = { "problem.test.classes.IInterfaceWithSuperClass" };
+		String[] classes = { "problem.test.classes.IInterfaceWithSuperClass", 
+							 "problem.test.classes.IInterface"};
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
 		BufferedReader buffer = new BufferedReader(reader);
@@ -187,7 +188,7 @@ public class GVTesting {
 			file += line;
 		}
 		
-		String gv = "digraph model{rankdir = BT;ClassWithEverything [shape=\"record\",label = \"{ClassWithEverything| - name: String\\"+"l|+ init() : void\\"+"l+ setName(String) : void\\"+"l+ getName() : java.lang.String\\"+"l}\"];//writing relations between classes nowClassWithEverything -> EmptyClass [arrowhead = \"empty\"];ClassWithEverything -> IInterface [arrowhead = \"empty\", style = \"dashed\"];}";
+		String gv = "digraph model{rankdir = BT;ClassWithEverything [shape=\"record\",label = \"{ClassWithEverything| - name: String\\"+"l|+ init() : void\\"+"l+ setName(String) : void\\"+"l+ getName() : String\\"+"l}\"];//writing relations between classes nowClassWithEverything -> EmptyClass [arrowhead = \"empty\"];ClassWithEverything -> IInterface [arrowhead = \"empty\", style = \"dashed\"];}";
 	
 		assertEquals(gv, file); 
 		

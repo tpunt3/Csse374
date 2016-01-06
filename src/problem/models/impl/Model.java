@@ -12,6 +12,7 @@ import problem.models.api.IClass;
 import problem.models.api.IModel;
 import problem.models.api.IRelation;
 import problem.models.api.RelationType;
+import problem.test.tests.TestDesignParser;
 
 public class Model implements IModel {
 
@@ -39,7 +40,7 @@ public class Model implements IModel {
 	public void addRelation(IRelation r) {
 
 		boolean inClasses = false;
-		for (String s : DesignParser.CLASSES) {
+		for (String s : TestDesignParser.CLASSES) {
 			
 			String[] split = s.split("\\.");
 			s = split[split.length-1];
@@ -51,6 +52,7 @@ public class Model implements IModel {
 
 		if (inClasses) {
 			if (this.relations.size() == 0) {
+				System.out.println("adding: " + r.getRelatedClass());
 				this.relations.add(r);
 				return;
 			}

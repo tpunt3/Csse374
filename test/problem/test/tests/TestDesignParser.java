@@ -22,6 +22,8 @@ import problem.models.impl.Relation;
 
 public class TestDesignParser {
 	
+	public static String[] CLASSES;
+	
 	public TestDesignParser(){
 		
 	}
@@ -33,6 +35,7 @@ public class TestDesignParser {
 		for (String className : CLASSES)
 
 		{
+			TestDesignParser.CLASSES = CLASSES;
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
 			// Java class
 			ClassReader reader = new ClassReader(className);
@@ -60,10 +63,10 @@ public class TestDesignParser {
 			out.close();
 
 			// runs DOT on our .gv file. This might need to be moved?
-//			 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-//			 "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
-			ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-					"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+			 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+			 "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+//			ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+//					"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 			builder.redirectErrorStream(true);
 			Process p = builder.start();
 			String line;
@@ -76,7 +79,5 @@ public class TestDesignParser {
 				System.out.println(line);
 			}
 		}
-
-		System.out.println(model.getClasses().toString());
 	}
 }

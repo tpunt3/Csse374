@@ -1,11 +1,15 @@
 digraph model{
 rankdir = BT;
-ClassWithInterface [
+IInterfaceWithSuperClass [
 shape="record",
-label = "{ClassWithInterface| + init() : void\l}"
+label = "{\<\<interface\>\>\nIInterfaceWithSuperClass| }"
+];
+
+IInterface [
+shape="record",
+label = "{\<\<interface\>\>\nIInterface| }"
 ];
 
 //writing relations between classes now
-ClassWithInterface -> Object [arrowhead = "empty"];
-ClassWithInterface -> IInterface [arrowhead = "empty", style = "dashed"];
+IInterfaceWithSuperClass -> IInterface [arrowhead = "empty"];
 }
