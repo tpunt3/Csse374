@@ -11,6 +11,7 @@ import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IModel;
 import problem.models.api.IRelation;
+import problem.models.api.RelationType;
 
 public class Model implements IModel {
 
@@ -57,6 +58,16 @@ public class Model implements IModel {
 			for (int i = 0; i < this.relations.size(); i++) {
 				if (r.equals(this.relations.get(i))) {
 					return;
+				}
+				
+				if(r.getName().equals(this.relations.get(i).getName()) && r.getRelatedClass().equals(this.relations.get(i).getRelatedClass())){
+					if (r.getType().equals(RelationType.uses) && this.relations.get(i).getType().equals(RelationType.association)){
+						return;
+					}else if(r.getType().equals(RelationType.association) && this.relations.get(i).getType().equals(RelationType.uses)){
+						this.relations.remove(i);
+						this.relations.add(r);
+						return;
+					}
 				}
 			}
 			this.relations.add(r);
