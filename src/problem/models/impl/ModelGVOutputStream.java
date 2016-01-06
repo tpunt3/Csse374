@@ -136,6 +136,20 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 	}
 
 	private void visitAssociations(IRelation r) {
+		String s = "";
+
+		Set<String> keys = r.getAssociations().keySet();
+		for (String k : keys) {
+			if (r.getAssociations().get(k).length > 0) {
+				String usedClass = r.getUses().get(k)[0];
+				String[] usedSplit = usedClass.split("/");
+				usedClass = usedSplit[usedSplit.length - 1];
+				s += "\n" + k + " -> " + usedClass + " [arrowhead = \"vee\"];";
+			}
+		}
+		if (s != "") {
+			this.write(s);
+		}
 
 	}
 
@@ -148,7 +162,7 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 				String usedClass = r.getUses().get(k)[0];
 				String[] usedSplit = usedClass.split("/");
 				usedClass = usedSplit[usedSplit.length - 1];
-				s += "\n" + k + " -> " + usedClass + " [arrowhead = \"vee\"];";
+				s += "\n" + k + " -> " + usedClass + " [arrowhead = \"vee\", style = \"dashed\"];";
 			}
 		}
 		if (s != "")

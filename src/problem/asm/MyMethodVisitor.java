@@ -2,7 +2,6 @@ package problem.asm;
 
 import java.util.ArrayList;
 
-import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
@@ -12,7 +11,7 @@ import problem.models.api.RelationType;
 import problem.models.impl.Model;
 import problem.models.impl.Relation;
 
-public class MyMethodVisitor extends MethodVisitor{
+public class MyMethodVisitor extends MethodVisitor {
 	private Model model;
 	private IClass clazz;
 	private MethodVisitor decorated;
@@ -28,65 +27,77 @@ public class MyMethodVisitor extends MethodVisitor{
 
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
-		super.visitMethodInsn(opcode,owner, name, desc, itf);
-		String[] args = addArguments(desc);
-		
-		String[] ownerSplit = owner.split("/");
-		owner = ownerSplit[ownerSplit.length-1];
+		super.visitMethodInsn(opcode, owner, name, desc, itf);
+		String[] args = getArguments(desc);
 		
 		IRelation r = new Relation(RelationType.uses, args);
-		r.addUses(owner, args);
+		r.addUses(this.clazz.getName(), args);
 		this.model.addRelation(r);
-		
+
 	}
-	
 
 	@Override
 	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
 		super.visitFieldInsn(opcode, owner, name, desc);
-		
-		//if owner is the class we are in, then we can automatically add it as an associations arrow, 
-		//because that is stronger than a uses
-		
+
+		// if owner is the class we are in, then we can automatically add it as
+		// an associations arrow,
+		// because that is stronger than a uses
+
+		String[] ownerSplit = owner.split("/");
+		owner = ownerSplit[ownerSplit.length - 1];
+
 		String fieldType = getType(desc);
-		String[] splitArg = fieldType.split("\\.");
-		fieldType = splitArg[splitArg.length-1];
-		
-		
-		if(this.arguments.contains(fieldType)){
-			System.out.println(fieldType);
+		String[] splitField = fieldType.split("\\.");
+		fieldType = splitField[splitField.length - 1];
+
+		String[] association = { fieldType };
+		if (owner.equals(this.clazz.getName())) {
+			// create relation for assocation
+			IRelation r = new Relation(RelationType.association, association);
+			r.addAssociations(owner, association);
 		}
 	}
 
 	@Override
 	public void visitTypeInsn(int opcode, String type) {
 		super.visitTypeInsn(opcode, type);
+
+		String[] typeSplit = type.split("/");
+		type = typeSplit[typeSplit.length - 1];
+
+
+		System.out.println(type);
+		// create relation for association
+		String[] association = { type };
+		IRelation r = new Relation(RelationType.association, association);
+		r.addAssociations(this.clazz.getName(), association);
+
 	}
 
 	@Override
 	public void visitVarInsn(int opcode, int var) {
 		super.visitVarInsn(opcode, var);
 	}
-	
-	String[] addArguments(String desc) {
-		String argList = "";
+
+	String[] getArguments(String desc) {
 		Type[] args = Type.getArgumentTypes(desc);
 		String[] argClassList = new String[args.length];
 		for (int i = 0; i < args.length; i++) {
 			String arg = args[i].getClassName();
 			String[] splitArg = arg.split("\\.");
-			
-			argClassList[i] = splitArg[splitArg.length-1];
-			this.arguments.add(splitArg[splitArg.length-1]);
+
+			arg = splitArg[splitArg.length - 1];
+			argClassList[i] = arg;
+			this.arguments.add(arg);
 		}
 		return argClassList;
 	}
-	
-	String getType(String desc){
+
+	String getType(String desc) {
 		Type type = Type.getType(desc);
 		String t = type.getClassName();
 		return t;
 	}
-	
 
 }
