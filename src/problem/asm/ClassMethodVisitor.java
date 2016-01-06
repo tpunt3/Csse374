@@ -1,6 +1,7 @@
 package problem.asm;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -18,6 +19,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	private Model model;
 	private ClassVisitor decorated;
 	private IClass clazz;
+	private String signature;
 
 	public ClassMethodVisitor(int api) {
 		super(api);
@@ -35,6 +37,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 
+		this.signature = signature;
 		this.clazz = this.getClazz();
 		IClass current = this.model.getClazz(this.clazz.getName());
 		MethodVisitor mine = new MyMethodVisitor(Opcodes.ASM5, toDecorate, this.model, this.clazz);
@@ -43,7 +46,13 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 
 		accessLevel = addAccessLevel(access);
 		String returnType = addReturnType(desc);
-		String args = addArguments(desc);
+
+		String args = "";
+		try {
+			args = addArguments(desc);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		String[] splitArgs = args.split(", ");
 
@@ -51,8 +60,15 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 			if (s != "") {
 				IRelation r = new Relation(this.clazz.getName(), s, RelationType.uses);
 				this.model.addRelation(r);
-				System.out.println(this.clazz.getName() + " uses " + s);
+				// System.out.println(this.clazz.getName() + " uses " + s);
 			}
+		}
+
+		if (signature != null) {
+			String[] sig = signature.split("/");
+			returnType = sig[sig.length - 1];
+			int index = returnType.indexOf(";");
+			returnType = returnType.substring(0, index);
 		}
 
 		name = name.replace("<", "");
@@ -88,13 +104,31 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		return returnType;
 	}
 
-	String addArguments(String desc) {
+	String addArguments(String desc) throws ClassNotFoundException {
 		String argList = "";
+		String arg;
 		Type[] args = Type.getArgumentTypes(desc);
 		for (int i = 0; i < args.length; i++) {
-			String arg = args[i].getClassName();
-			String[] splitArg = arg.split("\\.");
-			arg = splitArg[splitArg.length - 1];
+			// if instance of Collection, use signature
+			//System.out.println(args[i].getClassName());
+			Class<?> cls = null;
+			if (args[i].getClassName().startsWith("java.util."))
+			{
+				cls = Class.forName(args[i].getClassName());
+				System.out.println(cls.getName().toString());
+			}
+			if (cls != null && Collection.class.isAssignableFrom(cls)) {
+				System.out.println("GOT HERE!");
+				String[] sig = this.signature.split("/");
+				arg = sig[sig.length - 1];
+				int index = arg.indexOf(";");
+				arg = arg.substring(0, index);
+			} else {
+				arg = args[i].getClassName();
+				String[] splitArg = arg.split("\\.");
+				arg = splitArg[splitArg.length - 1];
+			}
+
 			if (args.length > 1 && i < args.length - 1) {
 				argList += arg + "; ";
 			} else {
