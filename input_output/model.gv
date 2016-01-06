@@ -2,17 +2,17 @@ digraph model{
 rankdir = BT;
 ClassDeclarationVisitor [
 shape="record",
-label = "{ClassDeclarationVisitor| - model: Model\l- clazz: IClass\l|+ init(int; Model) : void\l+ visit(int; int; String; String; String; String[]) : void\l+ getClazz() : problem.models.api.IClass\l}"
+label = "{ClassDeclarationVisitor| - model: Model\l- clazz: IClass\l|+ init(int; Model) : void\l+ visit(int; int; String; String; String; String[]) : void\l+ getClazz() : IClass\l}"
 ];
 
 ClassFieldVisitor [
 shape="record",
-label = "{ClassFieldVisitor| - model: Model\l- clazz: IClass\l- decorated: ClassVisitor\l|+ init(int; ClassVisitor; Model) : void\l+ visitField(int; String; String; String; Object) : org.objectweb.asm.FieldVisitor\l~ addAccessLevel(int) : java.lang.String\l+ getClazz() : problem.models.api.IClass\l}"
+label = "{ClassFieldVisitor| - model: Model\l- clazz: IClass\l- decorated: ClassVisitor\l|+ init(int; ClassVisitor; Model) : void\l+ visitField(int; String; String; String; Object) : FieldVisitor\l~ addAccessLevel(int) : String\l+ getClazz() : IClass\l}"
 ];
 
 ClassMethodVisitor [
 shape="record",
-label = "{ClassMethodVisitor| - model: Model\l- decorated: ClassVisitor\l- clazz: IClass\l|+ init(int) : void\l+ init(int; ClassVisitor; Model) : void\l+ visitMethod(int; String; String; String; String[]) : org.objectweb.asm.MethodVisitor\l~ addAccessLevel(int) : java.lang.String\l~ addReturnType(String) : java.lang.String\l~ addArguments(String) : java.lang.String\l+ getClazz() : problem.models.api.IClass\l}"
+label = "{ClassMethodVisitor| - model: Model\l- decorated: ClassVisitor\l- clazz: IClass\l|+ init(int) : void\l+ init(int; ClassVisitor; Model) : void\l+ visitMethod(int; String; String; String; String[]) : MethodVisitor\l~ addAccessLevel(int) : String\l~ addReturnType(String) : String\l~ addArguments(String) : String\l+ getClazz() : IClass\l}"
 ];
 
 DesignParser [
@@ -22,7 +22,7 @@ label = "{DesignParser| + CLASSES: String[]\l|~ clinit() : void\l+ init() : void
 
 IClazzGetter [
 shape="record",
-label = "{\<\<interface\>\>\nIClazzGetter| + getClazz() : problem.models.api.IClass\l}"
+label = "{\<\<interface\>\>\nIClazzGetter| + getClazz() : IClass\l}"
 ];
 
 IModelTraverser [
@@ -42,47 +42,47 @@ label = "{ModelVisitorAdapter| + init() : void\l+ preVisit(IModel) : void\l+ vis
 
 IClass [
 shape="record",
-label = "{\<\<interface\>\>\nIClass| + getName() : java.lang.String\l+ getMethods() : java.util.Collection\l+ getFields() : java.util.Collection\l+ getRelations() : java.util.Collection\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ addRelation(IRelation) : void\l+ getIsClass() : boolean\l}"
+label = "{\<\<interface\>\>\nIClass| + getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ getRelations() : IRelation\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ addRelation(IRelation) : void\l+ getIsClass() : boolean\l}"
 ];
 
 IField [
 shape="record",
-label = "{\<\<interface\>\>\nIField| + getType() : java.lang.String\l+ getAccess() : java.lang.String\l+ getName() : java.lang.String\l}"
+label = "{\<\<interface\>\>\nIField| + getType() : String\l+ getAccess() : String\l+ getName() : String\l}"
 ];
 
 IMethod [
 shape="record",
-label = "{\<\<interface\>\>\nIMethod| + getAccess() : java.lang.String\l+ getName() : java.lang.String\l+ getArgs() : java.lang.String\l+ getReturnType() : java.lang.String\l}"
+label = "{\<\<interface\>\>\nIMethod| + getAccess() : String\l+ getName() : String\l+ getArgs() : String\l+ getReturnType() : String\l}"
 ];
 
 IModel [
 shape="record",
-label = "{\<\<interface\>\>\nIModel| + getClasses() : java.util.Collection\l+ addClazz(IClass) : void\l+ getClazz(String) : problem.models.api.IClass\l+ getRelations() : java.util.Collection\l}"
+label = "{\<\<interface\>\>\nIModel| + getClasses() : IClass\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l+ getRelations() : IRelation\l}"
 ];
 
 IRelation [
 shape="record",
-label = "{\<\<interface\>\>\nIRelation| + setName(String) : void\l+ getName() : java.lang.String\l+ setRelatedClass(String) : void\l+ getRelatedClass() : java.lang.String\l+ setType(RelationType) : void\l+ getType() : problem.models.api.RelationType\l}"
+label = "{\<\<interface\>\>\nIRelation| + setName(String) : void\l+ getName() : String\l+ setRelatedClass(String) : void\l+ getRelatedClass() : String\l+ setType(RelationType) : void\l+ getType() : RelationType\l}"
 ];
 
 Class [
 shape="record",
-label = "{Class| - name: String\l- methods: Collection\l- fields: Collection\l- relations: Collection\l- isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : java.lang.String\l+ getMethods() : java.util.Collection\l+ getFields() : java.util.Collection\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getRelations() : java.util.Collection\l+ addRelation(IRelation) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l}"
+label = "{Class| - name: String\l- methods: IMethod\l- fields: IField\l- relations: IRelation\l- isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getRelations() : IRelation\l+ addRelation(IRelation) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l}"
 ];
 
 Field [
 shape="record",
-label = "{Field| - type: String\l- access: String\l- name: String\l|+ init(String; String; String) : void\l+ getName() : java.lang.String\l+ setName(String) : void\l+ getType() : java.lang.String\l+ getAccess() : java.lang.String\l+ accept(IModelVisitor) : void\l}"
+label = "{Field| - type: String\l- access: String\l- name: String\l|+ init(String; String; String) : void\l+ getName() : String\l+ setName(String) : void\l+ getType() : String\l+ getAccess() : String\l+ accept(IModelVisitor) : void\l}"
 ];
 
 Method [
 shape="record",
-label = "{Method| - access: String\l- name: String\l- args: String\l- returnType: String\l|+ getReturnType() : java.lang.String\l+ getArgs() : java.lang.String\l+ getName() : java.lang.String\l+ setName(String) : void\l+ init(String; String; String; String) : void\l+ getAccess() : java.lang.String\l+ accept(IModelVisitor) : void\l}"
+label = "{Method| - access: String\l- name: String\l- args: String\l- returnType: String\l|+ getReturnType() : String\l+ getArgs() : String\l+ getName() : String\l+ setName(String) : void\l+ init(String; String; String; String) : void\l+ getAccess() : String\l+ accept(IModelVisitor) : void\l}"
 ];
 
 Model [
 shape="record",
-label = "{Model| - classes: Collection\l- relations: ArrayList\l|+ init() : void\l+ init(Collection) : void\l+ getRelations() : java.util.ArrayList\l+ setRelations(ArrayList) : void\l+ addRelation(IRelation) : void\l+ getClasses() : java.util.Collection\l+ accept(IModelVisitor) : void\l+ toString() : java.lang.String\l+ addClazz(IClass) : void\l+ getClazz(String) : problem.models.api.IClass\l+ getRelations() : java.util.Collection\l}"
+label = "{Model| - classes: IClass\l- relations: IRelation\l|+ init() : void\l+ init(Collection) : IClass\l+ getRelations() : IRelation\l+ setRelations(ArrayList) : IRelation\l+ addRelation(IRelation) : void\l+ getClasses() : IClass\l+ accept(IModelVisitor) : void\l+ toString() : String\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l}"
 ];
 
 ModelGVOutputStream [
@@ -92,7 +92,7 @@ label = "{ModelGVOutputStream| ~ out: OutputStream\l~ s: StringBuilder\l- $SWITC
 
 Relation [
 shape="record",
-label = "{Relation| - name: String\l- relatedClass: String\l- type: RelationType\l|+ init() : void\l+ init(String; String; RelationType) : void\l+ getName() : java.lang.String\l+ setName(String) : void\l+ getRelatedClass() : java.lang.String\l+ setRelatedClass(String) : void\l+ getType() : problem.models.api.RelationType\l+ setType(RelationType) : void\l+ accept(IModelVisitor) : void\l+ hashCode() : int\l+ equals(Object) : boolean\l}"
+label = "{Relation| - name: String\l- relatedClass: String\l- type: RelationType\l|+ init() : void\l+ init(String; String; RelationType) : void\l+ getName() : String\l+ setName(String) : void\l+ getRelatedClass() : String\l+ setRelatedClass(String) : void\l+ getType() : RelationType\l+ setType(RelationType) : void\l+ accept(IModelVisitor) : void\l+ hashCode() : int\l+ equals(Object) : boolean\l}"
 ];
 
 //writing relations between classes now

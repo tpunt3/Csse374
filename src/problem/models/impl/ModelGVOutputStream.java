@@ -84,7 +84,10 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	@Override
 	public void visit(IMethod m) {
-		String s = String.format("%s %s(%s) : %s\\l", m.getAccess(), m.getName(), m.getArgs(), m.getReturnType());
+		String[] returnSplit = m.getReturnType().split("\\.");
+		String returnType = returnSplit[returnSplit.length-1];
+		
+		String s = String.format("%s %s(%s) : %s\\l", m.getAccess(), m.getName(), m.getArgs(), returnType);
 		this.write(s);
 	}
 

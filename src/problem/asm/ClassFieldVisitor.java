@@ -32,6 +32,13 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 		
 		this.clazz = this.getClazz();
 		
+		if (signature != null) {
+			String[] sig = signature.split("/");
+			type = sig[sig.length - 1];
+			int index = type.indexOf(";");
+			type = type.substring(0, index);
+		}
+		
 		IClass current = this.model.getClazz(this.clazz.getName());
 		Field f = new Field(type, name, accessLevel);
 		current.addField(f);
