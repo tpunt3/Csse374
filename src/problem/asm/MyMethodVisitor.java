@@ -29,11 +29,11 @@ public class MyMethodVisitor extends MethodVisitor {
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 		super.visitMethodInsn(opcode, owner, name, desc, itf);
 		String[] args = getArguments(desc);
-		
-		for(String s : args){
-			IRelation r = new Relation(this.clazz.getName(), s, RelationType.uses);
-			this.model.addRelation(r);
-		}
+//		for(String s : args){
+//			IRelation r = new Relation(this.clazz.getName(), s, RelationType.uses);
+//			this.model.addRelation(r);
+//			System.out.println(this.clazz.getName() +" uses "+ s);
+//		}
 
 	}
 
@@ -66,8 +66,6 @@ public class MyMethodVisitor extends MethodVisitor {
 		String[] typeSplit = type.split("/");
 		type = typeSplit[typeSplit.length - 1];
 
-
-		//System.out.println(type);
 		// create relation for association
 		IRelation r = new Relation(this.clazz.getName(), type, RelationType.association);
 		this.model.addRelation(r);
