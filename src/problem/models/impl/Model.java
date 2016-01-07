@@ -40,7 +40,7 @@ public class Model implements IModel {
 	public void addRelation(IRelation r) {
 
 		boolean inClasses = false;
-		for (String s : TestDesignParser.CLASSES) {
+		for (String s : DesignParser.CLASSES) {
 			
 			String[] split = s.split("\\.");
 			s = split[split.length-1];

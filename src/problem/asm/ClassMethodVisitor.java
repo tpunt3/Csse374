@@ -76,7 +76,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		Method m = new Method(accessLevel, name, args, returnType);
 		current.addMethod(m);
 
-		// return toDecorate;
 		return mine;
 	}
 
@@ -109,7 +108,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		Type[] args = Type.getArgumentTypes(desc);
 		for (int i = 0; i < args.length; i++) {
 			// if instance of Collection, use signature
-			//System.out.println(args[i].getClassName());
 			Class<?> cls = null;
 			if (args[i].getClassName().startsWith("java.util."))
 			{
@@ -117,7 +115,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 				System.out.println(cls.getName().toString());
 			}
 			if (cls != null && Collection.class.isAssignableFrom(cls)) {
-				System.out.println("GOT HERE!");
 				String[] sig = this.signature.split("/");
 				arg = sig[sig.length - 1];
 				int index = arg.indexOf(";");
