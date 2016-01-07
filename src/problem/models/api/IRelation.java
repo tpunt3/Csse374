@@ -1,7 +1,5 @@
 package problem.models.api;
 
-import java.util.Map;
-
 import problem.model.visitor.IModelTraverser;
 
 public interface IRelation extends IModelTraverser{

@@ -1,8 +1,5 @@
 package problem.models.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IRelation;
 import problem.models.api.RelationType;
@@ -14,7 +11,6 @@ public class Relation implements IRelation {
 	private RelationType type;
 
 	public Relation() {
-
 	}
 	
 	public Relation(String name, String relatedClass, RelationType type){

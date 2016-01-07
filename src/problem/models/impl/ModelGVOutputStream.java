@@ -3,19 +3,12 @@ package problem.models.impl;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
-import javax.management.RuntimeErrorException;
-
 import problem.model.visitor.ModelVisitorAdapter;
 import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
 import problem.models.api.IModel;
 import problem.models.api.IRelation;
-import problem.models.api.RelationType;
 
 public class ModelGVOutputStream extends ModelVisitorAdapter {
 

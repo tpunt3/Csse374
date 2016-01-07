@@ -1,6 +1,5 @@
 package problem.asm;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.objectweb.asm.ClassVisitor;

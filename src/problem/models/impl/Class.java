@@ -14,7 +14,6 @@ public class Class implements IClass{
 	private String name;
 	private Collection<IMethod> methods;
 	private Collection<IField> fields;
-	private Collection<IRelation> relations;
 	private boolean isClass;
 	
 	public Class(String name, boolean isClass) {
@@ -22,13 +21,11 @@ public class Class implements IClass{
 		this.name = name;
 		this.methods = new ArrayList<IMethod>();
 		this.fields = new ArrayList<IField>();
-		this.relations = new ArrayList<IRelation>();
 	}
 
 	public Class() {
 		this.methods = new ArrayList<IMethod>();
 		this.fields = new ArrayList<IField>();
-		this.relations = new ArrayList<IRelation>();
 	}
 
 	@Override

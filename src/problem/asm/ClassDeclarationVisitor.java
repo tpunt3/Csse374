@@ -1,7 +1,5 @@
 package problem.asm;
 
-import java.util.Arrays;
-
 import problem.models.api.IClass;
 import problem.models.api.IRelation;
 import problem.models.api.RelationType;

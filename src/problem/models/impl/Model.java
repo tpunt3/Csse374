@@ -2,17 +2,12 @@ package problem.models.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import problem.asm.DesignParser;
-import problem.model.visitor.IModelTraverser;
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IModel;
 import problem.models.api.IRelation;
 import problem.models.api.RelationType;
-import problem.test.tests.TestDesignParser;
 
 public class Model implements IModel {
 
