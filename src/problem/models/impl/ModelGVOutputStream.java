@@ -188,7 +188,6 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 	public void visitSuperClasses(IRelation r) {
 		String s = "";
 
-
 		String[] relatedSplit = r.getRelatedClass().split("/");
 		String split = relatedSplit[relatedSplit.length-1];
 		

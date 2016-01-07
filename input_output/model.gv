@@ -1,399 +1,180 @@
 digraph model{
 rankdir = BT;
-BlackOlives [
+ClassDeclarationVisitor [
 shape="record",
-label = "{BlackOlives| + init() : void\l+ toString() : String\l}"
+label = "{ClassDeclarationVisitor| - model: Model\l- clazz: IClass\l|+ init(int; Model) : void\l+ visit(int; int; String; String; String; String[]) : void\l+ getClazz() : IClass\l}"
 ];
 
-Cheese [
+ClassFieldVisitor [
 shape="record",
-label = "{\<\<interface\>\>\nCheese| + toString() : String\l}"
+label = "{ClassFieldVisitor| - model: Model\l- clazz: IClass\l- decorated: ClassVisitor\l|+ init(int; ClassVisitor; Model) : void\l+ visitField(int; String; String; String; Object) : FieldVisitor\l~ addAccessLevel(int) : String\l+ getClazz() : IClass\l}"
 ];
 
-CheesePizza [
+ClassMethodVisitor [
 shape="record",
-label = "{CheesePizza| ~ ingredientFactory: PizzaIngredientFactory\l|+ init(PizzaIngredientFactory) : void\l~ prepare() : void\l+ init() : void\l}"
+label = "{ClassMethodVisitor| - model: Model\l- decorated: ClassVisitor\l- clazz: IClass\l- signature: String\l|+ init(int) : void\l+ init(int; ClassVisitor; Model) : void\l+ visitMethod(int; String; String; String; String[]) : MethodVisitor\l~ addAccessLevel(int) : String\l~ addReturnType(String) : String\l~ addArguments(String) : String\l+ getClazz() : IClass\l}"
 ];
 
-ChicagoPizzaIngredientFactory [
+DesignParser [
 shape="record",
-label = "{ChicagoPizzaIngredientFactory| + init() : void\l+ createDough() : Dough\l+ createSauce() : Sauce\l+ createCheese() : Cheese\l+ createVeggies() : Veggies[]\l+ createPepperoni() : Pepperoni\l+ createClam() : Clams\l}"
+label = "{DesignParser| + CLASSES: String[]\l|~ clinit() : void\l+ init() : void\l+ main(String[]) : void\l}"
 ];
 
-ChicagoPizzaStore [
+IClazzGetter [
 shape="record",
-label = "{ChicagoPizzaStore| + init() : void\l# createPizza(String) : Pizza\l+ init() : void\l~ createPizza(String) : Pizza\l}"
+label = "{\<\<interface\>\>\nIClazzGetter| + getClazz() : IClass\l}"
 ];
 
-ClamPizza [
+MyMethodVisitor [
 shape="record",
-label = "{ClamPizza| ~ ingredientFactory: PizzaIngredientFactory\l|+ init(PizzaIngredientFactory) : void\l~ prepare() : void\l+ init() : void\l}"
+label = "{MyMethodVisitor| - model: Model\l- clazz: IClass\l- decorated: MethodVisitor\l- arguments: String\l|+ init(int; MethodVisitor; Model; IClass) : void\l+ visitMethodInsn(int; String; String; String; boolean) : void\l+ visitFieldInsn(int; String; String; String) : void\l+ visitTypeInsn(int; String) : void\l+ visitVarInsn(int; int) : void\l~ getArguments(String) : String[]\l~ getType(String) : String\l}"
 ];
 
-Clams [
+IModelTraverser [
 shape="record",
-label = "{\<\<interface\>\>\nClams| + toString() : String\l}"
+label = "{\<\<interface\>\>\nIModelTraverser| + accept(IModelVisitor) : void\l}"
 ];
 
-Dough [
+IModelVisitor [
 shape="record",
-label = "{\<\<interface\>\>\nDough| + toString() : String\l}"
+label = "{\<\<interface\>\>\nIModelVisitor| + preVisit(IModel) : void\l+ preVisit(IClass) : void\l+ preVisit(IMethod) : void\l+ preVisit(IField) : void\l+ preVisit(IRelation) : void\l+ visit(IModel) : void\l+ visit(IClass) : void\l+ visit(IMethod) : void\l+ visit(IField) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IModel) : void\l+ postVisit(IClass) : void\l+ postVisit(IMethod) : void\l+ postVisit(IField) : void\l+ postVisit(IRelation) : void\l+ visitRelations(IModel) : void\l+ intermediateVisit(IClass) : void\l}"
 ];
 
-Eggplant [
+ModelVisitorAdapter [
 shape="record",
-label = "{Eggplant| + init() : void\l+ toString() : String\l}"
+label = "{ModelVisitorAdapter| + init() : void\l+ preVisit(IModel) : void\l+ visit(IModel) : void\l+ postVisit(IModel) : void\l+ preVisit(IClass) : void\l+ visit(IClass) : void\l+ postVisit(IClass) : void\l+ visit(IMethod) : void\l+ visit(IField) : void\l+ preVisit(IMethod) : void\l+ preVisit(IField) : void\l+ postVisit(IMethod) : void\l+ postVisit(IField) : void\l+ intermediateVisit(IClass) : void\l+ preVisit(IRelation) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IRelation) : void\l+ visitRelations(IModel) : void\l}"
 ];
 
-FreshClams [
+IClass [
 shape="record",
-label = "{FreshClams| + init() : void\l+ toString() : String\l}"
+label = "{\<\<interface\>\>\nIClass| + getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ getRelations() : IRelation\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ addRelation(IRelation) : void\l+ getIsClass() : boolean\l}"
 ];
 
-FrozenClams [
+IField [
 shape="record",
-label = "{FrozenClams| + init() : void\l+ toString() : String\l}"
+label = "{\<\<interface\>\>\nIField| + getType() : String\l+ getAccess() : String\l+ getName() : String\l}"
 ];
 
-Garlic [
+IMethod [
 shape="record",
-label = "{Garlic| + init() : void\l+ toString() : String\l}"
+label = "{\<\<interface\>\>\nIMethod| + getAccess() : String\l+ getName() : String\l+ getArgs() : String\l+ getReturnType() : String\l}"
 ];
 
-MarinaraSauce [
+IModel [
 shape="record",
-label = "{MarinaraSauce| + init() : void\l+ toString() : String\l}"
+label = "{\<\<interface\>\>\nIModel| + getClasses() : IClass\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l+ getRelations() : IRelation\l}"
 ];
 
-MozzarellaCheese [
+IRelation [
 shape="record",
-label = "{MozzarellaCheese| + init() : void\l+ toString() : String\l}"
+label = "{\<\<interface\>\>\nIRelation| + setName(String) : void\l+ getName() : String\l+ setRelatedClass(String) : void\l+ getRelatedClass() : String\l+ setType(RelationType) : void\l+ getType() : RelationType\l}"
 ];
 
-Mushroom [
+RelationType [
 shape="record",
-label = "{Mushroom| + init() : void\l+ toString() : String\l}"
+label = "{RelationType| + superclass: RelationType\l+ interfaces: RelationType\l+ uses: RelationType\l+ association: RelationType\l- ENUM$VALUES: RelationType[]\l|~ clinit() : void\l- init(String; int) : void\l+ values() : RelationType[]\l+ valueOf(String) : RelationType\l}"
 ];
 
-NYPizzaIngredientFactory [
+Class [
 shape="record",
-label = "{NYPizzaIngredientFactory| + init() : void\l+ createDough() : Dough\l+ createSauce() : Sauce\l+ createCheese() : Cheese\l+ createVeggies() : Veggies[]\l+ createPepperoni() : Pepperoni\l+ createClam() : Clams\l}"
+label = "{Class| - name: String\l- methods: IMethod\l- fields: IField\l- relations: IRelation\l- isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getRelations() : IRelation\l+ addRelation(IRelation) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l}"
 ];
 
-NYPizzaStore [
+Field [
 shape="record",
-label = "{NYPizzaStore| + init() : void\l# createPizza(String) : Pizza\l+ init() : void\l~ createPizza(String) : Pizza\l}"
+label = "{Field| - type: String\l- access: String\l- name: String\l|+ init(String; String; String) : void\l+ getName() : String\l+ setName(String) : void\l+ getType() : String\l+ getAccess() : String\l+ accept(IModelVisitor) : void\l}"
 ];
 
-Onion [
+Method [
 shape="record",
-label = "{Onion| + init() : void\l+ toString() : String\l}"
+label = "{Method| - access: String\l- name: String\l- args: String\l- returnType: String\l|+ getReturnType() : String\l+ getArgs() : String\l+ getName() : String\l+ setName(String) : void\l+ init(String; String; String; String) : void\l+ getAccess() : String\l+ accept(IModelVisitor) : void\l}"
 ];
 
-ParmesanCheese [
+Model [
 shape="record",
-label = "{ParmesanCheese| + init() : void\l+ toString() : String\l}"
+label = "{Model| - classes: IClass\l- relations: IRelation\l|+ init() : void\l+ init(IClass) : IClass\l+ getRelations() : IRelation\l+ setRelations(IRelation) : IRelation\l+ addRelation(IRelation) : void\l+ getClasses() : IClass\l+ accept(IModelVisitor) : void\l+ toString() : String\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l}"
 ];
 
-Pepperoni [
+ModelGVOutputStream [
 shape="record",
-label = "{\<\<interface\>\>\nPepperoni| + toString() : String\l}"
+label = "{ModelGVOutputStream| ~ out: OutputStream\l~ s: StringBuilder\l- $SWITCH_TABLE$problem$models$api$RelationType: int[]\l|+ init() : void\l+ init(OutputStream) : void\l- write(String) : void\l+ preVisit(IModel) : void\l+ visit(IModel) : void\l+ postVisit(IModel) : void\l+ preVisit(IClass) : void\l+ visit(IClass) : void\l+ postVisit(IClass) : void\l+ preVisit(IMethod) : void\l+ visit(IMethod) : void\l+ postVisit(IMethod) : void\l+ preVisit(IField) : void\l+ visit(IField) : void\l+ postVisit(IField) : void\l+ preVisit(IRelation) : void\l+ visitRelations(IModel) : void\l- visitAssociations(IRelation) : void\l- visitUses(IRelation) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IRelation) : void\l+ intermediateVisit(IClass) : void\l~ $SWITCH_TABLE$problem$models$api$RelationType() : int[]\l}"
 ];
 
-PepperoniPizza [
+Relation [
 shape="record",
-label = "{PepperoniPizza| ~ ingredientFactory: PizzaIngredientFactory\l|+ init(PizzaIngredientFactory) : void\l~ prepare() : void\l+ init() : void\l}"
-];
-
-Pizza [
-shape="record",
-label = "{Pizza| ~ name: String\l~ dough: Dough\l~ sauce: Sauce\l~ veggies: Veggies[]\l~ cheese: Cheese\l~ pepperoni: Pepperoni\l~ clam: Clams\l~ name: String\l~ dough: String\l~ sauce: String\l~ toppings: String\l~ name: String\l~ dough: String\l~ sauce: String\l~ toppings: String\l|+ init() : void\l~ prepare() : void\l~ bake() : void\l~ cut() : void\l~ box() : void\l~ setName(String) : void\l~ getName() : String\l+ toString() : String\l+ init() : void\l~ prepare() : void\l~ bake() : void\l~ cut() : void\l~ box() : void\l+ getName() : String\l+ toString() : String\l+ init() : void\l+ getName() : String\l+ prepare() : void\l+ bake() : void\l+ cut() : void\l+ box() : void\l+ toString() : String\l}"
-];
-
-PizzaIngredientFactory [
-shape="record",
-label = "{\<\<interface\>\>\nPizzaIngredientFactory| + createDough() : Dough\l+ createSauce() : Sauce\l+ createCheese() : Cheese\l+ createVeggies() : Veggies[]\l+ createPepperoni() : Pepperoni\l+ createClam() : Clams\l}"
-];
-
-PizzaStore [
-shape="record",
-label = "{PizzaStore| ~ factory: SimplePizzaFactory\l|+ init() : void\l# createPizza(String) : Pizza\l+ orderPizza(String) : Pizza\l+ init() : void\l~ createPizza(String) : Pizza\l+ orderPizza(String) : Pizza\l+ init(SimplePizzaFactory) : void\l+ orderPizza(String) : Pizza\l}"
-];
-
-PizzaTestDrive [
-shape="record",
-label = "{PizzaTestDrive| + init() : void\l+ main(String[]) : void\l+ init() : void\l+ main(String[]) : void\l+ init() : void\l+ main(String[]) : void\l}"
-];
-
-PlumTomatoSauce [
-shape="record",
-label = "{PlumTomatoSauce| + init() : void\l+ toString() : String\l}"
-];
-
-RedPepper [
-shape="record",
-label = "{RedPepper| + init() : void\l+ toString() : String\l}"
-];
-
-ReggianoCheese [
-shape="record",
-label = "{ReggianoCheese| + init() : void\l+ toString() : String\l}"
-];
-
-Sauce [
-shape="record",
-label = "{\<\<interface\>\>\nSauce| + toString() : String\l}"
-];
-
-SlicedPepperoni [
-shape="record",
-label = "{SlicedPepperoni| + init() : void\l+ toString() : String\l}"
-];
-
-Spinach [
-shape="record",
-label = "{Spinach| + init() : void\l+ toString() : String\l}"
-];
-
-ThickCrustDough [
-shape="record",
-label = "{ThickCrustDough| + init() : void\l+ toString() : String\l}"
-];
-
-ThinCrustDough [
-shape="record",
-label = "{ThinCrustDough| + init() : void\l+ toString() : String\l}"
-];
-
-VeggiePizza [
-shape="record",
-label = "{VeggiePizza| ~ ingredientFactory: PizzaIngredientFactory\l|+ init(PizzaIngredientFactory) : void\l~ prepare() : void\l+ init() : void\l}"
-];
-
-Veggies [
-shape="record",
-label = "{\<\<interface\>\>\nVeggies| + toString() : String\l}"
-];
-
-ChicagoPizzaStore [
-shape="record",
-label = "{ChicagoPizzaStore| }"
-];
-
-ChicagoStyleCheesePizza [
-shape="record",
-label = "{ChicagoStyleCheesePizza| + init() : void\l~ cut() : void\l}"
-];
-
-ChicagoStyleClamPizza [
-shape="record",
-label = "{ChicagoStyleClamPizza| + init() : void\l~ cut() : void\l}"
-];
-
-ChicagoStylePepperoniPizza [
-shape="record",
-label = "{ChicagoStylePepperoniPizza| + init() : void\l~ cut() : void\l}"
-];
-
-ChicagoStyleVeggiePizza [
-shape="record",
-label = "{ChicagoStyleVeggiePizza| + init() : void\l~ cut() : void\l}"
-];
-
-DependentPizzaStore [
-shape="record",
-label = "{DependentPizzaStore| + init() : void\l+ createPizza(String; String) : Pizza\l}"
-];
-
-NYPizzaStore [
-shape="record",
-label = "{NYPizzaStore| }"
-];
-
-NYStyleCheesePizza [
-shape="record",
-label = "{NYStyleCheesePizza| + init() : void\l}"
-];
-
-NYStyleClamPizza [
-shape="record",
-label = "{NYStyleClamPizza| + init() : void\l}"
-];
-
-NYStylePepperoniPizza [
-shape="record",
-label = "{NYStylePepperoniPizza| + init() : void\l}"
-];
-
-NYStyleVeggiePizza [
-shape="record",
-label = "{NYStyleVeggiePizza| + init() : void\l}"
-];
-
-Pizza [
-shape="record",
-label = "{Pizza| }"
-];
-
-PizzaStore [
-shape="record",
-label = "{PizzaStore| }"
-];
-
-PizzaTestDrive [
-shape="record",
-label = "{PizzaTestDrive| }"
-];
-
-CheesePizza [
-shape="record",
-label = "{CheesePizza| }"
-];
-
-ClamPizza [
-shape="record",
-label = "{ClamPizza| }"
-];
-
-PepperoniPizza [
-shape="record",
-label = "{PepperoniPizza| }"
-];
-
-Pizza [
-shape="record",
-label = "{Pizza| }"
-];
-
-PizzaStore [
-shape="record",
-label = "{PizzaStore| }"
-];
-
-PizzaTestDrive [
-shape="record",
-label = "{PizzaTestDrive| }"
-];
-
-SimplePizzaFactory [
-shape="record",
-label = "{SimplePizzaFactory| + init() : void\l+ createPizza(String) : Pizza\l}"
-];
-
-VeggiePizza [
-shape="record",
-label = "{VeggiePizza| }"
+label = "{Relation| - name: String\l- relatedClass: String\l- type: RelationType\l|+ init() : void\l+ init(String; String; RelationType) : void\l+ getName() : String\l+ setName(String) : void\l+ getRelatedClass() : String\l+ setRelatedClass(String) : void\l+ getType() : RelationType\l+ setType(RelationType) : void\l+ accept(IModelVisitor) : void\l+ hashCode() : int\l+ equals(Object) : boolean\l}"
 ];
 
 //writing relations between classes now
-BlackOlives -> Veggies [arrowhead = "empty", style = "dashed"];
-CheesePizza -> Pizza [arrowhead = "empty"];
-CheesePizza -> PizzaIngredientFactory [arrowhead = "vee"];
-CheesePizza -> Dough [arrowhead = "vee"];
-CheesePizza -> Sauce [arrowhead = "vee"];
-CheesePizza -> Cheese [arrowhead = "vee"];
-ChicagoPizzaIngredientFactory -> PizzaIngredientFactory [arrowhead = "empty", style = "dashed"];
-ChicagoPizzaIngredientFactory -> ThickCrustDough [arrowhead = "vee"];
-ChicagoPizzaIngredientFactory -> PlumTomatoSauce [arrowhead = "vee"];
-ChicagoPizzaIngredientFactory -> MozzarellaCheese [arrowhead = "vee"];
-ChicagoPizzaIngredientFactory -> Veggies [arrowhead = "vee"];
-ChicagoPizzaIngredientFactory -> BlackOlives [arrowhead = "vee"];
-ChicagoPizzaIngredientFactory -> Spinach [arrowhead = "vee"];
-ChicagoPizzaIngredientFactory -> Eggplant [arrowhead = "vee"];
-ChicagoPizzaIngredientFactory -> SlicedPepperoni [arrowhead = "vee"];
-ChicagoPizzaIngredientFactory -> FrozenClams [arrowhead = "vee"];
-ChicagoPizzaStore -> PizzaStore [arrowhead = "empty"];
-ChicagoPizzaStore -> ChicagoPizzaIngredientFactory [arrowhead = "vee"];
-ChicagoPizzaStore -> CheesePizza [arrowhead = "vee"];
-ChicagoPizzaStore -> VeggiePizza [arrowhead = "vee"];
-ChicagoPizzaStore -> ClamPizza [arrowhead = "vee"];
-ChicagoPizzaStore -> PepperoniPizza [arrowhead = "vee"];
-ClamPizza -> Pizza [arrowhead = "empty"];
-ClamPizza -> PizzaIngredientFactory [arrowhead = "vee"];
-ClamPizza -> Dough [arrowhead = "vee"];
-ClamPizza -> Sauce [arrowhead = "vee"];
-ClamPizza -> Cheese [arrowhead = "vee"];
-ClamPizza -> Clams [arrowhead = "vee"];
-Eggplant -> Veggies [arrowhead = "empty", style = "dashed"];
-FreshClams -> Clams [arrowhead = "empty", style = "dashed"];
-FrozenClams -> Clams [arrowhead = "empty", style = "dashed"];
-Garlic -> Veggies [arrowhead = "empty", style = "dashed"];
-MarinaraSauce -> Sauce [arrowhead = "empty", style = "dashed"];
-MozzarellaCheese -> Cheese [arrowhead = "empty", style = "dashed"];
-Mushroom -> Veggies [arrowhead = "empty", style = "dashed"];
-NYPizzaIngredientFactory -> PizzaIngredientFactory [arrowhead = "empty", style = "dashed"];
-NYPizzaIngredientFactory -> ThinCrustDough [arrowhead = "vee"];
-NYPizzaIngredientFactory -> MarinaraSauce [arrowhead = "vee"];
-NYPizzaIngredientFactory -> ReggianoCheese [arrowhead = "vee"];
-NYPizzaIngredientFactory -> Veggies [arrowhead = "vee"];
-NYPizzaIngredientFactory -> Garlic [arrowhead = "vee"];
-NYPizzaIngredientFactory -> Onion [arrowhead = "vee"];
-NYPizzaIngredientFactory -> Mushroom [arrowhead = "vee"];
-NYPizzaIngredientFactory -> RedPepper [arrowhead = "vee"];
-NYPizzaIngredientFactory -> SlicedPepperoni [arrowhead = "vee"];
-NYPizzaIngredientFactory -> FreshClams [arrowhead = "vee"];
-NYPizzaStore -> PizzaStore [arrowhead = "empty"];
-NYPizzaStore -> NYPizzaIngredientFactory [arrowhead = "vee"];
-NYPizzaStore -> CheesePizza [arrowhead = "vee"];
-NYPizzaStore -> VeggiePizza [arrowhead = "vee"];
-NYPizzaStore -> ClamPizza [arrowhead = "vee"];
-NYPizzaStore -> PepperoniPizza [arrowhead = "vee"];
-Onion -> Veggies [arrowhead = "empty", style = "dashed"];
-ParmesanCheese -> Cheese [arrowhead = "empty", style = "dashed"];
-PepperoniPizza -> Pizza [arrowhead = "empty"];
-PepperoniPizza -> PizzaIngredientFactory [arrowhead = "vee"];
-PepperoniPizza -> Dough [arrowhead = "vee"];
-PepperoniPizza -> Sauce [arrowhead = "vee"];
-PepperoniPizza -> Cheese [arrowhead = "vee"];
-PepperoniPizza -> Pepperoni [arrowhead = "vee"];
-Pizza -> Dough [arrowhead = "vee"];
-Pizza -> Sauce [arrowhead = "vee"];
-Pizza -> Cheese [arrowhead = "vee"];
-Pizza -> Clams [arrowhead = "vee"];
-Pizza -> Pepperoni [arrowhead = "vee"];
-PizzaTestDrive -> NYPizzaStore [arrowhead = "vee"];
-PizzaTestDrive -> ChicagoPizzaStore [arrowhead = "vee"];
-PlumTomatoSauce -> Sauce [arrowhead = "empty", style = "dashed"];
-RedPepper -> Veggies [arrowhead = "empty", style = "dashed"];
-ReggianoCheese -> Cheese [arrowhead = "empty", style = "dashed"];
-SlicedPepperoni -> Pepperoni [arrowhead = "empty", style = "dashed"];
-Spinach -> Veggies [arrowhead = "empty", style = "dashed"];
-ThickCrustDough -> Dough [arrowhead = "empty", style = "dashed"];
-ThinCrustDough -> Dough [arrowhead = "empty", style = "dashed"];
-VeggiePizza -> Pizza [arrowhead = "empty"];
-VeggiePizza -> PizzaIngredientFactory [arrowhead = "vee"];
-VeggiePizza -> Dough [arrowhead = "vee"];
-VeggiePizza -> Sauce [arrowhead = "vee"];
-VeggiePizza -> Cheese [arrowhead = "vee"];
-ChicagoPizzaStore -> ChicagoStyleCheesePizza [arrowhead = "vee"];
-ChicagoPizzaStore -> ChicagoStyleVeggiePizza [arrowhead = "vee"];
-ChicagoPizzaStore -> ChicagoStyleClamPizza [arrowhead = "vee"];
-ChicagoPizzaStore -> ChicagoStylePepperoniPizza [arrowhead = "vee"];
-ChicagoStyleCheesePizza -> Pizza [arrowhead = "empty"];
-ChicagoStyleClamPizza -> Pizza [arrowhead = "empty"];
-ChicagoStylePepperoniPizza -> Pizza [arrowhead = "empty"];
-ChicagoStyleVeggiePizza -> Pizza [arrowhead = "empty"];
-DependentPizzaStore -> NYStyleCheesePizza [arrowhead = "vee"];
-DependentPizzaStore -> NYStyleVeggiePizza [arrowhead = "vee"];
-DependentPizzaStore -> NYStyleClamPizza [arrowhead = "vee"];
-DependentPizzaStore -> NYStylePepperoniPizza [arrowhead = "vee"];
-DependentPizzaStore -> ChicagoStyleCheesePizza [arrowhead = "vee"];
-DependentPizzaStore -> ChicagoStyleVeggiePizza [arrowhead = "vee"];
-DependentPizzaStore -> ChicagoStyleClamPizza [arrowhead = "vee"];
-DependentPizzaStore -> ChicagoStylePepperoniPizza [arrowhead = "vee"];
-NYPizzaStore -> NYStyleCheesePizza [arrowhead = "vee"];
-NYPizzaStore -> NYStyleVeggiePizza [arrowhead = "vee"];
-NYPizzaStore -> NYStyleClamPizza [arrowhead = "vee"];
-NYPizzaStore -> NYStylePepperoniPizza [arrowhead = "vee"];
-NYStyleCheesePizza -> Pizza [arrowhead = "empty"];
-NYStyleClamPizza -> Pizza [arrowhead = "empty"];
-NYStylePepperoniPizza -> Pizza [arrowhead = "empty"];
-NYStyleVeggiePizza -> Pizza [arrowhead = "empty"];
-PizzaStore -> SimplePizzaFactory [arrowhead = "vee"];
-PizzaTestDrive -> SimplePizzaFactory [arrowhead = "vee"];
-PizzaTestDrive -> PizzaStore [arrowhead = "vee"];
-SimplePizzaFactory -> CheesePizza [arrowhead = "vee"];
-SimplePizzaFactory -> PepperoniPizza [arrowhead = "vee"];
-SimplePizzaFactory -> ClamPizza [arrowhead = "vee"];
-SimplePizzaFactory -> VeggiePizza [arrowhead = "vee"];
+ClassDeclarationVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
+ClassDeclarationVisitor -> Model [arrowhead = "vee"];
+ClassDeclarationVisitor -> Class [arrowhead = "vee"];
+ClassDeclarationVisitor -> IClass [arrowhead = "vee"];
+ClassDeclarationVisitor -> Relation [arrowhead = "vee"];
+ClassFieldVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
+ClassFieldVisitor -> Model [arrowhead = "vee"];
+ClassFieldVisitor -> IClass [arrowhead = "vee"];
+ClassFieldVisitor -> Field [arrowhead = "vee"];
+ClassFieldVisitor -> IClazzGetter [arrowhead = "vee"];
+ClassMethodVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
+ClassMethodVisitor -> IClass [arrowhead = "vee"];
+ClassMethodVisitor -> Model [arrowhead = "vee"];
+ClassMethodVisitor -> MyMethodVisitor [arrowhead = "vee"];
+ClassMethodVisitor -> Relation [arrowhead = "vee"];
+ClassMethodVisitor -> Method [arrowhead = "vee"];
+ClassMethodVisitor -> IClazzGetter [arrowhead = "vee"];
+DesignParser -> Model [arrowhead = "vee"];
+DesignParser -> ClassDeclarationVisitor [arrowhead = "vee"];
+DesignParser -> ClassFieldVisitor [arrowhead = "vee"];
+DesignParser -> ClassMethodVisitor [arrowhead = "vee"];
+DesignParser -> ModelGVOutputStream [arrowhead = "vee"];
+MyMethodVisitor -> Model [arrowhead = "vee"];
+MyMethodVisitor -> IClass [arrowhead = "vee"];
+MyMethodVisitor -> Relation [arrowhead = "vee"];
+IModelTraverser -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IModel [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IClass [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IMethod [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IField [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IRelation [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IModelVisitor [arrowhead = "empty", style = "dashed"];
+ModelVisitorAdapter -> IModel [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IClass [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IMethod [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IField [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IRelation [arrowhead = "vee", style = "dashed"];
+IClass -> IModelTraverser [arrowhead = "empty"];
+IClass -> IMethod [arrowhead = "vee", style = "dashed"];
+IClass -> IField [arrowhead = "vee", style = "dashed"];
+IClass -> IRelation [arrowhead = "vee", style = "dashed"];
+IField -> IModelTraverser [arrowhead = "empty"];
+IMethod -> IModelTraverser [arrowhead = "empty"];
+IModel -> IModelTraverser [arrowhead = "empty"];
+IModel -> IClass [arrowhead = "vee", style = "dashed"];
+IRelation -> IModelTraverser [arrowhead = "empty"];
+IRelation -> RelationType [arrowhead = "vee", style = "dashed"];
+RelationType -> RelationType [arrowhead = "vee"];
+Class -> IClass [arrowhead = "empty", style = "dashed"];
+Class -> IRelation [arrowhead = "vee", style = "dashed"];
+Class -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Class -> IField [arrowhead = "vee"];
+Class -> IMethod [arrowhead = "vee"];
+Field -> IField [arrowhead = "empty", style = "dashed"];
+Field -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Method -> IMethod [arrowhead = "empty", style = "dashed"];
+Method -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Model -> IModel [arrowhead = "empty", style = "dashed"];
+Model -> IRelation [arrowhead = "vee"];
+Model -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Model -> IClass [arrowhead = "vee"];
+ModelGVOutputStream -> ModelVisitorAdapter [arrowhead = "empty"];
+ModelGVOutputStream -> IModel [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IClass [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IMethod [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IField [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IRelation [arrowhead = "vee"];
+Relation -> IRelation [arrowhead = "empty", style = "dashed"];
+Relation -> RelationType [arrowhead = "vee"];
+Relation -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Relation -> Relation [arrowhead = "vee"];
 }
