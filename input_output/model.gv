@@ -2,7 +2,7 @@ digraph model{
 rankdir = BT;
 ClassDeclarationVisitor [
 shape="record",
-label = "{ClassDeclarationVisitor| - model: Model\l- clazz: IClass\l|+ init(int; Model) : void\l+ visit(int; int; String; String; String; String[]) : void\l+ getClazz() : IClass\l}"
+label = "{ClassDeclarationVisitor| - model: Model\l- clazz: IClass\l|+ init(int; Model) : void\l+ visit(int; int; String; String; String; String[]) : void\l+ getClazz() : IClass\l+ splitOnSlash(String) : String\l}"
 ];
 
 ClassFieldVisitor [

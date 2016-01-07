@@ -112,7 +112,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 			if (args[i].getClassName().startsWith("java.util."))
 			{
 				cls = Class.forName(args[i].getClassName());
-				System.out.println(cls.getName().toString());
 			}
 			if (cls != null && Collection.class.isAssignableFrom(cls)) {
 				String[] sig = this.signature.split("/");

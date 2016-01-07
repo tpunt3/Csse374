@@ -36,30 +36,28 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 
 		this.clazz = new Class(name, isClass);
 		IRelation r;
+
+		// if its an interface and has another interface, there is an extends
+		// relationship
 		if (!isClass && interfaces.length > 0) {
 
-			String[] split = interfaces[0].split("/");
-			interfaces[0] = split[split.length-1];
-			
+			interfaces[0] = splitOnSlash(interfaces[0]);
+
 			r = new Relation(name, interfaces[0], RelationType.superclass);
-			//this.clazz.addRelation(r);
 			this.model.addRelation(r);
-		} else {			
-			for(String s : interfaces){
-				
-				String[] split = s.split("/");
-				s = split[split.length-1];
-				
-				r = new Relation(name, s, RelationType.interfaces);		
-				//this.clazz.addRelation(r);
+		} else {
+			// otherwise, it is an implements relationship
+			for (String s : interfaces) {
+
+				s = splitOnSlash(s);
+
+				r = new Relation(name, s, RelationType.interfaces);
 				this.model.addRelation(r);
 			}
-			
 
-			String[] split = superName.split("/");
-			superName = split[split.length-1];
+			superName = splitOnSlash(superName);
+
 			r = new Relation(name, superName, RelationType.superclass);
-			//this.clazz.addRelation(r);
 			this.model.addRelation(r);
 		}
 		this.model.addClazz(clazz);
@@ -69,5 +67,10 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 
 	public IClass getClazz() {
 		return this.clazz;
+	}
+
+	public String splitOnSlash(String stringToSplit) {
+		String[] split = stringToSplit.split("/");
+		return split[split.length - 1];
 	}
 }
