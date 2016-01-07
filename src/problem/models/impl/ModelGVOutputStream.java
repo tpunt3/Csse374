@@ -141,43 +141,31 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 	}
 
 	private void visitAssociations(IRelation r) {
-		String s = "";
-
-		s += "\n" + r.getName() + " -> " + r.getRelatedClass() + " [arrowhead = \"vee\"];";
-
+		String s = String.format("\n%s -> %s [arrowhead = \"vee\"];", r.getName(), r.getRelatedClass());
 		this.write(s);
-
 	}
 
 	private void visitUses(IRelation r) {
-		String s = "";
-
-		s += "\n" + r.getName() + " -> " + r.getRelatedClass() + " [arrowhead = \"vee\", style = \"dashed\"];";
-
+		String s = String.format("\n%s -> %s [arrowhead = \"vee\", style = \"dashed\"];", r.getName(),
+				r.getRelatedClass());
 		this.write(s);
-
 	}
 
 	@Override
 	public void visitSuperClasses(IRelation r) {
-		String s = "";
-
 		String[] relatedSplit = r.getRelatedClass().split("/");
 		String split = relatedSplit[relatedSplit.length - 1];
 
-		s += "\n" + r.getName() + " -> " + split + " [arrowhead = \"empty\"];";
-
+		String s = String.format("\n%s -> %s [arrowhead = \"empty\"];", r.getName(), split);
 		this.write(s);
 	}
 
 	@Override
 	public void visitInterfaces(IRelation r) {
-
 		String[] relatedSplit = r.getRelatedClass().split("/");
 		String split = relatedSplit[relatedSplit.length - 1];
 
-		String s = "\n" + r.getName() + " -> " + split + " [arrowhead = \"empty\", style = \"dashed\"];";
-
+		String s = String.format("\n%s -> %s [arrowhead = \"empty\", style = \"dashed\"];", r.getName(), split);
 		this.write(s);
 	}
 
