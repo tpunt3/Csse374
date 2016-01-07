@@ -41,15 +41,15 @@ public class Model implements IModel {
 
 		boolean inClasses = false;
 		for (String s : DesignParser.CLASSES) {
-			
+
 			String[] split = s.split("\\.");
-			s = split[split.length-1];
-			
+			s = split[split.length - 1];
+
 			if (r.getRelatedClass().equals(s)) {
 				inClasses = true;
 			}
 		}
-
+		// this is logic for when to add a relation to our UML and when not to
 		if (inClasses) {
 			if (this.relations.size() == 0) {
 				this.relations.add(r);
@@ -60,11 +60,14 @@ public class Model implements IModel {
 				if (r.equals(this.relations.get(i))) {
 					return;
 				}
-				
-				if(r.getName().equals(this.relations.get(i).getName()) && r.getRelatedClass().equals(this.relations.get(i).getRelatedClass())){
-					if (r.getType().equals(RelationType.uses) && this.relations.get(i).getType().equals(RelationType.association)){
+
+				if (r.getName().equals(this.relations.get(i).getName())
+						&& r.getRelatedClass().equals(this.relations.get(i).getRelatedClass())) {
+					if (r.getType().equals(RelationType.uses)
+							&& this.relations.get(i).getType().equals(RelationType.association)) {
 						return;
-					}else if(r.getType().equals(RelationType.association) && this.relations.get(i).getType().equals(RelationType.uses)){
+					} else if (r.getType().equals(RelationType.association)
+							&& this.relations.get(i).getType().equals(RelationType.uses)) {
 						this.relations.remove(i);
 						this.relations.add(r);
 						return;

@@ -14,21 +14,19 @@ import problem.models.impl.Relation;
 public class MyMethodVisitor extends MethodVisitor {
 	private Model model;
 	private IClass clazz;
-	private MethodVisitor decorated;
 	private ArrayList<String> arguments;
 
 	public MyMethodVisitor(int api, MethodVisitor decorated, Model m, IClass clazz) {
 		super(api, decorated);
 		this.model = m;
 		this.clazz = clazz;
-		this.decorated = decorated;
 		this.arguments = new ArrayList<String>();
 	}
 
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 		super.visitMethodInsn(opcode, owner, name, desc, itf);
-		String[] args = getArguments(desc);
+		getArguments(desc);
 	}
 
 	@Override

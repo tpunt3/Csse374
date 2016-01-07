@@ -57,16 +57,6 @@ public class Class implements IClass{
 	}
 
 	@Override
-	public Collection<IRelation> getRelations() {
-		return this.relations;
-	}
-
-	@Override
-	public void addRelation(IRelation r) {
-		this.relations.add(r);
-	}
-
-	@Override
 	public void accept(IModelVisitor v) {
 		v.preVisit(this);
 		v.visit(this);

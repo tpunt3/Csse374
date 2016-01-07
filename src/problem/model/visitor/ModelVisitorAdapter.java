@@ -78,13 +78,11 @@ public class ModelVisitorAdapter implements IModelVisitor{
 	
 	@Override
 	public void visitSuperClasses(IRelation r) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void visitInterfaces(IRelation r) {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -27,7 +27,7 @@ label = "{\<\<interface\>\>\nIClazzGetter| + getClazz() : IClass\l}"
 
 MyMethodVisitor [
 shape="record",
-label = "{MyMethodVisitor| - model: Model\l- clazz: IClass\l- decorated: MethodVisitor\l- arguments: String\l|+ init(int; MethodVisitor; Model; IClass) : void\l+ visitMethodInsn(int; String; String; String; boolean) : void\l+ visitFieldInsn(int; String; String; String) : void\l+ visitTypeInsn(int; String) : void\l+ visitVarInsn(int; int) : void\l~ getArguments(String) : String[]\l~ getType(String) : String\l}"
+label = "{MyMethodVisitor| - model: Model\l- clazz: IClass\l- arguments: String\l|+ init(int; MethodVisitor; Model; IClass) : void\l+ visitMethodInsn(int; String; String; String; boolean) : void\l+ visitFieldInsn(int; String; String; String) : void\l+ visitTypeInsn(int; String) : void\l+ visitVarInsn(int; int) : void\l~ getArguments(String) : String[]\l~ getType(String) : String\l}"
 ];
 
 IModelTraverser [
@@ -47,7 +47,7 @@ label = "{ModelVisitorAdapter| + init() : void\l+ preVisit(IModel) : void\l+ vis
 
 IClass [
 shape="record",
-label = "{\<\<interface\>\>\nIClass| + getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ getRelations() : IRelation\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ addRelation(IRelation) : void\l+ getIsClass() : boolean\l}"
+label = "{\<\<interface\>\>\nIClass| + getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getIsClass() : boolean\l}"
 ];
 
 IField [
@@ -77,7 +77,7 @@ label = "{RelationType| + superclass: RelationType\l+ interfaces: RelationType\l
 
 Class [
 shape="record",
-label = "{Class| - name: String\l- methods: IMethod\l- fields: IField\l- relations: IRelation\l- isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getRelations() : IRelation\l+ addRelation(IRelation) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l}"
+label = "{Class| - name: String\l- methods: IMethod\l- fields: IField\l- relations: IRelation\l- isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l}"
 ];
 
 Field [
@@ -146,7 +146,6 @@ ModelVisitorAdapter -> IRelation [arrowhead = "vee", style = "dashed"];
 IClass -> IModelTraverser [arrowhead = "empty"];
 IClass -> IMethod [arrowhead = "vee", style = "dashed"];
 IClass -> IField [arrowhead = "vee", style = "dashed"];
-IClass -> IRelation [arrowhead = "vee", style = "dashed"];
 IField -> IModelTraverser [arrowhead = "empty"];
 IMethod -> IModelTraverser [arrowhead = "empty"];
 IModel -> IModelTraverser [arrowhead = "empty"];
@@ -155,7 +154,6 @@ IRelation -> IModelTraverser [arrowhead = "empty"];
 IRelation -> RelationType [arrowhead = "vee", style = "dashed"];
 RelationType -> RelationType [arrowhead = "vee"];
 Class -> IClass [arrowhead = "empty", style = "dashed"];
-Class -> IRelation [arrowhead = "vee", style = "dashed"];
 Class -> IModelVisitor [arrowhead = "vee", style = "dashed"];
 Class -> IField [arrowhead = "vee"];
 Class -> IMethod [arrowhead = "vee"];
