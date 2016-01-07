@@ -29,12 +29,6 @@ public class MyMethodVisitor extends MethodVisitor {
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 		super.visitMethodInsn(opcode, owner, name, desc, itf);
 		String[] args = getArguments(desc);
-//		for(String s : args){
-//			IRelation r = new Relation(this.clazz.getName(), s, RelationType.uses);
-//			this.model.addRelation(r);
-//			System.out.println(this.clazz.getName() +" uses "+ s);
-//		}
-
 	}
 
 	@Override

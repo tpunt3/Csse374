@@ -134,7 +134,8 @@ public class GVTesting {
 
 	@Test
 	public final void testClassWithInterface() throws IOException {
-		String[] classes = { "problem.test.classes.ClassWithInterface" };
+		String[] classes = { "problem.test.classes.ClassWithInterface", 
+							 "problem.test.classes.IInterface"};
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
 		BufferedReader buffer = new BufferedReader(reader);
@@ -145,7 +146,7 @@ public class GVTesting {
 			file += line;
 		}
 		
-		String gv = "digraph model{rankdir = BT;ClassWithInterface [shape=\"record\",label = \"{ClassWithInterface| + init() : void\\"+"l}\"];//writing relations between classes nowClassWithInterface -> IInterface [arrowhead = \"empty\", style = \"dashed\"];}";
+		String gv = "digraph model{rankdir = BT;ClassWithInterface [shape=\"record\",label = \"{ClassWithInterface| + init() : void\\"+"l}\"];IInterface [shape=\"record\",label = \"{\\"+"<\\"+"<interface\\"+">\\"+">\\nIInterface| }\"];//writing relations between classes nowClassWithInterface -> IInterface [arrowhead = \"empty\", style = \"dashed\"];}";
 	
 		assertEquals(gv, file); 
 		
@@ -167,7 +168,7 @@ public class GVTesting {
 			file += line;
 		}
 		
-		String gv = "digraph model{rankdir = BT;IInterfaceWithSuperClass [shape=\"record\",label = \"{\\"+"<\\"+"<interface\\"+">\\"+">\\nIInterfaceWithSuperClass| }\"];//writing relations between classes nowIInterfaceWithSuperClass -> IInterface [arrowhead = \"empty\"];}";
+		String gv = "digraph model{rankdir = BT;IInterfaceWithSuperClass [shape=\"record\",label = \"{\\"+"<\\"+"<interface\\"+">\\"+">\\nIInterfaceWithSuperClass| }\"];IInterface [shape=\"record\",label = \"{\\"+"<\\"+"<interface\\"+">\\"+">\\nIInterface| }\"];//writing relations between classes nowIInterfaceWithSuperClass -> IInterface [arrowhead = \"empty\"];}";
 	
 		assertEquals(gv, file); 
 		
@@ -177,7 +178,9 @@ public class GVTesting {
 
 	@Test
 	public final void testClassWithEverything() throws IOException {
-		String[] classes = { "problem.test.classes.ClassWithEverything" };
+		String[] classes = { "problem.test.classes.ClassWithEverything", 
+				"problem.test.classes.EmptyClass", 
+				"problem.test.classes.IInterface"};
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
 		BufferedReader buffer = new BufferedReader(reader);
@@ -188,8 +191,52 @@ public class GVTesting {
 			file += line;
 		}
 		
-		String gv = "digraph model{rankdir = BT;ClassWithEverything [shape=\"record\",label = \"{ClassWithEverything| - name: String\\"+"l|+ init() : void\\"+"l+ setName(String) : void\\"+"l+ getName() : String\\"+"l}\"];//writing relations between classes nowClassWithEverything -> EmptyClass [arrowhead = \"empty\"];ClassWithEverything -> IInterface [arrowhead = \"empty\", style = \"dashed\"];}";
+		String gv = "digraph model{rankdir = BT;ClassWithEverything [shape=\"record\",label = \"{ClassWithEverything| - name: String\\"+"l|+ init() : void\\"+"l+ setName(String) : void\\"+"l+ getName() : String\\"+"l}\"];EmptyClass [shape=\"record\",label = \"{EmptyClass| + init() : void\\"+"l}\"];IInterface [shape=\"record\",label = \"{\\"+"<\\"+"<interface\\"+">\\"+">\\nIInterface| }\"];//writing relations between classes nowClassWithEverything -> IInterface [arrowhead = \"empty\", style = \"dashed\"];ClassWithEverything -> EmptyClass [arrowhead = \"empty\"];}";
 	
+		assertEquals(gv, file); 
+		
+		buffer.close();
+		reader.close();
+	}
+	
+	@Test
+	public final void testClassWithUses() throws IOException {
+		String[] classes = { "problem.test.classes.ClassWithUses", "problem.test.classes.EmptyClass"};
+		parser.parse(classes);
+		FileReader reader = new FileReader("input_output/test.gv");
+		BufferedReader buffer = new BufferedReader(reader);
+
+		String file = "";
+		String line = "";
+		
+		while ((line = buffer.readLine()) != null) {
+			file += line;
+		}
+		
+		String gv = "digraph model{rankdir = BT;ClassWithUses [shape=\"record\",label = \"{ClassWithUses| + init(EmptyClass) : void\\"+"l}\"];EmptyClass [shape=\"record\",label = \"{EmptyClass| + init() : void\\"+"l}\"];//writing relations between classes nowClassWithUses -> EmptyClass [arrowhead = \"vee\", style = \"dashed\"];}";
+		
+		assertEquals(gv, file); 
+		
+		buffer.close();
+		reader.close();
+	}
+	
+	@Test
+	public final void testClassWithAssociation() throws IOException {
+		String[] classes = { "problem.test.classes.ClassWithAssociation", "problem.test.classes.EmptyClass"};
+		parser.parse(classes);
+		FileReader reader = new FileReader("input_output/test.gv");
+		BufferedReader buffer = new BufferedReader(reader);
+
+		String file = "";
+		String line = "";
+		
+		while ((line = buffer.readLine()) != null) {
+			file += line;
+		}
+		
+		String gv = "digraph model{rankdir = BT;ClassWithAssociation [shape=\"record\",label = \"{ClassWithAssociation| + clazz: EmptyClass\\"+"l|+ init() : void\\"+"l}\"];EmptyClass [shape=\"record\",label = \"{EmptyClass| + init() : void\\"+"l}\"];//writing relations between classes nowClassWithAssociation -> EmptyClass [arrowhead = \"vee\"];}";
+		
 		assertEquals(gv, file); 
 		
 		buffer.close();

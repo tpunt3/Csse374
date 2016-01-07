@@ -52,7 +52,6 @@ public class Model implements IModel {
 
 		if (inClasses) {
 			if (this.relations.size() == 0) {
-				System.out.println("adding: " + r.getRelatedClass());
 				this.relations.add(r);
 				return;
 			}

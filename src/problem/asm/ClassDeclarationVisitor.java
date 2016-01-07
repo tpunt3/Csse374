@@ -42,7 +42,6 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 			interfaces[0] = split[split.length-1];
 			
 			r = new Relation(name, interfaces[0], RelationType.superclass);
-			System.out.println(interfaces[0]);
 			//this.clazz.addRelation(r);
 			this.model.addRelation(r);
 		} else {			

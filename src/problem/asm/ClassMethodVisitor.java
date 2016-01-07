@@ -60,7 +60,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 			if (s != "") {
 				IRelation r = new Relation(this.clazz.getName(), s, RelationType.uses);
 				this.model.addRelation(r);
-				// System.out.println(this.clazz.getName() + " uses " + s);
 			}
 		}
 
