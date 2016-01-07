@@ -1,8 +1,8 @@
 digraph model{
 rankdir = BT;
-ClassWithAssociation [
+ClassWithInterfaceAndAssociation [
 shape="record",
-label = "{ClassWithAssociation| + clazz: EmptyClass\l|+ init() : void\l}"
+label = "{ClassWithInterfaceAndAssociation| - clazz: EmptyClass\l|+ init() : void\l}"
 ];
 
 EmptyClass [
@@ -10,6 +10,12 @@ shape="record",
 label = "{EmptyClass| + init() : void\l}"
 ];
 
+IInterface [
+shape="record",
+label = "{\<\<interface\>\>\nIInterface| }"
+];
+
 //writing relations between classes now
-ClassWithAssociation -> EmptyClass [arrowhead = "vee"];
+ClassWithInterfaceAndAssociation -> IInterface [arrowhead = "empty", style = "dashed"];
+ClassWithInterfaceAndAssociation -> EmptyClass [arrowhead = "vee"];
 }

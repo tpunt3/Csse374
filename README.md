@@ -18,6 +18,9 @@ Instructions to use our code:
 2.) change the array of strings called CLASSES to reflect which classes you'd like to generate a UML for.
 3.) run the Design parser
 
+Instructions to use our tests:
+You must go into model.java and change "DesignParser" to "TestDesignParser" for relations to show up
+
 Evolution of our Code:
 Milestone 1
 Our relation was not designed the best in milestone 1, but it was a learning experience. We had different constructors for all of our different types of relations which made it somewhat difficult to keep track of them. We also had not implemented uses or association arrows at this time so our UML looked incomplete. 
