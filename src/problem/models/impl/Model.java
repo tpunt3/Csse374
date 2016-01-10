@@ -50,6 +50,10 @@ public class Model implements IModel {
 				this.relations.add(r);
 				return;
 			}
+			
+			if(r.getName().equals(r.getRelatedClass())){
+				return;
+			}
 
 			for (int i = 0; i < this.relations.size(); i++) {
 				if (r.equals(this.relations.get(i))) {

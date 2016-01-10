@@ -276,12 +276,37 @@ public class GVTesting {
 		}
 		System.out.println(file);
 
-		String gv = "digraph model{rankdir = BT;ClassWithInterfaceAndAssociation [shape=\"record\",label = \"{ClassWithInterfaceAndAssociation| - clazz: EmptyClass\\"+"l|+ init() : void\\"+"l}\"];EmptyClass [shape=\"record\",label = \"{EmptyClass| + init() : void\\"+"l}\"];IInterface [shape=\"record\",label = \"{\\"+"<\\"+"<interface\\"+">\\"+">\\nIInterface| }\"];//writing relations between classes nowClassWithInterfaceAndAssociation -> IInterface [arrowhead = \"empty\", style = \"dashed\"];ClassWithInterfaceAndAssociation -> EmptyClass [arrowhead = \"vee\"];}";
+		String gv = "digraph model{rankdir = BT;ClassWithInterfaceAndAssociation [shape=\"record\",label = \"{ClassWithInterfaceAndAssociation| - clazz: EmptyClass\\"
+				+ "l|+ init() : void\\" + "l}\"];EmptyClass [shape=\"record\",label = \"{EmptyClass| + init() : void\\"
+				+ "l}\"];IInterface [shape=\"record\",label = \"{\\" + "<\\" + "<interface\\" + ">\\"
+				+ ">\\nIInterface| }\"];//writing relations between classes nowClassWithInterfaceAndAssociation -> IInterface [arrowhead = \"empty\", style = \"dashed\"];ClassWithInterfaceAndAssociation -> EmptyClass [arrowhead = \"vee\"];}";
 
 		assertEquals(gv, file);
 
 		buffer.close();
 		reader.close();
 	}
+	
+	@Test
+	public final void testModel() throws IOException {
+		String[] classes = { "problem.models.impl.Model", "problem.models.api.IModel", "problem.models.api.IClass",
+				"problem.models.api.IRelation",};
+		parser.parse(classes);
+		FileReader reader = new FileReader("input_output/test.gv");
+		BufferedReader buffer = new BufferedReader(reader);
 
+		String file = "";
+		String line = "";
+
+		while ((line = buffer.readLine()) != null) {
+			file += line;
+		}
+		System.out.println(file);
+
+		String gv = "digraph model{rankdir = BT;Model [shape=\"record\",label = \"{Model| - classes: IClass\\"+"l- relations: IRelation\\"+"l|+ init() : void\\"+"l+ init(IClass) : IClass\\"+"l+ getRelations() : IRelation\\"+"l+ setRelations(IRelation) : IRelation\\"+"l+ addRelation(IRelation) : void\\"+"l+ getClasses() : IClass\\"+"l+ accept(IModelVisitor) : void\\"+"l+ toString() : String\\"+"l+ addClazz(IClass) : void\\"+"l+ getClazz(String) : IClass\\"+"l}\"];IModel [shape=\"record\",label = \"{\\"+"<\\"+"<interface\\"+">\\"+">\\nIModel| + getClasses() : IClass\\"+"l+ addClazz(IClass) : void\\"+"l+ getClazz(String) : IClass\\"+"l+ getRelations() : IRelation\\"+"l}\"];IClass [shape=\"record\",label = \"{\\"+"<\\"+"<interface\\"+">\\"+">\\nIClass| + getName() : String\\"+"l+ getMethods() : IMethod\\"+"l+ getFields() : IField\\"+"l+ addMethod(IMethod) : void\\"+"l+ addField(IField) : void\\"+"l+ getIsClass() : boolean\\"+"l}\"];IRelation [shape=\"record\",label = \"{\\"+"<\\"+"<interface\\"+">\\"+">\\nIRelation| + setName(String) : void\\"+"l+ getName() : String\\"+"l+ setRelatedClass(String) : void\\"+"l+ getRelatedClass() : String\\"+"l+ setType(RelationType) : void\\"+"l+ getType() : RelationType\\"+"l}\"];//writing relations between classes nowModel -> IModel [arrowhead = \"empty\", style = \"dashed\"];Model -> IRelation [arrowhead = \"vee\"];Model -> IModelVisitor [arrowhead = \"vee\", style = \"dashed\"];Model -> IClass [arrowhead = \"vee\"];IModel -> IModelTraverser [arrowhead = \"empty\"];IModel -> IClass [arrowhead = \"vee\", style = \"dashed\"];IClass -> IModelTraverser [arrowhead = \"empty\"];IClass -> IMethod [arrowhead = \"vee\", style = \"dashed\"];IClass -> IField [arrowhead = \"vee\", style = \"dashed\"];IRelation -> IModelTraverser [arrowhead = \"empty\"];IRelation -> RelationType [arrowhead = \"vee\", style = \"dashed\"];}";
+		assertEquals(gv, file);
+
+		buffer.close();
+		reader.close();
+	}
 }

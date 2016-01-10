@@ -1,21 +1,35 @@
 digraph model{
 rankdir = BT;
-ClassWithInterfaceAndAssociation [
+Model [
 shape="record",
-label = "{ClassWithInterfaceAndAssociation| - clazz: EmptyClass\l|+ init() : void\l}"
+label = "{Model| - classes: IClass\l- relations: IRelation\l|+ init() : void\l+ init(IClass) : IClass\l+ getRelations() : IRelation\l+ setRelations(IRelation) : IRelation\l+ addRelation(IRelation) : void\l+ getClasses() : IClass\l+ accept(IModelVisitor) : void\l+ toString() : String\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l}"
 ];
 
-EmptyClass [
+IModel [
 shape="record",
-label = "{EmptyClass| + init() : void\l}"
+label = "{\<\<interface\>\>\nIModel| + getClasses() : IClass\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l+ getRelations() : IRelation\l}"
 ];
 
-IInterface [
+IClass [
 shape="record",
-label = "{\<\<interface\>\>\nIInterface| }"
+label = "{\<\<interface\>\>\nIClass| + getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getIsClass() : boolean\l}"
+];
+
+IRelation [
+shape="record",
+label = "{\<\<interface\>\>\nIRelation| + setName(String) : void\l+ getName() : String\l+ setRelatedClass(String) : void\l+ getRelatedClass() : String\l+ setType(RelationType) : void\l+ getType() : RelationType\l}"
 ];
 
 //writing relations between classes now
-ClassWithInterfaceAndAssociation -> IInterface [arrowhead = "empty", style = "dashed"];
-ClassWithInterfaceAndAssociation -> EmptyClass [arrowhead = "vee"];
+Model -> IModel [arrowhead = "empty", style = "dashed"];
+Model -> IRelation [arrowhead = "vee"];
+Model -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Model -> IClass [arrowhead = "vee"];
+IModel -> IModelTraverser [arrowhead = "empty"];
+IModel -> IClass [arrowhead = "vee", style = "dashed"];
+IClass -> IModelTraverser [arrowhead = "empty"];
+IClass -> IMethod [arrowhead = "vee", style = "dashed"];
+IClass -> IField [arrowhead = "vee", style = "dashed"];
+IRelation -> IModelTraverser [arrowhead = "empty"];
+IRelation -> RelationType [arrowhead = "vee", style = "dashed"];
 }

@@ -152,7 +152,6 @@ IModel -> IModelTraverser [arrowhead = "empty"];
 IModel -> IClass [arrowhead = "vee", style = "dashed"];
 IRelation -> IModelTraverser [arrowhead = "empty"];
 IRelation -> RelationType [arrowhead = "vee", style = "dashed"];
-RelationType -> RelationType [arrowhead = "vee"];
 Class -> IClass [arrowhead = "empty", style = "dashed"];
 Class -> IModelVisitor [arrowhead = "vee", style = "dashed"];
 Class -> IField [arrowhead = "vee"];
@@ -174,5 +173,4 @@ ModelGVOutputStream -> IRelation [arrowhead = "vee"];
 Relation -> IRelation [arrowhead = "empty", style = "dashed"];
 Relation -> RelationType [arrowhead = "vee"];
 Relation -> IModelVisitor [arrowhead = "vee", style = "dashed"];
-Relation -> Relation [arrowhead = "vee"];
 }
