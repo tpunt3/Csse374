@@ -16,7 +16,7 @@ import problem.models.impl.Model;
 import problem.models.impl.ModelGVOutputStream;
 
 public class DesignParser {
-	
+
 	public static final String[] CLASSES= {
 //		"headfirst.factory.pizzaaf.BlackOlives",
 //		"headfirst.factory.pizzaaf.Cheese",

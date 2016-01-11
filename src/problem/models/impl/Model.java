@@ -34,7 +34,10 @@ public class Model implements IModel {
 
 	public void addRelation(IRelation r) {
 
-		boolean inClasses = false;
+		//boolean inClasses = false;
+		
+		//If you are running the UnitTesting JUNIT tests, uncomment this next line:
+		boolean inClasses = true;
 		for (String s : DesignParser.CLASSES) {
 
 			String[] split = s.split("\\.");
@@ -46,12 +49,13 @@ public class Model implements IModel {
 		}
 		// this is logic for when to add a relation to our UML and when not to
 		if (inClasses) {
-			if (this.relations.size() == 0) {
-				this.relations.add(r);
+			
+			if(r.getName().equals(r.getRelatedClass())){
 				return;
 			}
 			
-			if(r.getName().equals(r.getRelatedClass())){
+			if (this.relations.size() == 0) {
+				this.relations.add(r);
 				return;
 			}
 
