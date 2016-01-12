@@ -76,4 +76,10 @@ public class Class implements IClass{
 		return this.isClass;
 	}
 
+	@Override
+	public void acceptSequence(IModelVisitor v) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

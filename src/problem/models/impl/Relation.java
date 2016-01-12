@@ -52,6 +52,11 @@ public class Relation implements IRelation {
 	@Override
 	public void accept(IModelVisitor v) {
 	}
+	
+
+	@Override
+	public void acceptSequence(IModelVisitor v) {
+	}
 
 	@Override
 	public int hashCode() {

@@ -159,7 +159,7 @@ public class DesignParser {
 				OutputStream out = new FileOutputStream("input_output/sequence.sd");
 				IModelVisitor sdWriter = new ModelSDOutputStream(out);
 				IModelTraverser traverser = (IModelTraverser) model;
-				traverser.accept(sdWriter);
+				traverser.acceptSequence(sdWriter);
 				out.close();
 
 				ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",

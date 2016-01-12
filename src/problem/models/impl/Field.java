@@ -41,4 +41,8 @@ public class Field implements IField{
 		v.postVisit(this);
 	}
 
+	@Override
+	public void acceptSequence(IModelVisitor v) {
+	}
+
 }

@@ -46,4 +46,10 @@ public class Method implements IMethod {
 		v.postVisit(this);
 	}
 
+	@Override
+	public void acceptSequence(IModelVisitor v) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
