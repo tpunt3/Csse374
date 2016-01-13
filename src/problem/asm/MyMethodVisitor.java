@@ -33,22 +33,26 @@ public class MyMethodVisitor extends MethodVisitor {
 	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
 		super.visitFieldInsn(opcode, owner, name, desc);
 
+		//this clearly doesnt work as we thought it did, we now do this in classFieldVisitor
+		
+		
 		// if owner is the class we are in, then we can automatically add it as
 		// an associations arrow,
 		// because that is stronger than a uses
 
-		String[] ownerSplit = owner.split("/");
-		owner = ownerSplit[ownerSplit.length - 1];
-
-		String fieldType = getType(desc);
-		String[] splitField = fieldType.split("\\.");
-		fieldType = splitField[splitField.length - 1];
-
-		if (owner.equals(this.clazz.getName())) {
-			// create relation for assocation
-			IRelation r = new Relation(owner, fieldType, RelationType.association);
-			this.model.addRelation(r);
-		}
+//		String[] ownerSplit = owner.split("/");
+//		owner = ownerSplit[ownerSplit.length - 1];
+//
+//		String fieldType = getType(desc);
+//		String[] splitField = fieldType.split("\\.");
+//		fieldType = splitField[splitField.length - 1];
+//
+//		if (owner.equals(this.clazz.getName())) {
+//			//create relation for assocation
+//			
+//			IRelation r = new Relation(owner, fieldType, RelationType.association);
+//			this.model.addRelation(r);
+//		}
 	}
 
 	@Override
@@ -58,8 +62,8 @@ public class MyMethodVisitor extends MethodVisitor {
 		String[] typeSplit = type.split("/");
 		type = typeSplit[typeSplit.length - 1];
 
-		// create relation for association
-		IRelation r = new Relation(this.clazz.getName(), type, RelationType.association);
+		// create relation for uses
+		IRelation r = new Relation(this.clazz.getName(), type, RelationType.uses);
 		this.model.addRelation(r);
 	}
 

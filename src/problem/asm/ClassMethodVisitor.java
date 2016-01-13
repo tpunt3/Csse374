@@ -52,8 +52,8 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
-		String[] splitArgs = args.split(", ");
+		
+		String[] splitArgs = args.split("; ");
 
 		for (String s : splitArgs) {
 			if (s != "") {

@@ -34,10 +34,10 @@ public class Model implements IModel {
 
 	public void addRelation(IRelation r) {
 
-		//boolean inClasses = false;
+		boolean inClasses = false;
 		
 		//If you are running the UnitTesting JUNIT tests, uncomment this next line:
-		boolean inClasses = true;
+		//boolean inClasses = true;
 		for (String s : DesignParser.CLASSES) {
 
 			String[] split = s.split("\\.");

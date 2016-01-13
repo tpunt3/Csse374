@@ -6,8 +6,11 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 import problem.models.api.IClass;
+import problem.models.api.IRelation;
+import problem.models.api.RelationType;
 import problem.models.impl.Field;
 import problem.models.impl.Model;
+import problem.models.impl.Relation;
 
 public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 	private Model model;
@@ -33,11 +36,24 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 		this.clazz = this.getClazz();
 		
 		if (signature != null) {
+			//add association for collection
+			
 			String[] sig = signature.split("/");
 			type = sig[sig.length - 1];
 			int index = type.indexOf(";");
 			type = type.substring(0, index);
+			
+			IRelation relation = new Relation(this.clazz.getName(), type, RelationType.association);
+			
+			this.model.addRelation(relation);
+			
+		} else{
+			//add association relation for everything else
+			
+			IRelation relation = new Relation(this.clazz.getName(), type, RelationType.association);
+			this.model.addRelation(relation);
 		}
+		
 		
 		IClass current = this.model.getClazz(this.clazz.getName());
 		Field f = new Field(type, name, accessLevel);
