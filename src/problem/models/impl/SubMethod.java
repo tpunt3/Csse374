@@ -14,11 +14,11 @@ public class SubMethod implements ISubMethod {
 		this.args = args;
 	}
 	
-	public String getClazz() {
+	public String getClazzName() {
 		return clazz;
 	}
 	
-	public String getName() {
+	public String getMethodName() {
 		return name;
 	}
 	
@@ -33,9 +33,9 @@ public class SubMethod implements ISubMethod {
 	}
 
 	@Override
-	public void acceptSequence(IModelVisitor v) {
+	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

@@ -67,11 +67,15 @@ public class Method implements IMethod {
 	}
 
 	@Override
-	public void acceptSequence(IModelVisitor v) {
+	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
 		v.preVisit(this);
 		//for all the submethods
 			//visit them and get their classes
 		
+	}
+
+	public ArrayList<ISubMethod> getSubMethods() {
+		return subMethods;
 	}
 
 	public IClass getClazz() {

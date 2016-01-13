@@ -8,12 +8,13 @@ import problem.models.api.IClass;
 import problem.models.api.IMethod;
 import problem.models.api.IModel;
 import problem.models.api.IRelation;
+import problem.models.api.ISubMethod;
 import problem.models.api.RelationType;
 
 public class Model implements IModel {
 
 	private int callDepth;
-	private String methodSignature;
+	private ISubMethod startingMethod;
 	private Collection<IClass> classes;
 	private ArrayList<IRelation> relations;
 
@@ -31,12 +32,8 @@ public class Model implements IModel {
 		this.callDepth = callDepth;
 	}
 
-	public String getMethodSignature() {
-		return methodSignature;
-	}
-
-	public void setMethodSignature(String methodSignature) {
-		this.methodSignature = methodSignature;
+	public void setStartingMethod(ISubMethod start) {
+		this.startingMethod = start;
 	}
 
 	public Model(Collection<IClass> classes) {
@@ -55,9 +52,10 @@ public class Model implements IModel {
 	public void addRelation(IRelation r) {
 
 		boolean inClasses = false;
-		
-		//If you are running the UnitTesting JUNIT tests, uncomment this next line:
-		//boolean inClasses = true;
+
+		// If you are running the UnitTesting JUNIT tests, uncomment this next
+		// line:
+		// boolean inClasses = true;
 		for (String s : DesignParser.CLASSES) {
 
 			String[] split = s.split("\\.");
@@ -69,11 +67,11 @@ public class Model implements IModel {
 		}
 		// this is logic for when to add a relation to our UML and when not to
 		if (inClasses) {
-			
-			if(r.getName().equals(r.getRelatedClass())){
+
+			if (r.getName().equals(r.getRelatedClass())) {
 				return;
 			}
-			
+
 			if (this.relations.size() == 0) {
 				this.relations.add(r);
 				return;
@@ -134,18 +132,32 @@ public class Model implements IModel {
 	}
 
 	@Override
-	public void acceptSequence(IModelVisitor v) {
-		//Run through all the classes
-			//Run through all the methods
-				//If method name = the one we want, then call the necessary methods
-		
-		for (IClass clazz : classes){
-			for(IMethod method : clazz.getMethods()){
-				if(method.getSignature().equals(this.methodSignature)){
-					method.acceptSequence(v);
+	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
+		// Run through all the classes
+		// Run through all the methods
+		// If method name = the one we want, then call the necessary methods
+		System.out.println("depth = " + depth);
+		if (depth > 0) {
+			for (IClass clazz : classes) {
+				System.out.println("class: " + clazz.getName()  + " submethod class: " +sm.getClazzName());
+				if (clazz.getName().equals(sm.getClazzName())) {
+					for (IMethod m : clazz.getMethods()) {
+						System.out.println("method: "+m.getName() +" submethod: " + sm.getMethodName());
+						if ((m.getName()).equals(sm.getMethodName())) {
+							System.out.println("WE FOUND THAT CLASS");
+							//if (m.getArgs().equals(sm.getArgs())) {
+								//print some stuff
+								for(ISubMethod innerSM : m.getSubMethods()){
+									System.out.println("CALLING ACCEPT ON NEW SUB: class: " + innerSM.getClazzName() + " method: "+ innerSM.getMethodName());
+									this.acceptSequence(v, innerSM, depth-1);
+								}
+							//}
+						}
+					}
 				}
 			}
 		}
+		return;
 	}
 
 }

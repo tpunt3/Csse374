@@ -9,10 +9,12 @@ import org.objectweb.asm.Type;
 
 import problem.models.api.IClass;
 import problem.models.api.IRelation;
+import problem.models.api.ISubMethod;
 import problem.models.api.RelationType;
 import problem.models.impl.Method;
 import problem.models.impl.Model;
 import problem.models.impl.Relation;
+import problem.models.impl.SubMethod;
 
 public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	private Model model;

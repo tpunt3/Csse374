@@ -2,6 +2,7 @@ package problem.models.impl;
 
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IRelation;
+import problem.models.api.ISubMethod;
 import problem.models.api.RelationType;
 
 public class Relation implements IRelation {
@@ -52,10 +53,11 @@ public class Relation implements IRelation {
 	@Override
 	public void accept(IModelVisitor v) {
 	}
-	
 
 	@Override
-	public void acceptSequence(IModelVisitor v) {
+	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

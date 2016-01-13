@@ -2,6 +2,7 @@ package problem.models.impl;
 
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IField;
+import problem.models.api.ISubMethod;
 
 public class Field implements IField{
 	
@@ -42,7 +43,9 @@ public class Field implements IField{
 	}
 
 	@Override
-	public void acceptSequence(IModelVisitor v) {
+	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -12,15 +12,17 @@ import org.objectweb.asm.Opcodes;
 
 import problem.model.visitor.IModelTraverser;
 import problem.model.visitor.IModelVisitor;
+import problem.models.api.ISubMethod;
 import problem.models.impl.Model;
 import problem.models.impl.ModelGVOutputStream;
 import problem.models.impl.ModelSDOutputStream;
+import problem.models.impl.SubMethod;
 
 public class DesignParser {
 	
 	public static void main(String[] args) throws IOException{
 		DesignParser parser = new DesignParser();
-		parser.generateDocuments(DocType.uml, "");
+		parser.generateDocuments(DocType.both, "Field;accept;", 5);
 	}
 
 	public static final String[] CLASSES = {
@@ -82,27 +84,27 @@ public class DesignParser {
 //			 "headfirst.factory.pizzas.SimplePizzaFactory",
 //			 "headfirst.factory.pizzas.VeggiePizza",
 
-			"problem.asm.ClassDeclarationVisitor", 
-			"problem.asm.ClassFieldVisitor", 
-			"problem.asm.ClassMethodVisitor",
-			"problem.asm.DesignParser", 
-			"problem.asm.IClazzGetter", 
-			"problem.asm.MyMethodVisitor",
-			"problem.model.visitor.IModelTraverser", 
-			"problem.model.visitor.IModelVisitor",
-			"problem.model.visitor.ModelVisitorAdapter", 
-			"problem.models.api.IClass", 
-			"problem.models.api.IField",
-			"problem.models.api.IMethod", 
-			"problem.models.api.IModel", 
-			"problem.models.api.IRelation",
-			"problem.models.api.RelationType", 
-			"problem.models.impl.Class", 
+//			"problem.asm.ClassDeclarationVisitor", 
+//			"problem.asm.ClassFieldVisitor", 
+//			"problem.asm.ClassMethodVisitor",
+//			"problem.asm.DesignParser", 
+//			"problem.asm.IClazzGetter", 
+//			"problem.asm.MyMethodVisitor",
+//			"problem.model.visitor.IModelTraverser", 
+//			"problem.model.visitor.IModelVisitor",
+//			"problem.model.visitor.ModelVisitorAdapter", 
+//			"problem.models.api.IClass", 
+//			"problem.models.api.IField",
+//			"problem.models.api.IMethod", 
+//			"problem.models.api.IModel", 
+//			"problem.models.api.IRelation",
+//			"problem.models.api.RelationType", 
+//			"problem.models.impl.Class", 
 			"problem.models.impl.Field",
-			"problem.models.impl.Method", 
-			"problem.models.impl.Model", 
-			"problem.models.impl.ModelGVOutputStream",
-			"problem.models.impl.Relation"
+//			"problem.models.impl.Method", 
+//			"problem.models.impl.Model", 
+//			"problem.models.impl.ModelGVOutputStream",
+//			"problem.models.impl.Relation"
 
 			// "problem.AppLauncherApplication",
 			// "problem.ApplicationLauncher",
@@ -126,11 +128,25 @@ public class DesignParser {
 	 *            edu.rosehulman.csse374.ClassFieldVisitor java.lang.Math
 	 * @throws IOException
 	 */
-	public void generateDocuments(DocType type, String methodSig) throws IOException {
+	public void generateDocuments(DocType type, String methodSig, int depth) throws IOException {
 
 		Model model = new Model();
-		model.setMethodSignature(methodSig);
-
+		ISubMethod sm = null;
+		String args;
+		
+		if(type.equals(DocType.sd) || type.equals(DocType.both)){
+		String[] sigSplit = methodSig.split(";");
+		String clazzName = sigSplit[0];
+		String methodName = sigSplit[1];
+		if(sigSplit.length == 3){
+			args = sigSplit[2];
+		}else {
+			args = "";
+		}
+		
+		sm = new SubMethod(clazzName, methodName, args);
+		}
+		
 		for (String className : CLASSES) {
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
 			// Java class
@@ -177,14 +193,13 @@ public class DesignParser {
 				OutputStream out = new FileOutputStream("input_output/sequence.sd");
 				IModelVisitor sdWriter = new ModelSDOutputStream(out);
 				IModelTraverser traverser = (IModelTraverser) model;
-				traverser.acceptSequence(sdWriter);
+				traverser.acceptSequence(sdWriter, sm, 5);
 				out.close();
 
-				ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-						"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
-				// ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-				// "\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"
-				// -Tpng input_output/model.gv > input_output/graph1.png");
+				//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+				//		"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+				 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+				 "\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 				builder.redirectErrorStream(true);
 				Process p = builder.start();
 				String line;

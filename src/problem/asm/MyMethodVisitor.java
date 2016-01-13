@@ -33,10 +33,16 @@ public class MyMethodVisitor extends MethodVisitor {
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 		super.visitMethodInsn(opcode, owner, name, desc, itf);
+		
 		String args = getArguments(desc);
+		
+		String[] ownerSplit = owner.split("/");
+		owner = ownerSplit[ownerSplit.length-1];
 
-		ISubMethod sm = new SubMethod(this.clazz.getName(), name, args);
-		this.subMethods.add(sm);
+		ISubMethod sm = new SubMethod(owner, name, args);
+		if(!(name.equals("<init>"))){
+			this.subMethods.add(sm);
+		}
 	}
 
 	@Override
@@ -108,6 +114,6 @@ public class MyMethodVisitor extends MethodVisitor {
 	}
 
 	public ArrayList<ISubMethod> getSubMethods() {
-		return subMethods;
+		return this.subMethods;
 	}
 }

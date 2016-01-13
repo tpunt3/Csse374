@@ -8,6 +8,7 @@ import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
 import problem.models.api.IRelation;
+import problem.models.api.ISubMethod;
 
 public class Class implements IClass{
 	
@@ -77,8 +78,7 @@ public class Class implements IClass{
 	}
 
 	@Override
-	public void acceptSequence(IModelVisitor v) {
-		// TODO Auto-generated method stub
+	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
 		
 	}
 
