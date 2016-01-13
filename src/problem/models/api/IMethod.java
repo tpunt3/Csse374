@@ -7,4 +7,5 @@ public interface IMethod extends IModelTraverser{
 	public String getName();
 	public String getArgs();
 	public String getReturnType();
+	public String getSignature();
 }
