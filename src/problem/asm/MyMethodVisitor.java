@@ -1,58 +1,69 @@
 package problem.asm;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
 import problem.models.api.IClass;
+import problem.models.api.IMethod;
 import problem.models.api.IRelation;
+import problem.models.api.ISubMethod;
 import problem.models.api.RelationType;
+import problem.models.impl.Method;
 import problem.models.impl.Model;
 import problem.models.impl.Relation;
+import problem.models.impl.SubMethod;
 
 public class MyMethodVisitor extends MethodVisitor {
 	private Model model;
 	private IClass clazz;
 	private ArrayList<String> arguments;
+	private ArrayList<ISubMethod> subMethods;
 
 	public MyMethodVisitor(int api, MethodVisitor decorated, Model m, IClass clazz) {
 		super(api, decorated);
 		this.model = m;
 		this.clazz = clazz;
 		this.arguments = new ArrayList<String>();
+		this.subMethods = new ArrayList<ISubMethod>();
 	}
 
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 		super.visitMethodInsn(opcode, owner, name, desc, itf);
-		getArguments(desc);
+		String args = getArguments(desc);
+
+		ISubMethod sm = new SubMethod(this.clazz.getName(), name, args);
+		this.subMethods.add(sm);
 	}
 
 	@Override
 	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
 		super.visitFieldInsn(opcode, owner, name, desc);
 
-		//this clearly doesnt work as we thought it did, we now do this in classFieldVisitor
-		
-		
+		// this clearly doesnt work as we thought it did, we now do this in
+		// classFieldVisitor
+
 		// if owner is the class we are in, then we can automatically add it as
 		// an associations arrow,
 		// because that is stronger than a uses
 
-//		String[] ownerSplit = owner.split("/");
-//		owner = ownerSplit[ownerSplit.length - 1];
-//
-//		String fieldType = getType(desc);
-//		String[] splitField = fieldType.split("\\.");
-//		fieldType = splitField[splitField.length - 1];
-//
-//		if (owner.equals(this.clazz.getName())) {
-//			//create relation for assocation
-//			
-//			IRelation r = new Relation(owner, fieldType, RelationType.association);
-//			this.model.addRelation(r);
-//		}
+		// String[] ownerSplit = owner.split("/");
+		// owner = ownerSplit[ownerSplit.length - 1];
+		//
+		// String fieldType = getType(desc);
+		// String[] splitField = fieldType.split("\\.");
+		// fieldType = splitField[splitField.length - 1];
+		//
+		// if (owner.equals(this.clazz.getName())) {
+		// //create relation for assocation
+		//
+		// IRelation r = new Relation(owner, fieldType,
+		// RelationType.association);
+		// this.model.addRelation(r);
+		// }
 	}
 
 	@Override
@@ -72,18 +83,22 @@ public class MyMethodVisitor extends MethodVisitor {
 		super.visitVarInsn(opcode, var);
 	}
 
-	String[] getArguments(String desc) {
+	String getArguments(String desc) {
+		String argList = "";
+		String arg;
 		Type[] args = Type.getArgumentTypes(desc);
-		String[] argClassList = new String[args.length];
 		for (int i = 0; i < args.length; i++) {
-			String arg = args[i].getClassName();
+			arg = args[i].getClassName();
 			String[] splitArg = arg.split("\\.");
-
 			arg = splitArg[splitArg.length - 1];
-			argClassList[i] = arg;
-			this.arguments.add(arg);
+
+			if (args.length > 1 && i < args.length - 1) {
+				argList += arg + "; ";
+			} else {
+				argList += arg;
+			}
 		}
-		return argClassList;
+		return argList;
 	}
 
 	String getType(String desc) {
@@ -92,4 +107,7 @@ public class MyMethodVisitor extends MethodVisitor {
 		return t;
 	}
 
+	public ArrayList<ISubMethod> getSubMethods() {
+		return subMethods;
+	}
 }

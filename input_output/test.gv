@@ -1,35 +1,51 @@
 digraph model{
 rankdir = BT;
+ClassDeclarationVisitor [
+shape="record",
+label = "{ClassDeclarationVisitor| - model: Model\l- clazz: IClass\l|+ init(int; Model) : void\l+ visit(int; int; String; String; String; String[]) : void\l+ getClazz() : IClass\l+ splitOnSlash(String) : String\l}"
+];
+
+IClazzGetter [
+shape="record",
+label = "{\<\<interface\>\>\nIClazzGetter| + getClazz() : IClass\l}"
+];
+
 Model [
 shape="record",
-label = "{Model| - classes: IClass\l- relations: IRelation\l|+ init() : void\l+ init(IClass) : IClass\l+ getRelations() : IRelation\l+ setRelations(IRelation) : IRelation\l+ addRelation(IRelation) : void\l+ getClasses() : IClass\l+ accept(IModelVisitor) : void\l+ toString() : String\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l}"
+label = "{Model| - callDepth: int\l- methodSignature: String\l- classes: IClass\l- relations: IRelation\l|+ init() : void\l+ getCallDepth() : int\l+ setCallDepth(int) : void\l+ getMethodSignature() : String\l+ setMethodSignature(String) : void\l+ init(IClass) : IClass\l+ getRelations() : IRelation\l+ setRelations(IRelation) : IRelation\l+ addRelation(IRelation) : void\l+ getClasses() : IClass\l+ accept(IModelVisitor) : void\l+ toString() : String\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l+ acceptSequence(IModelVisitor) : void\l}"
 ];
 
-IModel [
+Class [
 shape="record",
-label = "{\<\<interface\>\>\nIModel| + getClasses() : IClass\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l+ getRelations() : IRelation\l}"
+label = "{Class| - name: String\l- methods: IMethod\l- fields: IField\l- isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l+ acceptSequence(IModelVisitor) : void\l}"
 ];
 
-IClass [
+Relation [
 shape="record",
-label = "{\<\<interface\>\>\nIClass| + getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getIsClass() : boolean\l}"
+label = "{Relation| - name: String\l- relatedClass: String\l- type: RelationType\l|+ init() : void\l+ init(String; String; RelationType) : void\l+ getName() : String\l+ setName(String) : void\l+ getRelatedClass() : String\l+ setRelatedClass(String) : void\l+ getType() : RelationType\l+ setType(RelationType) : void\l+ accept(IModelVisitor) : void\l+ acceptSequence(IModelVisitor) : void\l+ hashCode() : int\l+ equals(Object) : boolean\l}"
 ];
 
-IRelation [
+RelationType [
 shape="record",
-label = "{\<\<interface\>\>\nIRelation| + setName(String) : void\l+ getName() : String\l+ setRelatedClass(String) : void\l+ getRelatedClass() : String\l+ setType(RelationType) : void\l+ getType() : RelationType\l}"
+label = "{RelationType| + superclass: RelationType\l+ interfaces: RelationType\l+ uses: RelationType\l+ association: RelationType\l- ENUM$VALUES: RelationType[]\l|~ clinit() : void\l- init(String; int) : void\l+ values() : RelationType[]\l+ valueOf(String) : RelationType\l}"
 ];
 
 //writing relations between classes now
+ClassDeclarationVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
+ClassDeclarationVisitor -> Model [arrowhead = "vee"];
+ClassDeclarationVisitor -> IClass [arrowhead = "vee"];
+ClassDeclarationVisitor -> Class [arrowhead = "vee", style = "dashed"];
+ClassDeclarationVisitor -> Relation [arrowhead = "vee", style = "dashed"];
 Model -> IModel [arrowhead = "empty", style = "dashed"];
 Model -> IClass [arrowhead = "vee"];
 Model -> IRelation [arrowhead = "vee"];
 Model -> IModelVisitor [arrowhead = "vee", style = "dashed"];
-IModel -> IModelTraverser [arrowhead = "empty"];
-IModel -> IClass [arrowhead = "vee", style = "dashed"];
-IClass -> IModelTraverser [arrowhead = "empty"];
-IClass -> IMethod [arrowhead = "vee", style = "dashed"];
-IClass -> IField [arrowhead = "vee", style = "dashed"];
-IRelation -> IModelTraverser [arrowhead = "empty"];
-IRelation -> RelationType [arrowhead = "vee", style = "dashed"];
+Model -> IMethod [arrowhead = "vee", style = "dashed"];
+Class -> IClass [arrowhead = "empty", style = "dashed"];
+Class -> IMethod [arrowhead = "vee"];
+Class -> IField [arrowhead = "vee"];
+Class -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Relation -> IRelation [arrowhead = "empty", style = "dashed"];
+Relation -> RelationType [arrowhead = "vee"];
+Relation -> IModelVisitor [arrowhead = "vee", style = "dashed"];
 }

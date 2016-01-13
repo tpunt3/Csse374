@@ -1,7 +1,11 @@
 package problem.models.impl;
 
+import java.util.ArrayList;
+
 import problem.model.visitor.IModelVisitor;
+import problem.models.api.IClass;
 import problem.models.api.IMethod;
+import problem.models.api.ISubMethod;
 
 public class Method implements IMethod {
 
@@ -10,12 +14,16 @@ public class Method implements IMethod {
 	private String args;
 	private String returnType;
 	private String signature;
+	private IClass clazz;
+	private ArrayList<ISubMethod> subMethods;
 	
-	public Method(String access, String name, String args, String returnType) {
+	public Method(String access, String name, String args, String returnType, IClass clazz, ArrayList<ISubMethod> sm) {
 		this.access = access;
 		this.name = name;
 		this.args = args;
 		this.returnType = returnType;
+		this.clazz = clazz;
+		this.subMethods = sm;
 	}
 	
 	@Override
@@ -60,7 +68,17 @@ public class Method implements IMethod {
 
 	@Override
 	public void acceptSequence(IModelVisitor v) {
-		// TODO Auto-generated method stub
+		v.preVisit(this);
+		//for all the submethods
+			//visit them and get their classes
 		
+	}
+
+	public IClass getClazz() {
+		return clazz;
+	}
+
+	public void setClazz(IClass clazz) {
+		this.clazz = clazz;
 	}
 }

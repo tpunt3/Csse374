@@ -8,4 +8,5 @@ public interface IMethod extends IModelTraverser{
 	public String getArgs();
 	public String getReturnType();
 	public String getSignature();
+	public IClass getClazz();
 }

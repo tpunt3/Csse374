@@ -142,7 +142,7 @@ public class Model implements IModel {
 		for (IClass clazz : classes){
 			for(IMethod method : clazz.getMethods()){
 				if(method.getSignature().equals(this.methodSignature)){
-					
+					method.acceptSequence(v);
 				}
 			}
 		}

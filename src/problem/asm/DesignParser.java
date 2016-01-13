@@ -129,6 +129,7 @@ public class DesignParser {
 	public void generateDocuments(DocType type, String methodSig) throws IOException {
 
 		Model model = new Model();
+		model.setMethodSignature(methodSig);
 
 		for (String className : CLASSES) {
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
