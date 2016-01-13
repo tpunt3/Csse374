@@ -5,18 +5,38 @@ import java.util.Collection;
 import problem.asm.DesignParser;
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;
+import problem.models.api.IMethod;
 import problem.models.api.IModel;
 import problem.models.api.IRelation;
 import problem.models.api.RelationType;
 
 public class Model implements IModel {
 
+	private int callDepth;
+	private String methodSignature;
 	private Collection<IClass> classes;
 	private ArrayList<IRelation> relations;
 
 	public Model() {
 		this.classes = new ArrayList<IClass>();
 		this.relations = new ArrayList<IRelation>();
+		this.callDepth = 5;
+	}
+
+	public int getCallDepth() {
+		return callDepth;
+	}
+
+	public void setCallDepth(int callDepth) {
+		this.callDepth = callDepth;
+	}
+
+	public String getMethodSignature() {
+		return methodSignature;
+	}
+
+	public void setMethodSignature(String methodSignature) {
+		this.methodSignature = methodSignature;
 	}
 
 	public Model(Collection<IClass> classes) {
@@ -115,8 +135,17 @@ public class Model implements IModel {
 
 	@Override
 	public void acceptSequence(IModelVisitor v) {
-		// TODO Auto-generated method stub
+		//Run through all the classes
+			//Run through all the methods
+				//If method name = the one we want, then call the necessary methods
 		
+		for (IClass clazz : classes){
+			for(IMethod method : clazz.getMethods()){
+				if(method.getSignature().equals(this.methodSignature)){
+					
+				}
+			}
+		}
 	}
 
 }

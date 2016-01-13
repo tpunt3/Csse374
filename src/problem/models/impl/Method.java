@@ -9,11 +9,30 @@ public class Method implements IMethod {
 	private String name;
 	private String args;
 	private String returnType;
+	private String signature;
 	
+	public Method(String access, String name, String args, String returnType) {
+		this.access = access;
+		this.name = name;
+		this.args = args;
+		this.returnType = returnType;
+	}
+	
+	@Override
+	public String getSignature() {
+		return signature;
+	}
+
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+	
+	@Override
 	public String getReturnType(){
 		return returnType;
 	}
 
+	@Override
 	public String getArgs() {
 		return args;
 	}
@@ -25,13 +44,6 @@ public class Method implements IMethod {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Method(String access, String name, String args, String returnType) {
-		this.access = access;
-		this.name = name;
-		this.args = args;
-		this.returnType = returnType;
 	}
 
 	@Override
@@ -51,5 +63,4 @@ public class Method implements IMethod {
 		// TODO Auto-generated method stub
 		
 	}
-
 }
