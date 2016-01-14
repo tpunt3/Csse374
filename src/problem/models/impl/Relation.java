@@ -55,12 +55,6 @@ public class Relation implements IRelation {
 	}
 
 	@Override
-	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -92,5 +86,11 @@ public class Relation implements IRelation {
 		if (type != other.type)
 			return false;
 		return true;
+	}
+
+	@Override
+	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
+		// TODO Auto-generated method stub
+		
 	}
 }

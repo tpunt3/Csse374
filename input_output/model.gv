@@ -1,9 +1,179 @@
 digraph model{
 rankdir = BT;
+ClassDeclarationVisitor [
+shape="record",
+label = "{ClassDeclarationVisitor| - model: Model\l- clazz: IClass\l|+ init(int; Model) : void\l+ visit(int; int; String; String; String; String[]) : void\l+ getClazz() : IClass\l+ splitOnSlash(String) : String\l}"
+];
+
+ClassFieldVisitor [
+shape="record",
+label = "{ClassFieldVisitor| - model: Model\l- clazz: IClass\l- decorated: ClassVisitor\l|+ init(int; ClassVisitor; Model) : void\l+ visitField(int; String; String; String; Object) : FieldVisitor\l~ addAccessLevel(int) : String\l+ getClazz() : IClass\l}"
+];
+
+ClassMethodVisitor [
+shape="record",
+label = "{ClassMethodVisitor| - model: Model\l- decorated: ClassVisitor\l- clazz: IClass\l- signature: String\l|+ init(int) : void\l+ init(int; ClassVisitor; Model) : void\l+ visitMethod(int; String; String; String; String[]) : MethodVisitor\l~ addAccessLevel(int) : String\l~ addReturnType(String) : String\l~ addArguments(String) : String\l+ getClazz() : IClass\l}"
+];
+
+DesignParser [
+shape="record",
+label = "{DesignParser| + CLASSES: String[]\l|~ clinit() : void\l+ init() : void\l+ main(String[]) : void\l+ generateDocuments(DocType; String; int) : void\l}"
+];
+
+IClazzGetter [
+shape="record",
+label = "{\<\<interface\>\>\nIClazzGetter| + getClazz() : IClass\l}"
+];
+
+MyMethodVisitor [
+shape="record",
+label = "{MyMethodVisitor| - model: Model\l- clazz: IClass\l- arguments: String\l- subMethods: ISubMethod\l|+ init(int; MethodVisitor; Model; IClass) : void\l+ visitMethodInsn(int; String; String; String; boolean) : void\l+ visitFieldInsn(int; String; String; String) : void\l+ visitTypeInsn(int; String) : void\l+ visitVarInsn(int; int) : void\l~ getArguments(String) : String\l~ getType(String) : String\l+ getSubMethods() : ISubMethod\l}"
+];
+
+IModelTraverser [
+shape="record",
+label = "{\<\<interface\>\>\nIModelTraverser| + accept(IModelVisitor) : void\l+ acceptSequence(IModelVisitor; ISubMethod; int) : void\l}"
+];
+
+IModelVisitor [
+shape="record",
+label = "{\<\<interface\>\>\nIModelVisitor| + preVisit(IModel) : void\l+ preVisit(IClass) : void\l+ preVisit(IMethod) : void\l+ preVisit(IField) : void\l+ preVisit(IRelation) : void\l+ visit(IModel) : void\l+ visit(IClass) : void\l+ visit(IMethod) : void\l+ visit(IField) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IModel) : void\l+ postVisit(IClass) : void\l+ postVisit(IMethod) : void\l+ postVisit(IField) : void\l+ postVisit(IRelation) : void\l+ visitRelations(IModel) : void\l+ intermediateVisit(IClass) : void\l}"
+];
+
+ModelVisitorAdapter [
+shape="record",
+label = "{ModelVisitorAdapter| + init() : void\l+ preVisit(IModel) : void\l+ visit(IModel) : void\l+ postVisit(IModel) : void\l+ preVisit(IClass) : void\l+ visit(IClass) : void\l+ postVisit(IClass) : void\l+ visit(IMethod) : void\l+ visit(IField) : void\l+ preVisit(IMethod) : void\l+ preVisit(IField) : void\l+ postVisit(IMethod) : void\l+ postVisit(IField) : void\l+ intermediateVisit(IClass) : void\l+ preVisit(IRelation) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IRelation) : void\l+ visitRelations(IModel) : void\l}"
+];
+
+IClass [
+shape="record",
+label = "{\<\<interface\>\>\nIClass| + getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getIsClass() : boolean\l}"
+];
+
+IField [
+shape="record",
+label = "{\<\<interface\>\>\nIField| + getType() : String\l+ getAccess() : String\l+ getName() : String\l}"
+];
+
+IMethod [
+shape="record",
+label = "{\<\<interface\>\>\nIMethod| + getAccess() : String\l+ getName() : String\l+ getArgs() : String\l+ getReturnType() : String\l+ getSignature() : String\l+ getClazz() : IClass\l+ getSubMethods() : ISubMethod\l}"
+];
+
+IModel [
+shape="record",
+label = "{\<\<interface\>\>\nIModel| + getClasses() : IClass\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l+ getRelations() : IRelation\l+ getClassStrings() : String\l+ getMethodStrings() : String\l}"
+];
+
+IRelation [
+shape="record",
+label = "{\<\<interface\>\>\nIRelation| + setName(String) : void\l+ getName() : String\l+ setRelatedClass(String) : void\l+ getRelatedClass() : String\l+ setType(RelationType) : void\l+ getType() : RelationType\l}"
+];
+
+RelationType [
+shape="record",
+label = "{RelationType| + superclass: RelationType\l+ interfaces: RelationType\l+ uses: RelationType\l+ association: RelationType\l- ENUM$VALUES: RelationType[]\l|~ clinit() : void\l- init(String; int) : void\l+ values() : RelationType[]\l+ valueOf(String) : RelationType\l}"
+];
+
+Class [
+shape="record",
+label = "{Class| - name: String\l- methods: IMethod\l- fields: IField\l- isClass: boolean\l|+ init(String; boolean) : void\l+ init() : void\l+ getName() : String\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ accept(IModelVisitor) : void\l+ getIsClass() : boolean\l+ acceptSequence(IModelVisitor; ISubMethod; int) : void\l}"
+];
+
 Field [
 shape="record",
 label = "{Field| - type: String\l- access: String\l- name: String\l|+ init(String; String; String) : void\l+ getName() : String\l+ setName(String) : void\l+ getType() : String\l+ getAccess() : String\l+ accept(IModelVisitor) : void\l+ acceptSequence(IModelVisitor; ISubMethod; int) : void\l}"
 ];
 
+Method [
+shape="record",
+label = "{Method| - access: String\l- name: String\l- args: String\l- returnType: String\l- signature: String\l- clazz: IClass\l- subMethods: ISubMethod\l|+ init(String; String; String; String; IClass; ISubMethod) : ISubMethod\l+ getSignature() : String\l+ setSignature(String) : void\l+ getReturnType() : String\l+ getArgs() : String\l+ getName() : String\l+ setName(String) : void\l+ getAccess() : String\l+ accept(IModelVisitor) : void\l+ getSubMethods() : ISubMethod\l+ getClazz() : IClass\l+ setClazz(IClass) : void\l+ acceptSequence(IModelVisitor; ISubMethod; int) : void\l}"
+];
+
+Model [
+shape="record",
+label = "{Model| - callDepth: int\l- startingMethod: ISubMethod\l- classes: IClass\l- relations: IRelation\l- classStrings: String\l- methodStrings: String\l|+ init() : void\l+ getMethodStrings() : String\l+ getClassStrings() : String\l+ getCallDepth() : int\l+ setCallDepth(int) : void\l+ setStartingMethod(ISubMethod) : void\l+ init(IClass) : IClass\l+ getRelations() : IRelation\l+ setRelations(IRelation) : IRelation\l+ addRelation(IRelation) : void\l+ getClasses() : IClass\l+ accept(IModelVisitor) : void\l+ toString() : String\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l+ acceptSequence(IModelVisitor; ISubMethod; int) : void\l}"
+];
+
+ModelGVOutputStream [
+shape="record",
+label = "{ModelGVOutputStream| ~ out: OutputStream\l~ s: StringBuilder\l- $SWITCH_TABLE$problem$models$api$RelationType: int[]\l|+ init() : void\l+ init(OutputStream) : void\l- write(String) : void\l+ preVisit(IModel) : void\l+ visit(IModel) : void\l+ postVisit(IModel) : void\l+ preVisit(IClass) : void\l+ visit(IClass) : void\l+ postVisit(IClass) : void\l+ preVisit(IMethod) : void\l+ visit(IMethod) : void\l+ postVisit(IMethod) : void\l+ preVisit(IField) : void\l+ visit(IField) : void\l+ postVisit(IField) : void\l+ preVisit(IRelation) : void\l+ visitRelations(IModel) : void\l- visitAssociations(IRelation) : void\l- visitUses(IRelation) : void\l+ visitSuperClasses(IRelation) : void\l+ visitInterfaces(IRelation) : void\l+ postVisit(IRelation) : void\l+ intermediateVisit(IClass) : void\l~ $SWITCH_TABLE$problem$models$api$RelationType() : int[]\l}"
+];
+
+Relation [
+shape="record",
+label = "{Relation| - name: String\l- relatedClass: String\l- type: RelationType\l|+ init() : void\l+ init(String; String; RelationType) : void\l+ getName() : String\l+ setName(String) : void\l+ getRelatedClass() : String\l+ setRelatedClass(String) : void\l+ getType() : RelationType\l+ setType(RelationType) : void\l+ accept(IModelVisitor) : void\l+ hashCode() : int\l+ equals(Object) : boolean\l+ acceptSequence(IModelVisitor; ISubMethod; int) : void\l}"
+];
+
 //writing relations between classes now
+ClassDeclarationVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
+ClassDeclarationVisitor -> Model [arrowhead = "vee"];
+ClassDeclarationVisitor -> IClass [arrowhead = "vee"];
+ClassDeclarationVisitor -> Class [arrowhead = "vee", style = "dashed"];
+ClassDeclarationVisitor -> Relation [arrowhead = "vee", style = "dashed"];
+ClassFieldVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
+ClassFieldVisitor -> Model [arrowhead = "vee"];
+ClassFieldVisitor -> IClass [arrowhead = "vee"];
+ClassFieldVisitor -> Relation [arrowhead = "vee", style = "dashed"];
+ClassFieldVisitor -> Field [arrowhead = "vee", style = "dashed"];
+ClassFieldVisitor -> IClazzGetter [arrowhead = "vee", style = "dashed"];
+ClassMethodVisitor -> IClazzGetter [arrowhead = "empty", style = "dashed"];
+ClassMethodVisitor -> Model [arrowhead = "vee"];
+ClassMethodVisitor -> IClass [arrowhead = "vee"];
+ClassMethodVisitor -> MyMethodVisitor [arrowhead = "vee", style = "dashed"];
+ClassMethodVisitor -> Relation [arrowhead = "vee", style = "dashed"];
+ClassMethodVisitor -> Method [arrowhead = "vee", style = "dashed"];
+ClassMethodVisitor -> IClazzGetter [arrowhead = "vee", style = "dashed"];
+DesignParser -> Model [arrowhead = "vee", style = "dashed"];
+DesignParser -> ClassDeclarationVisitor [arrowhead = "vee", style = "dashed"];
+DesignParser -> ClassFieldVisitor [arrowhead = "vee", style = "dashed"];
+DesignParser -> ClassMethodVisitor [arrowhead = "vee", style = "dashed"];
+DesignParser -> ModelGVOutputStream [arrowhead = "vee", style = "dashed"];
+MyMethodVisitor -> Model [arrowhead = "vee"];
+MyMethodVisitor -> IClass [arrowhead = "vee"];
+MyMethodVisitor -> Relation [arrowhead = "vee", style = "dashed"];
+IModelTraverser -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IModel [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IClass [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IMethod [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IField [arrowhead = "vee", style = "dashed"];
+IModelVisitor -> IRelation [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IModelVisitor [arrowhead = "empty", style = "dashed"];
+ModelVisitorAdapter -> IModel [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IClass [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IMethod [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IField [arrowhead = "vee", style = "dashed"];
+ModelVisitorAdapter -> IRelation [arrowhead = "vee", style = "dashed"];
+IClass -> IModelTraverser [arrowhead = "empty"];
+IClass -> IMethod [arrowhead = "vee", style = "dashed"];
+IClass -> IField [arrowhead = "vee", style = "dashed"];
+IField -> IModelTraverser [arrowhead = "empty"];
+IMethod -> IModelTraverser [arrowhead = "empty"];
+IModel -> IModelTraverser [arrowhead = "empty"];
+IModel -> IClass [arrowhead = "vee", style = "dashed"];
+IRelation -> IModelTraverser [arrowhead = "empty"];
+IRelation -> RelationType [arrowhead = "vee", style = "dashed"];
+Class -> IClass [arrowhead = "empty", style = "dashed"];
+Class -> IMethod [arrowhead = "vee"];
+Class -> IField [arrowhead = "vee"];
+Class -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Field -> IField [arrowhead = "empty", style = "dashed"];
+Field -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Method -> IMethod [arrowhead = "empty", style = "dashed"];
+Method -> IClass [arrowhead = "vee"];
+Method -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Model -> IModel [arrowhead = "empty", style = "dashed"];
+Model -> IClass [arrowhead = "vee"];
+Model -> IRelation [arrowhead = "vee"];
+Model -> IModelVisitor [arrowhead = "vee", style = "dashed"];
+Model -> IMethod [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> ModelVisitorAdapter [arrowhead = "empty"];
+ModelGVOutputStream -> IModel [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IClass [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IMethod [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IField [arrowhead = "vee", style = "dashed"];
+ModelGVOutputStream -> IRelation [arrowhead = "vee", style = "dashed"];
+Relation -> IRelation [arrowhead = "empty", style = "dashed"];
+Relation -> RelationType [arrowhead = "vee"];
+Relation -> IModelVisitor [arrowhead = "vee", style = "dashed"];
 }

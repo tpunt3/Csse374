@@ -79,6 +79,7 @@ public class Class implements IClass{
 
 	@Override
 	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
+		// TODO Auto-generated method stub
 		
 	}
 

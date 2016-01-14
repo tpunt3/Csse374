@@ -29,14 +29,23 @@ public class ModelSDOutputStream extends ModelVisitorAdapter{
 	
 	@Override
 	public void preVisit(IModel m) {
-		// TODO Auto-generated method stub
-		super.preVisit(m);
+		Object [] classes = m.getClassStrings().toArray();
+		String s = "";
+		for(int i = m.getClassStrings().size() - 1; i >= 0; i--){
+			s += classes[i]+"\n";
+		}
+		
+		s +="\n";
+		this.write(s);
 	}
 
 	@Override
 	public void visit(IModel m) {
-		// TODO Auto-generated method stub
-		super.visit(m);
+		String s = "";
+		for(int i = 0; i < m.getMethodStrings().size(); i++){
+			s += m.getMethodStrings().get(i).toString()+"\n";
+		}
+		this.write(s);
 	}
 
 	@Override
