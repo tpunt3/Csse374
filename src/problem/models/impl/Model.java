@@ -17,11 +17,11 @@ import problem.models.api.RelationType;
 public class Model implements IModel {
 
 	private int callDepth;
-	private ISubMethod startingMethod;
 	private ArrayList<IClass> classes;
 	private ArrayList<IRelation> relations;
 	private Set<String> classStrings;
 	private ArrayList<String> methodStrings;
+	private ArrayList<String> classesToAdd;
 
 	public Model() {
 		this.classes = new ArrayList<IClass>();
@@ -29,6 +29,7 @@ public class Model implements IModel {
 		this.callDepth = 5;
 		this.classStrings = new HashSet<String>();
 		this.methodStrings = new ArrayList<String>();
+		this.classesToAdd = new ArrayList<String>();
 	}
 
 	public ArrayList<String> getMethodStrings() {
@@ -45,10 +46,6 @@ public class Model implements IModel {
 
 	public void setCallDepth(int callDepth) {
 		this.callDepth = callDepth;
-	}
-
-	public void setStartingMethod(ISubMethod start) {
-		this.startingMethod = start;
 	}
 
 	public Model(ArrayList<IClass> classes) {
@@ -145,6 +142,33 @@ public class Model implements IModel {
 		}
 		return null;
 	}
+	
+	public String[] findNewClasses(ISubMethod sm, int depth){
+		
+		//System.out.println("subMethod className: " + sm.getClazzName() + " submethod methodName: " + sm.getMethodName());
+		
+		if(depth > 0){
+			for(IClass clazz : classes) {
+				if (clazz.getName().equals(sm.getClazzName())) {
+					this.classesToAdd.add(sm.getQualifiedClassName());
+					for (IMethod m : clazz.getMethods()) {
+						if ((m.getName()).equals(sm.getMethodName())) {
+							if (m.getArgs().equals(sm.getArgs())) {
+								this.classesToAdd.remove(sm.getQualifiedClassName());
+								for (ISubMethod innerSM : m.getSubMethods()) {
+									this.classesToAdd.add(innerSM.getQualifiedClassName());
+									this.findNewClasses(innerSM, depth - 1);
+								}
+								
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return this.classesToAdd.toArray(new String[classesToAdd.size()]);
+	}
 
 	@Override
 	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
@@ -157,32 +181,18 @@ public class Model implements IModel {
 			for (IClass clazz : classes) {
 				
 				if (clazz.getName().equals(sm.getClazzName())) {
-
-					 System.out.println("class: " + clazz.getName() + " submethod class: " + sm.getClazzName());
+					 //System.out.println("class: " + clazz.getName() + " submethod class: " + sm.getClazzName());
+					String s = clazz.getName() + ":" + clazz.getName() + "[a]";
+					this.classStrings.add(s);
+					
 					for (IMethod m : clazz.getMethods()) {
-						 System.out.println("method: " + m.getName() + " submethod: " + sm.getMethodName());
 						if ((m.getName()).equals(sm.getMethodName())) {
-							 System.out.println("WE FOUND THAT CLASS");
-							 System.out.println("m.getArgs: "+m.getArgs() + " sm.getArgs: "+sm.getArgs());
 							if (m.getArgs().equals(sm.getArgs())) {
-
-								
-								// print some stuff
-
-								String s = "/"+clazz.getName() + ":" + clazz.getName() + "[a]";
-								this.classStrings.add(s);
-								// if(!this.classStrings.contains(s)){
-								// System.out.println(this.classStrings.toString());
-								// this.classStrings.add(clazz.getName()+":"+clazz.getName()+"[a]");
-								// }
 								for (ISubMethod innerSM : m.getSubMethods()) {
+									//System.out.println(innerSM.getMethodName() + innerSM.getArgs());
 									String s2 = clazz.getName() + ":" + innerSM.getClazzName() + "."
 											+ innerSM.getMethodName() + "("+innerSM.getArgs()+")";
 									this.methodStrings.add(s2);
-									// System.out.println("CALLING ACCEPT ON NEW
-									// SUB: class: " + innerSM.getClazzName() +
-									// "
-									// method: "+ innerSM.getMethodName());
 									this.acceptSequence(v, innerSM, depth - 1);
 								}
 								
@@ -192,12 +202,12 @@ public class Model implements IModel {
 				}
 			}
 		}
-
-		if (depth == 5) {
-			v.preVisit(this);
-			v.visit(this);
-		}
-
 		return;
+	}
+
+	@Override
+	public void writeFile(IModelVisitor v) {
+		v.preVisit(this);
+		v.visit(this);
 	}
 }

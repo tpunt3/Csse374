@@ -83,4 +83,10 @@ public class Method implements IMethod {
 		v.preVisit(this);
 		
 	}
+
+	@Override
+	public void writeFile(IModelVisitor sdWriter) {
+		// TODO Auto-generated method stub
+		
+	}
 }

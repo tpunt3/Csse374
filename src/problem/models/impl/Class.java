@@ -83,4 +83,10 @@ public class Class implements IClass{
 		
 	}
 
+	@Override
+	public void writeFile(IModelVisitor sdWriter) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

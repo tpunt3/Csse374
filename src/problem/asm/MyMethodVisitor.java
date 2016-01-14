@@ -19,15 +19,14 @@ import problem.models.impl.SubMethod;
 public class MyMethodVisitor extends MethodVisitor {
 	private Model model;
 	private IClass clazz;
-	private ArrayList<String> arguments;
 	private ArrayList<ISubMethod> subMethods;
 
 	public MyMethodVisitor(int api, MethodVisitor decorated, Model m, IClass clazz) {
 		super(api, decorated);
 		this.model = m;
 		this.clazz = clazz;
-		this.arguments = new ArrayList<String>();
 		this.subMethods = new ArrayList<ISubMethod>();
+		//System.out.println(this.clazz.);
 	}
 
 	@Override
@@ -35,11 +34,11 @@ public class MyMethodVisitor extends MethodVisitor {
 		super.visitMethodInsn(opcode, owner, name, desc, itf);
 		
 		String args = getArguments(desc);
-		
+		String qualified = owner.replace("/", ".");
 		String[] ownerSplit = owner.split("/");
 		owner = ownerSplit[ownerSplit.length-1];
 
-		ISubMethod sm = new SubMethod(owner, name, args);
+		ISubMethod sm = new SubMethod(qualified, owner, name, args);
 		if(!(name.equals("<init>"))){
 			this.subMethods.add(sm);
 		}

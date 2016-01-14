@@ -52,11 +52,12 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 				r = new Relation(name, s, RelationType.interfaces);
 				this.model.addRelation(r);
 			}
-
-			superName = splitOnSlash(superName);
-
-			r = new Relation(name, superName, RelationType.superclass);
-			this.model.addRelation(r);
+			if(superName != null){
+				superName = splitOnSlash(superName);
+	
+				r = new Relation(name, superName, RelationType.superclass);
+				this.model.addRelation(r);
+			}
 		}
 		this.model.addClazz(clazz);
 

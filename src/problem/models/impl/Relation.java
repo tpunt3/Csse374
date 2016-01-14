@@ -93,4 +93,10 @@ public class Relation implements IRelation {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void writeFile(IModelVisitor sdWriter) {
+		// TODO Auto-generated method stub
+		
+	}
 }

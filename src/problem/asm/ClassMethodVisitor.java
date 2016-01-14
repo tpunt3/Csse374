@@ -50,6 +50,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 
 		String args = "";
 		try {
+			//System.out.println("Description: "+desc);
 			args = addArguments(desc);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -110,11 +111,14 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		for (int i = 0; i < args.length; i++) {
 			// if instance of Collection, use signature
 			Class<?> cls = null;
+			//System.out.println("Args: "+ args[i].getClassName());
 			if (args[i].getClassName().startsWith("java.util."))
 			{
 				cls = Class.forName(args[i].getClassName());
 			}
-			if (cls != null && Collection.class.isAssignableFrom(cls)) {
+			//maybe missing some nested structures
+			if (cls != null && Collection.class.isAssignableFrom(cls) && this.signature != null) {
+				//System.out.println(signature);
 				String[] sig = this.signature.split("/");
 				arg = sig[sig.length - 1];
 				int index = arg.indexOf(";");
