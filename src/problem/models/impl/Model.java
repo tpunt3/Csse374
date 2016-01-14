@@ -200,6 +200,8 @@ public class Model implements IModel {
 						}
 					}
 				}
+				String s = clazz.getName() + ":" + clazz.getName() + "[a]";
+				this.classStrings.add(s);
 			}
 		}
 		return;

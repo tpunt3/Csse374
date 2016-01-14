@@ -82,14 +82,16 @@ public class DesignParser {
 			// "headfirst.factory.pizzas.SimplePizzaFactory",
 			// "headfirst.factory.pizzas.VeggiePizza",
 
-			"problem.asm.ClassDeclarationVisitor", "problem.asm.ClassFieldVisitor", "problem.asm.ClassMethodVisitor",
-			"problem.asm.DesignParser", "problem.asm.IClazzGetter", "problem.asm.MyMethodVisitor",
-			"problem.asm.DocType", "problem.model.visitor.IModelTraverser", "problem.model.visitor.IModelVisitor",
-			"problem.model.visitor.ModelVisitorAdapter", "problem.models.api.IClass", "problem.models.api.IField",
-			"problem.models.api.IMethod", "problem.models.api.IModel", "problem.models.api.IRelation",
-			"problem.models.api.ISubMethod", "problem.models.api.RelationType", "problem.models.impl.Class",
-			"problem.models.impl.Field", "problem.models.impl.Method", "problem.models.impl.Model",
-			"problem.models.impl.ModelGVOutputStream", "problem.models.impl.Relation", "problem.models.impl.SubMethod"
+//			"problem.asm.ClassDeclarationVisitor", "problem.asm.ClassFieldVisitor", "problem.asm.ClassMethodVisitor",
+//			"problem.asm.DesignParser", "problem.asm.IClazzGetter", "problem.asm.MyMethodVisitor",
+//			"problem.asm.DocType", "problem.model.visitor.IModelTraverser", "problem.model.visitor.IModelVisitor",
+//			"problem.model.visitor.ModelVisitorAdapter", "problem.models.api.IClass", "problem.models.api.IField",
+//			"problem.models.api.IMethod", "problem.models.api.IModel", "problem.models.api.IRelation",
+//			"problem.models.api.ISubMethod", "problem.models.api.RelationType", "problem.models.impl.Class",
+//			"problem.models.impl.Field", "problem.models.impl.Method", "problem.models.impl.Model",
+//			"problem.models.impl.ModelGVOutputStream", "problem.models.impl.Relation", "problem.models.impl.SubMethod"
+			
+			"java.util.Collections",
 
 			// "problem.AppLauncherApplication",
 			// "problem.ApplicationLauncher",
@@ -116,7 +118,7 @@ public class DesignParser {
 	public static void main(String[] args) throws IOException {
 		DesignParser parser = new DesignParser();
 		parser.generateDocuments(DocType.sd,
-				"problem.asm.DesignParser,DesignParser,generateDocuments,DocType; String; int; String[]", 5, CLASSES);
+				"java.util.Collections,Collections,shuffle,List<*>", 5, CLASSES);
 	}
 
 	public void generateDocuments(DocType type, String methodSig, int depth, String[] classes) throws IOException {

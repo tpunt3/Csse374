@@ -1,5 +1,8 @@
-ISubMethod:ISubMethod[a]
+Collections:Collections[a]
 
-ISubMethod:ISubMethod.test(Object)
-ISubMethod:ISubMethod.test(Object)
-ISubMethod:ISubMethod.test(Object)
+Collections:Collections.shuffle(List; Random)
+Collections:Collections.shuffle(List; Random)
+Collections:Collections.shuffle(List; Random)
+Collections:Collections.shuffle(List; Random)
+Collections:Collections.shuffle(List; Random)
+Collections:Collections.shuffle(List; Random)
