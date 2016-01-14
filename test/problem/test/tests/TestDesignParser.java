@@ -55,7 +55,7 @@ public class TestDesignParser {
 			// visit the class
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 
-			// this is what they do in CarApp???
+
 			OutputStream out = new FileOutputStream("input_output/test.gv");
 			IModelVisitor gvWriter = new ModelGVOutputStream(out);
 			IModelTraverser traverser = (IModelTraverser) model;
