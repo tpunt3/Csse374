@@ -21,6 +21,8 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	private ClassVisitor decorated;
 	private IClass clazz;
 	private String signature;
+	private String name;
+	private String argList;
 
 	public ClassMethodVisitor(int api) {
 		super(api);
@@ -32,10 +34,12 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		this.model = m;
 		this.decorated = decorated;
 		this.clazz = null;
+		this.argList = "";
 	}
 
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+		this.name = name;
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 
 		this.signature = signature;
@@ -48,15 +52,14 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		accessLevel = addAccessLevel(access);
 		String returnType = addReturnType(desc);
 
-		String args = "";
 		try {
-			//System.out.println("Description: "+desc);
-			args = addArguments(desc);
+			// System.out.println("Description: "+desc);
+			addArguments(desc);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		String[] splitArgs = args.split("; ");
+
+		String[] splitArgs = this.argList.split("; ");
 
 		for (String s : splitArgs) {
 			if (s != "") {
@@ -75,7 +78,8 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		name = name.replace("<", "");
 		name = name.replace(">", "");
 
-		Method m = new Method(accessLevel, name, args, returnType, this.clazz, ((MyMethodVisitor)mine).getSubMethods());
+		Method m = new Method(accessLevel, name, this.argList, returnType, this.clazz,
+				((MyMethodVisitor) mine).getSubMethods());
 		current.addMethod(m);
 
 		return mine;
@@ -104,38 +108,71 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		return returnType;
 	}
 
-	String addArguments(String desc) throws ClassNotFoundException {
-		String argList = "";
-		String arg;
+	void addArguments(String desc) throws ClassNotFoundException {
+		String arg = null;
+		this.argList = "";
 		Type[] args = Type.getArgumentTypes(desc);
 		for (int i = 0; i < args.length; i++) {
+			// if (this.name.equals("shuffle"))
+			// System.out.println("WOOO" + args[i].getClassName());
 			// if instance of Collection, use signature
 			Class<?> cls = null;
-			//System.out.println("Args: "+ args[i].getClassName());
-			if (args[i].getClassName().startsWith("java.util."))
-			{
+			// System.out.println("Args: "+ args[i].getClassName());
+			if (args[i].getClassName().startsWith("java.util.")) {
 				cls = Class.forName(args[i].getClassName());
 			}
-			//maybe missing some nested structures
+			// maybe missing some nested structures
 			if (cls != null && Collection.class.isAssignableFrom(cls) && this.signature != null) {
-				//System.out.println(signature);
-				String[] sig = this.signature.split("/");
-				arg = sig[sig.length - 1];
-				int index = arg.indexOf(";");
-				arg = arg.substring(0, index);
+				// System.out.println(signature);
+				// if (this.name.equals("shuffle"))
+				// System.out.println("IS THIS A CRAZY SIG?" + this.signature);
+				String[] sigs = this.signature.split(";");
+				System.out.println(this.signature);
+				for (int j = 0; j < sigs.length - 1; j++) {
+					if (!sigs[j].equals(">") && !sigs[j].equals("TT")) {
+						String[] sig = sigs[j].split("/");
+						arg = sig[sig.length - 1];
+						if (arg.contains("<")) {
+							arg = arg.substring(0, arg.indexOf("<"));
+						}
+						// if (this.name.equals("shuffle"))
+						// System.out.println("adding arg: " + arg);
+						if (j < sigs.length - 2) {
+							addArgToList(arg, false);
+						} else {
+							addArgToList(arg, true);
+						}
+					}
+				}
 			} else {
-				arg = args[i].getClassName();
-				String[] splitArg = arg.split("\\.");
-				arg = splitArg[splitArg.length - 1];
-			}
-
-			if (args.length > 1 && i < args.length - 1) {
-				argList += arg + "; ";
-			} else {
-				argList += arg;
+				if (this.signature == null) {
+					// if (this.name.equals("shuffle"))
+					// System.out.println("splitting " +
+					// args[i].getClassName());
+					arg = args[i].getClassName();
+					String[] splitArg = arg.split("\\.");
+					arg = splitArg[splitArg.length - 1];
+					if (args.length > 1 && i < args.length - 1) {
+						addArgToList(arg, false);
+					} else {
+						addArgToList(arg, true);
+					}
+				}
 			}
 		}
-		return argList;
+
+		// if (this.name.equals("shuffle"))
+		// System.out.println("ARG LIST!!" + this.argList);
+	}
+
+	private void addArgToList(String arg, boolean isLast) {
+		System.out.println("adding " + arg);
+		if (!isLast) {
+			argList += arg + "; ";
+		} else {
+			argList += arg;
+		}
+
 	}
 
 	@Override

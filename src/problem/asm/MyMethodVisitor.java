@@ -20,6 +20,7 @@ public class MyMethodVisitor extends MethodVisitor {
 	private Model model;
 	private IClass clazz;
 	private ArrayList<ISubMethod> subMethods;
+	private String name;
 
 	public MyMethodVisitor(int api, MethodVisitor decorated, Model m, IClass clazz) {
 		super(api, decorated);
@@ -32,6 +33,10 @@ public class MyMethodVisitor extends MethodVisitor {
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 		super.visitMethodInsn(opcode, owner, name, desc, itf);
+		
+		this.name = name;
+		//if(name.equals("shuffle"))
+			//System.out.println("DESCRIPTION: "+desc);
 		
 		String args = getArguments(desc);
 		String qualified = owner.replace("/", ".");
@@ -92,8 +97,10 @@ public class MyMethodVisitor extends MethodVisitor {
 		String argList = "";
 		String arg;
 		Type[] args = Type.getArgumentTypes(desc);
+		
 		for (int i = 0; i < args.length; i++) {
 			arg = args[i].getClassName();
+			//System.out.println(arg);
 			String[] splitArg = arg.split("\\.");
 			arg = splitArg[splitArg.length - 1];
 
@@ -103,6 +110,7 @@ public class MyMethodVisitor extends MethodVisitor {
 				argList += arg;
 			}
 		}
+		
 		return argList;
 	}
 
