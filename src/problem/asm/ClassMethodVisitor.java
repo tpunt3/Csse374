@@ -53,7 +53,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		String returnType = addReturnType(desc);
 
 		try {
-			// System.out.println("Description: "+desc);
 			addArguments(desc);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -127,7 +126,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 				// if (this.name.equals("shuffle"))
 				// System.out.println("IS THIS A CRAZY SIG?" + this.signature);
 				String[] sigs = this.signature.split(";");
-				System.out.println(this.signature);
 				for (int j = 0; j < sigs.length - 1; j++) {
 					if (!sigs[j].equals(">") && !sigs[j].equals("TT")) {
 						String[] sig = sigs[j].split("/");
@@ -135,8 +133,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 						if (arg.contains("<")) {
 							arg = arg.substring(0, arg.indexOf("<"));
 						}
-						// if (this.name.equals("shuffle"))
-						// System.out.println("adding arg: " + arg);
 						if (j < sigs.length - 2) {
 							addArgToList(arg, false);
 						} else {
@@ -166,7 +162,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	}
 
 	private void addArgToList(String arg, boolean isLast) {
-		System.out.println("adding " + arg);
 		if (!isLast) {
 			argList += arg + "; ";
 		} else {

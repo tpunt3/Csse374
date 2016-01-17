@@ -22,6 +22,7 @@ public class Model implements IModel {
 	private Set<String> classStrings;
 	private ArrayList<String> methodStrings;
 	private ArrayList<String> classesToAdd;
+	private ArrayList<String> classNames;
 
 	public Model() {
 		this.classes = new ArrayList<IClass>();
@@ -30,6 +31,7 @@ public class Model implements IModel {
 		this.classStrings = new HashSet<String>();
 		this.methodStrings = new ArrayList<String>();
 		this.classesToAdd = new ArrayList<String>();
+		this.classNames =  new ArrayList<String>();
 	}
 
 	public ArrayList<String> getMethodStrings() {
@@ -116,6 +118,12 @@ public class Model implements IModel {
 		return this.classes;
 	}
 
+	public void getClassNames() {
+		for (IClass c : this.classes) {
+			this.classNames.add(c.getName());
+		}
+	}
+
 	@Override
 	public void accept(IModelVisitor v) {
 		v.preVisit(this);
@@ -142,13 +150,15 @@ public class Model implements IModel {
 		}
 		return null;
 	}
-	
-	public String[] findNewClasses(ISubMethod sm, int depth){
-		
-		//System.out.println("subMethod className: " + sm.getClazzName() + " submethod methodName: " + sm.getMethodName());
-		
-		if(depth > 0){
-			for(IClass clazz : classes) {
+
+	public String[] findNewClasses(ISubMethod sm, int depth) {
+		getClassNames();
+
+		// System.out.println("subMethod className: " + sm.getClazzName() + "
+		// submethod methodName: " + sm.getMethodName());
+
+		if (depth > 0) {
+			for (IClass clazz : classes) {
 				if (clazz.getName().equals(sm.getClazzName())) {
 					this.classesToAdd.add(sm.getQualifiedClassName());
 					for (IMethod m : clazz.getMethods()) {
@@ -156,46 +166,45 @@ public class Model implements IModel {
 							if (m.getArgs().equals(sm.getArgs())) {
 								this.classesToAdd.remove(sm.getQualifiedClassName());
 								for (ISubMethod innerSM : m.getSubMethods()) {
-									this.classesToAdd.add(innerSM.getQualifiedClassName());
+									if (sm.getClazzName().equals("ArrayList")) {
+										// System.out.println(innerSM.getQualifiedClassName());
+									}
+									if (!this.classNames.contains(innerSM.getClazzName())) {
+										this.classesToAdd.add(innerSM.getQualifiedClassName());
+									}
 									this.findNewClasses(innerSM, depth - 1);
 								}
-								
 							}
 						}
 					}
 				}
 			}
 		}
-		
 		return this.classesToAdd.toArray(new String[classesToAdd.size()]);
 	}
 
 	@Override
 	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
-		
-		// Run through all the classes
-		// Run through all the methods
-		// If method name = the one we want, then call the necessary methods
-		 //System.out.println("depth = " + depth +" sm.getClazzName() = " +sm.getClazzName());
 		if (depth > 0) {
 			for (IClass clazz : classes) {
-				
 				if (clazz.getName().equals(sm.getClazzName())) {
-					 //System.out.println("class: " + clazz.getName() + " submethod class: " + sm.getClazzName());
+					// System.out.println("class: " + clazz.getName() + "
+					// submethod class: " + sm.getClazzName());
 					String s = clazz.getName() + ":" + clazz.getName() + "[a]";
 					this.classStrings.add(s);
-					
+
 					for (IMethod m : clazz.getMethods()) {
 						if ((m.getName()).equals(sm.getMethodName())) {
 							if (m.getArgs().equals(sm.getArgs())) {
 								for (ISubMethod innerSM : m.getSubMethods()) {
-									//System.out.println(innerSM.getMethodName() + innerSM.getArgs());
+									// System.out.println(innerSM.getMethodName()
+									// + innerSM.getArgs());
 									String s2 = clazz.getName() + ":" + innerSM.getClazzName() + "."
-											+ innerSM.getMethodName() + "("+innerSM.getArgs()+")";
+											+ innerSM.getMethodName() + "(" + innerSM.getArgs() + ")";
 									this.methodStrings.add(s2);
 									this.acceptSequence(v, innerSM, depth - 1);
 								}
-								
+
 							}
 						}
 					}

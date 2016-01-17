@@ -2,6 +2,7 @@ package problem.models.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;

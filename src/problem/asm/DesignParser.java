@@ -15,6 +15,7 @@ import org.objectweb.asm.Opcodes;
 
 import problem.model.visitor.IModelTraverser;
 import problem.model.visitor.IModelVisitor;
+import problem.models.api.IClass;
 import problem.models.api.ISubMethod;
 import problem.models.impl.Model;
 import problem.models.impl.ModelGVOutputStream;
@@ -82,16 +83,32 @@ public class DesignParser {
 			// "headfirst.factory.pizzas.SimplePizzaFactory",
 			// "headfirst.factory.pizzas.VeggiePizza",
 
-//			"problem.asm.ClassDeclarationVisitor", "problem.asm.ClassFieldVisitor", "problem.asm.ClassMethodVisitor",
-//			"problem.asm.DesignParser", "problem.asm.IClazzGetter", "problem.asm.MyMethodVisitor",
-//			"problem.asm.DocType", "problem.model.visitor.IModelTraverser", "problem.model.visitor.IModelVisitor",
-//			"problem.model.visitor.ModelVisitorAdapter", "problem.models.api.IClass", "problem.models.api.IField",
-//			"problem.models.api.IMethod", "problem.models.api.IModel", "problem.models.api.IRelation",
-//			"problem.models.api.ISubMethod", "problem.models.api.RelationType", "problem.models.impl.Class",
-//			"problem.models.impl.Field", "problem.models.impl.Method", "problem.models.impl.Model",
-//			"problem.models.impl.ModelGVOutputStream", "problem.models.impl.Relation", "problem.models.impl.SubMethod"
-			
-			"java.util.Collections",
+//			"problem.asm.ClassDeclarationVisitor", 
+//			"problem.asm.ClassFieldVisitor", 
+//			"problem.asm.ClassMethodVisitor",
+//			"problem.asm.DesignParser", 
+//			"problem.asm.IClazzGetter", 
+//			"problem.asm.MyMethodVisitor",
+//			"problem.asm.DocType", 
+//			"problem.model.visitor.IModelTraverser", 
+			"problem.model.visitor.IModelVisitor",
+			"problem.model.visitor.ModelVisitorAdapter", 
+			"problem.models.api.IClass", 
+//			"problem.models.api.IField",
+//			"problem.models.api.IMethod", 
+//			"problem.models.api.IModel", 
+//			"problem.models.api.IRelation",
+//			"problem.models.api.ISubMethod", 
+//			"problem.models.api.RelationType", 
+//			"problem.models.impl.Class",
+//			"problem.models.impl.Field", 
+//			"problem.models.impl.Method", 
+//			"problem.models.impl.Model",
+//			"problem.models.impl.ModelGVOutputStream", 
+//			"problem.models.impl.Relation", 
+//			"problem.models.impl.SubMethod"
+
+			 "java.util.Collections",
 
 			// "problem.AppLauncherApplication",
 			// "problem.ApplicationLauncher",
@@ -118,7 +135,9 @@ public class DesignParser {
 	public static void main(String[] args) throws IOException {
 		DesignParser parser = new DesignParser();
 		parser.generateDocuments(DocType.sd,
-				"java.util.Collections,Collections,shuffle,List<*>", 5, CLASSES);
+				//"problem.asm.DesignParser,DesignParser,generateDocuments,DocType; String; int; String[]", 5, CLASSES);
+				//"problem.asm.Class,Class,accept,IModelVisitor", 5, CLASSES);
+				"java.util.Collections,Collections,shuffle,List", 5, CLASSES);
 	}
 
 	public void generateDocuments(DocType type, String methodSig, int depth, String[] classes) throws IOException {
@@ -155,21 +174,27 @@ public class DesignParser {
 	}
 
 	public void visitClasses(String[] classes, Model model) throws IOException {
+
 		for (String className : classes) {
-			// ASM's ClassReader does the heavy lifting of parsing the compiled
-			// Java class
-			ClassReader reader = new ClassReader(className);
+			if (!className.contains("[")) {
 
-			// make class declaration visitor to get superclass and interfaces
-			ClassVisitor decVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, model);
+				// ASM's ClassReader does the heavy lifting of parsing the
+				// compiled
+				// Java class
+				ClassReader reader = new ClassReader(className);
 
-			// DECORATE declaration visitor with field visitor
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, decVisitor, model);
+				// make class declaration visitor to get superclass and
+				// interfaces
+				ClassVisitor decVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, model);
 
-			// DECORATE field visitor with method visitor
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, model);
+				// DECORATE declaration visitor with field visitor
+				ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, decVisitor, model);
 
-			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+				// DECORATE field visitor with method visitor
+				ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, model);
+
+				reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			}
 		}
 	}
 
@@ -200,21 +225,19 @@ public class DesignParser {
 	}
 
 	public void generateSD(Model model, ISubMethod sm, int depth) throws IOException {
-		String[] classes=null;
-		for(int i = 0; i < depth; i++){
+		String[] classes = null;
+		for (int i = 0; i < depth; i++) {
+			System.out.println("depth: " + i);
 			classes = model.findNewClasses(sm, depth);
 			Set<String> mySet = new HashSet<String>(Arrays.asList(classes));
-			
-			for(String s: mySet){
-				//System.out.println(s);
-			}
-	
-			try{
-				visitClasses(mySet.toArray(new String[mySet.size()]), model);
-			} catch(IOException e){
-				
-			}
 
+			try {
+				String[] newArray = mySet.toArray(new String[mySet.size()]);
+				visitClasses(newArray, model);
+
+			} catch (IOException e) {
+				System.out.println("IO Exception");
+			}
 		}
 
 		OutputStream out = new FileOutputStream("input_output/sequence.sd");
@@ -224,11 +247,11 @@ public class DesignParser {
 		traverser.writeFile(sdWriter);
 		out.close();
 
-		// ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		// "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\"
-		// -Tpng input_output/model.gv > input_output/graph1.png");
 		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-				"\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
+				"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
+		// ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		// "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"
+		// -o ./input_output/SD.png -t png ./input_output/sequence.sd");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;
