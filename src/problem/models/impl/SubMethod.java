@@ -9,14 +9,24 @@ public class SubMethod implements ISubMethod {
 	private String name;
 	private String args;
 	private String qualifiedClassName;
+	private boolean visited;
 
 	public SubMethod(String qualifiedClassName, String clazzName, String name, String args) {
 		this.qualifiedClassName = qualifiedClassName;
 		this.clazzName = clazzName;
 		this.name = name;
 		this.args = args;
+		this.visited = false;
 	}
 	
+	public boolean isVisited() {
+		return visited;
+	}
+
+	public void setVisited(boolean visited) {
+		this.visited = visited;
+	}
+
 	public String getQualifiedClassName() {
 		return qualifiedClassName;
 	}

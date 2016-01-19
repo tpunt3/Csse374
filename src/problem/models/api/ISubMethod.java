@@ -7,4 +7,6 @@ public interface ISubMethod extends IModelTraverser {
 	public String getMethodName();
 	public String getArgs();
 	public String getQualifiedClassName();
+	public boolean isVisited();
+	public void setVisited(boolean b);
 }

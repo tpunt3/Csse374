@@ -17,7 +17,7 @@ import problem.models.api.RelationType;
 public class Model implements IModel {
 
 	private int callDepth;
-	private ArrayList<IClass> classes;
+	private HashSet<IClass> classes;
 	private ArrayList<IRelation> relations;
 	private Set<String> classStrings;
 	private ArrayList<String> methodStrings;
@@ -25,13 +25,13 @@ public class Model implements IModel {
 	private ArrayList<String> classNames;
 
 	public Model() {
-		this.classes = new ArrayList<IClass>();
+		this.classes = new HashSet<IClass>();
 		this.relations = new ArrayList<IRelation>();
 		this.callDepth = 5;
 		this.classStrings = new HashSet<String>();
 		this.methodStrings = new ArrayList<String>();
 		this.classesToAdd = new ArrayList<String>();
-		this.classNames =  new ArrayList<String>();
+		this.classNames = new ArrayList<String>();
 	}
 
 	public ArrayList<String> getMethodStrings() {
@@ -50,7 +50,7 @@ public class Model implements IModel {
 		this.callDepth = callDepth;
 	}
 
-	public Model(ArrayList<IClass> classes) {
+	public Model(HashSet<IClass> classes) {
 		this.classes = classes;
 		this.relations = new ArrayList<IRelation>();
 	}
@@ -68,7 +68,7 @@ public class Model implements IModel {
 		boolean inClasses = false;
 
 		// If you are running the UnitTesting JUNIT tests, uncomment this next
-		// line:
+		// line and comment out the one above:
 		// boolean inClasses = true;
 		for (String s : DesignParser.CLASSES) {
 
@@ -114,7 +114,7 @@ public class Model implements IModel {
 	}
 
 	@Override
-	public ArrayList<IClass> getClasses() {
+	public HashSet<IClass> getClasses() {
 		return this.classes;
 	}
 
@@ -166,9 +166,6 @@ public class Model implements IModel {
 							if (m.getArgs().equals(sm.getArgs())) {
 								this.classesToAdd.remove(sm.getQualifiedClassName());
 								for (ISubMethod innerSM : m.getSubMethods()) {
-									if (sm.getClazzName().equals("ArrayList")) {
-										// System.out.println(innerSM.getQualifiedClassName());
-									}
 									if (!this.classNames.contains(innerSM.getClazzName())) {
 										this.classesToAdd.add(innerSM.getQualifiedClassName());
 									}
@@ -185,11 +182,10 @@ public class Model implements IModel {
 
 	@Override
 	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
+
 		if (depth > 0) {
 			for (IClass clazz : classes) {
 				if (clazz.getName().equals(sm.getClazzName())) {
-					// System.out.println("class: " + clazz.getName() + "
-					// submethod class: " + sm.getClazzName());
 					String s = clazz.getName() + ":" + clazz.getName() + "[a]";
 					this.classStrings.add(s);
 
@@ -197,12 +193,14 @@ public class Model implements IModel {
 						if ((m.getName()).equals(sm.getMethodName())) {
 							if (m.getArgs().equals(sm.getArgs())) {
 								for (ISubMethod innerSM : m.getSubMethods()) {
-									// System.out.println(innerSM.getMethodName()
-									// + innerSM.getArgs());
-									String s2 = clazz.getName() + ":" + innerSM.getClazzName() + "."
-											+ innerSM.getMethodName() + "(" + innerSM.getArgs() + ")";
-									this.methodStrings.add(s2);
-									this.acceptSequence(v, innerSM, depth - 1);
+									if (!innerSM.isVisited()) {
+										String s2 = clazz.getName() + ":" + innerSM.getClazzName() + "."
+												+ innerSM.getMethodName() + "(" + innerSM.getArgs() + ")";
+										this.methodStrings.add(s2);
+										innerSM.setVisited(true);
+
+										this.acceptSequence(v, innerSM, depth - 1);
+									}
 								}
 
 							}

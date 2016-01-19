@@ -2,31 +2,30 @@ package problem.models.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.HashSet;
 
 import problem.model.visitor.IModelVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
-import problem.models.api.IRelation;
 import problem.models.api.ISubMethod;
 
-public class Class implements IClass{
-	
+public class Class implements IClass {
+
 	private String name;
-	private Collection<IMethod> methods;
+	private HashSet<IMethod> methods;
 	private Collection<IField> fields;
 	private boolean isClass;
-	
+
 	public Class(String name, boolean isClass) {
 		this.isClass = isClass;
 		this.name = name;
-		this.methods = new ArrayList<IMethod>();
+		this.methods = new HashSet<IMethod>();
 		this.fields = new ArrayList<IField>();
 	}
 
 	public Class() {
-		this.methods = new ArrayList<IMethod>();
+		this.methods = new HashSet<IMethod>();
 		this.fields = new ArrayList<IField>();
 	}
 
@@ -59,15 +58,15 @@ public class Class implements IClass{
 	public void accept(IModelVisitor v) {
 		v.preVisit(this);
 		v.visit(this);
-		for(IField f : this.fields){
+		for (IField f : this.fields) {
 			f.accept(v);
 		}
-		
-		if(!this.fields.isEmpty()){
+
+		if (!this.fields.isEmpty()) {
 			v.intermediateVisit(this);
 		}
-		
-		for(IMethod m : this.methods){
+
+		for (IMethod m : this.methods) {
 			m.accept(v);
 		}
 		v.postVisit(this);
@@ -81,13 +80,49 @@ public class Class implements IClass{
 	@Override
 	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void writeFile(IModelVisitor sdWriter) {
 		// TODO Auto-generated method stub
-		
+
 	}
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fields == null) ? 0 : fields.hashCode());
+		result = prime * result + (isClass ? 1231 : 1237);
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Class other = (Class) obj;
+		if (fields == null) {
+			if (other.fields != null)
+				return false;
+		} else if (!fields.equals(other.fields))
+			return false;
+		if (isClass != other.isClass)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
 
 }

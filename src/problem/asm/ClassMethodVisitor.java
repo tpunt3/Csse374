@@ -112,19 +112,12 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		this.argList = "";
 		Type[] args = Type.getArgumentTypes(desc);
 		for (int i = 0; i < args.length; i++) {
-			// if (this.name.equals("shuffle"))
-			// System.out.println("WOOO" + args[i].getClassName());
 			// if instance of Collection, use signature
 			Class<?> cls = null;
-			// System.out.println("Args: "+ args[i].getClassName());
 			if (args[i].getClassName().startsWith("java.util.")) {
 				cls = Class.forName(args[i].getClassName());
 			}
-			// maybe missing some nested structures
 			if (cls != null && Collection.class.isAssignableFrom(cls) && this.signature != null) {
-				// System.out.println(signature);
-				// if (this.name.equals("shuffle"))
-				// System.out.println("IS THIS A CRAZY SIG?" + this.signature);
 				String[] sigs = this.signature.split(";");
 				for (int j = 0; j < sigs.length - 1; j++) {
 					if (!sigs[j].equals(">") && !sigs[j].equals("TT")) {
@@ -142,9 +135,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 				}
 			} else {
 				if (this.signature == null) {
-					// if (this.name.equals("shuffle"))
-					// System.out.println("splitting " +
-					// args[i].getClassName());
 					arg = args[i].getClassName();
 					String[] splitArg = arg.split("\\.");
 					arg = splitArg[splitArg.length - 1];
@@ -156,9 +146,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 				}
 			}
 		}
-
-		// if (this.name.equals("shuffle"))
-		// System.out.println("ARG LIST!!" + this.argList);
 	}
 
 	private void addArgToList(String arg, boolean isLast) {

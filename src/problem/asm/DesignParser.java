@@ -86,21 +86,21 @@ public class DesignParser {
 //			"problem.asm.ClassDeclarationVisitor", 
 //			"problem.asm.ClassFieldVisitor", 
 //			"problem.asm.ClassMethodVisitor",
-//			"problem.asm.DesignParser", 
+			"problem.asm.DesignParser", 
 //			"problem.asm.IClazzGetter", 
 //			"problem.asm.MyMethodVisitor",
 //			"problem.asm.DocType", 
 //			"problem.model.visitor.IModelTraverser", 
 			"problem.model.visitor.IModelVisitor",
-			"problem.model.visitor.ModelVisitorAdapter", 
-			"problem.models.api.IClass", 
+//			"problem.model.visitor.ModelVisitorAdapter", 
+//			"problem.models.api.IClass", 
 //			"problem.models.api.IField",
 //			"problem.models.api.IMethod", 
 //			"problem.models.api.IModel", 
 //			"problem.models.api.IRelation",
 //			"problem.models.api.ISubMethod", 
 //			"problem.models.api.RelationType", 
-//			"problem.models.impl.Class",
+			"problem.models.impl.Class",
 //			"problem.models.impl.Field", 
 //			"problem.models.impl.Method", 
 //			"problem.models.impl.Model",
@@ -108,7 +108,7 @@ public class DesignParser {
 //			"problem.models.impl.Relation", 
 //			"problem.models.impl.SubMethod"
 
-			 "java.util.Collections",
+//			 "java.util.Collections",
 
 			// "problem.AppLauncherApplication",
 			// "problem.ApplicationLauncher",
@@ -136,8 +136,8 @@ public class DesignParser {
 		DesignParser parser = new DesignParser();
 		parser.generateDocuments(DocType.sd,
 				//"problem.asm.DesignParser,DesignParser,generateDocuments,DocType; String; int; String[]", 5, CLASSES);
-				//"problem.asm.Class,Class,accept,IModelVisitor", 5, CLASSES);
-				"java.util.Collections,Collections,shuffle,List", 5, CLASSES);
+				"problem.asm.Class,Class,accept,IModelVisitor", 5, CLASSES);
+				//"java.util.Collections,Collections,shuffle,List", 5, CLASSES);
 	}
 
 	public void generateDocuments(DocType type, String methodSig, int depth, String[] classes) throws IOException {
@@ -227,7 +227,6 @@ public class DesignParser {
 	public void generateSD(Model model, ISubMethod sm, int depth) throws IOException {
 		String[] classes = null;
 		for (int i = 0; i < depth; i++) {
-			System.out.println("depth: " + i);
 			classes = model.findNewClasses(sm, depth);
 			Set<String> mySet = new HashSet<String>(Arrays.asList(classes));
 
@@ -243,7 +242,7 @@ public class DesignParser {
 		OutputStream out = new FileOutputStream("input_output/sequence.sd");
 		IModelVisitor sdWriter = new ModelSDOutputStream(out);
 		IModelTraverser traverser = (IModelTraverser) model;
-		traverser.acceptSequence(sdWriter, sm, 5);
+		traverser.acceptSequence(sdWriter, sm, depth);
 		traverser.writeFile(sdWriter);
 		out.close();
 
