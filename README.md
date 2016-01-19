@@ -29,13 +29,20 @@ Evolution of our Code:
 Milestone 1
 Our relation was not designed the best in milestone 1, but it was a learning experience. We had different constructors for all of our different types of relations which made it somewhat difficult to keep track of them. We also had not implemented uses or association arrows at this time so our UML looked incomplete. 
 
+Picture of Milestone 1:
 ![Milestone1](./docs/FinalProjectUML_M1.png)
 
 Milestone 2
 We refactored relation so that it takes in what class has the relation, what class it is being related to, and the type of relation. This has made our implementation much more simple in many ways. For instance, it much easier to write the logic of when to exclude arrows with this implementation of relation. We also had some unnecessary methods and fields in our project before that have been removed. Our design definitely got better in milestone 2.
 
+Picture of Milestone 2:
+![Milestone2](./docs/FinalProjectUML_M2.png)
+
 Milestone 3
 As of right now our milestone 3 is not fully functional. For this milestone we added only a few classes (DocType, ISubMethod, and SubMethod). The biggest changes were in how we run DesignParser, and the addition of logic in Model to recursively run through our model, find the information we need for our sequence diagram, format it correctly, and then print it to the correct file. We also included code to automatically generate a .png of that sequence diagram.
+
+Picture of Milestone 3:
+![Milestone3](./docs/FinalProjectUML_M3.png)
 
 Locations and names of important documents:
 - Generated .gv file: called "model.gv" and located in the input_output folder.
