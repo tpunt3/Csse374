@@ -44,7 +44,10 @@ public class MyMethodVisitor extends MethodVisitor {
 		owner = ownerSplit[ownerSplit.length-1];
 		
 		String returnType = getReturnType(desc);
-
+		String[] returnSplit = returnType.split("\\.");
+		returnType = returnSplit[returnSplit.length-1];
+		
+		
 		ISubMethod sm = new SubMethod(qualified, owner, name, args, returnType);
 		if(!(name.equals("<init>"))){
 			this.subMethods.add(sm);

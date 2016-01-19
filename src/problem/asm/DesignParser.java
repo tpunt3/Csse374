@@ -246,11 +246,10 @@ public class DesignParser {
 		traverser.writeFile(sdWriter);
 		out.close();
 
-		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-				"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
-		// ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		// "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"
-		// -o ./input_output/SD.png -t png ./input_output/sequence.sd");
+		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		//		"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
+		 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		 "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;
