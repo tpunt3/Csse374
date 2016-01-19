@@ -42,8 +42,10 @@ public class MyMethodVisitor extends MethodVisitor {
 		String qualified = owner.replace("/", ".");
 		String[] ownerSplit = owner.split("/");
 		owner = ownerSplit[ownerSplit.length-1];
+		
+		String returnType = getReturnType(desc);
 
-		ISubMethod sm = new SubMethod(qualified, owner, name, args);
+		ISubMethod sm = new SubMethod(qualified, owner, name, args, returnType);
 		if(!(name.equals("<init>"))){
 			this.subMethods.add(sm);
 		}
@@ -112,6 +114,11 @@ public class MyMethodVisitor extends MethodVisitor {
 		}
 		
 		return argList;
+	}
+	
+	String getReturnType(String desc) {
+		String returnType = Type.getReturnType(desc).getClassName();
+		return returnType;
 	}
 
 	String getType(String desc) {

@@ -157,7 +157,7 @@ public class DesignParser {
 				args = "";
 			}
 
-			sm = new SubMethod(qualifiedClassName, clazzName, methodName, args);
+			sm = new SubMethod(qualifiedClassName, clazzName, methodName, args, "");
 		}
 
 		visitClasses(classes, model);

@@ -194,7 +194,7 @@ public class Model implements IModel {
 							if (m.getArgs().equals(sm.getArgs())) {
 								for (ISubMethod innerSM : m.getSubMethods()) {
 									if (!innerSM.isVisited()) {
-										String s2 = clazz.getName() + ":" + innerSM.getClazzName() + "."
+										String s2 = clazz.getName() + ":" + innerSM.getReturnType() +"="+ innerSM.getClazzName() + "."
 												+ innerSM.getMethodName() + "(" + innerSM.getArgs() + ")";
 										this.methodStrings.add(s2);
 										innerSM.setVisited(true);

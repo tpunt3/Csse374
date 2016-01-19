@@ -12,7 +12,6 @@ public static void main(String[] args) throws IOException{
 	String[] classes = {"problem.sdTest.classes.A"};
 	parser.generateDocuments(DocType.sd, "problem.sdTest.classes.A,A,a1", 2, classes);
 	
-	
 }
 
 private void a1(){

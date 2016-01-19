@@ -9,14 +9,16 @@ public class SubMethod implements ISubMethod {
 	private String name;
 	private String args;
 	private String qualifiedClassName;
+	private String returnType;
 	private boolean visited;
 
-	public SubMethod(String qualifiedClassName, String clazzName, String name, String args) {
+	public SubMethod(String qualifiedClassName, String clazzName, String name, String args, String returnType) {
 		this.qualifiedClassName = qualifiedClassName;
 		this.clazzName = clazzName;
 		this.name = name;
 		this.args = args;
 		this.visited = false;
+		this.returnType = returnType;
 	}
 	
 	public boolean isVisited() {
@@ -59,6 +61,11 @@ public class SubMethod implements ISubMethod {
 	public void writeFile(IModelVisitor sdWriter) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String getReturnType() {
+		return this.returnType;
 	}
 
 }
