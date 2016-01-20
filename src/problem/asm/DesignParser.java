@@ -142,7 +142,7 @@ public class DesignParser {
 
 	public void generateDocuments(DocType type, String methodSig, int depth, String[] classes) throws IOException {
 
-		Model model = new Model();
+		Model model = Model.getInstance();
 		ISubMethod sm = null;
 		String args;
 
