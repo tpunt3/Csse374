@@ -1,3 +1,25 @@
-ChocolateBoiler:ChocolateBoiler[a]
-ChocolateController:ChocolateController[a]
+Collection:Collection[a]
+HashSet:HashSet[a]
+Class:Class[a]
+Iterator:Iterator[a]
+IModelVisitor:IModelVisitor[a]
+IField:IField[a]
+IMethod:IMethod[a]
+Set:Set[a]
+HashMap:HashMap[a]
 
+Class:void=IModelVisitor.preVisit(IClass)
+Class:void=IModelVisitor.visit(IClass)
+Class:Iterator=Collection.iterator()
+Class:Object=Iterator.next()
+Class:void=IField.accept(IModelVisitor)
+Class:boolean=Iterator.hasNext()
+Class:boolean=Collection.isEmpty()
+Class:void=IModelVisitor.intermediateVisit(IClass)
+Class:Iterator=HashSet.iterator()
+HashSet:Set=HashMap.keySet()
+HashSet:Iterator=Set.iterator()
+Class:Object=Iterator.next()
+Class:void=IMethod.accept(IModelVisitor)
+Class:boolean=Iterator.hasNext()
+Class:void=IModelVisitor.postVisit(IClass)

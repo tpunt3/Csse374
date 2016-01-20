@@ -59,14 +59,15 @@ public class TestDesignParser {
 			OutputStream out = new FileOutputStream("input_output/test.gv");
 			IModelVisitor gvWriter = new ModelGVOutputStream(out);
 			IModelTraverser traverser = (IModelTraverser) model;
+			model.clearSD();
 			traverser.accept(gvWriter);
 			out.close();
 
 			// runs DOT on our .gv file. This might need to be moved?
 			 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-			 "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/test.gv > input_output/test.png");
+			 //"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/test.gv > input_output/test.png");
 			//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-			//"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/test.gv > input_output/test.png");
+			"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/test.gv > input_output/test.png");
 			builder.redirectErrorStream(true);
 			Process p = builder.start();
 			String line;

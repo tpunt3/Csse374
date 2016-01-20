@@ -1,5 +1,10 @@
 digraph model{
 rankdir = BT;
+UsedClass [
+shape="record",
+label = "{UsedClass| }"
+];
+
 CoreClass [
 shape="record",
 label = "{CoreClass| }"
@@ -20,14 +25,5 @@ shape="record",
 label = "{AssociatedClass| }"
 ];
 
-UsedClass [
-shape="record",
-label = "{UsedClass| }"
-];
-
 //writing relations between classes now
-CoreClass -> SuperClass [arrowhead = "empty"];
-CoreClass -> Interface [arrowhead = "empty", style = "dashed"];
-CoreClass -> AssociatedClass [arrowhead = "vee"];
-CoreClass -> UsedClass [arrowhead = "vee", style = "dashed"];
 }

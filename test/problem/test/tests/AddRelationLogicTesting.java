@@ -21,7 +21,7 @@ import problem.models.impl.ModelGVOutputStream;
 import problem.models.impl.Relation;
 import problem.models.impl.Class;
 
-public class UnitTesting {
+public class AddRelationLogicTesting {
 	
 	private Model testModel;
 	private IClass class1;

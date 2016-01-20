@@ -207,11 +207,11 @@ public class Model implements IModel {
 												+ innerSM.getMethodName() + "(" + innerSM.getArgs() + ")";
 										this.methodStrings.add(s2);
 										
-										innerSM.setVisited(true);
+										//innerSM.setVisited(true);
 										this.acceptSequence(v, innerSM, depth - 1);
 									}
 								}
-
+								break;
 							}
 						}
 					}
@@ -221,6 +221,11 @@ public class Model implements IModel {
 			}
 		}
 		return;
+	}
+	
+	public void clearSD(){
+		this.classStrings.clear();
+		this.methodStrings.clear();
 	}
 
 	@Override

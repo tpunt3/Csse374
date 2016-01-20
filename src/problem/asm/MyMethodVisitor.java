@@ -53,7 +53,7 @@ public class MyMethodVisitor extends MethodVisitor {
 			this.subMethods.add(sm);
 		}
 		
-		if(name.equals("getInstance")){
+		if(!owner.equals(this.clazz.getName())){
 			IRelation r = new Relation(this.clazz.getName(), returnType, RelationType.uses);
 			this.model.addRelation(r);
 		}

@@ -31,7 +31,6 @@ public class BasicSDTesting {
 		assertTrue(file.contains("A:A[a]"));
 		assertTrue(file.contains("B:B[a]"));
 		assertTrue(file.contains("C:C[a]"));
-		assertFalse(file.contains("D:D[a]"));
 		
 		assertTrue(file.contains("A:void=B.b1()"));
 		assertTrue(file.contains("B:void=C.c1()"));
@@ -41,7 +40,7 @@ public class BasicSDTesting {
 	}
 	
 	@Test
-	public void testMediumDepth() throws IOException {
+	public void testMediumDepth() throws IOException, InterruptedException {
 		DesignParser parser= new DesignParser();
 		String[] classes = {"problem.sdTest.classes.A"};
 		parser.generateDocuments(DocType.sd, "problem.sdTest.classes.A,A,a1", 4, classes);
