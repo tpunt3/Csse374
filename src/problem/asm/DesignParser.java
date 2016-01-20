@@ -86,12 +86,12 @@ public class DesignParser {
 //			"problem.asm.ClassDeclarationVisitor", 
 //			"problem.asm.ClassFieldVisitor", 
 //			"problem.asm.ClassMethodVisitor",
-			"problem.asm.DesignParser", 
+//			"problem.asm.DesignParser", 
 //			"problem.asm.IClazzGetter", 
 //			"problem.asm.MyMethodVisitor",
 //			"problem.asm.DocType", 
 //			"problem.model.visitor.IModelTraverser", 
-			"problem.model.visitor.IModelVisitor",
+//			"problem.model.visitor.IModelVisitor",
 //			"problem.model.visitor.ModelVisitorAdapter", 
 //			"problem.models.api.IClass", 
 //			"problem.models.api.IField",
@@ -100,7 +100,7 @@ public class DesignParser {
 //			"problem.models.api.IRelation",
 //			"problem.models.api.ISubMethod", 
 //			"problem.models.api.RelationType", 
-			"problem.models.impl.Class",
+//			"problem.models.impl.Class",
 //			"problem.models.impl.Field", 
 //			"problem.models.impl.Method", 
 //			"problem.models.impl.Model",
@@ -108,7 +108,7 @@ public class DesignParser {
 //			"problem.models.impl.Relation", 
 //			"problem.models.impl.SubMethod"
 
-//			 "java.util.Collections",
+			 "java.util.Collections",
 
 			// "problem.AppLauncherApplication",
 			// "problem.ApplicationLauncher",
@@ -136,8 +136,8 @@ public class DesignParser {
 		DesignParser parser = new DesignParser();
 		parser.generateDocuments(DocType.sd,
 				//"problem.asm.DesignParser,DesignParser,generateDocuments,DocType; String; int; String[]", 5, CLASSES);
-				"problem.asm.Class,Class,accept,IModelVisitor", 5, CLASSES);
-				//"java.util.Collections,Collections,shuffle,List", 5, CLASSES);
+				//"problem.asm.Class,Class,accept,IModelVisitor", 5, CLASSES);
+				"java.util.Collections,Collections,shuffle,List", 5, CLASSES);
 	}
 
 	public void generateDocuments(DocType type, String methodSig, int depth, String[] classes) throws IOException {
@@ -206,11 +206,10 @@ public class DesignParser {
 		out.close();
 
 		// runs DOT on our .gv file. This might need to be moved?
-		// ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		// "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\"
-		// -Tpng input_output/model.gv > input_output/graph1.png");
-		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-				"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		 "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+			//	"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;
@@ -246,10 +245,10 @@ public class DesignParser {
 		traverser.writeFile(sdWriter);
 		out.close();
 
-		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		//		"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
-		 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		 "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
+		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+				"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
+		 //ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		 //"\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;

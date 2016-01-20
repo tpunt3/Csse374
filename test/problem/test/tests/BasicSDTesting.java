@@ -33,8 +33,8 @@ public class BasicSDTesting {
 		assertTrue(file.contains("C:C[a]"));
 		assertFalse(file.contains("D:D[a]"));
 		
-		assertTrue(file.contains("A:B.b1()"));
-		assertTrue(file.contains("B:C.c1()"));
+		assertTrue(file.contains("A:void=B.b1()"));
+		assertTrue(file.contains("B:void=C.c1()"));
 
 		buffer.close();
 		reader.close();
@@ -61,10 +61,10 @@ public class BasicSDTesting {
 		assertTrue(file.contains("D:D[a]"));
 		assertTrue(file.contains("E:E[a]"));
 		
-		assertTrue(file.contains("A:B.b1()"));
-		assertTrue(file.contains("B:C.c1()"));
-		assertTrue(file.contains("C:D.d1()"));
-		assertTrue(file.contains("D:E.e1()"));
+		assertTrue(file.contains("A:void=B.b1()"));
+		assertTrue(file.contains("B:void=C.c1()"));
+		assertTrue(file.contains("C:void=D.d1()"));
+		assertTrue(file.contains("D:void=E.e1()"));
 
 		buffer.close();
 		reader.close();
@@ -92,11 +92,11 @@ public class BasicSDTesting {
 		assertTrue(file.contains("E:E[a]"));
 		assertTrue(file.contains("F:F[a]"));
 		
-		assertTrue(file.contains("A:B.b1()"));
-		assertTrue(file.contains("B:C.c1()"));
-		assertTrue(file.contains("C:D.d1()"));
-		assertTrue(file.contains("D:E.e1()"));
-		assertTrue(file.contains("E:F.f1()"));
+		assertTrue(file.contains("A:void=B.b1()"));
+		assertTrue(file.contains("B:void=C.c1()"));
+		assertTrue(file.contains("C:void=D.d1()"));
+		assertTrue(file.contains("D:void=E.e1()"));
+		assertTrue(file.contains("E:void=F.f1()"));
 
 		buffer.close();
 		reader.close();
