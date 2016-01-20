@@ -13,6 +13,7 @@ import problem.models.api.IModel;
 import problem.models.api.IRelation;
 import problem.models.api.ISubMethod;
 import problem.models.api.RelationType;
+import problem.test.tests.TestDesignParser;
 
 public class Model implements IModel {
 
@@ -79,7 +80,7 @@ public class Model implements IModel {
 		// If you are running the UnitTesting JUNIT tests, uncomment this next
 		// line and comment out the one above:
 		// boolean inClasses = true;
-		for (String s : DesignParser.CLASSES) {
+		for (String s : TestDesignParser.CLASSES) {
 
 			String[] split = s.split("\\.");
 			s = split[split.length - 1];
@@ -226,6 +227,15 @@ public class Model implements IModel {
 	public void clearSD(){
 		this.classStrings.clear();
 		this.methodStrings.clear();
+	}
+	
+	public void clearModel(){
+		this.classes.clear();
+		this.relations.clear();
+		this.classStrings.clear();
+		this.methodStrings.clear();
+		this.classesToAdd.clear();
+		this.classNames.clear();
 	}
 
 	@Override

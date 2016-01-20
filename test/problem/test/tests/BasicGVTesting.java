@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import problem.AppLauncher;
+import problem.models.impl.Model;
 
 public class BasicGVTesting {
 
@@ -28,6 +29,8 @@ public class BasicGVTesting {
 
 	@Test
 	public final void testEmptyClass() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
 		String[] classes = { "problem.test.classes.EmptyClass" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
@@ -49,6 +52,9 @@ public class BasicGVTesting {
 
 	@Test
 	public final void testClassWithField() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
+		
 		String[] classes = { "problem.test.classes.FieldClass" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
@@ -72,6 +78,9 @@ public class BasicGVTesting {
 
 	@Test
 	public final void testClassWithMethod() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
+		
 		String[] classes = { "problem.test.classes.MethodClass" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
@@ -95,6 +104,9 @@ public class BasicGVTesting {
 
 	@Test
 	public final void testClassWithFieldAndMethod() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
+		
 		String[] classes = { "problem.test.classes.FieldAndMethodClass" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
@@ -118,6 +130,9 @@ public class BasicGVTesting {
 
 	@Test
 	public final void testClassWithSuperClass() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
+		
 		String[] classes = { "problem.test.classes.ClassWithSuperClass" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
@@ -140,6 +155,9 @@ public class BasicGVTesting {
 
 	@Test
 	public final void testClassWithInterface() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
+		
 		String[] classes = { "problem.test.classes.ClassWithInterface", "problem.test.classes.IInterface" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
@@ -163,6 +181,9 @@ public class BasicGVTesting {
 
 	@Test
 	public final void testInterfaceWithSuperClass() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
+		
 		String[] classes = { "problem.test.classes.IInterfaceWithSuperClass", "problem.test.classes.IInterface" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
@@ -188,6 +209,9 @@ public class BasicGVTesting {
 
 	@Test
 	public final void testClassWithEverything() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
+		
 		String[] classes = { "problem.test.classes.ClassWithEverything", "problem.test.classes.EmptyClass",
 				"problem.test.classes.IInterface" };
 		parser.parse(classes);
@@ -214,6 +238,9 @@ public class BasicGVTesting {
 
 	@Test
 	public final void testClassWithUses() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
+		
 		String[] classes = { "problem.test.classes.ClassWithUses", "problem.test.classes.EmptyClass" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
@@ -238,6 +265,9 @@ public class BasicGVTesting {
 
 	@Test
 	public final void testClassWithAssociation() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
+		
 		String[] classes = { "problem.test.classes.ClassWithAssociation", "problem.test.classes.EmptyClass" };
 		parser.parse(classes);
 		FileReader reader = new FileReader("input_output/test.gv");
@@ -262,6 +292,9 @@ public class BasicGVTesting {
 
 	@Test
 	public final void testClassWithAssociationAndInterface() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
+		
 		String[] classes = { "problem.test.classes.ClassWithInterfaceAndAssociation", "problem.test.classes.EmptyClass",
 				"problem.test.classes.IInterface" };
 		parser.parse(classes);

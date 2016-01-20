@@ -16,6 +16,9 @@ Again, most of the work was done sitting together, trading off who would code an
 Milestone 3
 For this milestone we continued to pair program, switching off regularly and whenever the other partner got stuck. Our commits do not show this as well as in previous milestones because we committed less and did most of our work on one laptop at a time.
 
+Milestone 4
+
+
 Instructions to use our code:
 1.) Go to the DesignParser.java class in problem.asm
 2.) Change the array of strings called CLASSES to reflect which classes you'd like to generate a UML for
@@ -39,10 +42,17 @@ Picture of Milestone 2:
 ![Milestone2](./docs/FinalProjectUML_M2.png)
 
 Milestone 3
-As of right now our milestone 3 is not fully functional. For this milestone we added only a few classes (DocType, ISubMethod, and SubMethod). The biggest changes were in how we run DesignParser, and the addition of logic in Model to recursively run through our model, find the information we need for our sequence diagram, format it correctly, and then print it to the correct file. We also included code to automatically generate a .png of that sequence diagram.
+For this milestone we added only a few classes (DocType, ISubMethod, and SubMethod). ISubmethod and SubMethod fit into our existing hierarchy of objects like Method and Field and their interfaces IMethod and IField. The biggest changes were in how we run DesignParser, and the addition of logic in Model to recursively run through our model, find the information we need for our sequence diagram, format it correctly, and then print it to the correct file. In DesignParser we now require a DocType, which tells DesignParser which kind of document to generate, a UML, sequence diagram, or both. We also included code to automatically create a .png of the generated sequence diagram.
 
 Picture of Milestone 3:
 ![Milestone3](./docs/FinalProjectUML_M3.png)
+
+Milestone 4
+We added logic in our Class Class, to detect if it is a Singleton. To do this, we check if a class has a private constructor, a private static field, and a public static method. When we call ClassMethodVisitor, it checks if the method is a private constructor or a public static method. If it is, the appropriate boolean in the Class it belongs to is set to true. When we call ClassFieldVisitor, it checks if the field is a private static field. If it is, the appropriate boolean in the Class it belongs to is set to true. If all three of the necessary requirements are met, then when isSingleton() is called on that Class, it will return true. Then, when we create our .gv file, before we print out the text for a class, we check if it is a Singleton, and make the appropriate changes. 
+
+Picture of Milestone 4:
+![Milestone4](./docs/FinalProjectUML_M4.png)
+
 
 Locations and names of important documents:
 - Generated .gv file: called "model.gv" and located in the input_output folder.

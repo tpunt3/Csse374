@@ -1,69 +1,15 @@
 digraph model{
 rankdir = BT;
-Relation [
+ClassWithUses [
 shape="record",
-label = "{Relation| - name: String\l- relatedClass: String\l- type: RelationType\l|+ init() : void\l+ getName() : String\l+ getType() : RelationType\l+ getRelatedClass() : String\l+ setRelatedClass(String) : void\l+ accept(IModelVisitor) : void\l+ acceptSequence(IModelVisitor; ISubMethod; int) : void\l+ setType(RelationType) : void\l+ equals(Object) : boolean\l+ setName(String) : void\l+ writeFile(IModelVisitor) : void\l+ hashCode() : int\l+ init(String; String; RelationType) : void\l}"
+label = "{ClassWithUses| + init(EmptyClass) : void\l}"
 ];
 
-IField [
+EmptyClass [
 shape="record",
-label = "{\<\<interface\>\>\nIField| + getType() : String\l+ getAccess() : String\l+ getName() : String\l}"
-];
-
-IRelation [
-shape="record",
-label = "{\<\<interface\>\>\nIRelation| + getType() : RelationType\l+ getRelatedClass() : String\l+ setName(String) : void\l+ getName() : String\l+ setType(RelationType) : void\l+ setRelatedClass(String) : void\l}"
-];
-
-RelationType [
-shape="record",
-label = "{RelationType| + superclass: RelationType\l+ interfaces: RelationType\l+ uses: RelationType\l+ association: RelationType\l- ENUM$VALUES: RelationType[]\l|+ valueOf(String) : RelationType\l- init(String; int) : void\l% clinit() : void\l+ values() : RelationType[]\l}"
-];
-
-IClazzGetter [
-shape="record",
-label = "{\<\<interface\>\>\nIClazzGetter| + getClazz() : IClass\l}"
-];
-
-IMethod [
-shape="record",
-label = "{\<\<interface\>\>\nIMethod| + getSignature() : String\l+ getSubMethods() : ISubMethod\l+ getName() : String\l+ getArgs() : String\l+ getAccess() : String\l+ getReturnType() : String\l+ getClazz() : IClass\l}"
-];
-
-Model [
-shape="record",color=blue
-label = "{Model\n\<\<Singleton\>\>|- uniqueInstance: Model\l- callDepth: int\l- classes: IClass\l- relations: IRelation\l- classStrings: String\l- methodStrings: String\l- classesToAdd: String\l- classNames: String\l- uniqueInstance: Model\l- callDepth: int\l- classes: IClass\l- relations: IRelation\l- classStrings: String\l- methodStrings: String\l- classesToAdd: String\l- classNames: String\l|+ getRelations() : IRelation\l+ writeFile(IModelVisitor) : void\l+ getClazz(String) : IClass\l+ getMethodStrings() : String\l+ getClasses() : IClass\l+ clearSD() : void\l+ getClassStrings() : String\l+ getCallDepth() : int\l+ findNewClasses(ISubMethod; int) : String[]\l+ findNewClasses(ISubMethod; int) : String[]\l+ getClasses() : IClass\l+ getClassNames() : void\l+ toString() : String\l+ getClazz(String) : IClass\l+ getInstance() : Model\l+ getRelations() : IRelation\l- init() : void\l+ acceptSequence(IModelVisitor; ISubMethod; int) : void\l+ addClazz(IClass) : void\l+ clearSD() : void\l+ init(IClass; ) : IClass\l+ toString() : String\l+ getClassNames() : void\l+ getInstance() : Model\l+ addRelation(IRelation) : void\l+ init(IClass; ) : IClass\l+ accept(IModelVisitor) : void\l+ addClazz(IClass) : void\l+ setRelations(IRelation; ) : IRelation\l+ addRelation(IRelation) : void\l- init() : void\l+ acceptSequence(IModelVisitor; ISubMethod; int) : void\l+ getClassStrings() : String\l+ setCallDepth(int) : void\l+ writeFile(IModelVisitor) : void\l+ getCallDepth() : int\l+ setRelations(IRelation; ) : IRelation\l+ setCallDepth(int) : void\l+ getMethodStrings() : String\l+ accept(IModelVisitor) : void\l}"
-];
-
-Model [
-shape="record",color=blue
-label = "{Model\n\<\<Singleton\>\>|}"
-];
-
-IModel [
-shape="record",
-label = "{\<\<interface\>\>\nIModel| + addClazz(IClass) : void\l+ getClasses() : IClass\l+ getMethodStrings() : String\l+ getClassStrings() : String\l+ getClazz(String) : IClass\l+ getRelations() : IRelation\l}"
-];
-
-Class [
-shape="record",
-label = "{Class| - name: String\l- methods: IMethod\l- fields: IField\l- isClass: boolean\l- hasStaticField: boolean\l- hasPrivateConstructor: boolean\l- hasPublicStaticMethod: boolean\l|+ addField(IField) : void\l+ init() : void\l+ init(String; boolean) : void\l+ getMethods() : IMethod\l+ addMethod(IMethod) : void\l+ setHasPublicStaticMethod(boolean) : void\l+ setHasStaticField(boolean) : void\l+ setHasPrivateConstructor(boolean) : void\l+ getIsClass() : boolean\l+ acceptSequence(IModelVisitor; ISubMethod; int) : void\l+ accept(IModelVisitor) : void\l+ hashCode() : int\l+ getFields() : IField\l+ writeFile(IModelVisitor) : void\l+ isSingleton() : boolean\l+ equals(Object) : boolean\l+ getName() : String\l}"
-];
-
-IClass [
-shape="record",
-label = "{\<\<interface\>\>\nIClass| + getFields() : IField\l+ addField(IField) : void\l+ addMethod(IMethod) : void\l+ getMethods() : IMethod\l+ setHasPrivateConstructor(boolean) : void\l+ setHasPublicStaticMethod(boolean) : void\l+ isSingleton() : boolean\l+ getName() : String\l+ getIsClass() : boolean\l+ setHasStaticField(boolean) : void\l}"
-];
-
-IModelVisitor [
-shape="record",
-label = "{\<\<interface\>\>\nIModelVisitor| + preVisit(IField) : void\l+ visit(IMethod) : void\l+ visitSuperClasses(IRelation) : void\l+ visit(IModel) : void\l+ preVisit(IModel) : void\l+ postVisit(IClass) : void\l+ postVisit(IMethod) : void\l+ preVisit(IRelation) : void\l+ visit(IField) : void\l+ postVisit(IModel) : void\l+ visitInterfaces(IRelation) : void\l+ preVisit(IClass) : void\l+ intermediateVisit(IClass) : void\l+ visit(IClass) : void\l+ postVisit(IField) : void\l+ visitRelations(IModel) : void\l+ preVisit(IMethod) : void\l+ postVisit(IRelation) : void\l}"
-];
-
-ClassDeclarationVisitor [
-shape="record",
-label = "{ClassDeclarationVisitor| - model: Model\l- clazz: IClass\l|+ init(int; Model) : void\l+ splitOnSlash(String) : String\l+ getClazz() : IClass\l+ visit(int; int; String; String; String; String[]) : void\l}"
+label = "{EmptyClass| + init() : void\l}"
 ];
 
 //writing relations between classes now
+ClassWithUses -> EmptyClass [arrowhead = "vee", style = "dashed"];
 }
