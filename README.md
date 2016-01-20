@@ -49,8 +49,11 @@ Locations and names of important documents:
 - Generated .png file for the UML: called "graph1.png" and located in the input_output folder.
 - Generated .sd file: called "sequence.sd" and located in the input_output folder.
 - Generated .png file for the sequence diagram: called "SD.png" and located in the input_output folder.
-- Our manually created UML: called "FinalProjectUML.uxf" (for the UMLet file) and "FinalProjectUML_M#.png" (for a .png version, with the M# representing the milestone for which it was created), both are located in the docs folder.
 
 - Generated UML .png file for Lab 1-3: called Lab1-3_GeneratedUML.png and located in the docs folder.
 - Generated UML .png file for FinalProject: called FinalProject_GeneratedUML_M#.png and located in the docs folder.
 - Generated UML .png file for the Pizza project: called Pizza_GeneratedUML.png and located in the docs folder.
+- Generated sequence diagram .png file for the Collections, shuffle: called "shuffle_SD_generated.png" and located in the docs folder. 
+
+- Our manually created UML: called "FinalProjectUML.uxf" (for the UMLet file) and "FinalProjectUML_M#.png" (for a .png version, with the M# representing the milestone for which it was created), both are located in the docs folder.
+- Our manually created sequence diagram for Collections, shuffle: called "shuffle_SD_manual.uxf" or "shuffle_SD_manual.png" depending on the type and located in the docs folder.
