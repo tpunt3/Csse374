@@ -35,13 +35,13 @@ public class ProjectSDTesting {
 		assertTrue(file.contains("IMethod:IMethod[a]"));
 		assertTrue(file.contains("Collection:Collection[a]"));
 		
-		assertTrue(file.contains("Class:IModelVisitor.preVisit(IClass)"));
-		assertTrue(file.contains("Class:IModelVisitor.visit(IClass)"));
-		assertTrue(file.contains("Class:IField.accept(IModelVisitor)"));
-		assertTrue(file.contains("Class:Collection.isEmpty()"));
-		assertTrue(file.contains("Class:IModelVisitor.intermediateVisit(IClass)"));
-		assertTrue(file.contains("Class:IMethod.accept(IModelVisitor)"));
-		assertTrue(file.contains("Class:IModelVisitor.postVisit(IClass)"));
+		assertTrue(file.contains("Class:void=IModelVisitor.preVisit(IClass)"));
+		assertTrue(file.contains("Class:void=IModelVisitor.visit(IClass)"));
+		assertTrue(file.contains("Class:void=IField.accept(IModelVisitor)"));
+		assertTrue(file.contains("Class:boolean=Collection.isEmpty()"));
+		assertTrue(file.contains("Class:void=IModelVisitor.intermediateVisit(IClass)"));
+		assertTrue(file.contains("Class:void=IMethod.accept(IModelVisitor)"));
+		assertTrue(file.contains("Class:void=IModelVisitor.postVisit(IClass)"));
 		
 	}
 
