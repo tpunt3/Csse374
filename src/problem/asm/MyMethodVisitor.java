@@ -52,6 +52,12 @@ public class MyMethodVisitor extends MethodVisitor {
 		if(!(name.equals("<init>"))){
 			this.subMethods.add(sm);
 		}
+		
+		if(name.equals("getInstance")){
+			IRelation r = new Relation(this.clazz.getName(), returnType, RelationType.uses);
+			this.model.addRelation(r);
+		}
+		
 	}
 
 	@Override

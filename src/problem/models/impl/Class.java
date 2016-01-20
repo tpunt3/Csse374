@@ -16,7 +16,10 @@ public class Class implements IClass {
 	private HashSet<IMethod> methods;
 	private Collection<IField> fields;
 	private boolean isClass;
-
+	private boolean hasStaticField;
+	private boolean hasPrivateConstructor;
+	private boolean hasPublicStaticMethod;
+	
 	public Class(String name, boolean isClass) {
 		this.isClass = isClass;
 		this.name = name;
@@ -88,7 +91,22 @@ public class Class implements IClass {
 		// TODO Auto-generated method stub
 
 	}
-	
+
+	public boolean isSingleton() {
+		return (this.hasStaticField && this.hasPrivateConstructor && this.hasPublicStaticMethod);
+	}
+
+	public void setHasStaticField(boolean hasStaticField) {
+		this.hasStaticField = hasStaticField;
+	}
+
+	public void setHasPrivateConstructor(boolean hasPrivateConstructor) {
+		this.hasPrivateConstructor = hasPrivateConstructor;
+	}
+
+	public void setHasPublicStaticMethod(boolean hasPublicStaticMethod) {
+		this.hasPublicStaticMethod = hasPublicStaticMethod;
+	}
 
 	@Override
 	public int hashCode() {

@@ -35,6 +35,13 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 		
 		this.clazz = this.getClazz();
 		
+		if(access == 10 && type.equals(this.clazz.getName())){
+			//has private static field that is its own class type
+			this.clazz.setHasStaticField(true);
+			//System.out.println("acccess: " + access +" name: " + name +" desc: " + desc +" sig: " + signature );
+		}
+		
+		
 		if (signature != null) {
 			//add association for collection
 			

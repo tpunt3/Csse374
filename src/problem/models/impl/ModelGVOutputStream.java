@@ -50,7 +50,12 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 
 	@Override
 	public void preVisit(IClass c) {
-		String s = String.format("%s [\nshape=\"record\",\n", c.getName());
+		String s;
+		if(c.isSingleton()){
+			s = String.format("%s [\nshape=\"record\",color=blue\n", c.getName());
+		} else{
+			s = String.format("%s [\nshape=\"record\",\n", c.getName());
+		}
 		this.write(s);
 	}
 
@@ -59,7 +64,10 @@ public class ModelGVOutputStream extends ModelVisitorAdapter {
 		String s;
 		if (!c.getIsClass()) {
 			s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
-		} else {
+		} else if(c.isSingleton()){
+			s = String.format("label = \"{%s\\n\\<\\<Singleton\\>\\>|", c.getName());
+		} 
+		else{
 			s = String.format("label = \"{%s| ", c.getName());
 		}
 		this.write(s);

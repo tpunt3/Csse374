@@ -46,7 +46,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		this.clazz = this.getClazz();
 		IClass current = this.model.getClazz(this.clazz.getName());
 		MethodVisitor mine = new MyMethodVisitor(Opcodes.ASM5, toDecorate, this.model, this.clazz);
-
+		
 		String accessLevel;
 
 		accessLevel = addAccessLevel(access);
@@ -73,6 +73,16 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 			int index = returnType.indexOf(";");
 			returnType = returnType.substring(0, index);
 		}
+		
+		if(access == 9 && returnType.contains(this.clazz.getName())){
+			//has public static method that returns itself
+			this.clazz.setHasPublicStaticMethod(true);
+			//System.out.println(accessLevel + access + this.clazz.getName() + this.name + returnType);
+		}
+		
+		if(accessLevel.equals("-") && name.equals("<init>")){
+			this.clazz.setHasPrivateConstructor(true);
+		}
 
 		name = name.replace("<", "");
 		name = name.replace(">", "");
@@ -89,7 +99,9 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		if ((access & Opcodes.ACC_PUBLIC) != 0) {
 			// public
 			level = "+";
-		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
+		} else if((access & Opcodes.ACC_STATIC) != 0){
+			level = "%";
+		}else if ((access & Opcodes.ACC_PROTECTED) != 0) {
 			// protected
 			level = "#";
 		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {

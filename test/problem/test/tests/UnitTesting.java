@@ -36,7 +36,7 @@ public class UnitTesting {
 	
 	@Before
 	public void setUp(){
-		testModel = new Model();
+		testModel = Model.getInstance();
 		class1 = new Class("CoreClass", true);
 		class2 = new Class("SuperClass", true);
 		class3 = new Class("Interface", false);

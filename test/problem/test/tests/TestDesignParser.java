@@ -30,7 +30,7 @@ public class TestDesignParser {
 
 	public void parse(String[] CLASSES) throws IOException {
 
-		Model model = new Model();
+		Model model = Model.getInstance();
 
 		for (String className : CLASSES)
 

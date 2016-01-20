@@ -16,6 +16,8 @@ import problem.models.api.RelationType;
 
 public class Model implements IModel {
 
+	private static Model uniqueInstance;
+	
 	private int callDepth;
 	private HashSet<IClass> classes;
 	private ArrayList<IRelation> relations;
@@ -24,7 +26,7 @@ public class Model implements IModel {
 	private ArrayList<String> classesToAdd;
 	private ArrayList<String> classNames;
 
-	public Model() {
+	private Model() {
 		this.classes = new HashSet<IClass>();
 		this.relations = new ArrayList<IRelation>();
 		this.callDepth = 5;
@@ -32,6 +34,13 @@ public class Model implements IModel {
 		this.methodStrings = new ArrayList<String>();
 		this.classesToAdd = new ArrayList<String>();
 		this.classNames = new ArrayList<String>();
+	}
+	
+	public static Model getInstance(){
+		if(uniqueInstance == null){
+			uniqueInstance = new Model();
+		}
+		return uniqueInstance;
 	}
 
 	public ArrayList<String> getMethodStrings() {
@@ -197,8 +206,8 @@ public class Model implements IModel {
 										String s2 = clazz.getName() + ":" + innerSM.getReturnType() +"="+ innerSM.getClazzName() + "."
 												+ innerSM.getMethodName() + "(" + innerSM.getArgs() + ")";
 										this.methodStrings.add(s2);
+										
 										innerSM.setVisited(true);
-
 										this.acceptSequence(v, innerSM, depth - 1);
 									}
 								}
