@@ -86,7 +86,7 @@ public class DesignParser {
 //			"problem.asm.ClassDeclarationVisitor", 
 //			"problem.asm.ClassFieldVisitor", 
 //			"problem.asm.ClassMethodVisitor",
-//			"problem.asm.DesignParser", 
+			"problem.asm.DesignParser", 
 //			"problem.asm.IClazzGetter", 
 //			"problem.asm.MyMethodVisitor",
 //			"problem.asm.DocType", 
@@ -108,7 +108,7 @@ public class DesignParser {
 //			"problem.models.impl.Relation", 
 //			"problem.models.impl.SubMethod"
 
-			// "java.util.Collections",
+		//	 "java.util.Collections",
 
 			// "problem.AppLauncherApplication",
 			// "problem.ApplicationLauncher",
@@ -122,8 +122,8 @@ public class DesignParser {
 			// "problem.IDirectoryMonitorService",
 			// "problem.ProcessRunner"
 			
-				"headfirst.singleton.chocolate.ChocolateBoiler",
-				"headfirst.singleton.chocolate.ChocolateController"
+				//"headfirst.singleton.chocolate.ChocolateBoiler",
+				//"headfirst.singleton.chocolate.ChocolateController"
 	};
 
 	/**
@@ -137,10 +137,11 @@ public class DesignParser {
 	 */
 	public static void main(String[] args) throws IOException {
 		DesignParser parser = new DesignParser();
-		parser.generateDocuments(DocType.uml,
+		parser.generateDocuments(DocType.sd,
 				//"problem.asm.DesignParser,DesignParser,generateDocuments,DocType; String; int; String[]", 5, CLASSES);
 				//"problem.asm.Class,Class,accept,IModelVisitor", 5, CLASSES);
-				"java.util.Collections,Collections,shuffle,List", 5, CLASSES);
+				//"java.util.Collections,Collections,shuffle,List", 5, CLASSES);
+				"problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod; int", 2, CLASSES);
 	}
 
 	public void generateDocuments(DocType type, String methodSig, int depth, String[] classes) throws IOException {

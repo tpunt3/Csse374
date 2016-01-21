@@ -77,10 +77,10 @@ public class Model implements IModel {
 
 		boolean inClasses = false;
 
-		// If you are running the UnitTesting JUNIT tests, uncomment this next
+		// If you are running the UnitTesting JUNIT tests in ProjectGVTesting, uncomment this next
 		// line and comment out the one above:
-		// boolean inClasses = true;
-		for (String s : TestDesignParser.CLASSES) {
+		 //boolean inClasses = true;
+		for (String s : DesignParser.CLASSES) {
 
 			String[] split = s.split("\\.");
 			s = split[split.length - 1];
