@@ -17,7 +17,7 @@ Milestone 3
 For this milestone we continued to pair program, switching off regularly and whenever the other partner got stuck. Our commits do not show this as well as in previous milestones because we committed less and did most of our work on one laptop at a time.
 
 Milestone 4
-
+For this milestone we continued to pair program. All code we wrote was done together, including new code additions and refactoring of old code. There was not much new code needed for this milestone, so there aren't very many commits.
 
 Instructions to use our code:
 1.) Go to the DesignParser.java class in problem.asm

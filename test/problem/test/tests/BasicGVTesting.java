@@ -6,16 +6,10 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import problem.AppLauncher;
 import problem.models.impl.Model;
 
 public class BasicGVTesting {
@@ -92,9 +86,7 @@ public class BasicGVTesting {
 			file += line;
 		}
 
-		String gv = "digraph model{rankdir = BT;MethodClass [shape=\"record\",label = \"{MethodClass| + init() : void\\"
-				+ "l+ doStuff() : void\\" + "l+ doStuffWithArgs(String; int) : void\\"
-				+ "l}\"];//writing relations between classes now}";
+		String gv = "digraph model{rankdir = BT;IInterface [shape=\"record\",label = \"{\\" + "<\\" + "<interface\\" + ">\\"+">\\nIInterface| }\"];ClassWithInterface [shape=\"record\",label = \"{ClassWithInterface| + init() : void\\"+"l}\"];//writing relations between classes now}";
 
 		assertEquals(gv, file);
 
@@ -119,8 +111,7 @@ public class BasicGVTesting {
 		}
 
 		String gv = "digraph model{rankdir = BT;FieldAndMethodClass [shape=\"record\",label = \"{FieldAndMethodClass| + testString: String\\"
-				+ "l- testInt: int\\" + "l# testBoolean: boolean\\" + "l|+ init() : void\\" + "l+ doStuff() : void\\"
-				+ "l+ doStuffWithArgs(String; int) : void\\" + "l}\"];//writing relations between classes now}";
+				+ "l- testInt: int\\" + "l# testBoolean: boolean\\" + "l|+ doStuff() : void\\"+"l+ doStuffWithArgs(String; int) : void\\"+"l+ init() : void\\"+"l}\"];//writing relations between classes now}";
 
 		assertEquals(gv, file);
 
