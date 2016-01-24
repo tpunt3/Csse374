@@ -2,7 +2,7 @@ digraph model{
 rankdir = BT;
 ChocolateBoiler [
 shape="record",color=blue
-label = "{ChocolateBoiler\n\<\<Singleton\>\>|- empty: boolean\l- boiled: boolean\l- uniqueInstance: ChocolateBoiler\l|+ fill() : void\l+ isBoiled() : boolean\l+ drain() : void\l+ boil() : void\l+ isEmpty() : boolean\l+ getInstance() : ChocolateBoiler\l% clinit() : void\l- init() : void\l}"
+label = "{ChocolateBoiler\n\<\<Singleton\>\>|- empty: boolean\l- boiled: boolean\l- uniqueInstance: ChocolateBoiler\l|+ fill() : void\l+ isBoiled() : boolean\l+ drain() : void\l+ boil() : void\l+ isEmpty() : boolean\l+ getInstance() : ChocolateBoiler\l- init() : void\l}"
 ];
 
 ChocolateController [

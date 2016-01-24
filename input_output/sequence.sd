@@ -1,25 +1,26 @@
-Collection:Collection[a]
-HashSet:HashSet[a]
-Class:Class[a]
-Iterator:Iterator[a]
-IModelVisitor:IModelVisitor[a]
-IField:IField[a]
-IMethod:IMethod[a]
+Arrays:Arrays[a]
+Model:Model[a]
+Process:Process[a]
+BufferedReader:BufferedReader[a]
 Set:Set[a]
-HashMap:HashMap[a]
+IModelTraverser:IModelTraverser[a]
+PrintStream:PrintStream[a]
+ProcessBuilder:ProcessBuilder[a]
+DesignParser:DesignParser[a]
+OutputStream:OutputStream[a]
 
-Class:void=IModelVisitor.preVisit(IClass)
-Class:void=IModelVisitor.visit(IClass)
-Class:Iterator=Collection.iterator()
-Class:Object=Iterator.next()
-Class:void=IField.accept(IModelVisitor)
-Class:boolean=Iterator.hasNext()
-Class:boolean=Collection.isEmpty()
-Class:void=IModelVisitor.intermediateVisit(IClass)
-Class:Iterator=HashSet.iterator()
-HashSet:Set=HashMap.keySet()
-HashSet:Iterator=Set.iterator()
-Class:Object=Iterator.next()
-Class:void=IMethod.accept(IModelVisitor)
-Class:boolean=Iterator.hasNext()
-Class:void=IModelVisitor.postVisit(IClass)
+DesignParser:String[]=Model.findNewClasses(ISubMethod; int)
+DesignParser:List=Arrays.asList(Object[])
+DesignParser:int=Set.size()
+DesignParser:Object[]=Set.toArray(Object[])
+DesignParser:void=DesignParser.visitClasses(String[]; Model)
+DesignParser:void=PrintStream.println(String)
+DesignParser:void=Model.clearSD()
+DesignParser:void=IModelTraverser.acceptSequence(IModelVisitor; ISubMethod; int)
+DesignParser:void=IModelTraverser.writeFile(IModelVisitor)
+DesignParser:void=OutputStream.close()
+DesignParser:ProcessBuilder=ProcessBuilder.redirectErrorStream(boolean)
+DesignParser:Process=ProcessBuilder.start()
+DesignParser:InputStream=Process.getInputStream()
+DesignParser:String=BufferedReader.readLine()
+DesignParser:void=PrintStream.println(String)
