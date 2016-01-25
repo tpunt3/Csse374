@@ -1,6 +1,6 @@
 package problem.models.impl;
 
-import problem.model.visitor.IModelVisitor;
+import problem.model.visitor.IVisitor;
 import problem.models.api.IField;
 import problem.models.api.ISubMethod;
 
@@ -36,22 +36,10 @@ public class Field implements IField{
 	}
 
 	@Override
-	public void accept(IModelVisitor v) {
-		v.preVisit(this);
+	public void accept(IVisitor v) {
+		//v.preVisit(this);
 		v.visit(this);
-		v.postVisit(this);
-	}
-
-	@Override
-	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void writeFile(IModelVisitor sdWriter) {
-		// TODO Auto-generated method stub
-		
+		//v.postVisit(this);
 	}
 
 }

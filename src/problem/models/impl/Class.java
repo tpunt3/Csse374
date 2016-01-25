@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
-import problem.model.visitor.IModelVisitor;
+import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
@@ -58,7 +58,7 @@ public class Class implements IClass {
 	}
 
 	@Override
-	public void accept(IModelVisitor v) {
+	public void accept(IVisitor v) {
 		v.preVisit(this);
 		v.visit(this);
 		for (IField f : this.fields) {
@@ -78,18 +78,6 @@ public class Class implements IClass {
 	@Override
 	public boolean getIsClass() {
 		return this.isClass;
-	}
-
-	@Override
-	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void writeFile(IModelVisitor sdWriter) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public boolean isSingleton() {

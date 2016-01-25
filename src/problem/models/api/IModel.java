@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
-import problem.model.visitor.IModelTraverser;
+import problem.model.visitor.ITraverser;
 
-public interface IModel extends IModelTraverser{
+public interface IModel extends ITraverser{
 	public HashSet<IClass> getClasses();
 	public void addClazz(IClass c);
 	public IClass getClazz(String s);

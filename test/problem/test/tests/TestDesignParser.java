@@ -13,8 +13,8 @@ import org.objectweb.asm.Opcodes;
 import problem.asm.ClassDeclarationVisitor;
 import problem.asm.ClassFieldVisitor;
 import problem.asm.ClassMethodVisitor;
-import problem.model.visitor.IModelTraverser;
-import problem.model.visitor.IModelVisitor;
+import problem.model.visitor.ITraverser;
+import problem.model.visitor.IVisitor;
 import problem.models.api.IRelation;
 import problem.models.impl.Model;
 import problem.models.impl.ModelGVOutputStream;
@@ -57,10 +57,11 @@ public class TestDesignParser {
 
 
 			OutputStream out = new FileOutputStream("input_output/test.gv");
-			IModelVisitor gvWriter = new ModelGVOutputStream(out);
-			IModelTraverser traverser = (IModelTraverser) model;
+			ModelGVOutputStream gvWriter = new ModelGVOutputStream(out);
+			ITraverser traverser = (ITraverser) model;
 			model.clearSD();
-			traverser.accept(gvWriter);
+			//traverser.accept(gvWriter);
+			gvWriter.write(model);
 			out.close();
 
 			// runs DOT on our .gv file. This might need to be moved?

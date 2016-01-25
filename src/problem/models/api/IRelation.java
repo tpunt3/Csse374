@@ -1,8 +1,8 @@
 package problem.models.api;
 
-import problem.model.visitor.IModelTraverser;
+import problem.model.visitor.ITraverser;
 
-public interface IRelation extends IModelTraverser{
+public interface IRelation extends ITraverser{
 	public void setName(String s);
 	public String getName();
 	public void setRelatedClass(String s);

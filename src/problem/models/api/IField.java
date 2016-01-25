@@ -1,8 +1,8 @@
 package problem.models.api;
 
-import problem.model.visitor.IModelTraverser;
+import problem.model.visitor.ITraverser;
 
-public interface IField extends IModelTraverser{
+public interface IField extends ITraverser{
 	public String getType();
 	public String getAccess();
 	public String getName();

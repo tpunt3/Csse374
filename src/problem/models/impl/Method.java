@@ -2,7 +2,7 @@ package problem.models.impl;
 
 import java.util.ArrayList;
 
-import problem.model.visitor.IModelVisitor;
+import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IMethod;
 import problem.models.api.ISubMethod;
@@ -60,10 +60,10 @@ public class Method implements IMethod {
 	}
 
 	@Override
-	public void accept(IModelVisitor v) {
-		v.preVisit(this);
+	public void accept(IVisitor v) {
+		//v.preVisit(this);
 		v.visit(this);
-		v.postVisit(this);
+		//v.postVisit(this);
 	}
 
 	public ArrayList<ISubMethod> getSubMethods() {
@@ -76,18 +76,6 @@ public class Method implements IMethod {
 
 	public void setClazz(IClass clazz) {
 		this.clazz = clazz;
-	}
-
-	@Override
-	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
-		v.preVisit(this);
-		
-	}
-
-	@Override
-	public void writeFile(IModelVisitor sdWriter) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 

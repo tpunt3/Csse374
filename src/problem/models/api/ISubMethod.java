@@ -1,8 +1,8 @@
 package problem.models.api;
 
-import problem.model.visitor.IModelTraverser;
+import problem.model.visitor.ITraverser;
 
-public interface ISubMethod extends IModelTraverser {
+public interface ISubMethod extends ITraverser {
 	public String getClazzName();
 	public String getMethodName();
 	public String getArgs();

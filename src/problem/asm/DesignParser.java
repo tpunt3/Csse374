@@ -1,6 +1,7 @@
 package problem.asm;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,9 +14,10 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import problem.model.visitor.IModelTraverser;
-import problem.model.visitor.IModelVisitor;
+import problem.model.visitor.ITraverser;
+import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
+import problem.models.api.IMethod;
 import problem.models.api.ISubMethod;
 import problem.models.impl.Model;
 import problem.models.impl.ModelGVOutputStream;
@@ -83,30 +85,33 @@ public class DesignParser {
 			// "headfirst.factory.pizzas.SimplePizzaFactory",
 			// "headfirst.factory.pizzas.VeggiePizza",
 
-//			"problem.asm.ClassDeclarationVisitor", 
-//			"problem.asm.ClassFieldVisitor", 
-//			"problem.asm.ClassMethodVisitor",
+			"problem.asm.ClassDeclarationVisitor", 
+			"problem.asm.ClassFieldVisitor", 
+			"problem.asm.ClassMethodVisitor",
 			"problem.asm.DesignParser", 
-//			"problem.asm.IClazzGetter", 
-//			"problem.asm.MyMethodVisitor",
-//			"problem.asm.DocType", 
-//			"problem.model.visitor.IModelTraverser", 
-//			"problem.model.visitor.IModelVisitor",
-//			"problem.model.visitor.ModelVisitorAdapter", 
-//			"problem.models.api.IClass", 
-//			"problem.models.api.IField",
-//			"problem.models.api.IMethod", 
-//			"problem.models.api.IModel", 
-//			"problem.models.api.IRelation",
-//			"problem.models.api.ISubMethod", 
-//			"problem.models.api.RelationType", 
-//			"problem.models.impl.Class",
-//			"problem.models.impl.Field", 
-//			"problem.models.impl.Method", 
-//			"problem.models.impl.Model",
-//			"problem.models.impl.ModelGVOutputStream", 
-//			"problem.models.impl.Relation", 
-//			"problem.models.impl.SubMethod"
+			"problem.asm.IClazzGetter", 
+			"problem.asm.MyMethodVisitor",
+			"problem.asm.DocType", 
+			"problem.model.visitor.ITraverser",
+			"problem.model.visitor.IVisitor",
+			"problem.model.visitor.Visitor",
+			"problem.model.visitor.LookupKey",
+			"problem.model.visitor.VisitType",
+			"problem.model.visitor.IVisitMethod",
+			"problem.models.api.IClass", 
+			"problem.models.api.IField",
+			"problem.models.api.IMethod", 
+			"problem.models.api.IModel", 
+			"problem.models.api.IRelation",
+			"problem.models.api.ISubMethod", 
+			"problem.models.api.RelationType", 
+			"problem.models.impl.Class",
+			"problem.models.impl.Field", 
+			"problem.models.impl.Method", 
+			"problem.models.impl.Model",
+			"problem.models.impl.ModelGVOutputStream", 
+			"problem.models.impl.Relation", 
+			"problem.models.impl.SubMethod"
 
 		//	 "java.util.Collections",
 
@@ -137,11 +142,12 @@ public class DesignParser {
 	 */
 	public static void main(String[] args) throws IOException {
 		DesignParser parser = new DesignParser();
-		parser.generateDocuments(DocType.sd,
+		parser.generateDocuments(DocType.uml,
 				//"problem.asm.DesignParser,DesignParser,generateDocuments,DocType; String; int; String[]", 5, CLASSES);
 				//"problem.asm.Class,Class,accept,IModelVisitor", 5, CLASSES);
 				//"java.util.Collections,Collections,shuffle,List", 5, CLASSES);
 				"problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod; int", 2, CLASSES);
+		//testVisitor();
 	}
 
 	public void generateDocuments(DocType type, String methodSig, int depth, String[] classes) throws IOException {
@@ -203,13 +209,19 @@ public class DesignParser {
 	}
 
 	public void generateUML(Model model) throws IOException {
-		OutputStream out = new FileOutputStream("input_output/model.gv");
-		IModelVisitor gvWriter = new ModelGVOutputStream(out);
-		IModelTraverser traverser = (IModelTraverser) model;
-		traverser.accept(gvWriter);
-		out.close();
+		
+		for(IClass c : model.getClasses()){
+			if(c.getName().equals("Visitor")){
+				for(IMethod m: c.getMethods()){
+					System.out.println(m.getName());
+				}
+			}
+		}
+		
+		ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream("input_output/model.gv"));
+		gv.write(model);
+		gv.close();
 
-		// runs DOT on our .gv file. This might need to be moved?
 		 //ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
 		 //"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
@@ -243,11 +255,11 @@ public class DesignParser {
 		}
 
 		OutputStream out = new FileOutputStream("input_output/sequence.sd");
-		IModelVisitor sdWriter = new ModelSDOutputStream(out);
-		IModelTraverser traverser = (IModelTraverser) model;
+		IVisitor sdWriter = new ModelSDOutputStream(out);
+		ITraverser traverser = (ITraverser) model;
 		model.clearSD();
-		traverser.acceptSequence(sdWriter, sm, depth);
-		traverser.writeFile(sdWriter);
+		model.acceptSequence(sdWriter, sm, depth);
+		model.writeFile(sdWriter);
 		out.close();
 
 		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
@@ -265,6 +277,10 @@ public class DesignParser {
 			}
 			System.out.println(line);
 		}
+	}
+	
+	public static void testVisitor() throws FileNotFoundException {
+		
 	}
 
 }

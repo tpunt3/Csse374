@@ -2,9 +2,9 @@ package problem.models.api;
 
 import java.util.Collection;
 
-import problem.model.visitor.IModelTraverser;
+import problem.model.visitor.ITraverser;
 
-public interface IClass extends IModelTraverser {
+public interface IClass extends ITraverser {
 	public String getName();
 	public Collection<IMethod> getMethods();
 	public Collection<IField> getFields();

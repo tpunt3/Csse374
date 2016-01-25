@@ -11,8 +11,8 @@ import java.io.OutputStream;
 import org.junit.Before;
 import org.junit.Test;
 
-import problem.model.visitor.IModelTraverser;
-import problem.model.visitor.IModelVisitor;
+import problem.model.visitor.ITraverser;
+import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IRelation;
 import problem.models.api.RelationType;
@@ -67,9 +67,10 @@ public class AddRelationLogicTesting {
 		testModel.addRelation(usesRel);
 
 		OutputStream out = new FileOutputStream("input_output/unit_test.gv");
-		IModelVisitor gvWriter = new ModelGVOutputStream(out);
-		IModelTraverser traverser = (IModelTraverser)testModel;
-		traverser.accept(gvWriter);
+		ModelGVOutputStream gvWriter = new ModelGVOutputStream(out);
+		ITraverser traverser = (ITraverser)testModel;
+		//traverser.accept(gvWriter);
+		gvWriter.write(testModel);
 		out.close();
 		
 		FileReader reader = new FileReader("input_output/unit_test.gv");
@@ -98,9 +99,10 @@ public class AddRelationLogicTesting {
 		testModel.addRelation(toSelfRel);
 		
 		OutputStream out = new FileOutputStream("input_output/unit_test.gv");
-		IModelVisitor gvWriter = new ModelGVOutputStream(out);
-		IModelTraverser traverser = (IModelTraverser)testModel;
-		traverser.accept(gvWriter);
+		ModelGVOutputStream gvWriter = new ModelGVOutputStream(out);
+		ITraverser traverser = (ITraverser)testModel;
+		//traverser.accept(gvWriter);
+		gvWriter.write(testModel);
 		out.close();
 		
 		FileReader reader = new FileReader("input_output/unit_test.gv");
@@ -133,9 +135,10 @@ public class AddRelationLogicTesting {
 		
 
 		OutputStream out = new FileOutputStream("input_output/unit_test.gv");
-		IModelVisitor gvWriter = new ModelGVOutputStream(out);
-		IModelTraverser traverser = (IModelTraverser)testModel;
-		traverser.accept(gvWriter);
+		ModelGVOutputStream gvWriter = new ModelGVOutputStream(out);
+		ITraverser traverser = (ITraverser)testModel;
+		//traverser.accept(gvWriter);
+		gvWriter.write(testModel);
 		out.close();
 		
 		FileReader reader = new FileReader("input_output/unit_test.gv");
@@ -163,9 +166,10 @@ public class AddRelationLogicTesting {
 		testModel.addRelation(duplicateRel);
 		
 		OutputStream out = new FileOutputStream("input_output/unit_test.gv");
-		IModelVisitor gvWriter = new ModelGVOutputStream(out);
-		IModelTraverser traverser = (IModelTraverser)testModel;
-		traverser.accept(gvWriter);
+		ModelGVOutputStream gvWriter = new ModelGVOutputStream(out);
+		ITraverser traverser = (ITraverser)testModel;
+		//traverser.accept(gvWriter);
+		gvWriter.write(testModel);
 		out.close();
 		
 		FileReader reader = new FileReader("input_output/unit_test.gv");

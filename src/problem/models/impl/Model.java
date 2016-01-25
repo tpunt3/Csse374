@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import problem.asm.DesignParser;
-import problem.model.visitor.IModelVisitor;
+import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IMethod;
 import problem.models.api.IModel;
@@ -135,7 +135,7 @@ public class Model implements IModel {
 	}
 
 	@Override
-	public void accept(IModelVisitor v) {
+	public void accept(IVisitor v) {
 		v.preVisit(this);
 		for (IClass c : this.classes) {
 			c.accept(v);
@@ -190,8 +190,7 @@ public class Model implements IModel {
 		return this.classesToAdd.toArray(new String[classesToAdd.size()]);
 	}
 
-	@Override
-	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
+	public void acceptSequence(IVisitor v, ISubMethod sm, int depth) {
 
 		if (depth > 0) {
 			for (IClass clazz : classes) {
@@ -238,8 +237,7 @@ public class Model implements IModel {
 		this.classNames.clear();
 	}
 
-	@Override
-	public void writeFile(IModelVisitor v) {
+	public void writeFile(IVisitor v) {
 		v.preVisit(this);
 		v.visit(this);
 	}

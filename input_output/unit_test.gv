@@ -2,28 +2,26 @@ digraph model{
 rankdir = BT;
 UsedClass [
 shape="record",
-label = "{UsedClass| }"
+}"
 ];
 
 CoreClass [
 shape="record",
-label = "{CoreClass| }"
+}"
 ];
 
 SuperClass [
 shape="record",
-label = "{SuperClass| }"
+}"
 ];
 
 Interface [
 shape="record",
-label = "{\<\<interface\>\>\nInterface| }"
+}"
 ];
 
 AssociatedClass [
 shape="record",
-label = "{AssociatedClass| }"
+}"
 ];
 
-//writing relations between classes now
-}

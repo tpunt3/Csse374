@@ -1,6 +1,6 @@
 package problem.models.impl;
 
-import problem.model.visitor.IModelVisitor;
+import problem.model.visitor.IVisitor;
 import problem.models.api.IRelation;
 import problem.models.api.ISubMethod;
 import problem.models.api.RelationType;
@@ -51,7 +51,7 @@ public class Relation implements IRelation {
 	}
 
 	@Override
-	public void accept(IModelVisitor v) {
+	public void accept(IVisitor v) {
 	}
 
 	@Override
@@ -88,15 +88,4 @@ public class Relation implements IRelation {
 		return true;
 	}
 
-	@Override
-	public void acceptSequence(IModelVisitor v, ISubMethod sm, int depth) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void writeFile(IModelVisitor sdWriter) {
-		// TODO Auto-generated method stub
-		
-	}
 }
