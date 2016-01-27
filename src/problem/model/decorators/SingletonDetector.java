@@ -23,7 +23,7 @@ public class SingletonDetector implements IPatternDetector {
 			boolean returnsSelf = false;
 			boolean isEnum = false;
 			
-			if(c.getSignature().contains("Enum")){
+			if(c.getSignature() != null && c.getSignature().contains("Enum")){
 				isEnum = true;
 			}
 			

@@ -1,18 +1,8 @@
 digraph model{
 rankdir = BT;
-RelationType [
-shape="record",color=blue
-label = "{RelationType\n\<\<Singleton\>\>|+ superclass: RelationType\l+ interfaces: RelationType\l+ uses: RelationType\l+ association: RelationType\l- ENUM$VALUES: RelationType[]\l|- init(String; int) : void\l+ values() : RelationType[]\l% clinit() : void\l+ valueOf(String) : RelationType\l}"
-];
-
 IVisitor [
 shape="record",
 label = "{\<\<interface\>\>\nIVisitor| + postVisit(ITraverser) : void\l+ visit(ITraverser) : void\l+ removeVisit(VisitType; Class) : void\l+ addVisit(VisitType; Class; IVisitMethod) : void\l+ preVisit(ITraverser) : void\l+ visitRelations(ITraverser) : void\l+ intermediateVisit(ITraverser) : void\l}"
-];
-
-DocType [
-shape="record",color=blue
-label = "{DocType\n\<\<Singleton\>\>|+ uml: DocType\l+ sd: DocType\l+ both: DocType\l- ENUM$VALUES: DocType[]\l|+ values() : DocType[]\l% clinit() : void\l- init(String; int) : void\l+ valueOf(String) : DocType\l}"
 ];
 
 ClassMethodVisitor [
@@ -47,12 +37,17 @@ label = "{\<\<interface\>\>\nIVisitMethod| + execute(ITraverser) : void\l}"
 
 Class [
 shape="record",
-label = "{Class| - name: String\l- methods: IMethod\l- fields: IField\l- isClass: boolean\l- patterns: PatternType\l|+ equals(Object) : boolean\l+ accept(IVisitor) : void\l+ getIsClass() : boolean\l+ init() : void\l+ getName() : String\l+ addField(IField) : void\l+ hashCode() : int\l+ init(String; boolean) : void\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ isSingleton() : boolean\l}"
+label = "{Class| - name: String\l- methods: IMethod\l- fields: IField\l- isClass: boolean\l- patterns: PatternType\l- signature: String\l|+ equals(Object) : boolean\l+ getSignature() : String\l+ getIsClass() : boolean\l+ init(String; boolean; String) : void\l+ init() : void\l+ addField(IField) : void\l+ getMethods() : IMethod\l+ addMethod(IMethod) : void\l+ accept(IVisitor) : void\l+ getName() : String\l+ hashCode() : int\l+ getFields() : IField\l+ isSingleton() : boolean\l}"
 ];
 
 IRelation [
 shape="record",
 label = "{\<\<interface\>\>\nIRelation| + getName() : String\l+ getRelatedClass() : String\l+ getType() : RelationType\l+ setName(String) : void\l+ setType(RelationType) : void\l+ setRelatedClass(String) : void\l}"
+];
+
+VisitType [
+shape="record",
+label = "{VisitType| + PreVisit: VisitType\l+ Visit: VisitType\l+ PostVisit: VisitType\l+ IntermediateVisit: VisitType\l+ RelationVisit: VisitType\l- ENUM$VALUES: VisitType[]\l|- init(String; int) : void\l+ values() : VisitType[]\l% clinit() : void\l+ valueOf(String) : VisitType\l}"
 ];
 
 ModelGVOutputStream [
@@ -70,19 +65,9 @@ shape="record",
 label = "{SubMethod| - clazzName: String\l- name: String\l- args: String\l- qualifiedClassName: String\l- returnType: String\l- visited: boolean\l|+ getClazzName() : String\l+ getQualifiedClassName() : String\l+ init(String; String; String; String; String) : void\l+ getMethodName() : String\l+ accept(IVisitor) : void\l+ getReturnType() : String\l+ getArgs() : String\l+ isVisited() : boolean\l+ setVisited(boolean) : void\l}"
 ];
 
-VisitType [
-shape="record",color=blue
-label = "{VisitType\n\<\<Singleton\>\>|+ PreVisit: VisitType\l+ Visit: VisitType\l+ PostVisit: VisitType\l+ IntermediateVisit: VisitType\l+ RelationVisit: VisitType\l- ENUM$VALUES: VisitType[]\l|- init(String; int) : void\l+ values() : VisitType[]\l% clinit() : void\l+ valueOf(String) : VisitType\l}"
-];
-
 Visitor [
 shape="record",
 label = "{Visitor| ~ keyToCommandMap: IVisitMethod\l|+ visitRelations(ITraverser) : void\l+ init() : void\l- doVisit(VisitType; ITraverser) : void\l+ visit(ITraverser) : void\l+ postVisit(ITraverser) : void\l+ preVisit(ITraverser) : void\l+ removeVisit(VisitType; Class) : void\l+ addVisit(VisitType; Class; IVisitMethod) : void\l+ intermediateVisit(ITraverser) : void\l}"
-];
-
-Model [
-shape="record",color=blue
-label = "{Model\n\<\<Singleton\>\>|- uniqueInstance: Model\l- callDepth: int\l- classes: IClass\l- relations: IRelation\l- classStrings: String\l- methodStrings: String\l- classesToAdd: String\l- classNames: String\l|+ getMethodStrings() : String\l+ getRelations() : IRelation\l+ accept(IVisitor) : void\l+ addRelation(IRelation) : void\l+ getClazz(String) : IClass\l+ clearModel() : void\l+ clearSD() : void\l+ setCallDepth(int) : void\l+ toString() : String\l+ init(IClass; ) : IClass\l+ getClassStrings() : String\l- init() : void\l+ getClassNames() : void\l+ findNewClasses(ISubMethod; int) : String[]\l+ replaceClass(IClass; IClass) : void\l+ getInstance() : Model\l+ writeFile(IVisitor) : void\l+ setRelations(IRelation; ) : IRelation\l+ acceptSequence(IVisitor; ISubMethod; int) : void\l+ getClasses() : IClass\l+ addClazz(IClass) : void\l+ getCallDepth() : int\l}"
 ];
 
 ClassDeclarationVisitor [
@@ -105,6 +90,11 @@ shape="record",
 label = "{ClassFieldVisitor| - model: Model\l- clazz: IClass\l- decorated: ClassVisitor\l|+ init(int; ClassVisitor; Model) : void\l+ visitField(int; String; String; String; Object) : FieldVisitor\l+ getClazz() : IClass\l~ addAccessLevel(int) : String\l}"
 ];
 
+RelationType [
+shape="record",
+label = "{RelationType| + superclass: RelationType\l+ interfaces: RelationType\l+ uses: RelationType\l+ association: RelationType\l- ENUM$VALUES: RelationType[]\l|- init(String; int) : void\l+ values() : RelationType[]\l% clinit() : void\l+ valueOf(String) : RelationType\l}"
+];
+
 MyMethodVisitor [
 shape="record",
 label = "{MyMethodVisitor| - model: Model\l- clazz: IClass\l- subMethods: ISubMethod\l- name: String\l|+ getSubMethods() : ISubMethod\l+ visitFieldInsn(int; String; String; String) : void\l+ visitTypeInsn(int; String) : void\l+ visitVarInsn(int; int) : void\l+ init(int; MethodVisitor; Model; IClass) : void\l+ visitMethodInsn(int; String; String; String; boolean) : void\l~ getArguments(String) : String\l~ getReturnType(String) : String\l~ getType(String) : String\l}"
@@ -122,7 +112,7 @@ label = "{\<\<interface\>\>\nIMethod| + getSignature() : String\l+ getArgs() : S
 
 IClass [
 shape="record",
-label = "{\<\<interface\>\>\nIClass| + addField(IField) : void\l+ getName() : String\l+ getIsClass() : boolean\l+ addMethod(IMethod) : void\l+ getMethods() : IMethod\l+ isSingleton() : boolean\l+ getFields() : IField\l}"
+label = "{\<\<interface\>\>\nIClass| + getSignature() : String\l+ addField(IField) : void\l+ getName() : String\l+ getIsClass() : boolean\l+ addMethod(IMethod) : void\l+ getMethods() : IMethod\l+ isSingleton() : boolean\l+ getFields() : IField\l}"
 ];
 
 IClazzGetter [
@@ -130,9 +120,19 @@ shape="record",
 label = "{\<\<interface\>\>\nIClazzGetter| + getClazz() : IClass\l}"
 ];
 
+DocType [
+shape="record",
+label = "{DocType| + uml: DocType\l+ sd: DocType\l+ both: DocType\l- ENUM$VALUES: DocType[]\l|+ values() : DocType[]\l% clinit() : void\l- init(String; int) : void\l+ valueOf(String) : DocType\l}"
+];
+
 IModel [
 shape="record",
 label = "{\<\<interface\>\>\nIModel| + getClasses() : IClass\l+ getMethodStrings() : String\l+ getClassStrings() : String\l+ replaceClass(IClass; IClass) : void\l+ getRelations() : IRelation\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l}"
+];
+
+Model [
+shape="record",color=blue
+label = "{Model\n\<\<Singleton\>\>|- uniqueInstance: Model\l- callDepth: int\l- classes: IClass\l- relations: IRelation\l- classStrings: String\l- methodStrings: String\l- classesToAdd: String\l- classNames: String\l|+ getMethodStrings() : String\l+ getRelations() : IRelation\l+ accept(IVisitor) : void\l+ addRelation(IRelation) : void\l+ getClazz(String) : IClass\l+ clearModel() : void\l+ clearSD() : void\l+ setCallDepth(int) : void\l+ toString() : String\l+ init(IClass; ) : IClass\l+ getClassStrings() : String\l- init() : void\l+ getClassNames() : void\l+ findNewClasses(ISubMethod; int) : String[]\l+ replaceClass(IClass; IClass) : void\l+ getInstance() : Model\l+ writeFile(IVisitor) : void\l+ setRelations(IRelation; ) : IRelation\l+ acceptSequence(IVisitor; ISubMethod; int) : void\l+ getClasses() : IClass\l+ addClazz(IClass) : void\l+ getCallDepth() : int\l}"
 ];
 
 //writing relations between classes now

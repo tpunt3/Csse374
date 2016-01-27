@@ -37,13 +37,13 @@ public class AddRelationLogicTesting {
 	@Before
 	public void setUp(){
 		testModel = Model.getInstance();
-		class1 = new Class("CoreClass", true);
-		class2 = new Class("SuperClass", true);
-		class3 = new Class("Interface", false);
-		class4 = new Class("AssociatedClass", true);
-		class5 = new Class("UsedClass", true);
-		class6 = new Class("AssociatedThenUsedClass", true);
-		class7 = new Class("UsedThenAssociatedClass", true);
+		class1 = new Class("CoreClass", true, "");
+		class2 = new Class("SuperClass", true, "");
+		class3 = new Class("Interface", false, "");
+		class4 = new Class("AssociatedClass", true, "");
+		class5 = new Class("UsedClass", true, "");
+		class6 = new Class("AssociatedThenUsedClass", true, "");
+		class7 = new Class("UsedThenAssociatedClass", true, "");
 		
 		testModel.addClazz(class1);
 		testModel.addClazz(class2);
