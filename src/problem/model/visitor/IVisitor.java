@@ -9,6 +9,4 @@ public interface IVisitor {
 	
 	public void addVisit(VisitType vType, Class clazz, IVisitMethod m);
 	public void removeVisit(VisitType vType, Class clazz);
-	
-	
 }

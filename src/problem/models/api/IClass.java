@@ -13,6 +13,4 @@ public interface IClass extends ITraverser {
 	public void addField(IField f);
 	public boolean getIsClass();
 	public boolean isSingleton();
-	public void addPattern(PatternType p);
-	public Collection<PatternType> getPatterns();
 }

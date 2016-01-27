@@ -10,10 +10,11 @@ import org.junit.Test;
 import problem.asm.DesignParser;
 import problem.asm.DocType;
 import problem.model.decorators.IPatternDetector;
-import problem.model.decorators.PatternDetector;
+import problem.model.decorators.SingletonDetector;
 import problem.model.decorators.PatternType;
 import problem.models.api.IClass;
 import problem.models.impl.Model;
+import problem.models.impl.SingletonDecorator;
 
 public class SingletonLogicTesting {
 	
@@ -29,14 +30,14 @@ public class SingletonLogicTesting {
 		Model m = Model.getInstance();
 		String[] classes = {"problem.test.classes.LazySingleton", "problem.test.classes.EmptyClass"};
 		parser.visitClasses(classes,m);
-		IPatternDetector pd = new PatternDetector(m);
+		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 		
 		for(IClass c: m.getClasses()){
 			if(c.getName().equals("LazySingleton")){
-				assertTrue(c.getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
 			}else{
-				assertFalse(c.getPatterns().contains(PatternType.Singleton));
+				assertFalse(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
 			}
 		}
 	}
@@ -47,14 +48,14 @@ public class SingletonLogicTesting {
 		m.clearModel();
 		String[] classes = {"problem.test.classes.EagerSingleton", "problem.test.classes.FieldClass"};
 		parser.visitClasses(classes,m);
-		IPatternDetector pd = new PatternDetector(m);
+		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 		
 		for(IClass c: m.getClasses()){
 			if(c.getName().equals("EagerSingleton") || c.getName().equals("LazySingleton")){
-				assertTrue(c.getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
 			}else{
-				assertFalse(c.getPatterns().contains(PatternType.Singleton));
+				assertFalse(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
 			}
 		}
 	}
@@ -65,14 +66,14 @@ public class SingletonLogicTesting {
 		m.clearModel();
 		String[] classes = {"problem.test.classes.EagerSingleton", "problem.test.classes.AlmostSingleton"};
 		parser.visitClasses(classes,m);
-		IPatternDetector pd = new PatternDetector(m);
+		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 		
 		for(IClass c: m.getClasses()){
 			if(c.getName().equals("EagerSingleton") || c.getName().equals("LazySingleton")){
-				assertTrue(c.getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
 			}else{
-				assertFalse(c.getPatterns().contains(PatternType.Singleton));
+				assertFalse(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
 			}
 		}
 	}

@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import problem.model.decorators.IPatternDetector;
 import problem.model.decorators.PatternType;
+import problem.model.decorators.SingletonDetector;
 import problem.model.visitor.ITraverser;
 import problem.model.visitor.Visitor;
 import problem.model.visitor.VisitType;
@@ -70,7 +72,7 @@ public class ModelGVOutputStream extends FilterOutputStream {
 		this.visitor.addVisit(VisitType.PreVisit, IClass.class, (ITraverser t) ->{
 			IClass c = (IClass) t;
 			String s;
-			if(c.getPatterns().contains(PatternType.Singleton)){
+			if(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton)){
 				s = String.format("%s [\nshape=\"record\",color=blue\n", c.getName());
 			} else{
 				s = String.format("%s [\nshape=\"record\",\n", c.getName());
@@ -81,11 +83,18 @@ public class ModelGVOutputStream extends FilterOutputStream {
 
 	private void setVisitClass() {
 		this.visitor.addVisit(VisitType.Visit, IClass.class, (ITraverser t) ->{
+			
+			System.out.println(t);
+			
 			IClass c = (IClass) t;
+			
+/*			System.out.println(c.getName());
+			System.out.println(c.getClass());*/
+			
 			String s;
 			if (!c.getIsClass()) {
 				s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
-			} else if(c.getPatterns().contains(PatternType.Singleton)){
+			} else if(c.isSingleton()){
 				s = String.format("label = \"{%s\\n\\<\\<Singleton\\>\\>|", c.getName());
 			} 
 			else{

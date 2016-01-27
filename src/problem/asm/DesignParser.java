@@ -15,7 +15,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import problem.model.decorators.IPatternDetector;
-import problem.model.decorators.PatternDetector;
+import problem.model.decorators.SingletonDetector;
 import problem.model.visitor.ITraverser;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
@@ -212,8 +212,13 @@ public class DesignParser {
 
 	public void generateUML(Model model) throws IOException {
 		
-		IPatternDetector pd = new PatternDetector(model);
+		IPatternDetector pd = new SingletonDetector(model);
 		pd.detectPatterns();
+		
+		for(IClass c : model.getClasses()){
+			System.out.println(c.getName());
+			System.out.println(c.getClass());
+		}
 		
 		ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream("input_output/model.gv"));
 		gv.write(model);

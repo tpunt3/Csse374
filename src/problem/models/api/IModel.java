@@ -13,4 +13,5 @@ public interface IModel extends ITraverser{
 	public ArrayList<IRelation> getRelations();
 	public HashSet<String> getClassStrings();
 	public ArrayList<String> getMethodStrings();
+	public void replaceClass(IClass oldC, IClass newC);
 }

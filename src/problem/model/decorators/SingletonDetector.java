@@ -1,15 +1,19 @@
 package problem.model.decorators;
 
+import java.util.ArrayList;
+
 import problem.models.api.IClass;
 import problem.models.api.IMethod;
 import problem.models.api.IModel;
 import problem.models.impl.SingletonDecorator;
 
-public class PatternDetector implements IPatternDetector {
+public class SingletonDetector implements IPatternDetector {
 	private IModel model;
+	private ArrayList<IClass> toReplace;
 	
-	public PatternDetector(IModel model) {
+	public SingletonDetector(IModel model) {
 		this.model = model;
+		this.toReplace = new ArrayList<IClass>();
 	}
 	
 	@Override
@@ -29,10 +33,12 @@ public class PatternDetector implements IPatternDetector {
 			}
 			
 			if(privateConstructor && returnsSelf){
-				c = new SingletonDecorator(c);
-				
+				this.toReplace.add(c);
 			}
 		}
+		
+		for (IClass c : this.toReplace){
+			this.model.replaceClass(c, new SingletonDecorator(c));
+		}
 	}
-
 }

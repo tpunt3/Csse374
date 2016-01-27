@@ -241,4 +241,11 @@ public class Model implements IModel {
 		v.preVisit(this);
 		v.visit(this);
 	}
+	
+	public void replaceClass(IClass oldC, IClass newC){
+		if(this.classes.contains(oldC)){
+			this.classes.remove(oldC);
+			this.classes.add(newC);
+		}
+	}
 }

@@ -1,5 +1,6 @@
 package problem.models.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import problem.model.decorators.PatternType;
@@ -10,10 +11,11 @@ import problem.models.api.IMethod;
 
 public class SingletonDecorator implements IClass {
 	private IClass thisClass;
-
+	private ArrayList<PatternType> patterns = new ArrayList<PatternType>(); 
+	
 	public SingletonDecorator(IClass c) {
 		this.thisClass = c;
-		this.thisClass.addPattern(PatternType.Singleton);
+		this.patterns.add(PatternType.Singleton);
 	}
 
 	@Override
@@ -51,20 +53,12 @@ public class SingletonDecorator implements IClass {
 		return thisClass.getIsClass();
 	}
 
-	@Override
-	public boolean isSingleton() {
-		return true;
-	}
-
-	@Override
-	public void addPattern(PatternType p) {
-		thisClass.addPattern(p);
-	}
-
-	@Override
 	public Collection<PatternType> getPatterns() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.patterns;
+	}
+	
+	public boolean isSingleton(){
+		return true;
 	}
 
 }
