@@ -70,7 +70,7 @@ public class Lab4SingletonTests {
 		pd.detectPatterns();
 
 		for (IClass c : m.getClasses()) {
-			if (c.getName().contains("Singleton")) {
+			if (c.getName().equals("Singleton")) {
 				assertTrue(c.getPatterns().contains(PatternType.Singleton));
 			}else{
 				assertFalse(c.getPatterns().contains(PatternType.Singleton));
@@ -88,7 +88,7 @@ public class Lab4SingletonTests {
 		pd.detectPatterns();
 
 		for (IClass c : m.getClasses()) {
-			if (c.getName().contains("Singleton")) {
+			if (c.getName().equals("Singleton")) {
 				assertTrue(c.getPatterns().contains(PatternType.Singleton));
 			}else{
 				assertFalse(c.getPatterns().contains(PatternType.Singleton));
@@ -106,7 +106,7 @@ public class Lab4SingletonTests {
 		pd.detectPatterns();
 
 		for (IClass c : m.getClasses()) {
-			if (c.getName().contains("Singleton")) {
+			if (!(c.getName().equals("SingletonTestDrive"))) {
 				assertTrue(c.getPatterns().contains(PatternType.Singleton));
 			}else{
 				assertFalse(c.getPatterns().contains(PatternType.Singleton));
@@ -126,8 +126,6 @@ public class Lab4SingletonTests {
 		for (IClass c : m.getClasses()) {
 			if (c.getName().contains("Singleton")) {
 				assertTrue(c.getPatterns().contains(PatternType.Singleton));
-			}else{
-				assertFalse(c.getPatterns().contains(PatternType.Singleton));
 			}
 		}
 		m.clearModel();

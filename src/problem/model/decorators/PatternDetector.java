@@ -19,7 +19,7 @@ public class PatternDetector implements IPatternDetector {
 			boolean returnsSelf = false;
 			
 			for(IMethod m : c.getMethods()){
-				if(m.getAccessNumber() == 9 && m.getReturnType().contains(m.getClazz().getName())){
+				if((m.getAccessNumber() == 9 || m.getAccessNumber() == 41) && m.getReturnType().contains(m.getClazz().getName())){
 					returnsSelf = true;
 				}
 				
