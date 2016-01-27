@@ -215,11 +215,6 @@ public class DesignParser {
 		IPatternDetector pd = new SingletonDetector(model);
 		pd.detectPatterns();
 		
-		for(IClass c : model.getClasses()){
-			System.out.println(c.getName());
-			System.out.println(c.getClass());
-		}
-		
 		ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream("input_output/model.gv"));
 		gv.write(model);
 		gv.close();

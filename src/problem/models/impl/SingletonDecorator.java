@@ -20,7 +20,20 @@ public class SingletonDecorator implements IClass {
 
 	@Override
 	public void accept(IVisitor v) {
-		thisClass.accept(v);
+		v.preVisit(this);
+		v.visit(this);
+		for (IField f : this.thisClass.getFields()) {
+			f.accept(v);
+		}
+
+		if (!this.thisClass.getFields().isEmpty()) {
+			v.intermediateVisit(this);
+		}
+
+		for (IMethod m : this.thisClass.getMethods()) {
+			m.accept(v);
+		}
+		v.postVisit(this);
 	}
 
 	@Override

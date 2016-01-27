@@ -72,7 +72,7 @@ public class ModelGVOutputStream extends FilterOutputStream {
 		this.visitor.addVisit(VisitType.PreVisit, IClass.class, (ITraverser t) ->{
 			IClass c = (IClass) t;
 			String s;
-			if(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton)){
+			if(c instanceof SingletonDecorator){
 				s = String.format("%s [\nshape=\"record\",color=blue\n", c.getName());
 			} else{
 				s = String.format("%s [\nshape=\"record\",\n", c.getName());
@@ -83,18 +83,12 @@ public class ModelGVOutputStream extends FilterOutputStream {
 
 	private void setVisitClass() {
 		this.visitor.addVisit(VisitType.Visit, IClass.class, (ITraverser t) ->{
-			
-			System.out.println(t);
-			
 			IClass c = (IClass) t;
-			
-/*			System.out.println(c.getName());
-			System.out.println(c.getClass());*/
 			
 			String s;
 			if (!c.getIsClass()) {
 				s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
-			} else if(c.isSingleton()){
+			} else if(c instanceof SingletonDecorator){
 				s = String.format("label = \"{%s\\n\\<\\<Singleton\\>\\>|", c.getName());
 			} 
 			else{
