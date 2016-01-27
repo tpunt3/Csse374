@@ -6,6 +6,7 @@ import problem.model.visitor.ITraverser;
 
 public interface IMethod extends ITraverser{
 	public String getAccess();
+	public int getAccessNumber();
 	public String getName();
 	public String getArgs();
 	public String getReturnType();

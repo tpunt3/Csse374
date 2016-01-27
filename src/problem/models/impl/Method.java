@@ -10,6 +10,7 @@ import problem.models.api.ISubMethod;
 public class Method implements IMethod {
 
 	private String access;
+	private int accessNumber;
 	private String name;
 	private String args;
 	private String returnType;
@@ -17,8 +18,9 @@ public class Method implements IMethod {
 	private IClass clazz;
 	private ArrayList<ISubMethod> subMethods;
 	
-	public Method(String access, String name, String args, String returnType, IClass clazz, ArrayList<ISubMethod> sm) {
+	public Method(String access, int accessNumber, String name, String args, String returnType, IClass clazz, ArrayList<ISubMethod> sm) {
 		this.access = access;
+		this.accessNumber = accessNumber;
 		this.name = name;
 		this.args = args;
 		this.returnType = returnType;
@@ -26,6 +28,15 @@ public class Method implements IMethod {
 		this.subMethods = sm;
 	}
 	
+	@Override
+	public int getAccessNumber() {
+		return accessNumber;
+	}
+
+	public void setAccessNumber(int accessNumber) {
+		this.accessNumber = accessNumber;
+	}
+
 	@Override
 	public String getSignature() {
 		return signature;

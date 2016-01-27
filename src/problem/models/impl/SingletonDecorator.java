@@ -1,4 +1,4 @@
-package problem.model.decorators;
+package problem.models.impl;
 
 import java.util.Collection;
 
@@ -7,12 +7,16 @@ import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
 
-public abstract class ClassDecorator implements IClass {
+public class SingletonDecorator implements IClass {
+
+	public SingletonDecorator() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void accept(IVisitor v) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -36,13 +40,13 @@ public abstract class ClassDecorator implements IClass {
 	@Override
 	public void addMethod(IMethod m) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addField(IField f) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -54,19 +58,19 @@ public abstract class ClassDecorator implements IClass {
 	@Override
 	public void setHasStaticField(boolean hasStaticField) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setHasPrivateConstructor(boolean hasPrivateConstructor) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setHasPublicStaticMethod(boolean hasPublicStaticMethod) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -74,5 +78,5 @@ public abstract class ClassDecorator implements IClass {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 }

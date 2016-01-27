@@ -87,7 +87,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		name = name.replace("<", "");
 		name = name.replace(">", "");
 
-		Method m = new Method(accessLevel, name, this.argList, returnType, this.clazz,
+		Method m = new Method(accessLevel, access, name, this.argList, returnType, this.clazz,
 				((MyMethodVisitor) mine).getSubMethods());
 		current.addMethod(m);
 
