@@ -38,9 +38,9 @@ public class Lab4SingletonTests {
 
 		for (IClass c : m.getClasses()) {
 			if (c.getName().contains("ChocolateBoiler")) {
-				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof SingletonDecorator);
 			} else {
-				assertFalse(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertFalse(c instanceof SingletonDecorator);
 			}
 		}
 		m.clearModel();
@@ -56,7 +56,7 @@ public class Lab4SingletonTests {
 
 		for (IClass c : m.getClasses()) {
 			if (c.getName().contains("Singleton")) {
-				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof SingletonDecorator);
 			}
 		}
 		m.clearModel();
@@ -72,9 +72,9 @@ public class Lab4SingletonTests {
 
 		for (IClass c : m.getClasses()) {
 			if (c.getName().equals("Singleton")) {
-				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof SingletonDecorator);
 			}else{
-				assertFalse(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertFalse(c instanceof SingletonDecorator);
 			}
 		}
 		m.clearModel();
@@ -90,9 +90,9 @@ public class Lab4SingletonTests {
 
 		for (IClass c : m.getClasses()) {
 			if (c.getName().equals("Singleton")) {
-				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof SingletonDecorator);
 			}else{
-				assertFalse(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertFalse(c instanceof SingletonDecorator);
 			}
 		}
 		m.clearModel();
@@ -108,9 +108,9 @@ public class Lab4SingletonTests {
 
 		for (IClass c : m.getClasses()) {
 			if (!(c.getName().equals("SingletonTestDrive"))) {
-				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof SingletonDecorator);
 			}else{
-				assertFalse(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertFalse(c instanceof SingletonDecorator);
 			}
 		}
 		m.clearModel();
@@ -126,7 +126,7 @@ public class Lab4SingletonTests {
 
 		for (IClass c : m.getClasses()) {
 			if (c.getName().contains("Singleton")) {
-				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof SingletonDecorator);
 			}
 		}
 		m.clearModel();

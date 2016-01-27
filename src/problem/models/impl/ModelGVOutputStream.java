@@ -57,7 +57,6 @@ public class ModelGVOutputStream extends FilterOutputStream {
 			String s = "digraph model{\n" + "rankdir = BT;\n";
 			this.write(s);	
 		});
-		
 	}
 
 	private void setPostVisitModel() {

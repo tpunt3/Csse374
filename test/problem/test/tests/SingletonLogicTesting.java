@@ -35,9 +35,9 @@ public class SingletonLogicTesting {
 		
 		for(IClass c: m.getClasses()){
 			if(c.getName().equals("LazySingleton")){
-				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof SingletonDecorator);
 			}else{
-				assertFalse(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertFalse(c instanceof SingletonDecorator);
 			}
 		}
 	}
@@ -53,9 +53,9 @@ public class SingletonLogicTesting {
 		
 		for(IClass c: m.getClasses()){
 			if(c.getName().equals("EagerSingleton") || c.getName().equals("LazySingleton")){
-				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof SingletonDecorator);
 			}else{
-				assertFalse(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertFalse(c instanceof SingletonDecorator);
 			}
 		}
 	}
@@ -71,9 +71,9 @@ public class SingletonLogicTesting {
 		
 		for(IClass c: m.getClasses()){
 			if(c.getName().equals("EagerSingleton") || c.getName().equals("LazySingleton")){
-				assertTrue(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertTrue(c instanceof SingletonDecorator);
 			}else{
-				assertFalse(c instanceof IPatternDetector && ((SingletonDecorator)c).getPatterns().contains(PatternType.Singleton));
+				assertFalse(c instanceof SingletonDecorator);
 			}
 		}
 	}
