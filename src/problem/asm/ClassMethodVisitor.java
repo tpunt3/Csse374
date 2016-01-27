@@ -74,16 +74,6 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 			returnType = returnType.substring(0, index);
 		}
 		
-		if(access == 9 && returnType.contains(this.clazz.getName())){
-			//has public static method that returns itself
-			this.clazz.setHasPublicStaticMethod(true);
-			//System.out.println(accessLevel + access + this.clazz.getName() + this.name + returnType);
-		}
-		
-		if(accessLevel.equals("-") && name.equals("<init>")){
-			this.clazz.setHasPrivateConstructor(true);
-		}
-
 		name = name.replace("<", "");
 		name = name.replace(">", "");
 

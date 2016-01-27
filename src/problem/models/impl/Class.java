@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
+import problem.model.decorators.PatternType;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IField;
@@ -19,17 +20,24 @@ public class Class implements IClass {
 	private boolean hasStaticField;
 	private boolean hasPrivateConstructor;
 	private boolean hasPublicStaticMethod;
+	private ArrayList<PatternType> patterns; 
 	
 	public Class(String name, boolean isClass) {
 		this.isClass = isClass;
 		this.name = name;
 		this.methods = new HashSet<IMethod>();
 		this.fields = new ArrayList<IField>();
+		this.patterns = new ArrayList<PatternType>();
 	}
 
 	public Class() {
 		this.methods = new HashSet<IMethod>();
 		this.fields = new ArrayList<IField>();
+	}
+	
+	@Override
+	public void addPattern(PatternType p){
+		this.patterns.add(p);
 	}
 
 	@Override
@@ -84,16 +92,13 @@ public class Class implements IClass {
 		return (this.hasStaticField && this.hasPrivateConstructor && this.hasPublicStaticMethod);
 	}
 
-	public void setHasStaticField(boolean hasStaticField) {
-		this.hasStaticField = hasStaticField;
+	@Override
+	public ArrayList<PatternType> getPatterns() {
+		return patterns;
 	}
 
-	public void setHasPrivateConstructor(boolean hasPrivateConstructor) {
-		this.hasPrivateConstructor = hasPrivateConstructor;
-	}
-
-	public void setHasPublicStaticMethod(boolean hasPublicStaticMethod) {
-		this.hasPublicStaticMethod = hasPublicStaticMethod;
+	public void setPatterns(ArrayList<PatternType> patterns) {
+		this.patterns = patterns;
 	}
 
 	@Override

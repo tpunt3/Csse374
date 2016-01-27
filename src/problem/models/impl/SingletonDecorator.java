@@ -2,81 +2,69 @@ package problem.models.impl;
 
 import java.util.Collection;
 
+import problem.model.decorators.PatternType;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
 
 public class SingletonDecorator implements IClass {
+	private IClass thisClass;
 
-	public SingletonDecorator() {
-		// TODO Auto-generated constructor stub
+	public SingletonDecorator(IClass c) {
+		this.thisClass = c;
+		this.thisClass.addPattern(PatternType.Singleton);
 	}
 
 	@Override
 	public void accept(IVisitor v) {
-		// TODO Auto-generated method stub
-
+		thisClass.accept(v);
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.thisClass.getName();
 	}
 
 	@Override
 	public Collection<IMethod> getMethods() {
-		// TODO Auto-generated method stub
-		return null;
+		return thisClass.getMethods();
 	}
 
 	@Override
 	public Collection<IField> getFields() {
-		// TODO Auto-generated method stub
-		return null;
+		return thisClass.getFields();
 	}
 
 	@Override
 	public void addMethod(IMethod m) {
-		// TODO Auto-generated method stub
-
+		thisClass.addMethod(m);
 	}
 
 	@Override
 	public void addField(IField f) {
-		// TODO Auto-generated method stub
-
+		thisClass.addField(f);
 	}
 
 	@Override
 	public boolean getIsClass() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setHasStaticField(boolean hasStaticField) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setHasPrivateConstructor(boolean hasPrivateConstructor) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setHasPublicStaticMethod(boolean hasPublicStaticMethod) {
-		// TODO Auto-generated method stub
-
+		return thisClass.getIsClass();
 	}
 
 	@Override
 	public boolean isSingleton() {
+		return true;
+	}
+
+	@Override
+	public void addPattern(PatternType p) {
+		thisClass.addPattern(p);
+	}
+
+	@Override
+	public Collection<PatternType> getPatterns() {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 }

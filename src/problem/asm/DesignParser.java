@@ -14,6 +14,8 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
+import problem.model.decorators.IPatternDetector;
+import problem.model.decorators.PatternDetector;
 import problem.model.visitor.ITraverser;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
@@ -210,22 +212,17 @@ public class DesignParser {
 
 	public void generateUML(Model model) throws IOException {
 		
-		for(IClass c : model.getClasses()){
-			if(c.getName().equals("Visitor")){
-				for(IMethod m: c.getMethods()){
-					System.out.println(m.getName());
-				}
-			}
-		}
+		IPatternDetector pd = new PatternDetector(model);
+		pd.detectPatterns();
 		
 		ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream("input_output/model.gv"));
 		gv.write(model);
 		gv.close();
 
-		 //ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		 //"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
-		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-				"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		 "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+			//	"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;

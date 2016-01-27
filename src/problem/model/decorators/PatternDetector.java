@@ -12,23 +12,25 @@ public class PatternDetector implements IPatternDetector {
 		this.model = model;
 	}
 	
+	@Override
 	public void detectPatterns(){
-		boolean privateConstructor = false;
-		boolean returnsSelf = false;
-		
 		for(IClass c : model.getClasses()){
+			boolean privateConstructor = false;
+			boolean returnsSelf = false;
+			
 			for(IMethod m : c.getMethods()){
 				if(m.getAccessNumber() == 9 && m.getReturnType().contains(m.getClazz().getName())){
 					returnsSelf = true;
 				}
 				
-				if(m.getAccess().equals("-") && m.getName().equals("<init>")){
+				if(m.getAccess().equals("-") && m.getName().equals("init")){
 					privateConstructor = true;
 				}
 			}
 			
 			if(privateConstructor && returnsSelf){
-				c = new SingletonDecorator();
+				c = new SingletonDecorator(c);
+				
 			}
 		}
 	}

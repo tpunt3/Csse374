@@ -2,6 +2,7 @@ package problem.models.api;
 
 import java.util.Collection;
 
+import problem.model.decorators.PatternType;
 import problem.model.visitor.ITraverser;
 
 public interface IClass extends ITraverser {
@@ -11,8 +12,7 @@ public interface IClass extends ITraverser {
 	public void addMethod(IMethod m);
 	public void addField(IField f);
 	public boolean getIsClass();
-	public void setHasStaticField(boolean hasStaticField);
-	public void setHasPrivateConstructor(boolean hasPrivateConstructor);
-	public void setHasPublicStaticMethod(boolean hasPublicStaticMethod);
 	public boolean isSingleton();
+	public void addPattern(PatternType p);
+	public Collection<PatternType> getPatterns();
 }
