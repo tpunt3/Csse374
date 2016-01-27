@@ -44,6 +44,7 @@ public class SingletonLogicTesting {
 	@Test
 	public void testEagerSingleton() throws IOException {
 		Model m = Model.getInstance();
+		m.clearModel();
 		String[] classes = {"problem.test.classes.EagerSingleton", "problem.test.classes.FieldClass"};
 		parser.visitClasses(classes,m);
 		IPatternDetector pd = new PatternDetector(m);
@@ -51,7 +52,6 @@ public class SingletonLogicTesting {
 		
 		for(IClass c: m.getClasses()){
 			if(c.getName().equals("EagerSingleton") || c.getName().equals("LazySingleton")){
-				System.out.println(c.getName());
 				assertTrue(c.getPatterns().contains(PatternType.Singleton));
 			}else{
 				assertFalse(c.getPatterns().contains(PatternType.Singleton));
@@ -62,6 +62,7 @@ public class SingletonLogicTesting {
 	@Test
 	public void testAlmostSingleton() throws IOException {
 		Model m = Model.getInstance();
+		m.clearModel();
 		String[] classes = {"problem.test.classes.EagerSingleton", "problem.test.classes.AlmostSingleton"};
 		parser.visitClasses(classes,m);
 		IPatternDetector pd = new PatternDetector(m);
@@ -71,7 +72,6 @@ public class SingletonLogicTesting {
 			if(c.getName().equals("EagerSingleton") || c.getName().equals("LazySingleton")){
 				assertTrue(c.getPatterns().contains(PatternType.Singleton));
 			}else{
-				System.out.println(c.getName()+c.isSingleton());
 				assertFalse(c.getPatterns().contains(PatternType.Singleton));
 			}
 		}
