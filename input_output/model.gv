@@ -65,6 +65,11 @@ shape="record",
 label = "{SubMethod| - clazzName: String\l- name: String\l- args: String\l- qualifiedClassName: String\l- returnType: String\l- visited: boolean\l|+ getClazzName() : String\l+ getQualifiedClassName() : String\l+ init(String; String; String; String; String) : void\l+ getMethodName() : String\l+ accept(IVisitor) : void\l+ getReturnType() : String\l+ getArgs() : String\l+ isVisited() : boolean\l+ setVisited(boolean) : void\l}"
 ];
 
+Model [
+shape="record",color=blue
+label = "{Model\n\<\<Singleton\>\>|- uniqueInstance: Model\l- callDepth: int\l- classes: IClass\l- relations: IRelation\l- classStrings: String\l- methodStrings: String\l- classesToAdd: String\l- classNames: String\l|+ getMethodStrings() : String\l+ getRelations() : IRelation\l+ accept(IVisitor) : void\l+ addRelation(IRelation) : void\l+ getClazz(String) : IClass\l+ clearModel() : void\l+ clearSD() : void\l+ setCallDepth(int) : void\l+ toString() : String\l+ init(IClass; ) : IClass\l+ getClassStrings() : String\l- init() : void\l+ getClassNames() : void\l+ findNewClasses(ISubMethod; int) : String[]\l+ replaceClass(IClass; IClass) : void\l+ getInstance() : Model\l+ writeFile(IVisitor) : void\l+ setRelations(IRelation; ) : IRelation\l+ acceptSequence(IVisitor; ISubMethod; int) : void\l+ getClasses() : IClass\l+ addClazz(IClass) : void\l+ getCallDepth() : int\l}"
+];
+
 Visitor [
 shape="record",
 label = "{Visitor| ~ keyToCommandMap: IVisitMethod\l|+ visitRelations(ITraverser) : void\l+ init() : void\l- doVisit(VisitType; ITraverser) : void\l+ visit(ITraverser) : void\l+ postVisit(ITraverser) : void\l+ preVisit(ITraverser) : void\l+ removeVisit(VisitType; Class) : void\l+ addVisit(VisitType; Class; IVisitMethod) : void\l+ intermediateVisit(ITraverser) : void\l}"
@@ -128,11 +133,6 @@ label = "{DocType| + uml: DocType\l+ sd: DocType\l+ both: DocType\l- ENUM$VALUES
 IModel [
 shape="record",
 label = "{\<\<interface\>\>\nIModel| + getClasses() : IClass\l+ getMethodStrings() : String\l+ getClassStrings() : String\l+ replaceClass(IClass; IClass) : void\l+ getRelations() : IRelation\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l}"
-];
-
-Model [
-shape="record",color=blue
-label = "{Model\n\<\<Singleton\>\>|- uniqueInstance: Model\l- callDepth: int\l- classes: IClass\l- relations: IRelation\l- classStrings: String\l- methodStrings: String\l- classesToAdd: String\l- classNames: String\l|+ getMethodStrings() : String\l+ getRelations() : IRelation\l+ accept(IVisitor) : void\l+ addRelation(IRelation) : void\l+ getClazz(String) : IClass\l+ clearModel() : void\l+ clearSD() : void\l+ setCallDepth(int) : void\l+ toString() : String\l+ init(IClass; ) : IClass\l+ getClassStrings() : String\l- init() : void\l+ getClassNames() : void\l+ findNewClasses(ISubMethod; int) : String[]\l+ replaceClass(IClass; IClass) : void\l+ getInstance() : Model\l+ writeFile(IVisitor) : void\l+ setRelations(IRelation; ) : IRelation\l+ acceptSequence(IVisitor; ISubMethod; int) : void\l+ getClasses() : IClass\l+ addClazz(IClass) : void\l+ getCallDepth() : int\l}"
 ];
 
 //writing relations between classes now

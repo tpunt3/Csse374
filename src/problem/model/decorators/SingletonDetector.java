@@ -32,7 +32,7 @@ public class SingletonDetector implements IPatternDetector {
 					returnsSelf = true;
 				}
 				
-				if(m.getAccess().equals("-") && m.getName().equals("init")){
+				if((m.getAccess().equals("-") || m.getAccess().equals("#")) && m.getName().equals("init")){
 					privateConstructor = true;
 				}
 			}
