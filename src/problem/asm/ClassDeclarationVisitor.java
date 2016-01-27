@@ -32,7 +32,7 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 		String[] nameSplit = name.split("/");
 		name = nameSplit[nameSplit.length - 1];
 
-		this.clazz = new Class(name, isClass);
+		this.clazz = new Class(name, isClass, signature);
 		IRelation r;
 
 		// if its an interface and has another interface, there is an extends

@@ -21,6 +21,11 @@ public class SingletonDetector implements IPatternDetector {
 		for(IClass c : model.getClasses()){
 			boolean privateConstructor = false;
 			boolean returnsSelf = false;
+			boolean isEnum = false;
+			
+			if(c.getSignature().contains("Enum")){
+				isEnum = true;
+			}
 			
 			for(IMethod m : c.getMethods()){
 				if((m.getAccessNumber() == 9 || m.getAccessNumber() == 41) && m.getReturnType().contains(m.getClazz().getName())){
@@ -32,7 +37,7 @@ public class SingletonDetector implements IPatternDetector {
 				}
 			}
 			
-			if(privateConstructor && returnsSelf){
+			if(privateConstructor && returnsSelf && !isEnum){
 				this.toReplace.add(c);
 			}
 		}

@@ -17,14 +17,16 @@ public class Class implements IClass {
 	private HashSet<IMethod> methods;
 	private Collection<IField> fields;
 	private boolean isClass;
-	private ArrayList<PatternType> patterns; 
+	private ArrayList<PatternType> patterns;
+	private String signature;
 	
-	public Class(String name, boolean isClass) {
+	public Class(String name, boolean isClass, String signature) {
 		this.isClass = isClass;
 		this.name = name;
 		this.methods = new HashSet<IMethod>();
 		this.fields = new ArrayList<IField>();
 		this.patterns = new ArrayList<PatternType>();
+		this.signature = signature;
 	}
 
 	public Class() {
@@ -117,6 +119,10 @@ public class Class implements IClass {
 	@Override
 	public boolean isSingleton() {
 		return false;
+	}
+	
+	public String getSignature(){
+		return this.signature;
 	}
 
 

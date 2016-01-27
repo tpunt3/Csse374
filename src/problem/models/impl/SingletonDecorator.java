@@ -74,4 +74,9 @@ public class SingletonDecorator implements IClass {
 		return true;
 	}
 
+	@Override
+	public String getSignature() {
+		return thisClass.getSignature();
+	}
+
 }

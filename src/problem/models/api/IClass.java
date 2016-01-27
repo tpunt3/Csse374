@@ -13,4 +13,5 @@ public interface IClass extends ITraverser {
 	public void addField(IField f);
 	public boolean getIsClass();
 	public boolean isSingleton();
+	public String getSignature();
 }
