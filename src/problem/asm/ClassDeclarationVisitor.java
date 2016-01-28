@@ -7,6 +7,8 @@ import problem.models.impl.Class;
 import problem.models.impl.Model;
 import problem.models.impl.Relation;
 
+import java.util.ArrayList;
+
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -32,8 +34,9 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 		String[] nameSplit = name.split("/");
 		name = nameSplit[nameSplit.length - 1];
 
-		this.clazz = new Class(name, isClass, signature);
 		IRelation r;
+		String superClass;
+		ArrayList<String> interfaceList = new ArrayList<String>();
 
 		// if its an interface and has another interface, there is an extends
 		// relationship
@@ -43,22 +46,27 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 
 			r = new Relation(name, interfaces[0], RelationType.superclass);
 			this.model.addRelation(r);
+			superClass = interfaces[0];
 		} else {
 			// otherwise, it is an implements relationship
 			for (String s : interfaces) {
 
 				s = splitOnSlash(s);
-
 				r = new Relation(name, s, RelationType.interfaces);
 				this.model.addRelation(r);
+				
+				interfaceList.add(s);
 			}
 			if(superName != null){
 				superName = splitOnSlash(superName);
 	
-				r = new Relation(name, superName, RelationType.superclass);
+				r = new Relation(name, superName, RelationType.superclass);	
 				this.model.addRelation(r);
+				superClass = superName;
 			}
 		}
+		
+		this.clazz = new Class(name, isClass, signature, superName, interfaceList);
 		this.model.addClazz(clazz);
 
 		super.visit(version, access, name, signature, superName, interfaces);

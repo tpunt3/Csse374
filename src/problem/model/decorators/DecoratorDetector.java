@@ -11,7 +11,6 @@ public class DecoratorDetector implements IPatternDetector {
 
 	@Override
 	public void detectPatterns() {
-		// TODO Auto-generated method stub
 
 	}
 
