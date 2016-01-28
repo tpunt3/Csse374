@@ -9,9 +9,9 @@ import org.junit.Test;
 
 import problem.asm.DesignParser;
 import problem.asm.DocType;
-import problem.model.decorators.IPatternDetector;
-import problem.model.decorators.SingletonDetector;
 import problem.model.decorators.PatternType;
+import problem.model.detectors.IPatternDetector;
+import problem.model.detectors.SingletonDetector;
 import problem.models.api.IClass;
 import problem.models.impl.Model;
 import problem.models.impl.SingletonDecorator;

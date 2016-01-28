@@ -15,9 +15,9 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import problem.model.decorators.DecoratorDecorator;
-import problem.model.decorators.DecoratorDetector;
-import problem.model.decorators.IPatternDetector;
-import problem.model.decorators.SingletonDetector;
+import problem.model.detectors.DecoratorDetector;
+import problem.model.detectors.IPatternDetector;
+import problem.model.detectors.SingletonDetector;
 import problem.model.visitor.ITraverser;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;

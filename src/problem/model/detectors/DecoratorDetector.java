@@ -1,7 +1,9 @@
-package problem.model.decorators;
+package problem.model.detectors;
 
 import java.util.ArrayList;
 
+import problem.model.decorators.ComponentDecorator;
+import problem.model.decorators.DecoratorDecorator;
 import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;

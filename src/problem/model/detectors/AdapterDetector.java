@@ -1,4 +1,4 @@
-package problem.model.decorators;
+package problem.model.detectors;
 
 import java.util.ArrayList;
 
