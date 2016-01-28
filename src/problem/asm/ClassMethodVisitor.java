@@ -39,6 +39,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+
 		this.name = name;
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 
@@ -46,7 +47,7 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		this.clazz = this.getClazz();
 		IClass current = this.model.getClazz(this.clazz.getName());
 		MethodVisitor mine = new MyMethodVisitor(Opcodes.ASM5, toDecorate, this.model, this.clazz);
-		
+
 		String accessLevel;
 
 		accessLevel = addAccessLevel(access);
@@ -67,26 +68,31 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 			}
 		}
 
-		System.out.println("signature: " + signature);
-		
 		if (signature != null) {
 			String[] sig = signature.split("/");
 			returnType = sig[sig.length - 1];
 			int index = returnType.indexOf(";");
 			returnType = returnType.substring(0, index);
-			if(returnType.contains("<")){
+			if (returnType.contains("<")) {
 				returnType = returnType.substring(0, returnType.indexOf("<"));
 			}
-			
-			if(signature.equals("()TE;")){
+
+			if (signature.equals("()TE;")) {
 				returnType = "E";
 			}
 		}
-		
+
 		name = name.replace("<", "");
 		name = name.replace(">", "");
+
+		if (name.contains("init")) {
+			returnType = "void";
+		}
 		
-		System.out.println("name:" + name+ " returntype:" + returnType);
+		argList = argList.trim();
+		if(argList.endsWith(";")){
+			argList = argList.substring(0, argList.lastIndexOf(";"));
+		}
 
 		Method m = new Method(accessLevel, access, name, this.argList, returnType, this.clazz,
 				((MyMethodVisitor) mine).getSubMethods());
@@ -100,9 +106,9 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 		if ((access & Opcodes.ACC_PUBLIC) != 0) {
 			// public
 			level = "+";
-		} else if((access & Opcodes.ACC_STATIC) != 0){
+		} else if ((access & Opcodes.ACC_STATIC) != 0) {
 			level = "%";
-		}else if ((access & Opcodes.ACC_PROTECTED) != 0) {
+		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
 			// protected
 			level = "#";
 		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
@@ -121,24 +127,23 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	}
 
 	void addArguments(String desc) throws ClassNotFoundException {
-		//System.out.println(this.signature);
+		// System.out.println(this.signature);
 		String arg = null;
 		this.argList = "";
 		Type[] args = Type.getArgumentTypes(desc);
 		for (int i = 0; i < args.length; i++) {
 			// if instance of Collection, use signature
 			String name = args[i].getClassName();
-			//System.out.println(name);
+			// System.out.println(name);
 			Class<?> cls = null;
 			if (args[i].getClassName().startsWith("java.util.")) {
-				if(name.contains("$"))
+				if (name.contains("$"))
 					name = name.substring(0, name.indexOf("$"));
 				cls = Class.forName(name);
 			}
-			if (cls != null && Collection.class.isAssignableFrom(cls)) {
+			if (cls != null && signature != null) {
 				String[] sigs = this.signature.split(";");
 				for (int j = 0; j < sigs.length - 1; j++) {
-					//System.out.println(sigs[j]);
 					if (!sigs[j].equals(">") && !sigs[j].equals("TT")) {
 						String[] sig = sigs[j].split("/");
 						arg = sig[sig.length - 1];
@@ -153,15 +158,13 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 					}
 				}
 			} else {
-				if (this.signature == null) {
-					arg = args[i].getClassName();
-					String[] splitArg = arg.split("\\.");
-					arg = splitArg[splitArg.length - 1];
-					if (args.length > 1 && i < args.length - 1) {
-						addArgToList(arg, false);
-					} else {
-						addArgToList(arg, true);
-					}
+				arg = args[i].getClassName();
+				String[] splitArg = arg.split("\\.");
+				arg = splitArg[splitArg.length - 1];
+				if (args.length > 1 && i < args.length - 1) {
+					addArgToList(arg, false);
+				} else {
+					addArgToList(arg, true);
 				}
 			}
 		}

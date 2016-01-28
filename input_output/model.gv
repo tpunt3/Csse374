@@ -5,17 +5,31 @@ shape="record",
 label = "{App| + init() : void\l+ main(String[]) : void\l}"
 ];
 
+Enumeration [
+shape="record",
+label = "{\<\<interface\>\>\nEnumeration| + nextElement() : E\l+ hasMoreElements() : boolean\l}"
+];
+
 LinearTransformer [
 shape="record",
-label = "{LinearTransformer| - enumTion: Enumeration\l|+ init() : Enumeration\l+ transform(OutputStream) : void\l}"
+label = "{LinearTransformer| - enumTion: Enumeration\l|+ init(Enumeration) : void\l+ transform(OutputStream) : void\l}"
+];
+
+Iterator [
+shape="record",
+label = "{\<\<interface\>\>\nIterator| + next() : E\l+ forEachRemaining(Consumer) : Consumer\l+ hasNext() : boolean\l+ remove() : void\l}"
 ];
 
 IteratorToEnumerationAdapter [
 shape="record",
-label = "{IteratorToEnumerationAdapter| - itr: Iterator\l|+ init() : Iterator\l+ nextElement() : E\l+ hasMoreElements() : boolean\l}"
+label = "{IteratorToEnumerationAdapter| - itr: Iterator\l|+ init(Iterator) : void\l+ nextElement() : E\l+ hasMoreElements() : boolean\l}"
 ];
 
 //writing relations between classes now
 App -> IteratorToEnumerationAdapter [arrowhead = "vee", style = "dashed"];
+App -> Iterator [arrowhead = "vee", style = "dashed"];
 App -> LinearTransformer [arrowhead = "vee", style = "dashed"];
+IteratorToEnumerationAdapter -> Enumeration [arrowhead = "empty", style = "dashed"];
+IteratorToEnumerationAdapter -> Iterator [arrowhead = "vee"];
+LinearTransformer -> Enumeration [arrowhead = "vee"];
 }

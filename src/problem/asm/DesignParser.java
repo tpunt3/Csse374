@@ -158,7 +158,9 @@ public class DesignParser {
 			
 			"problem.client.App",
 			"problem.client.IteratorToEnumerationAdapter",
-			"problem.lib.LinearTransformer"
+			"problem.lib.LinearTransformer",
+			"java.util.Iterator",
+			"java.util.Enumeration"
 			
 	};
 
