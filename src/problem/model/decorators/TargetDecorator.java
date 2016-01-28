@@ -8,10 +8,11 @@ import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
 
-public class ComponentDecorator extends ClassDecorator {
+public class TargetDecorator extends ClassDecorator {
+
 private IClass thisClass;
 	
-	public ComponentDecorator(IClass c) {
+	public TargetDecorator(IClass c) {
 		this.thisClass = c;
 	}
 
@@ -77,4 +78,5 @@ private IClass thisClass;
 	public ArrayList<String> getInterfaceList() {
 		return thisClass.getInterfaceList();
 	}
+
 }

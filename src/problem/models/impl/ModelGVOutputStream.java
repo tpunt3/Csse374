@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import problem.model.decorators.ComponentDecorator;
 import problem.model.decorators.DecoratorDecorator;
 import problem.model.decorators.PatternType;
+import problem.model.decorators.SingletonDecorator;
 import problem.model.detectors.IPatternDetector;
 import problem.model.detectors.SingletonDetector;
 import problem.model.visitor.ITraverser;

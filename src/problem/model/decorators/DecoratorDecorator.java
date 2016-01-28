@@ -77,10 +77,4 @@ public class DecoratorDecorator extends ClassDecorator {
 	public ArrayList<String> getInterfaceList() {
 		return thisClass.getInterfaceList();
 	}
-
-	@Override
-	public boolean isSingleton() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

@@ -126,11 +126,6 @@ public class Class implements IClass {
 			return false;
 		return true;
 	}
-
-	@Override
-	public boolean isSingleton() {
-		return false;
-	}
 	
 	public String getSignature(){
 		return this.signature;

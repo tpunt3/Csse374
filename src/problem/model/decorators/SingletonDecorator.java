@@ -1,9 +1,8 @@
-package problem.models.impl;
+package problem.model.decorators;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import problem.model.decorators.PatternType;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IField;
@@ -77,12 +76,6 @@ public class SingletonDecorator implements IClass {
 	@Override
 	public ArrayList<String> getInterfaceList() {
 		return thisClass.getInterfaceList();
-	}
-
-	@Override
-	public boolean isSingleton() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

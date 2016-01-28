@@ -2,10 +2,10 @@ package problem.model.detectors;
 
 import java.util.ArrayList;
 
+import problem.model.decorators.SingletonDecorator;
 import problem.models.api.IClass;
 import problem.models.api.IMethod;
 import problem.models.api.IModel;
-import problem.models.impl.SingletonDecorator;
 
 public class SingletonDetector implements IPatternDetector {
 	private IModel model;
