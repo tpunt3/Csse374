@@ -15,6 +15,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import problem.model.decorators.DecoratorDecorator;
+import problem.model.detectors.AdapterDetector;
 import problem.model.detectors.DecoratorDetector;
 import problem.model.detectors.IPatternDetector;
 import problem.model.detectors.SingletonDetector;
@@ -241,6 +242,9 @@ public class DesignParser {
 		
 		IPatternDetector decoratorDetector = new DecoratorDetector(model);
 		decoratorDetector.detectPatterns();
+		
+		IPatternDetector adapterDetector = new AdapterDetector(model);
+		adapterDetector.detectPatterns();
 		
 		ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream("input_output/model.gv"));
 		gv.write(model);
