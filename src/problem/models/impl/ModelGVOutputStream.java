@@ -5,10 +5,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import problem.model.decorators.AdapteeDecorator;
+import problem.model.decorators.AdapterDecorator;
 import problem.model.decorators.ComponentDecorator;
 import problem.model.decorators.DecoratorDecorator;
 import problem.model.decorators.PatternType;
 import problem.model.decorators.SingletonDecorator;
+import problem.model.decorators.TargetDecorator;
 import problem.model.detectors.IPatternDetector;
 import problem.model.detectors.SingletonDetector;
 import problem.model.visitor.ITraverser;
@@ -78,6 +81,8 @@ public class ModelGVOutputStream extends FilterOutputStream {
 				s = String.format("%s [\nshape=\"record\",color=blue\n", c.getName());
 			}else if(c instanceof DecoratorDecorator || c instanceof ComponentDecorator){
 				s = String.format("%s [\nshape=\"record\",color=green\n", c.getName());
+			}else if(c instanceof AdapterDecorator || c instanceof AdapteeDecorator || c instanceof TargetDecorator){
+				s = String.format("%s [\nshape=\"record\",color=red\n", c.getName());
 			}else{
 				s = String.format("%s [\nshape=\"record\",\n", c.getName());
 			}
@@ -93,6 +98,8 @@ public class ModelGVOutputStream extends FilterOutputStream {
 			if (!c.getIsClass()) {
 				if(c instanceof ComponentDecorator){
 					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<component\\>\\>| ", c.getName());
+				}else if(c instanceof TargetDecorator){
+					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<target\\>\\>| ", c.getName());
 				}else{
 					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
 				}
@@ -102,6 +109,12 @@ public class ModelGVOutputStream extends FilterOutputStream {
 				s = String.format("label = \"{%s\\n\\<\\<decorator\\>\\>|", c.getName());
 			}else if(c instanceof ComponentDecorator){
 				s = String.format("label = \"{%s\\n\\<\\<component\\>\\>|", c.getName());
+			}else if(c instanceof AdapterDecorator){
+				s = String.format("label = \"{%s\\n\\<\\<adapter\\>\\>|", c.getName());
+			}else if(c instanceof AdapteeDecorator){
+				s = String.format("label = \"{%s\\n\\<\\<adaptee\\>\\>|", c.getName());
+			}else if(c instanceof TargetDecorator){
+				s = String.format("label = \"{%s\\n\\<\\<target\\>\\>|", c.getName());
 			}
 			else{
 				s = String.format("label = \"{%s| ", c.getName());

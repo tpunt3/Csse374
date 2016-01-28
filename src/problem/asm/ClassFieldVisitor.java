@@ -42,6 +42,9 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 			type = sig[sig.length - 1];
 			int index = type.indexOf(";");
 			type = type.substring(0, index);
+			if(type.contains("<")){
+				type = type.substring(0,type.indexOf("<"));
+			}
 			
 			IRelation relation = new Relation(this.clazz.getName(), type, RelationType.association);
 			
@@ -53,7 +56,6 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 			IRelation relation = new Relation(this.clazz.getName(), type, RelationType.association);
 			this.model.addRelation(relation);
 		}
-		
 		
 		IClass current = this.model.getClazz(this.clazz.getName());
 		Field f = new Field(type, name, accessLevel);

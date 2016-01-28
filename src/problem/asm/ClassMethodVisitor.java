@@ -67,15 +67,26 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 			}
 		}
 
+		System.out.println("signature: " + signature);
+		
 		if (signature != null) {
 			String[] sig = signature.split("/");
 			returnType = sig[sig.length - 1];
 			int index = returnType.indexOf(";");
 			returnType = returnType.substring(0, index);
+			if(returnType.contains("<")){
+				returnType = returnType.substring(0, returnType.indexOf("<"));
+			}
+			
+			if(signature.equals("()TE;")){
+				returnType = "E";
+			}
 		}
 		
 		name = name.replace("<", "");
 		name = name.replace(">", "");
+		
+		System.out.println("name:" + name+ " returntype:" + returnType);
 
 		Method m = new Method(accessLevel, access, name, this.argList, returnType, this.clazz,
 				((MyMethodVisitor) mine).getSubMethods());
@@ -110,21 +121,24 @@ public class ClassMethodVisitor extends ClassVisitor implements IClazzGetter {
 	}
 
 	void addArguments(String desc) throws ClassNotFoundException {
+		//System.out.println(this.signature);
 		String arg = null;
 		this.argList = "";
 		Type[] args = Type.getArgumentTypes(desc);
 		for (int i = 0; i < args.length; i++) {
 			// if instance of Collection, use signature
 			String name = args[i].getClassName();
+			//System.out.println(name);
 			Class<?> cls = null;
 			if (args[i].getClassName().startsWith("java.util.")) {
 				if(name.contains("$"))
 					name = name.substring(0, name.indexOf("$"));
 				cls = Class.forName(name);
 			}
-			if (cls != null && Collection.class.isAssignableFrom(cls) && this.signature != null) {
+			if (cls != null && Collection.class.isAssignableFrom(cls)) {
 				String[] sigs = this.signature.split(";");
 				for (int j = 0; j < sigs.length - 1; j++) {
+					//System.out.println(sigs[j]);
 					if (!sigs[j].equals(">") && !sigs[j].equals("TT")) {
 						String[] sig = sigs[j].split("/");
 						arg = sig[sig.length - 1];
