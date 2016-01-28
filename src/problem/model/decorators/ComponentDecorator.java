@@ -1,18 +1,17 @@
-package problem.models.impl;
+package problem.model.decorators;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import problem.model.decorators.PatternType;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
 
-public class SingletonDecorator implements IClass {
-	private IClass thisClass;
+public class ComponentDecorator implements IClass {
+private IClass thisClass;
 	
-	public SingletonDecorator(IClass c) {
+	public ComponentDecorator(IClass c) {
 		this.thisClass = c;
 	}
 
@@ -84,5 +83,4 @@ public class SingletonDecorator implements IClass {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

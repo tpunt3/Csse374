@@ -14,6 +14,8 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
+import problem.model.decorators.DecoratorDecorator;
+import problem.model.decorators.DecoratorDetector;
 import problem.model.decorators.IPatternDetector;
 import problem.model.decorators.SingletonDetector;
 import problem.model.visitor.ITraverser;
@@ -87,33 +89,33 @@ public class DesignParser {
 			// "headfirst.factory.pizzas.SimplePizzaFactory",
 			// "headfirst.factory.pizzas.VeggiePizza",
 
-			"problem.asm.ClassDeclarationVisitor", 
-			"problem.asm.ClassFieldVisitor", 
-			"problem.asm.ClassMethodVisitor",
-			"problem.asm.DesignParser", 
-			"problem.asm.IClazzGetter", 
-			"problem.asm.MyMethodVisitor",
-			"problem.asm.DocType", 
-			"problem.model.visitor.ITraverser",
-			"problem.model.visitor.IVisitor",
-			"problem.model.visitor.Visitor",
-			"problem.model.visitor.LookupKey",
-			"problem.model.visitor.VisitType",
-			"problem.model.visitor.IVisitMethod",
-			"problem.models.api.IClass", 
-			"problem.models.api.IField",
-			"problem.models.api.IMethod", 
-			"problem.models.api.IModel", 
-			"problem.models.api.IRelation",
-			"problem.models.api.ISubMethod", 
-			"problem.models.api.RelationType", 
-			"problem.models.impl.Class",
-			"problem.models.impl.Field", 
-			"problem.models.impl.Method", 
-			"problem.models.impl.Model",
-			"problem.models.impl.ModelGVOutputStream", 
-			"problem.models.impl.Relation", 
-			"problem.models.impl.SubMethod"
+//			"problem.asm.ClassDeclarationVisitor", 
+//			"problem.asm.ClassFieldVisitor", 
+//			"problem.asm.ClassMethodVisitor",
+//			"problem.asm.DesignParser", 
+//			"problem.asm.IClazzGetter", 
+//			"problem.asm.MyMethodVisitor",
+//			"problem.asm.DocType", 
+//			"problem.model.visitor.ITraverser",
+//			"problem.model.visitor.IVisitor",
+//			"problem.model.visitor.Visitor",
+//			"problem.model.visitor.LookupKey",
+//			"problem.model.visitor.VisitType",
+//			"problem.model.visitor.IVisitMethod",
+//			"problem.models.api.IClass", 
+//			"problem.models.api.IField",
+//			"problem.models.api.IMethod", 
+//			"problem.models.api.IModel", 
+//			"problem.models.api.IRelation",
+//			"problem.models.api.ISubMethod", 
+//			"problem.models.api.RelationType", 
+//			"problem.models.impl.Class",
+//			"problem.models.impl.Field", 
+//			"problem.models.impl.Method", 
+//			"problem.models.impl.Model",
+//			"problem.models.impl.ModelGVOutputStream", 
+//			"problem.models.impl.Relation", 
+//			"problem.models.impl.SubMethod"
 
 		//	 "java.util.Collections",
 
@@ -131,6 +133,19 @@ public class DesignParser {
 			
 				//"headfirst.singleton.chocolate.ChocolateBoiler",
 				//"headfirst.singleton.chocolate.ChocolateController"
+			
+			"headfirst.decorator.starbuzz.Beverage", 
+			"headfirst.decorator.starbuzz.CondimentDecorator",
+			"headfirst.decorator.starbuzz.DarkRoast",
+			"headfirst.decorator.starbuzz.Decaf",
+			"headfirst.decorator.starbuzz.Espresso",
+			"headfirst.decorator.starbuzz.HouseBlend",
+			"headfirst.decorator.starbuzz.Milk", 
+			"headfirst.decorator.starbuzz.Mocha",
+			"headfirst.decorator.starbuzz.Soy",
+			"headfirst.decorator.starbuzz.StarbuzzCoffee",
+			"headfirst.decorator.starbuzz.Whip"
+			
 	};
 
 	/**
@@ -212,8 +227,11 @@ public class DesignParser {
 
 	public void generateUML(Model model) throws IOException {
 		
-		IPatternDetector pd = new SingletonDetector(model);
-		pd.detectPatterns();
+		IPatternDetector singletonDetector = new SingletonDetector(model);
+		singletonDetector.detectPatterns();
+		
+		IPatternDetector decoratorDetector = new DecoratorDetector(model);
+		decoratorDetector.detectPatterns();
 		
 		ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream("input_output/model.gv"));
 		gv.write(model);

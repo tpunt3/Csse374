@@ -1,5 +1,6 @@
 package problem.models.api;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import problem.model.decorators.PatternType;
@@ -14,4 +15,6 @@ public interface IClass extends ITraverser {
 	public boolean getIsClass();
 	public boolean isSingleton();
 	public String getSignature();
+	public String getSuperClass();
+	public ArrayList<String> getInterfaceList();
 }

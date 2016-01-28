@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import problem.model.decorators.ComponentDecorator;
+import problem.model.decorators.DecoratorDecorator;
 import problem.model.decorators.IPatternDetector;
 import problem.model.decorators.PatternType;
 import problem.model.decorators.SingletonDetector;
@@ -73,7 +75,9 @@ public class ModelGVOutputStream extends FilterOutputStream {
 			String s;
 			if(c instanceof SingletonDecorator){
 				s = String.format("%s [\nshape=\"record\",color=blue\n", c.getName());
-			} else{
+			}else if(c instanceof DecoratorDecorator || c instanceof ComponentDecorator){
+				s = String.format("%s [\nshape=\"record\",color=green\n", c.getName());
+			}else{
 				s = String.format("%s [\nshape=\"record\",\n", c.getName());
 			}
 			this.write(s);
@@ -89,7 +93,11 @@ public class ModelGVOutputStream extends FilterOutputStream {
 				s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
 			} else if(c instanceof SingletonDecorator){
 				s = String.format("label = \"{%s\\n\\<\\<Singleton\\>\\>|", c.getName());
-			} 
+			} else if(c instanceof DecoratorDecorator){
+				s = String.format("label = \"{%s\\n\\<\\<decorator\\>\\>|", c.getName());
+			}else if(c instanceof ComponentDecorator){
+				s = String.format("label = \"{%s\\n\\<\\<component\\>\\>|", c.getName());
+			}
 			else{
 				s = String.format("label = \"{%s| ", c.getName());
 			}

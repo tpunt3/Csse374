@@ -82,10 +82,12 @@ public class Class implements IClass {
 		return this.isClass;
 	}
 	
+	@Override
 	public String getSuperClass(){
 		return this.superClass;
 	}
 	
+	@Override
 	public ArrayList<String> getInterfaceList(){
 		return this.interfaceList;
 	}

@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,13 +38,13 @@ public class AddRelationLogicTesting {
 	@Before
 	public void setUp(){
 		testModel = Model.getInstance();
-		class1 = new Class("CoreClass", true, "");
-		class2 = new Class("SuperClass", true, "");
-		class3 = new Class("Interface", false, "");
-		class4 = new Class("AssociatedClass", true, "");
-		class5 = new Class("UsedClass", true, "");
-		class6 = new Class("AssociatedThenUsedClass", true, "");
-		class7 = new Class("UsedThenAssociatedClass", true, "");
+		class1 = new Class("CoreClass", true, "", "", new ArrayList<String>());
+		class2 = new Class("SuperClass", true, "", "", new ArrayList<String>());
+		class3 = new Class("Interface", false, "", "", new ArrayList<String>());
+		class4 = new Class("AssociatedClass", true, "", "", new ArrayList<String>());
+		class5 = new Class("UsedClass", true, "", "", new ArrayList<String>());
+		class6 = new Class("AssociatedThenUsedClass", true, "", "", new ArrayList<String>());
+		class7 = new Class("UsedThenAssociatedClass", true, "", "", new ArrayList<String>());
 		
 		testModel.addClazz(class1);
 		testModel.addClazz(class2);
