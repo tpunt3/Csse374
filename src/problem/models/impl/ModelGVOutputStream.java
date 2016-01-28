@@ -90,7 +90,11 @@ public class ModelGVOutputStream extends FilterOutputStream {
 			
 			String s;
 			if (!c.getIsClass()) {
-				s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
+				if(c instanceof ComponentDecorator){
+					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<component\\>\\>| ", c.getName());
+				}else{
+					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
+				}
 			} else if(c instanceof SingletonDecorator){
 				s = String.format("label = \"{%s\\n\\<\\<Singleton\\>\\>|", c.getName());
 			} else if(c instanceof DecoratorDecorator){
@@ -162,11 +166,19 @@ public class ModelGVOutputStream extends FilterOutputStream {
 				case interfaces:
 					visitInterfaces(r);
 					break;
+				case decorates:
+					visitDecorates(r);
+					break;
 				}
 			}
 		});
 	}
 
+	private void visitDecorates(IRelation r){
+		String s = String.format("\n%s -> %s [arrowhead = \"vee\", label = \"decorates\"];", r.getName(), r.getRelatedClass());
+		this.write(s);
+	}
+	
 	private void visitAssociations(IRelation r) {
 		String s = String.format("\n%s -> %s [arrowhead = \"vee\"];", r.getName(), r.getRelatedClass());
 		this.write(s);

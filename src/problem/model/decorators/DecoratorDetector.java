@@ -6,7 +6,9 @@ import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
 import problem.models.api.IModel;
-import problem.models.impl.SingletonDecorator;
+import problem.models.api.IRelation;
+import problem.models.api.RelationType;
+import problem.models.impl.Relation;
 
 public class DecoratorDetector implements IPatternDetector {
 	private IModel model;
@@ -43,7 +45,10 @@ public class DecoratorDetector implements IPatternDetector {
 
 							// now we recurse to see if component is in the
 							// hierarchy
-							boolean isDecorator = findComponent(c, component);
+							boolean isDecorator = false;
+							if(component != null){
+								isDecorator = findComponent(c, component);
+							}
 							if(isDecorator){
 								this.decorators.add(c);
 								this.components.add(component);
@@ -78,6 +83,8 @@ public class DecoratorDetector implements IPatternDetector {
 						}
 					}
 					this.decorators.add(newInterface);
+					IRelation r = new Relation(newInterface.getName(),component.getName(),RelationType.decorates);
+					this.model.addRelation(r);
 					return true;
 				}
 			}
@@ -93,6 +100,8 @@ public class DecoratorDetector implements IPatternDetector {
 				if(newInterface != null){
 					if(findComponent(newInterface, component)){
 						this.decorators.add(newInterface);
+						IRelation r = new Relation(newInterface.getName(),component.getName(),RelationType.decorates);
+						this.model.addRelation(r);
 						return true;
 					}
 				}
@@ -100,12 +109,6 @@ public class DecoratorDetector implements IPatternDetector {
 
 		} else if (decorator.getInterfaceList().isEmpty()) {
 			if (decorator.getSuperClass().equals(component.getName())) {
-				IClass superClass = null;
-				for (IClass c : this.model.getClasses()) {
-					if (c.getName().equals(decorator.getSuperClass())) {
-						superClass = c;
-					}
-				}
 				return true;
 			} else {
 				IClass superClass = null;
@@ -119,6 +122,8 @@ public class DecoratorDetector implements IPatternDetector {
 				if (superClass != null) {
 					if (findComponent(superClass, component)) {
 						this.decorators.add(superClass);
+						IRelation r = new Relation(superClass.getName(),component.getName(),RelationType.decorates);
+						this.model.addRelation(r);
 						return true;
 					}
 				}
@@ -128,13 +133,6 @@ public class DecoratorDetector implements IPatternDetector {
 			
 			//recurse on the superclass
 			if (decorator.getSuperClass().equals(component.getName())) {
-				IClass superClass = null;
-				for (IClass c : this.model.getClasses()) {
-					if (c.getName().equals(decorator.getSuperClass())) {
-						superClass = c;
-					}
-				}
-				this.decorators.add(superClass);
 				return true;
 			} else {
 				IClass superClass = null;
@@ -147,6 +145,8 @@ public class DecoratorDetector implements IPatternDetector {
 				if (superClass != null) {
 					if (findComponent(superClass, component)) {
 						this.decorators.add(superClass);
+						IRelation r = new Relation(superClass.getName(),component.getName(),RelationType.decorates);
+						this.model.addRelation(r);
 						return true;
 					}
 				}
@@ -155,13 +155,6 @@ public class DecoratorDetector implements IPatternDetector {
 			//recurse on the interfaces
 			for (String s : decorator.getInterfaceList()) {
 				if (s.equals(component.getName())) {
-					IClass newInterface = null;
-					for (IClass c : this.model.getClasses()) {
-						if (c.getName().equals(s)) {
-							newInterface = c;
-						}
-					}
-					this.decorators.add(newInterface);
 					return true;
 				}
 			}
@@ -177,6 +170,8 @@ public class DecoratorDetector implements IPatternDetector {
 				if(newInterface != null){
 					if(findComponent(newInterface, component)){
 						this.decorators.add(newInterface);
+						IRelation r = new Relation(newInterface.getName(),component.getName(),RelationType.decorates);
+						this.model.addRelation(r);
 						return true;
 					}
 				}

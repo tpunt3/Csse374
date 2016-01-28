@@ -4,5 +4,6 @@ public enum RelationType {
 	superclass,
 	interfaces,
 	uses,
-	association
+	association,
+	decorates
 }

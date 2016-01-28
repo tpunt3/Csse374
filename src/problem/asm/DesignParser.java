@@ -89,33 +89,42 @@ public class DesignParser {
 			// "headfirst.factory.pizzas.SimplePizzaFactory",
 			// "headfirst.factory.pizzas.VeggiePizza",
 
-//			"problem.asm.ClassDeclarationVisitor", 
-//			"problem.asm.ClassFieldVisitor", 
-//			"problem.asm.ClassMethodVisitor",
-//			"problem.asm.DesignParser", 
-//			"problem.asm.IClazzGetter", 
-//			"problem.asm.MyMethodVisitor",
-//			"problem.asm.DocType", 
-//			"problem.model.visitor.ITraverser",
-//			"problem.model.visitor.IVisitor",
-//			"problem.model.visitor.Visitor",
-//			"problem.model.visitor.LookupKey",
-//			"problem.model.visitor.VisitType",
-//			"problem.model.visitor.IVisitMethod",
-//			"problem.models.api.IClass", 
-//			"problem.models.api.IField",
-//			"problem.models.api.IMethod", 
-//			"problem.models.api.IModel", 
-//			"problem.models.api.IRelation",
-//			"problem.models.api.ISubMethod", 
-//			"problem.models.api.RelationType", 
-//			"problem.models.impl.Class",
-//			"problem.models.impl.Field", 
-//			"problem.models.impl.Method", 
-//			"problem.models.impl.Model",
-//			"problem.models.impl.ModelGVOutputStream", 
-//			"problem.models.impl.Relation", 
-//			"problem.models.impl.SubMethod"
+			"problem.asm.ClassDeclarationVisitor", 
+			"problem.asm.ClassFieldVisitor", 
+			"problem.asm.ClassMethodVisitor",
+			"problem.asm.DesignParser", 
+			"problem.asm.IClazzGetter", 
+			"problem.asm.MyMethodVisitor",
+			"problem.asm.DocType", 
+			"problem.model.decorators.AdapterDetector",
+			"problem.model.decorators.ComponentDecorator",
+			"problem.model.decorators.DecoratorDecorator",
+			"problem.model.decorators.ClassDecorator",
+			"problem.model.decorators.IPatternDetector",
+			"problem.model.decorators.PatternType",
+			"problem.model.decorators.SingletonDetector",
+			"problem.model.visitor.ITraverser",
+			"problem.model.visitor.IVisitor",
+			"problem.model.visitor.Visitor",
+			"problem.model.visitor.LookupKey",
+			"problem.model.visitor.VisitType",
+			"problem.model.visitor.IVisitMethod",
+			"problem.models.api.IClass", 
+			"problem.models.api.IField",
+			"problem.models.api.IMethod", 
+			"problem.models.api.IModel", 
+			"problem.models.api.IRelation",
+			"problem.models.api.ISubMethod", 
+			"problem.models.api.RelationType", 
+			"problem.models.impl.Class",
+			"problem.models.impl.Field", 
+			"problem.models.impl.Method", 
+			"problem.models.impl.Model",
+			"problem.models.impl.ModelGVOutputStream", 
+			"problem.models.impl.ModelSDOutputStream",
+			"problem.models.impl.Relation",
+			"problem.models.impl.SingletonDecorator",
+			"problem.models.impl.SubMethod"
 
 		//	 "java.util.Collections",
 
@@ -134,17 +143,17 @@ public class DesignParser {
 				//"headfirst.singleton.chocolate.ChocolateBoiler",
 				//"headfirst.singleton.chocolate.ChocolateController"
 			
-			"headfirst.decorator.starbuzz.Beverage", 
-			"headfirst.decorator.starbuzz.CondimentDecorator",
-			"headfirst.decorator.starbuzz.DarkRoast",
-			"headfirst.decorator.starbuzz.Decaf",
-			"headfirst.decorator.starbuzz.Espresso",
-			"headfirst.decorator.starbuzz.HouseBlend",
-			"headfirst.decorator.starbuzz.Milk", 
-			"headfirst.decorator.starbuzz.Mocha",
-			"headfirst.decorator.starbuzz.Soy",
-			"headfirst.decorator.starbuzz.StarbuzzCoffee",
-			"headfirst.decorator.starbuzz.Whip"
+//			"headfirst.decorator.starbuzz.Beverage", 
+//			"headfirst.decorator.starbuzz.CondimentDecorator",
+//			"headfirst.decorator.starbuzz.DarkRoast",
+//			"headfirst.decorator.starbuzz.Decaf",
+//			"headfirst.decorator.starbuzz.Espresso",
+//			"headfirst.decorator.starbuzz.HouseBlend",
+//			"headfirst.decorator.starbuzz.Milk", 
+//			"headfirst.decorator.starbuzz.Mocha",
+//			"headfirst.decorator.starbuzz.Soy",
+//			"headfirst.decorator.starbuzz.StarbuzzCoffee",
+//			"headfirst.decorator.starbuzz.Whip"
 			
 	};
 
@@ -237,10 +246,10 @@ public class DesignParser {
 		gv.write(model);
 		gv.close();
 
-		 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		 "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
-		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-			//	"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		 //ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		 //"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+				"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;

@@ -8,7 +8,7 @@ import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
 
-public class DecoratorDecorator implements IClass {
+public class DecoratorDecorator extends ClassDecorator {
 	private IClass thisClass;
 	
 	public DecoratorDecorator(IClass c) {

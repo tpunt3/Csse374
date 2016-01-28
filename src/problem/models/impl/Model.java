@@ -73,6 +73,7 @@ public class Model implements IModel {
 		this.relations = relations;
 	}
 
+	@Override
 	public void addRelation(IRelation r) {
 
 		boolean inClasses = false;
