@@ -49,7 +49,7 @@ public class AdapterDetector implements IPatternDetector {
 							IClass target = null;
 
 							boolean isAdapter = false;
-							if (adaptee != null) {
+							if (adaptee != null && c != null) {
 
 								target = checkHierarchy(c, adaptee);
 
@@ -92,13 +92,21 @@ public class AdapterDetector implements IPatternDetector {
 
 				String interfaceName = adapter.getInterfaceList().get(0);
 				if (!interfaceName.equals(adaptee.getName())) {
+
 					IClass newInterface = null;
 					for (IClass c : this.model.getClasses()) {
 						if (c.getName().equals(interfaceName)) {
 							newInterface = c;
 						}
 					}
-					return newInterface;
+
+					if (newInterface != null) {
+						if (checkHierarchy(newInterface, adaptee) != null) {
+							return newInterface;
+						} else {
+							return null;
+						}
+					}
 				}
 			}
 
@@ -112,7 +120,14 @@ public class AdapterDetector implements IPatternDetector {
 						superClass = c;
 					}
 				}
-				return superClass;
+				// make sure none of its superclasses are that either
+				if (superClass != null) {
+					if (checkHierarchy(superClass, adaptee) != null) {
+						return superClass;
+					} else {
+						return null;
+					}
+				}
 			}
 
 		} else {
