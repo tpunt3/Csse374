@@ -35,7 +35,7 @@ public class ClassDeclarationVisitor extends ClassVisitor implements IClazzGette
 		name = nameSplit[nameSplit.length - 1];
 
 		IRelation r;
-		String superClass;
+		String superClass = "";
 		ArrayList<String> interfaceList = new ArrayList<String>();
 
 		// if its an interface and has another interface, there is an extends
