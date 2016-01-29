@@ -99,6 +99,8 @@ public class ModelGVOutputStream extends FilterOutputStream {
 					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<component\\>\\>| ", c.getName());
 				}else if(c instanceof TargetDecorator){
 					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<target\\>\\>| ", c.getName());
+				}else if(c instanceof AdapteeDecorator){
+					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<adaptee\\>\\>| ", c.getName());
 				}else{
 					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
 				}

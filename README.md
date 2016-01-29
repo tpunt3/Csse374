@@ -19,6 +19,9 @@ For this milestone we continued to pair program, switching off regularly and whe
 Milestone 4
 For this milestone we continued to pair program. All code we wrote was done together, including new code additions and refactoring of old code. There was not much new code needed for this milestone, so there aren't very many commits.
 
+Milestone 5
+During this milestone, Trent was sick so we had to skype call to pair program. We continued to work very closely together even though we could not meet in person. We made great progress on singleton and adapter/decorator and feel pretty good about the progress we made/design decisions we incorporated. We still did almost every commit together because we work very closely.
+
 Instructions to use our code:
 1.) Go to the DesignParser.java class in problem.asm
 2.) Change the array of strings called CLASSES to reflect which classes you'd like to generate a UML for
@@ -53,17 +56,16 @@ We added logic in our Class Class, to detect if it is a Singleton. To do this, w
 Picture of Milestone 4:
 ![Milestone4](./docs/FinalProjectUML_M4.png)
 
+Milestone 5:
+In this milestone, we added code to our project that uses the decorator pattern to help us display patterns. This changed our previous code for singleton detection but hopefully will make it far easier to detect other patterns in the future. We hope our design decisions will be easily extensible. We added detectors for each pattern that run through our model and search for their respective patterns after the model is created. We also created decorators for each pattern that decorate IClass with the correct pattern if any of the detectors find that class to be part of any designated pattern. Detectors/decorators were added for singleton pattern, adapter pattern, and decorator pattern.
+
+Picture of Milestone 5:
+![Milestone5](./docs/FinalProjectUML_M5.png)
+
 
 Locations and names of important documents:
-- Generated .gv file: called "model.gv" and located in the input_output folder.
-- Generated .png file for the UML: called "graph1.png" and located in the input_output folder.
-- Generated .sd file: called "sequence.sd" and located in the input_output folder.
-- Generated .png file for the sequence diagram: called "SD.png" and located in the input_output folder.
 
-- Generated UML .png file for Lab 1-3: called Lab1-3_GeneratedUML.png and located in the docs folder.
-- Generated UML .png file for FinalProject: called FinalProject_GeneratedUML_M#.png and located in the docs folder.
-- Generated UML .png file for the Pizza project: called Pizza_GeneratedUML.png and located in the docs folder.
-- Generated sequence diagram .png file for the Collections, shuffle: called "shuffle_SD_generated.png" and located in the docs folder. 
-
-- Our manually created UML: called "FinalProjectUML.uxf" (for the UMLet file) and "FinalProjectUML_M#.png" (for a .png version, with the M# representing the milestone for which it was created), both are located in the docs folder.
-- Our manually created sequence diagram for Collections, shuffle: called "shuffle_SD_manual.uxf" or "shuffle_SD_manual.png" depending on the type and located in the docs folder.
+-All of our sequence diagram .png's and .uxf's are in the folder called "sequence_diagrams"
+-All of our uml .png's and .uxf's are in the folder called "UML_diagrams"
+UML diagrams depicting our final project code are in the subfolder of UML_diagrams called "our_project"
+Other files in UML_diagrams are requested tests on projects we did in class
