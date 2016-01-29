@@ -33,10 +33,16 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 		String accessLevel;
 		accessLevel = addAccessLevel(access);
 		
+		if(name.equals("keyToCommandMap")){
+			System.out.println(signature);
+		}
+		
 		this.clazz = this.getClazz();
 		
-		if (signature != null) {
+		if (signature != null && !type.equals("Map")) {
 			//add association for collection
+			
+			System.out.println(type);
 			
 			String[] sig = signature.split("/");
 			type = sig[sig.length - 1];
