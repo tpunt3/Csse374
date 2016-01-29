@@ -36,31 +36,31 @@ Milestone 1
 Our relation was not designed the best in milestone 1, but it was a learning experience. We had different constructors for all of our different types of relations which made it somewhat difficult to keep track of them. We also had not implemented uses or association arrows at this time so our UML looked incomplete. 
 
 Picture of Milestone 1:
-![Milestone1](./docs/FinalProjectUML_M1.png)
+![Milestone1](./UML_diagrams/our_project/FinalProjectUML_M1.png)
 
 Milestone 2
 We refactored relation so that it takes in what class has the relation, what class it is being related to, and the type of relation. This has made our implementation much more simple in many ways. For instance, it much easier to write the logic of when to exclude arrows with this implementation of relation. We also had some unnecessary methods and fields in our project before that have been removed. Our design definitely got better in milestone 2.
 
 Picture of Milestone 2:
-![Milestone2](./docs/FinalProjectUML_M2.png)
+![Milestone2](./UML_diagrams/our_project/FinalProjectUML_M2.png)
 
 Milestone 3
 For this milestone we added only a few classes (DocType, ISubMethod, and SubMethod). ISubmethod and SubMethod fit into our existing hierarchy of objects like Method and Field and their interfaces IMethod and IField. The biggest changes were in how we run DesignParser, and the addition of logic in Model to recursively run through our model, find the information we need for our sequence diagram, format it correctly, and then print it to the correct file. In DesignParser we now require a DocType, which tells DesignParser which kind of document to generate, a UML, sequence diagram, or both. We also included code to automatically create a .png of the generated sequence diagram.
 
 Picture of Milestone 3:
-![Milestone3](./docs/FinalProjectUML_M3.png)
+![Milestone3](./UML_diagrams/our_project/FinalProjectUML_M3.png)
 
 Milestone 4
 We added logic in our Class Class, to detect if it is a Singleton. To do this, we check if a class has a private constructor, a private static field, and a public static method. When we call ClassMethodVisitor, it checks if the method is a private constructor or a public static method. If it is, the appropriate boolean in the Class it belongs to is set to true. When we call ClassFieldVisitor, it checks if the field is a private static field. If it is, the appropriate boolean in the Class it belongs to is set to true. If all three of the necessary requirements are met, then when isSingleton() is called on that Class, it will return true. Then, when we create our .gv file, before we print out the text for a class, we check if it is a Singleton, and make the appropriate changes. 
 
 Picture of Milestone 4:
-![Milestone4](./docs/FinalProjectUML_M4.png)
+![Milestone4](./UML_diagrams/our_project/FinalProjectUML_M4.png)
 
 Milestone 5:
 In this milestone, we added code to our project that uses the decorator pattern to help us display patterns. This changed our previous code for singleton detection but hopefully will make it far easier to detect other patterns in the future. We hope our design decisions will be easily extensible. We added detectors for each pattern that run through our model and search for their respective patterns after the model is created. We also created decorators for each pattern that decorate IClass with the correct pattern if any of the detectors find that class to be part of any designated pattern. Detectors/decorators were added for singleton pattern, adapter pattern, and decorator pattern.
 
 Picture of Milestone 5:
-![Milestone5](./docs/FinalProjectUML_M5.png)
+![Milestone5](./UML_diagrams/our_project/FinalProjectUML_M5.png)
 
 
 Locations and names of important documents:
