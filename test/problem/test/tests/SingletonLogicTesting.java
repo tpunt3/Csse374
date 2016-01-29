@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import problem.asm.DesignParser;
 import problem.asm.DocType;
-import problem.model.decorators.PatternType;
 import problem.model.decorators.SingletonDecorator;
 import problem.model.detectors.IPatternDetector;
 import problem.model.detectors.SingletonDetector;

@@ -9,7 +9,6 @@ import problem.model.decorators.AdapteeDecorator;
 import problem.model.decorators.AdapterDecorator;
 import problem.model.decorators.ComponentDecorator;
 import problem.model.decorators.DecoratorDecorator;
-import problem.model.decorators.PatternType;
 import problem.model.decorators.SingletonDecorator;
 import problem.model.decorators.TargetDecorator;
 import problem.model.detectors.IPatternDetector;

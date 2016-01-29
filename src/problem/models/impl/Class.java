@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
-import problem.model.decorators.PatternType;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IField;

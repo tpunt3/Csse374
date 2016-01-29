@@ -141,8 +141,8 @@ public class DesignParser {
 			// "problem.IDirectoryMonitorService",
 			// "problem.ProcessRunner"
 			
-				//"headfirst.singleton.chocolate.ChocolateBoiler",
-				//"headfirst.singleton.chocolate.ChocolateController"
+			//"headfirst.singleton.chocolate.ChocolateBoiler",
+			//"headfirst.singleton.chocolate.ChocolateController"
 			
 //			"headfirst.decorator.starbuzz.Beverage", 
 //			"headfirst.decorator.starbuzz.CondimentDecorator",
@@ -154,13 +154,18 @@ public class DesignParser {
 //			"headfirst.decorator.starbuzz.Mocha",
 //			"headfirst.decorator.starbuzz.Soy",
 //			"headfirst.decorator.starbuzz.StarbuzzCoffee",
-//			"headfirst.decorator.starbuzz.Whip"
+//			"headfirst.decorator.starbuzz.Whip",
 			
-			"problem.client.App",
-			"problem.client.IteratorToEnumerationAdapter",
-			"problem.lib.LinearTransformer",
-			"java.util.Iterator",
-			"java.util.Enumeration"
+//			"problem.client.App",
+//			"problem.client.IteratorToEnumerationAdapter",
+//			"problem.lib.LinearTransformer",
+//			"java.util.Iterator",
+//			"java.util.Enumeration"
+			
+			"java.lang.Runtime", 
+			"java.awt.Desktop",
+			"java.util.Calendar",
+			"java.io.FilterInputStream"
 			
 	};
 

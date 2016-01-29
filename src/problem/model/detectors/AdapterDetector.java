@@ -41,6 +41,7 @@ public class AdapterDetector implements IPatternDetector {
 							for (IClass c2 : this.model.getClasses()) {
 								if (c2.getName().equals(f.getType())) {
 									adaptee = c2;
+									break;
 								}
 							}
 
@@ -51,7 +52,7 @@ public class AdapterDetector implements IPatternDetector {
 							boolean isAdapter = false;
 							if (adaptee != null && c != null) {
 
-								target = checkHierarchy(c, adaptee);
+								target = checkHierarchy(c, adaptee, true);
 
 								if (target != null) {
 									isAdapter = true;
@@ -78,18 +79,17 @@ public class AdapterDetector implements IPatternDetector {
 		}
 	}
 
-	private IClass checkHierarchy(IClass adapter, IClass adaptee) {
+	private IClass checkHierarchy(IClass adapter, IClass adaptee, boolean first) {
 		// here we need to make sure that the class which c extends/implements
 		// is not the same as adaptee
-		if (adapter.getSuperClass().equals("") && adapter.getInterfaceList().isEmpty()) {
+		if ((adapter.getSuperClass().equals("") || adapter.getSuperClass().equals("Object")) && adapter.getInterfaceList().isEmpty() && first) {
 			return null;
-		} else if (adapter.getSuperClass().equals("")) {
+		} else if (adapter.getSuperClass().equals("") || adapter.getSuperClass().equals("Object")) {
 			// check that the none of the classes it implements are the same as
 			// adaptee
-			if (adapter.getInterfaceList().size() > 1) {
-				return null;
+			if (adapter.getInterfaceList().size() > 1 || adapter.getInterfaceList().size() == 0) {
+				return adapter;
 			} else {
-
 				String interfaceName = adapter.getInterfaceList().get(0);
 				if (!interfaceName.equals(adaptee.getName())) {
 
@@ -97,11 +97,12 @@ public class AdapterDetector implements IPatternDetector {
 					for (IClass c : this.model.getClasses()) {
 						if (c.getName().equals(interfaceName)) {
 							newInterface = c;
+							break;
 						}
 					}
 
 					if (newInterface != null) {
-						if (checkHierarchy(newInterface, adaptee) != null) {
+						if (checkHierarchy(newInterface, adaptee, false) != null) {
 							return newInterface;
 						} else {
 							return null;
@@ -122,12 +123,14 @@ public class AdapterDetector implements IPatternDetector {
 				}
 				// make sure none of its superclasses are that either
 				if (superClass != null) {
-					if (checkHierarchy(superClass, adaptee) != null) {
+					if (checkHierarchy(superClass, adaptee, false) != null) {
 						return superClass;
 					} else {
 						return null;
 					}
 				}
+			}else{
+				//return not null?
 			}
 
 		} else {

@@ -1,35 +1,24 @@
 digraph model{
 rankdir = BT;
-App [
+FilterInputStream [
 shape="record",
-label = "{App| + init() : void\l+ main(String[]) : void\l}"
+label = "{FilterInputStream| # in: InputStream\l|# init(InputStream) : void\l+ available() : int\l+ markSupported() : boolean\l+ reset() : void\l+ read(byte[]) : int\l+ mark(int) : void\l+ read() : int\l+ read(byte[]; int; int) : int\l+ skip(long) : long\l+ close() : void\l}"
 ];
 
-Enumeration [
-shape="record",
-label = "{\<\<interface\>\>\nEnumeration| + nextElement() : E\l+ hasMoreElements() : boolean\l}"
+Desktop [
+shape="record",color=blue
+label = "{Desktop\n\<\<Singleton\>\>|- peer: DesktopPeer\l|% checkFileValidation(File) : void\l+ open(File) : void\l+ mail() : void\l- checkExec() : void\l+ print(File) : void\l- checkActionSupport(Desktop$Action) : void\l+ isDesktopSupported() : boolean\l+ isSupported(Desktop$Action) : boolean\l- checkAWTPermission() : void\l- init() : void\l+ browse(URI) : void\l+ getDesktop() : Desktop\l+ edit(File) : void\l+ mail(URI) : void\l}"
 ];
 
-LinearTransformer [
-shape="record",
-label = "{LinearTransformer| - enumTion: Enumeration\l|+ init(Enumeration) : void\l+ transform(OutputStream) : void\l}"
+Runtime [
+shape="record",color=blue
+label = "{Runtime\n\<\<Singleton\>\>|- currentRuntime: Runtime\l|+ addShutdownHook(Thread) : void\l+ getLocalizedInputStream(InputStream) : InputStream\l+ maxMemory() : long\l+ exec(String) : Process\l+ exec(String; String[]) : Process\l+ loadLibrary(String) : void\l+ freeMemory() : long\l+ load(String) : void\l+ getLocalizedOutputStream(OutputStream) : OutputStream\l% runFinalization0() : void\l+ traceInstructions(boolean) : void\l+ exec(String[]; String[]; File) : Process\l+ removeShutdownHook(Thread) : boolean\l+ halt(int) : void\l+ gc() : void\l+ getRuntime() : Runtime\l+ exit(int) : void\l+ availableProcessors() : int\l+ exec(String[]) : Process\l% clinit() : void\l~ load0(Class; String) : String\l+ runFinalizersOnExit(boolean) : void\l+ runFinalization() : void\l+ traceMethodCalls(boolean) : void\l+ exec(String; String[]; File) : Process\l+ exec(String[]; String[]) : Process\l- init() : void\l+ totalMemory() : long\l~ loadLibrary0(Class; String) : String\l}"
 ];
 
-Iterator [
-shape="record",
-label = "{\<\<interface\>\>\nIterator| + next() : E\l+ forEachRemaining(Consumer) : Consumer\l+ hasNext() : boolean\l+ remove() : void\l}"
-];
-
-IteratorToEnumerationAdapter [
-shape="record",
-label = "{IteratorToEnumerationAdapter| - itr: Iterator\l|+ init(Iterator) : void\l+ nextElement() : E\l+ hasMoreElements() : boolean\l}"
+Calendar [
+shape="record",color=blue
+label = "{Calendar\n\<\<Singleton\>\>|+ ERA: int\l+ YEAR: int\l+ MONTH: int\l+ WEEK_OF_YEAR: int\l+ WEEK_OF_MONTH: int\l+ DATE: int\l+ DAY_OF_MONTH: int\l+ DAY_OF_YEAR: int\l+ DAY_OF_WEEK: int\l+ DAY_OF_WEEK_IN_MONTH: int\l+ AM_PM: int\l+ HOUR: int\l+ HOUR_OF_DAY: int\l+ MINUTE: int\l+ SECOND: int\l+ MILLISECOND: int\l+ ZONE_OFFSET: int\l+ DST_OFFSET: int\l+ FIELD_COUNT: int\l+ SUNDAY: int\l+ MONDAY: int\l+ TUESDAY: int\l+ WEDNESDAY: int\l+ THURSDAY: int\l+ FRIDAY: int\l+ SATURDAY: int\l+ JANUARY: int\l+ FEBRUARY: int\l+ MARCH: int\l+ APRIL: int\l+ MAY: int\l+ JUNE: int\l+ JULY: int\l+ AUGUST: int\l+ SEPTEMBER: int\l+ OCTOBER: int\l+ NOVEMBER: int\l+ DECEMBER: int\l+ UNDECIMBER: int\l+ AM: int\l+ PM: int\l+ ALL_STYLES: int\l~ STANDALONE_MASK: int\l+ SHORT: int\l+ LONG: int\l+ NARROW_FORMAT: int\l+ NARROW_STANDALONE: int\l+ SHORT_FORMAT: int\l+ LONG_FORMAT: int\l+ SHORT_STANDALONE: int\l+ LONG_STANDALONE: int\l# fields: int[]\l# isSet: boolean[]\l- stamp: int[]\l# time: long\l# isTimeSet: boolean\l# areFieldsSet: boolean\l~ areAllFieldsSet: boolean\l- lenient: boolean\l- zone: TimeZone\l- sharedZone: boolean\l- firstDayOfWeek: int\l- minimalDaysInFirstWeek: int\l- cachedLocaleData: Locale\l- UNSET: int\l- COMPUTED: int\l- MINIMUM_USER_STAMP: int\l~ ALL_FIELDS: int\l- nextStamp: int\l~ currentSerialVersion: int\l- serialVersionOnStream: int\l~ serialVersionUID: long\l~ ERA_MASK: int\l~ YEAR_MASK: int\l~ MONTH_MASK: int\l~ WEEK_OF_YEAR_MASK: int\l~ WEEK_OF_MONTH_MASK: int\l~ DAY_OF_MONTH_MASK: int\l~ DATE_MASK: int\l~ DAY_OF_YEAR_MASK: int\l~ DAY_OF_WEEK_MASK: int\l~ DAY_OF_WEEK_IN_MONTH_MASK: int\l~ AM_PM_MASK: int\l~ HOUR_MASK: int\l~ HOUR_OF_DAY_MASK: int\l~ MINUTE_MASK: int\l~ SECOND_MASK: int\l~ MILLISECOND_MASK: int\l~ ZONE_OFFSET_MASK: int\l~ DST_OFFSET_MASK: int\l- FIELD_NAME: String[]\l~ $assertionsDisabled: boolean\l|~ getSetStateFields() : int\l+ getMaximum(int) : int\l- getDisplayNamesImpl(int; int; Locale; String; Integer) : Integer\l~ isPartiallyNormalized() : boolean\l+ compareTo(Calendar) : int\l~ getBaseStyle(int) : int\l+ getGreatestMinimum(int) : int\l~ checkDisplayNameParams(int; int; int; int; Locale; int) : boolean\l- setWeekCountData(Locale) : void\l+ get(int) : int\l# complete() : void\l% appendValue(StringBuilder; String; boolean; long) : void\l- readObject(ObjectInputStream) : void\l- isNarrowFormatStyle(int) : boolean\l- adjustStamp() : void\l+ set(int; int; int; int; int; int) : void\l# init(TimeZone; Locale) : void\l- isNarrowStyle(int) : boolean\l+ isWeekDateSupported() : boolean\l% getFieldName(int) : String\l+ setFirstDayOfWeek(int) : void\l+ clear(int) : void\l~ isFullyNormalized() : boolean\l+ getActualMinimum(int) : int\l+ getInstance() : Calendar\l# computeFields() : void\l~ setUnnormalized() : void\l+ getCalendarType() : String\l# computeTime() : void\l+ getFirstDayOfWeek() : int\l# internalGet(int) : int\l+ isSet(int) : boolean\l+ roll(int; int) : void\l+ toString() : String\l+ setTimeInMillis(long) : void\l+ getAvailableLocales() : Locale[]\l+ getInstance(Locale) : Calendar\l~ setFieldsNormalized(int) : void\l~ selectFields() : int\l+ setTimeZone(TimeZone) : void\l+ getWeekYear() : int\l+ getTimeZone() : TimeZone\l+ isLenient() : boolean\l+ getActualMaximum(int) : int\l+ add(int; int) : void\l+ getAvailableCalendarTypes() : String\l+ setMinimalDaysInFirstWeek(int) : void\l+ getTime() : Date\l+ getMinimalDaysInFirstWeek() : int\l~ isExternallySet(int) : boolean\l~ getZone() : TimeZone\l+ setLenient(boolean) : void\l+ clone() : Object\l+ setTime(Date) : void\l+ after(Object) : boolean\l- writeObject(ObjectOutputStream) : void\l+ getInstance(TimeZone) : Calendar\l+ hashCode() : int\l+ set(int; int; int) : void\l+ getTimeInMillis() : long\l~ setZoneShared(boolean) : void\l+ getDisplayNames(int; int; Locale; String; Integer) : Integer\l+ set(int; int; int; int; int) : void\l+ clear() : void\l+ setWeekDate(int; int; int) : void\l+ toInstant() : Instant\l+ getWeeksInWeekYear() : int\l+ compareTo(Object) : int\l- toStandaloneStyle(int) : int\l- compareTo(long) : int\l+ getInstance(TimeZone; Locale) : Calendar\l+ getDisplayName(int; int; Locale) : String\l+ roll(int; boolean) : void\l% createCalendar(TimeZone; Locale) : Calendar\l+ equals(Object) : boolean\l~ internalSet(int; int) : void\l- getFieldStrings(int; int; DateFormatSymbols) : String[]\l+ getLeastMaximum(int) : int\l# init() : void\l+ getMinimum(int) : int\l% isFieldSet(int; int) : boolean\l- isStandaloneStyle(int) : boolean\l% getMillisOf(Calendar) : long\l+ before(Object) : boolean\l- updateTime() : void\l% clinit() : void\l+ set(int; int) : void\l- invalidateWeekFields() : void\l~ setFieldsComputed(int) : void\l% aggregateStamp(int; int) : int\l}"
 ];
 
 //writing relations between classes now
-App -> IteratorToEnumerationAdapter [arrowhead = "vee", style = "dashed"];
-App -> Iterator [arrowhead = "vee", style = "dashed"];
-App -> LinearTransformer [arrowhead = "vee", style = "dashed"];
-IteratorToEnumerationAdapter -> Enumeration [arrowhead = "empty", style = "dashed"];
-IteratorToEnumerationAdapter -> Iterator [arrowhead = "vee"];
-LinearTransformer -> Enumeration [arrowhead = "vee"];
 }

@@ -3,7 +3,6 @@ package problem.models.api;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import problem.model.decorators.PatternType;
 import problem.model.visitor.ITraverser;
 
 public interface IClass extends ITraverser {
