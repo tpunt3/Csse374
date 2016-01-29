@@ -184,9 +184,17 @@ public class ModelGVOutputStream extends FilterOutputStream {
 				case decorates:
 					visitDecorates(r);
 					break;
+				case adapts:
+					visitAdapts(r);
+					break;
 				}
 			}
 		});
+	}
+	
+	private void visitAdapts(IRelation r){
+		String s = String.format("\n%s -> %s [arrowhead = \"vee\", label = \"adapts\"];", r.getName(), r.getRelatedClass());
+		this.write(s);
 	}
 
 	private void visitDecorates(IRelation r){

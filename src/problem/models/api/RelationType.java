@@ -5,5 +5,6 @@ public enum RelationType {
 	interfaces,
 	uses,
 	association,
-	decorates
+	decorates,
+	adapts
 }

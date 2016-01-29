@@ -9,6 +9,9 @@ import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
 import problem.models.api.IModel;
+import problem.models.api.IRelation;
+import problem.models.api.RelationType;
+import problem.models.impl.Relation;
 
 public class AdapterDetector implements IPatternDetector {
 	private IModel model;
@@ -62,6 +65,8 @@ public class AdapterDetector implements IPatternDetector {
 								this.adapters.add(c);
 								this.adaptees.add(adaptee);
 								this.targets.add(target);
+								IRelation r = new Relation(c.getName(),adaptee.getName(),RelationType.adapts);
+								model.addRelation(r);
 							}
 						}
 					}

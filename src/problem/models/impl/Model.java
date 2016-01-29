@@ -117,6 +117,11 @@ public class Model implements IModel {
 						this.relations.remove(i);
 						this.relations.add(r);
 						return;
+					}else if ((r.getType().equals(RelationType.decorates) || r.getType().equals(RelationType.adapts))
+							&& this.relations.get(i).getType().equals(RelationType.association)) {
+						this.relations.remove(i);
+						this.relations.add(r);
+						return;
 					}
 				}
 			}

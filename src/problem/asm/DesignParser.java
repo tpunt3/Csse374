@@ -14,15 +14,12 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import problem.model.decorators.DecoratorDecorator;
 import problem.model.detectors.AdapterDetector;
 import problem.model.detectors.DecoratorDetector;
 import problem.model.detectors.IPatternDetector;
 import problem.model.detectors.SingletonDetector;
 import problem.model.visitor.ITraverser;
 import problem.model.visitor.IVisitor;
-import problem.models.api.IClass;
-import problem.models.api.IMethod;
 import problem.models.api.ISubMethod;
 import problem.models.impl.Model;
 import problem.models.impl.ModelGVOutputStream;
@@ -144,28 +141,28 @@ public class DesignParser {
 			//"headfirst.singleton.chocolate.ChocolateBoiler",
 			//"headfirst.singleton.chocolate.ChocolateController"
 			
-//			"headfirst.decorator.starbuzz.Beverage", 
-//			"headfirst.decorator.starbuzz.CondimentDecorator",
-//			"headfirst.decorator.starbuzz.DarkRoast",
-//			"headfirst.decorator.starbuzz.Decaf",
-//			"headfirst.decorator.starbuzz.Espresso",
-//			"headfirst.decorator.starbuzz.HouseBlend",
-//			"headfirst.decorator.starbuzz.Milk", 
-//			"headfirst.decorator.starbuzz.Mocha",
-//			"headfirst.decorator.starbuzz.Soy",
-//			"headfirst.decorator.starbuzz.StarbuzzCoffee",
-//			"headfirst.decorator.starbuzz.Whip",
+			"headfirst.decorator.starbuzz.Beverage", 
+			"headfirst.decorator.starbuzz.CondimentDecorator",
+			"headfirst.decorator.starbuzz.DarkRoast",
+			"headfirst.decorator.starbuzz.Decaf",
+			"headfirst.decorator.starbuzz.Espresso",
+			"headfirst.decorator.starbuzz.HouseBlend",
+			"headfirst.decorator.starbuzz.Milk", 
+			"headfirst.decorator.starbuzz.Mocha",
+			"headfirst.decorator.starbuzz.Soy",
+			"headfirst.decorator.starbuzz.StarbuzzCoffee",
+			"headfirst.decorator.starbuzz.Whip",
 			
-//			"problem.client.App",
-//			"problem.client.IteratorToEnumerationAdapter",
-//			"problem.lib.LinearTransformer",
-//			"java.util.Iterator",
-//			"java.util.Enumeration"
+			"problem.client.App",
+			"problem.client.IteratorToEnumerationAdapter",
+			"problem.lib.LinearTransformer",
+			"java.util.Iterator",
+			"java.util.Enumeration"
 			
-			"java.lang.Runtime", 
-			"java.awt.Desktop",
-			"java.util.Calendar",
-			"java.io.FilterInputStream"
+//			"java.lang.Runtime", 
+//			"java.awt.Desktop",
+//			"java.util.Calendar",
+//			"java.io.FilterInputStream"
 			
 	};
 
@@ -261,10 +258,10 @@ public class DesignParser {
 		gv.write(model);
 		gv.close();
 
-		 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		 "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
-		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-			//	"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		 //ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		// "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+				"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;
