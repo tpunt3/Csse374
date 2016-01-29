@@ -53,12 +53,25 @@ public class AdapterDetector implements IPatternDetector {
 							IClass target = null;
 
 							boolean isAdapter = false;
+							int extendsImplementsCount=0;
+							int associationCount=0;
 							if (adaptee != null && c != null) {
 
 								target = checkHierarchy(c, adaptee, true);
 
 								if (target != null) {
-									isAdapter = true;
+									
+									for(IRelation r: model.getRelations()){
+										if(c.getName().equals(r.getName()) && (r.getType().equals(RelationType.interfaces) || r.getType().equals(RelationType.superclass))){
+											extendsImplementsCount++;
+										}
+										if(c.getName().equals(r.getName()) && r.getType().equals(RelationType.association)){
+											associationCount++;
+										}
+									}
+									if(extendsImplementsCount == 1 && associationCount == 1){
+										isAdapter = true;
+									}
 								}
 							}
 							if (isAdapter) {
