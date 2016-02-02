@@ -166,6 +166,11 @@ public class DesignParser {
 //			"java.awt.Desktop",
 //			"java.util.Calendar",
 //			"java.io.FilterInputStream"
+
+//			"java.io.InputStreamReader",
+//			"java.io.Reader", 
+//			"java.io.InputStream",
+//			"java.io.OutputStreamWriter"
 			
 	};
 

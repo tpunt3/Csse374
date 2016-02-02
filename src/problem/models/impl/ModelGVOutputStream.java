@@ -187,6 +187,9 @@ public class ModelGVOutputStream extends FilterOutputStream {
 				case adapts:
 					visitAdapts(r);
 					break;
+				case singleton:
+					visitSingletons(r);
+					break;
 				}
 			}
 		});
@@ -203,6 +206,11 @@ public class ModelGVOutputStream extends FilterOutputStream {
 	}
 	
 	private void visitAssociations(IRelation r) {
+		String s = String.format("\n%s -> %s [arrowhead = \"vee\"];", r.getName(), r.getRelatedClass());
+		this.write(s);
+	}
+	
+	private void visitSingletons(IRelation r) {
 		String s = String.format("\n%s -> %s [arrowhead = \"vee\"];", r.getName(), r.getRelatedClass());
 		this.write(s);
 	}

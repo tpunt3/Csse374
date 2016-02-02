@@ -6,6 +6,9 @@ import problem.model.decorators.SingletonDecorator;
 import problem.models.api.IClass;
 import problem.models.api.IMethod;
 import problem.models.api.IModel;
+import problem.models.api.IRelation;
+import problem.models.api.RelationType;
+import problem.models.impl.Relation;
 
 public class SingletonDetector implements IPatternDetector {
 	private IModel model;
@@ -39,7 +42,11 @@ public class SingletonDetector implements IPatternDetector {
 		
 		for (IClass c : this.toReplace){
 			this.model.replaceClass(c, new SingletonDecorator(c));
+			IRelation relation = new Relation(c.getName(), c.getName(), RelationType.singleton);
+			this.model.addRelation(relation);
 		}
+		
+		
 	}
 	
 	private boolean checkForSingleton(IClass c){

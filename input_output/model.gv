@@ -97,7 +97,7 @@ label = "{VisitType| + PreVisit: VisitType\l+ Visit: VisitType\l+ PostVisit: Vis
 
 ModelGVOutputStream [
 shape="record",
-label = "{ModelGVOutputStream| ~ out: OutputStream\l~ s: StringBuilder\l~ visitor: Visitor\l- $SWITCH_TABLE$problem$models$api$RelationType: int[]\l|- lambda$0(ITraverser) : void\l- lambda$1(ITraverser) : void\l- write(String) : void\l- lambda$8(ITraverser) : void\l- lambda$6(ITraverser) : void\l- lambda$7(ITraverser) : void\l- lambda$4(ITraverser) : void\l- lambda$5(ITraverser) : void\l- lambda$2(ITraverser) : void\l- lambda$3(ITraverser) : void\l- setPreVisitModel() : void\l- setRelationVisit() : void\l- setPreVisitClass() : void\l- setVisitMethod() : void\l- setPostVisitClass() : void\l- setVisitClass() : void\l- setPostVisitModel() : void\l- visitAssociations(IRelation) : void\l- setIntermediateVisit() : void\l- setVisitField() : void\l- visitSuperClasses(IRelation) : void\l- visitAdapts(IRelation) : void\l% $SWITCH_TABLE$problem$models$api$RelationType() : int[]\l+ write(IModel) : void\l+ init(OutputStream) : void\l- visitInterfaces(IRelation) : void\l- visitDecorates(IRelation) : void\l- visitUses(IRelation) : void\l}"
+label = "{ModelGVOutputStream| ~ out: OutputStream\l~ s: StringBuilder\l~ visitor: Visitor\l- $SWITCH_TABLE$problem$models$api$RelationType: int[]\l|- lambda$0(ITraverser) : void\l- lambda$1(ITraverser) : void\l- write(String) : void\l- lambda$8(ITraverser) : void\l- lambda$6(ITraverser) : void\l- lambda$7(ITraverser) : void\l- lambda$4(ITraverser) : void\l- lambda$5(ITraverser) : void\l- lambda$2(ITraverser) : void\l- lambda$3(ITraverser) : void\l- setPreVisitModel() : void\l- setRelationVisit() : void\l- setPreVisitClass() : void\l- setVisitMethod() : void\l- setPostVisitClass() : void\l- setVisitClass() : void\l- setPostVisitModel() : void\l- visitAssociations(IRelation) : void\l- setIntermediateVisit() : void\l- visitSingletons(IRelation) : void\l- setVisitField() : void\l- visitSuperClasses(IRelation) : void\l- visitAdapts(IRelation) : void\l% $SWITCH_TABLE$problem$models$api$RelationType() : int[]\l+ write(IModel) : void\l+ init(OutputStream) : void\l- visitInterfaces(IRelation) : void\l- visitDecorates(IRelation) : void\l- visitUses(IRelation) : void\l}"
 ];
 
 ITraverser [
@@ -152,7 +152,7 @@ label = "{ClassFieldVisitor| - model: Model\l- clazz: IClass\l- decorated: Class
 
 RelationType [
 shape="record",
-label = "{RelationType| + superclass: RelationType\l+ interfaces: RelationType\l+ uses: RelationType\l+ association: RelationType\l+ decorates: RelationType\l+ adapts: RelationType\l- ENUM$VALUES: RelationType[]\l|- init(String; int) : void\l+ values() : RelationType[]\l% clinit() : void\l+ valueOf(String) : RelationType\l}"
+label = "{RelationType| + superclass: RelationType\l+ interfaces: RelationType\l+ uses: RelationType\l+ singleton: RelationType\l+ association: RelationType\l+ decorates: RelationType\l+ adapts: RelationType\l- ENUM$VALUES: RelationType[]\l|- init(String; int) : void\l+ values() : RelationType[]\l% clinit() : void\l+ valueOf(String) : RelationType\l}"
 ];
 
 TargetDecorator [
@@ -286,6 +286,7 @@ SingletonDetector -> IPatternDetector [arrowhead = "empty", style = "dashed"];
 SingletonDetector -> IModel [arrowhead = "vee"];
 SingletonDetector -> IClass [arrowhead = "vee"];
 SingletonDetector -> SingletonDecorator [arrowhead = "vee", style = "dashed"];
+SingletonDetector -> Relation [arrowhead = "vee", style = "dashed"];
 SingletonDetector -> IMethod [arrowhead = "vee", style = "dashed"];
 ITraverser -> IVisitor [arrowhead = "vee", style = "dashed"];
 IVisitor -> ITraverser [arrowhead = "vee", style = "dashed"];
@@ -356,5 +357,6 @@ Relation -> IVisitor [arrowhead = "vee", style = "dashed"];
 Relation -> Class [arrowhead = "vee", style = "dashed"];
 SubMethod -> ISubMethod [arrowhead = "empty", style = "dashed"];
 SubMethod -> IVisitor [arrowhead = "vee", style = "dashed"];
+Model -> Model [arrowhead = "vee"];
 ClassDecorator -> IClass [arrowhead = "vee", label = "decorates"];
 }

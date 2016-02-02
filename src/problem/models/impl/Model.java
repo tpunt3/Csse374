@@ -94,7 +94,9 @@ public class Model implements IModel {
 		if (inClasses) {
 
 			if (r.getName().equals(r.getRelatedClass())) {
-				return;
+				if(!r.getType().equals(RelationType.singleton)){
+					return;
+				}
 			}
 
 			if (this.relations.size() == 0) {
