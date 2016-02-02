@@ -79,9 +79,9 @@ public class ModelGVOutputStream extends FilterOutputStream {
 			if(c instanceof SingletonDecorator){
 				s = String.format("%s [\nshape=\"record\",color=blue\n", c.getName());
 			}else if(c instanceof DecoratorDecorator || c instanceof ComponentDecorator){
-				s = String.format("%s [\nshape=\"record\",color=green\n", c.getName());
+				s = String.format("%s [\nshape=\"record\",style = filled,fillcolor=green\n", c.getName());
 			}else if(c instanceof AdapterDecorator || c instanceof AdapteeDecorator || c instanceof TargetDecorator){
-				s = String.format("%s [\nshape=\"record\",color=red\n", c.getName());
+				s = String.format("%s [\nshape=\"record\",style = filled,fillcolor=red\n", c.getName());
 			}else{
 				s = String.format("%s [\nshape=\"record\",\n", c.getName());
 			}
@@ -196,12 +196,12 @@ public class ModelGVOutputStream extends FilterOutputStream {
 	}
 	
 	private void visitAdapts(IRelation r){
-		String s = String.format("\n%s -> %s [arrowhead = \"vee\", label = \"adapts\"];", r.getName(), r.getRelatedClass());
+		String s = String.format("\n%s -> %s [arrowhead = \"vee\", label = \"\\<\\<adapts\\>\\>\"];", r.getName(), r.getRelatedClass());
 		this.write(s);
 	}
 
 	private void visitDecorates(IRelation r){
-		String s = String.format("\n%s -> %s [arrowhead = \"vee\", label = \"decorates\"];", r.getName(), r.getRelatedClass());
+		String s = String.format("\n%s -> %s [arrowhead = \"vee\", label = \"\\<\\<decorates\\>\\>\"];", r.getName(), r.getRelatedClass());
 		this.write(s);
 	}
 	
