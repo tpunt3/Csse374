@@ -42,12 +42,12 @@ public class ModelGVOutputStream extends FilterOutputStream {
 		this.setIntermediateVisit();
 		this.setRelationVisit();
 	}
-	
-	public void write(IModel m){
+
+	public void write(IModel m) {
 		ITraverser t = (ITraverser) m;
 		t.accept(this.visitor);
 	}
-	
+
 	private void write(String s) {
 		try {
 			out.write(s.getBytes());
@@ -57,32 +57,34 @@ public class ModelGVOutputStream extends FilterOutputStream {
 	}
 
 	private void setPreVisitModel() {
-		this.visitor.addVisit(VisitType.PreVisit, IModel.class, (ITraverser t) ->{
+		this.visitor.addVisit(VisitType.PreVisit, IModel.class, (ITraverser t) -> {
 			IModel m = (IModel) t;
 			String s = "digraph model{\n" + "rankdir = BT;\n";
-			this.write(s);	
+			this.write(s);
 		});
 	}
 
 	private void setPostVisitModel() {
-		this.visitor.addVisit(VisitType.PostVisit, IModel.class, (ITraverser t) ->{
+		this.visitor.addVisit(VisitType.PostVisit, IModel.class, (ITraverser t) -> {
 			IModel m = (IModel) t;
 			String s = "\n}";
-			this.write(s);	
+			this.write(s);
 		});
 	}
 
 	private void setPreVisitClass() {
-		this.visitor.addVisit(VisitType.PreVisit, IClass.class, (ITraverser t) ->{
+		this.visitor.addVisit(VisitType.PreVisit, IClass.class, (ITraverser t) -> {
 			IClass c = (IClass) t;
 			String s;
-			if(c instanceof SingletonDecorator){
+			if (c instanceof SingletonDecorator) {
 				s = String.format("%s [\nshape=\"record\",color=blue\n", c.getName());
-			}else if(c instanceof DecoratorDecorator || c instanceof ComponentDecorator){
+			} else if (c instanceof DecoratorDecorator || c instanceof ComponentDecorator) {
 				s = String.format("%s [\nshape=\"record\",style = filled,fillcolor=green\n", c.getName());
-			}else if(c instanceof AdapterDecorator || c instanceof AdapteeDecorator || c instanceof TargetDecorator){
+			} else if (c instanceof AdapterDecorator || c instanceof AdapteeDecorator || c instanceof TargetDecorator) {
 				s = String.format("%s [\nshape=\"record\",style = filled,fillcolor=red\n", c.getName());
-			}else{
+			} else if (c instanceof CompositeDecorator || c instanceof CompositeComponentDecorator || c instanceof LeafDecorator) {
+				s = String.format("%s [\nshape=\"record\",style = filled,fillcolor=yellow\n", c.getName());
+			} else {
 				s = String.format("%s [\nshape=\"record\",\n", c.getName());
 			}
 			this.write(s);
@@ -90,34 +92,39 @@ public class ModelGVOutputStream extends FilterOutputStream {
 	}
 
 	private void setVisitClass() {
-		this.visitor.addVisit(VisitType.Visit, IClass.class, (ITraverser t) ->{
+		this.visitor.addVisit(VisitType.Visit, IClass.class, (ITraverser t) -> {
 			IClass c = (IClass) t;
-			
+
 			String s;
 			if (!c.getIsClass()) {
-				if(c instanceof ComponentDecorator){
+				if (c instanceof ComponentDecorator) {
 					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<component\\>\\>| ", c.getName());
-				}else if(c instanceof TargetDecorator){
+				} else if (c instanceof TargetDecorator) {
 					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<target\\>\\>| ", c.getName());
-				}else if(c instanceof AdapteeDecorator){
+				} else if (c instanceof AdapteeDecorator) {
 					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<adaptee\\>\\>| ", c.getName());
-				}else{
+				} else if (c instanceof CompositeComponentDecorator) {
+					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<component\\>\\>| ", c.getName());
+				}else {
 					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
 				}
-			} else if(c instanceof SingletonDecorator){
+			} else if (c instanceof SingletonDecorator) {
 				s = String.format("label = \"{%s\\n\\<\\<Singleton\\>\\>|", c.getName());
-			} else if(c instanceof DecoratorDecorator){
+			} else if (c instanceof DecoratorDecorator) {
 				s = String.format("label = \"{%s\\n\\<\\<decorator\\>\\>|", c.getName());
-			}else if(c instanceof ComponentDecorator){
+			} else if (c instanceof ComponentDecorator || c instanceof CompositeComponentDecorator) {
 				s = String.format("label = \"{%s\\n\\<\\<component\\>\\>|", c.getName());
-			}else if(c instanceof AdapterDecorator){
+			} else if (c instanceof AdapterDecorator) {
 				s = String.format("label = \"{%s\\n\\<\\<adapter\\>\\>|", c.getName());
-			}else if(c instanceof AdapteeDecorator){
+			} else if (c instanceof AdapteeDecorator) {
 				s = String.format("label = \"{%s\\n\\<\\<adaptee\\>\\>|", c.getName());
-			}else if(c instanceof TargetDecorator){
+			} else if (c instanceof TargetDecorator) {
 				s = String.format("label = \"{%s\\n\\<\\<target\\>\\>|", c.getName());
-			}
-			else{
+			} else if (c instanceof CompositeDecorator) {
+				s = String.format("label = \"{%s\\n\\<\\<composite\\>\\>|", c.getName());
+			}else if (c instanceof LeafDecorator) {
+				s = String.format("label = \"{%s\\n\\<\\<leaf\\>\\>|", c.getName());
+			}else {
 				s = String.format("label = \"{%s| ", c.getName());
 			}
 			this.write(s);
@@ -125,7 +132,7 @@ public class ModelGVOutputStream extends FilterOutputStream {
 	}
 
 	private void setPostVisitClass() {
-		this.visitor.addVisit(VisitType.PostVisit, IClass.class, (ITraverser t) ->{
+		this.visitor.addVisit(VisitType.PostVisit, IClass.class, (ITraverser t) -> {
 			IClass c = (IClass) t;
 			String s = "}\"\n];\n\n";
 			this.write(s);
@@ -133,34 +140,34 @@ public class ModelGVOutputStream extends FilterOutputStream {
 	}
 
 	private void setVisitMethod() {
-		this.visitor.addVisit(VisitType.Visit, IMethod.class, (ITraverser t) ->{
-			
+		this.visitor.addVisit(VisitType.Visit, IMethod.class, (ITraverser t) -> {
+
 			IMethod m = (IMethod) t;
 			String[] returnSplit = m.getReturnType().split("\\.");
 			String returnType = returnSplit[returnSplit.length - 1];
-	
+
 			String s = String.format("%s %s(%s) : %s\\l", m.getAccess(), m.getName(), m.getArgs(), returnType);
 			this.write(s);
 		});
 	}
 
 	private void setVisitField() {
-		this.visitor.addVisit(VisitType.Visit, IField.class, (ITraverser t) ->{
+		this.visitor.addVisit(VisitType.Visit, IField.class, (ITraverser t) -> {
 			IField f = (IField) t;
 			String s = String.format("%s %s" + ":" + " %s\\l", f.getAccess(), f.getName(), f.getType());
 			this.write(s);
 		});
 	}
-	
-	private void setIntermediateVisit(){
-		this.visitor.addVisit(VisitType.IntermediateVisit, IClass.class, (ITraverser t) ->{
+
+	private void setIntermediateVisit() {
+		this.visitor.addVisit(VisitType.IntermediateVisit, IClass.class, (ITraverser t) -> {
 			String s = "|";
 			this.write(s);
 		});
 	}
-	
-	private void setRelationVisit(){
-		this.visitor.addVisit(VisitType.RelationVisit, IModel.class, (ITraverser t) ->{
+
+	private void setRelationVisit() {
+		this.visitor.addVisit(VisitType.RelationVisit, IModel.class, (ITraverser t) -> {
 			IModel m = (IModel) t;
 			ArrayList<IRelation> relations = (ArrayList<IRelation>) m.getRelations();
 
@@ -194,22 +201,24 @@ public class ModelGVOutputStream extends FilterOutputStream {
 			}
 		});
 	}
-	
-	private void visitAdapts(IRelation r){
-		String s = String.format("\n%s -> %s [arrowhead = \"vee\", label = \"\\<\\<adapts\\>\\>\"];", r.getName(), r.getRelatedClass());
+
+	private void visitAdapts(IRelation r) {
+		String s = String.format("\n%s -> %s [arrowhead = \"vee\", label = \"\\<\\<adapts\\>\\>\"];", r.getName(),
+				r.getRelatedClass());
 		this.write(s);
 	}
 
-	private void visitDecorates(IRelation r){
-		String s = String.format("\n%s -> %s [arrowhead = \"vee\", label = \"\\<\\<decorates\\>\\>\"];", r.getName(), r.getRelatedClass());
+	private void visitDecorates(IRelation r) {
+		String s = String.format("\n%s -> %s [arrowhead = \"vee\", label = \"\\<\\<decorates\\>\\>\"];", r.getName(),
+				r.getRelatedClass());
 		this.write(s);
 	}
-	
+
 	private void visitAssociations(IRelation r) {
 		String s = String.format("\n%s -> %s [arrowhead = \"vee\"];", r.getName(), r.getRelatedClass());
 		this.write(s);
 	}
-	
+
 	private void visitSingletons(IRelation r) {
 		String s = String.format("\n%s -> %s [arrowhead = \"vee\"];", r.getName(), r.getRelatedClass());
 		this.write(s);
