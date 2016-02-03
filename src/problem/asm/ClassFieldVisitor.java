@@ -42,8 +42,6 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 		if (signature != null && !type.equals("Map")) {
 			//add association for collection
 			
-			System.out.println(type);
-			
 			String[] sig = signature.split("/");
 			type = sig[sig.length - 1];
 			int index = type.indexOf(";");
