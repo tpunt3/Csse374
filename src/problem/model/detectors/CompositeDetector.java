@@ -1,6 +1,8 @@
 package problem.model.detectors;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import problem.model.decorators.AdapteeDecorator;
 import problem.model.decorators.AdapterDecorator;
@@ -28,8 +30,18 @@ public class CompositeDetector implements IPatternDetector {
 	@Override
 	public void detectPatterns() {
 		for (IClass c : this.model.getClasses()) {
+			Map<String, Integer> fieldMap = new HashMap<String, Integer>();
+			
+			for(IField f: c.getFields()){
+				fieldMap.put(f.getType(), 0);
+			}
+			
+			for(IField f: c.getFields()){
+				fieldMap.put(f.getType(), fieldMap.get(f.getType())+1);
+			}
+			
 			for (IField f : c.getFields()) {
-				if (f.getIsCollection()) {
+				if (f.getIsCollection() || fieldMap.get(f.getType())>1) {
 
 					IClass component = null;
 					for (IClass c2 : this.model.getClasses()) {
