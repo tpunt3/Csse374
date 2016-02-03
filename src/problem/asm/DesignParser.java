@@ -15,6 +15,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import problem.model.detectors.AdapterDetector;
+import problem.model.detectors.CompositeDetector;
 import problem.model.detectors.DecoratorDetector;
 import problem.model.detectors.IPatternDetector;
 import problem.model.detectors.SingletonDetector;
@@ -274,6 +275,8 @@ public class DesignParser {
 		IPatternDetector adapterDetector = new AdapterDetector(model);
 		adapterDetector.detectPatterns();
 		
+		IPatternDetector compositeDetector = new CompositeDetector(model);
+		compositeDetector.detectPatterns();
 		
 		ModelPatternVisitor mpv = new ModelPatternVisitor();
 		mpv.detect(model);
@@ -282,10 +285,10 @@ public class DesignParser {
 		gv.write(model);
 		gv.close();
 
-		 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		 "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
-		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-			//	"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		 //ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		 //"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+				"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;

@@ -9,13 +9,13 @@ import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IModel;
 
-public class ComponentDetector implements IPatternDetector {
+public class CompositeDetector implements IPatternDetector {
 	private IModel model;
 	private ArrayList<IClass> composites;
 	private ArrayList<IClass> components;
 	private ArrayList<IClass> leaves;
 
-	public ComponentDetector(IModel model) {
+	public CompositeDetector(IModel model) {
 		this.model = model;
 		this.composites = new ArrayList<IClass>();
 		this.components = new ArrayList<IClass>();
