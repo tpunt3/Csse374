@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import problem.model.decorators.AdapteeDecorator;
 import problem.model.decorators.AdapterDecorator;
+import problem.model.decorators.CompositeComponentDecorator;
+import problem.model.decorators.CompositeDecorator;
+import problem.model.decorators.LeafDecorator;
 import problem.model.decorators.TargetDecorator;
 import problem.models.api.IClass;
 import problem.models.api.IField;
@@ -50,15 +53,21 @@ public class CompositeDetector implements IPatternDetector {
 				}
 			}
 		}
+		
+		
 		for (IClass c : this.components) {
-			this.model.replaceClass(c, new AdapterDecorator(c));
+			this.model.replaceClass(c, new CompositeComponentDecorator(c));
 		}
 		for (IClass c : this.composites) {
-			this.model.replaceClass(c, new AdapteeDecorator(c));
+			this.model.replaceClass(c, new CompositeDecorator(c));
 		}
 		for (IClass c : this.leaves) {
-			this.model.replaceClass(c, new TargetDecorator(c));
+			this.model.replaceClass(c, new LeafDecorator(c));
 		}
+	}
+	
+	private void getLeaves(IClass component){
+		
 	}
 
 	private boolean checkHierarchy(IClass clazz, IClass fieldType, boolean first) {

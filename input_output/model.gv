@@ -6,8 +6,8 @@ label = "{Waitress| ~ allMenus: MenuComponent\l|+ init(MenuComponent) : void\l+ 
 ];
 
 MenuComponent [
-shape="record",style = filled,fillcolor=red
-label = "{MenuComponent\n\<\<adapter\>\>|+ init() : void\l+ add(MenuComponent) : void\l+ getName() : String\l+ getChild(int) : MenuComponent\l+ getDescription() : String\l+ isVegetarian() : boolean\l+ getPrice() : double\l+ remove(MenuComponent) : void\l+ print() : void\l}"
+shape="record",style = filled,fillcolor=yellow
+label = "{MenuComponent\n\<\<component\>\>|+ init() : void\l+ add(MenuComponent) : void\l+ getName() : String\l+ getChild(int) : MenuComponent\l+ getDescription() : String\l+ isVegetarian() : boolean\l+ getPrice() : double\l+ remove(MenuComponent) : void\l+ print() : void\l}"
 ];
 
 MenuItem [
@@ -21,8 +21,8 @@ label = "{MenuTestDrive| + main(String[]) : void\l+ init() : void\l}"
 ];
 
 Menu [
-shape="record",style = filled,fillcolor=red
-label = "{Menu\n\<\<adaptee\>\>|~ menuComponents: MenuComponent\l~ name: String\l~ description: String\l|+ remove(MenuComponent) : void\l+ getDescription() : String\l+ add(MenuComponent) : void\l+ getChild(int) : MenuComponent\l+ getName() : String\l+ init(String; String) : void\l+ print() : void\l}"
+shape="record",style = filled,fillcolor=yellow
+label = "{Menu\n\<\<composite\>\>|~ menuComponents: MenuComponent\l~ name: String\l~ description: String\l|+ remove(MenuComponent) : void\l+ getDescription() : String\l+ add(MenuComponent) : void\l+ getChild(int) : MenuComponent\l+ getName() : String\l+ init(String; String) : void\l+ print() : void\l}"
 ];
 
 //writing relations between classes now

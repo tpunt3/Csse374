@@ -53,23 +53,26 @@ public class AdapterDetector implements IPatternDetector {
 							IClass target = null;
 
 							boolean isAdapter = false;
-							int extendsImplementsCount=0;
-							int associationCount=0;
+							int extendsImplementsCount = 0;
+							int associationCount = 0;
 							if (adaptee != null && c != null) {
 
 								target = checkHierarchy(c, adaptee, true);
 
 								if (target != null) {
-									
-									for(IRelation r: model.getRelations()){
-										if(c.getName().equals(r.getName()) && (r.getType().equals(RelationType.interfaces) || r.getType().equals(RelationType.superclass))){
+
+									for (IRelation r : model.getRelations()) {
+										if (c.getName().equals(r.getName())
+												&& (r.getType().equals(RelationType.interfaces)
+														|| r.getType().equals(RelationType.superclass))) {
 											extendsImplementsCount++;
 										}
-										if(c.getName().equals(r.getName()) && r.getType().equals(RelationType.association)){
+										if (c.getName().equals(r.getName())
+												&& r.getType().equals(RelationType.association)) {
 											associationCount++;
 										}
 									}
-									if(extendsImplementsCount == 1 && associationCount == 1){
+									if (extendsImplementsCount == 1 && associationCount == 1) {
 										isAdapter = true;
 									}
 								}
@@ -78,7 +81,7 @@ public class AdapterDetector implements IPatternDetector {
 								this.adapters.add(c);
 								this.adaptees.add(adaptee);
 								this.targets.add(target);
-								IRelation r = new Relation(c.getName(),adaptee.getName(),RelationType.adapts);
+								IRelation r = new Relation(c.getName(), adaptee.getName(), RelationType.adapts);
 								model.addRelation(r);
 							}
 						}
@@ -100,7 +103,8 @@ public class AdapterDetector implements IPatternDetector {
 	private IClass checkHierarchy(IClass adapter, IClass adaptee, boolean first) {
 		// here we need to make sure that the class which c extends/implements
 		// is not the same as adaptee
-		if ((adapter.getSuperClass().equals("") || adapter.getSuperClass().equals("Object")) && adapter.getInterfaceList().isEmpty() && first) {
+		if ((adapter.getSuperClass().equals("") || adapter.getSuperClass().equals("Object"))
+				&& adapter.getInterfaceList().isEmpty() && first) {
 			return null;
 		} else if (adapter.getSuperClass().equals("") || adapter.getSuperClass().equals("Object")) {
 			// check that the none of the classes it implements are the same as
@@ -147,8 +151,8 @@ public class AdapterDetector implements IPatternDetector {
 						return null;
 					}
 				}
-			}else{
-				//return not null?
+			} else {
+				// return not null?
 			}
 
 		} else {
