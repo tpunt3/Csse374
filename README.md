@@ -22,6 +22,9 @@ For this milestone we continued to pair program. All code we wrote was done toge
 Milestone 5
 During this milestone, Trent was sick so we had to skype call to pair program. We continued to work very closely together even though we could not meet in person. We made great progress on singleton and adapter/decorator and feel pretty good about the progress we made/design decisions we incorporated. We still did almost every commit together because we work very closely.
 
+Milestone 6
+During this milestone, Katie and I could meet again in person which was helpful. We both worked very closely on the pattern detection and then we split up a little bit of the testing to make writing tests go faster. We continue to work very closely together on almost every commit. 
+
 Instructions to use our code:
 1.) Go to the DesignParser.java class in problem.asm
 2.) Change the array of strings called CLASSES to reflect which classes you'd like to generate a UML for
@@ -62,6 +65,11 @@ In this milestone, we added code to our project that uses the decorator pattern 
 Picture of Milestone 5:
 ![Milestone5](./UML_diagrams/our_project/FinalProjectUML_M5.png)
 
+Milestone 6:
+In this milestone, we added composite detection to our project. This included adding a Composite detector class and decorators such as Leaf, CompositeComponent, and Composite. We also implemented a visitor pattern to detect singletons in our project. We now have two visitor patterns in our project, one that can be used for pattern detection and one for output data. We realize that we could implement the rest of our pattern detection in this visitor pattern, but we have made the design decision to keep with our decorator pattern because we like our separation of concerns in our decorator and we want to be consistent with how we have been previously doing our design. 
+
+Picture of Milestone 6:
+![Milestone6](./UML_diagrams/our_project/FinalProjectUML_M6.png)
 
 Locations and names of important documents:
 
