@@ -33,7 +33,7 @@ public class DecoratorDetector implements IPatternDetector {
 				for (String s : splitArgs) {
 					s = s.trim();
 					for (IField f : c.getFields()) {
-						if (s.equals(f.getType())) {
+						if (s.equals(f.getType()) && !f.getIsCollection()) {
 							// this is has a field that is passed in through the
 							// constructor
 							// now we need to check if that is in its hierarchy
