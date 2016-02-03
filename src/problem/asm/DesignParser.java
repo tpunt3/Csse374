@@ -178,11 +178,24 @@ public class DesignParser {
 //			"java.io.InputStream",
 //			"java.io.OutputStreamWriter"
 			
-			"headfirst.composite.menu.Menu",
-			"headfirst.composite.menu.MenuComponent",
-			"headfirst.composite.menu.MenuItem",
-			"headfirst.composite.menu.MenuTestDrive",
-			"headfirst.composite.menu.Waitress"
+//			"headfirst.composite.menu.Menu",
+//			"headfirst.composite.menu.MenuComponent",
+//			"headfirst.composite.menu.MenuItem",
+//			"headfirst.composite.menu.MenuTestDrive",
+//			"headfirst.composite.menu.Waitress"
+			
+			"problem.sprites.AbstractSprite",
+			"problem.sprites.CircleSprite",
+			"problem.sprites.CompositeCompositeSprite",
+			"problem.sprites.CompositeIterator",
+			"problem.sprites.CompositeSprite",
+			"problem.sprites.ISprite",
+			"problem.sprites.NullIterator",
+			"problem.sprites.PyramidSprite",
+			"problem.sprites.RectangleSprite",
+			"problem.sprites.SpriteFactory",
+			"problem.sprites.StackSprite",
+			
 			
 			
 	};
@@ -285,10 +298,10 @@ public class DesignParser {
 		gv.write(model);
 		gv.close();
 
-		 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		 "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
-		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-			//	"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		// ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		 //"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+				"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;

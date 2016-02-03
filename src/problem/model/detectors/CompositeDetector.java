@@ -49,12 +49,12 @@ public class CompositeDetector implements IPatternDetector {
 					if (isComposite) {
 						this.composites.add(c);
 						this.components.add(component);
+						finish(c, component);
 					}
 				}
 			}
 		}
-		
-		
+
 		for (IClass c : this.components) {
 			this.model.replaceClass(c, new CompositeComponentDecorator(c));
 		}
@@ -65,9 +65,28 @@ public class CompositeDetector implements IPatternDetector {
 			this.model.replaceClass(c, new LeafDecorator(c));
 		}
 	}
-	
-	private void getLeaves(IClass component){
-		
+
+	private void finish(IClass composite, IClass component) {
+		for (IClass c : this.model.getClasses()) {
+			
+			if(checkHierarchy(c, composite, true)){
+				this.composites.add(c);
+			}
+			
+			if (checkHierarchy(c, component, true)) {
+				for(IClass c2 : this.model.getClasses()){
+					if(checkHierarchy(c2, c, true)){
+						if(!this.composites.contains(c)){
+							this.components.add(c);
+						}
+					}else{
+						if(!this.composites.contains(c)){
+							this.leaves.add(c);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private boolean checkHierarchy(IClass clazz, IClass fieldType, boolean first) {
@@ -77,16 +96,17 @@ public class CompositeDetector implements IPatternDetector {
 				&& clazz.getInterfaceList().isEmpty() && first) {
 			return false;
 		} else if (clazz.getSuperClass().equals("") || clazz.getSuperClass().equals("Object")) {
-			
-			//check if the fieldType is exactly equal to any of our interfaces
-			for(String s : clazz.getInterfaceList()){
+
+			// check if the fieldType is exactly equal to any of our interfaces
+			for (String s : clazz.getInterfaceList()) {
 				if (s.equals(fieldType.getName())) {
 					return true;
 				}
 			}
-			
-			//check if the fieldType is equal to anything in the hierarchy of our interfaces
-			for(String s : clazz.getInterfaceList()){
+
+			// check if the fieldType is equal to anything in the hierarchy of
+			// our interfaces
+			for (String s : clazz.getInterfaceList()) {
 				IClass newInterface = null;
 				for (IClass c : this.model.getClasses()) {
 					if (c.getName().equals(s)) {
@@ -94,30 +114,31 @@ public class CompositeDetector implements IPatternDetector {
 						break;
 					}
 				}
-				
-				if(checkHierarchy(newInterface, fieldType, false)){
-					return true;
+
+				if (newInterface != null) {
+					if (checkHierarchy(newInterface, fieldType, false)) {
+						return true;
+					}
 				}
 			}
 			return false;
-			
 
 		} else if (clazz.getInterfaceList().isEmpty()) {
 			// check that its superclass is not the same as adaptee
 			if (clazz.getSuperClass().equals(fieldType.getName())) {
 				return true;
-			}else{
+			} else {
 				IClass superClass = null;
 				for (IClass c : this.model.getClasses()) {
 					if (clazz.getSuperClass().equals(c.getName())) {
 						superClass = c;
 					}
 				}
-				
-				if(checkHierarchy(superClass, fieldType, false)){
+
+				if (checkHierarchy(superClass, fieldType, false)) {
 					return true;
 				}
-				
+
 				return false;
 			}
 
