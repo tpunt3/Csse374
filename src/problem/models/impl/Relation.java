@@ -1,5 +1,6 @@
 package problem.models.impl;
 
+import problem.model.patternvisitor.IPatternVisitor;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IRelation;
 import problem.models.api.ISubMethod;
@@ -86,6 +87,12 @@ public class Relation implements IRelation {
 		if (type != other.type)
 			return false;
 		return true;
+	}
+
+	@Override
+	public void accept(IPatternVisitor v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,6 +1,6 @@
 package problem.model.visitor;
 
-class LookupKey {
+public class LookupKey {
 	
 	VisitType visitType;
 	Class clazz;

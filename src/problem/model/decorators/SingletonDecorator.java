@@ -3,6 +3,7 @@ package problem.model.decorators;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import problem.model.patternvisitor.IPatternVisitor;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IField;
@@ -76,6 +77,12 @@ public class SingletonDecorator implements IClass {
 	@Override
 	public ArrayList<String> getInterfaceList() {
 		return thisClass.getInterfaceList();
+	}
+
+	@Override
+	public void accept(IPatternVisitor v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

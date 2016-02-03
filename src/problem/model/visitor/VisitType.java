@@ -5,5 +5,6 @@ public enum VisitType {
 	Visit,
 	PostVisit,
 	IntermediateVisit,
-	RelationVisit
+	RelationVisit,
+	SingletonPattern
 }

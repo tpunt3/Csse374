@@ -18,6 +18,7 @@ import problem.model.detectors.AdapterDetector;
 import problem.model.detectors.DecoratorDetector;
 import problem.model.detectors.IPatternDetector;
 import problem.model.detectors.SingletonDetector;
+import problem.model.patternvisitor.ModelPatternVisitor;
 import problem.model.visitor.ITraverser;
 import problem.model.visitor.IVisitor;
 import problem.models.api.ISubMethod;
@@ -253,8 +254,8 @@ public class DesignParser {
 
 	public void generateUML(Model model) throws IOException {
 		
-		IPatternDetector singletonDetector = new SingletonDetector(model);
-		singletonDetector.detectPatterns();
+		//IPatternDetector singletonDetector = new SingletonDetector(model);
+		//singletonDetector.detectPatterns();
 		
 		IPatternDetector decoratorDetector = new DecoratorDetector(model);
 		decoratorDetector.detectPatterns();
@@ -262,14 +263,17 @@ public class DesignParser {
 		IPatternDetector adapterDetector = new AdapterDetector(model);
 		adapterDetector.detectPatterns();
 		
+		ModelPatternVisitor mpv = new ModelPatternVisitor();
+		mpv.detect(model);
+		
 		ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream("input_output/model.gv"));
 		gv.write(model);
 		gv.close();
 
-		 //ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		 //"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
-		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-				"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		 "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+	//	ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		//		"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;
@@ -306,10 +310,10 @@ public class DesignParser {
 		model.writeFile(sdWriter);
 		out.close();
 
-		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-			//	"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
-		 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		 "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
+		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+				"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
+		// ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		 //"\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\" -o ./input_output/SD.png -t png ./input_output/sequence.sd");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;

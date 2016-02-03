@@ -2,6 +2,7 @@ package problem.models.impl;
 
 import java.util.ArrayList;
 
+import problem.model.patternvisitor.IPatternVisitor;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IMethod;
@@ -133,6 +134,12 @@ public class Method implements IMethod {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public void accept(IPatternVisitor v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

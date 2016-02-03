@@ -1,5 +1,6 @@
 package problem.models.impl;
 
+import problem.model.patternvisitor.IPatternVisitor;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.ISubMethod;
@@ -54,6 +55,12 @@ public class SubMethod implements ISubMethod {
 	@Override
 	public String getReturnType() {
 		return this.returnType;
+	}
+
+	@Override
+	public void accept(IPatternVisitor v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,5 +1,6 @@
 package problem.models.impl;
 
+import problem.model.patternvisitor.IPatternVisitor;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IField;
 import problem.models.api.ISubMethod;
@@ -40,6 +41,12 @@ public class Field implements IField{
 		//v.preVisit(this);
 		v.visit(this);
 		//v.postVisit(this);
+	}
+
+	@Override
+	public void accept(IPatternVisitor v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

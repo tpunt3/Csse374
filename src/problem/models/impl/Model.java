@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import problem.asm.DesignParser;
+import problem.model.patternvisitor.IPatternVisitor;
 import problem.model.visitor.IVisitor;
 import problem.models.api.IClass;
 import problem.models.api.IMethod;
@@ -255,5 +256,11 @@ public class Model implements IModel {
 			this.classes.remove(oldC);
 			this.classes.add(newC);
 		}
+	}
+
+	@Override
+	public void accept(IPatternVisitor v) {
+		v.singletonVisit(this);
+		
 	}
 }
