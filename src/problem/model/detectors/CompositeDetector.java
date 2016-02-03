@@ -31,17 +31,17 @@ public class CompositeDetector implements IPatternDetector {
 	public void detectPatterns() {
 		for (IClass c : this.model.getClasses()) {
 			Map<String, Integer> fieldMap = new HashMap<String, Integer>();
-			
-			for(IField f: c.getFields()){
+
+			for (IField f : c.getFields()) {
 				fieldMap.put(f.getType(), 0);
 			}
-			
-			for(IField f: c.getFields()){
-				fieldMap.put(f.getType(), fieldMap.get(f.getType())+1);
-			}
-			
+
 			for (IField f : c.getFields()) {
-				if (f.getIsCollection() || fieldMap.get(f.getType())>1) {
+				fieldMap.put(f.getType(), fieldMap.get(f.getType()) + 1);
+			}
+
+			for (IField f : c.getFields()) {
+				if (f.getIsCollection() || fieldMap.get(f.getType()) > 1) {
 
 					IClass component = null;
 					for (IClass c2 : this.model.getClasses()) {
@@ -80,19 +80,19 @@ public class CompositeDetector implements IPatternDetector {
 
 	private void finish(IClass composite, IClass component) {
 		for (IClass c : this.model.getClasses()) {
-			
-			if(checkHierarchy(c, composite, true)){
+
+			if (checkHierarchy(c, composite, true)) {
 				this.composites.add(c);
 			}
-			
+
 			if (checkHierarchy(c, component, true)) {
-				for(IClass c2 : this.model.getClasses()){
-					if(checkHierarchy(c2, c, true)){
-						if(!this.composites.contains(c)){
+				for (IClass c2 : this.model.getClasses()) {
+					if (checkHierarchy(c2, c, true)) {
+						if (!this.composites.contains(c)) {
 							this.components.add(c);
 						}
-					}else{
-						if(!this.composites.contains(c)){
+					} else {
+						if (!this.composites.contains(c)) {
 							this.leaves.add(c);
 						}
 					}
@@ -146,9 +146,10 @@ public class CompositeDetector implements IPatternDetector {
 						superClass = c;
 					}
 				}
-
-				if (checkHierarchy(superClass, fieldType, false)) {
-					return true;
+				if (superClass != null) {
+					if (checkHierarchy(superClass, fieldType, false)) {
+						return true;
+					}
 				}
 
 				return false;
