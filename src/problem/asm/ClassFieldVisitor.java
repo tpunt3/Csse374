@@ -27,21 +27,18 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
+		this.clazz = this.getClazz();
 		String type = Type.getType(desc).getClassName();
 		String[] typeSplit = type.split("\\.");
 		type = typeSplit[typeSplit.length-1];
 		String accessLevel;
 		accessLevel = addAccessLevel(access);
 		
-		if(name.equals("keyToCommandMap")){
-			System.out.println(signature);
-		}
-		
-		this.clazz = this.getClazz();
+		boolean isCollection = false;
 		
 		if (signature != null && !type.equals("Map")) {
 			//add association for collection
-			
+			isCollection = true;
 			String[] sig = signature.split("/");
 			type = sig[sig.length - 1];
 			int index = type.indexOf(";");
@@ -49,6 +46,11 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 			if(type.contains("<")){
 				type = type.substring(0,type.indexOf("<"));
 			}
+			
+//			if(this.clazz.getName().equals("Model")){
+//				System.out.println(desc);
+//				System.out.println(type);
+//			}
 			
 			IRelation relation = new Relation(this.clazz.getName(), type, RelationType.association);
 			
@@ -62,7 +64,7 @@ public class ClassFieldVisitor extends ClassVisitor implements IClazzGetter{
 		}
 		
 		IClass current = this.model.getClazz(this.clazz.getName());
-		Field f = new Field(type, name, accessLevel);
+		Field f = new Field(type, name, accessLevel, isCollection);
 		current.addField(f);
 		
 		return toDecorate;

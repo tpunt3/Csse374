@@ -6,4 +6,5 @@ public interface IField extends ITraverser{
 	public String getType();
 	public String getAccess();
 	public String getName();
+	public boolean getIsCollection();
 }
