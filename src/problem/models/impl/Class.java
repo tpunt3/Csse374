@@ -133,7 +133,14 @@ public class Class implements IClass {
 
 	@Override
 	public void accept(IPatternVisitor v) {
-		// TODO Auto-generated method stub
+		v.visit(this);
+		for(IMethod m : this.methods){
+			m.accept(v);
+		}
+		
+		for(IField f : this.fields){
+			f.accept(v);
+		}
 		
 	}
 

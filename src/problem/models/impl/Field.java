@@ -45,8 +45,7 @@ public class Field implements IField{
 
 	@Override
 	public void accept(IPatternVisitor v) {
-		// TODO Auto-generated method stub
-		
+		v.visit(this);
 	}
 
 }

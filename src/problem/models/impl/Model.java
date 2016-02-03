@@ -260,7 +260,11 @@ public class Model implements IModel {
 
 	@Override
 	public void accept(IPatternVisitor v) {
-		v.singletonVisit(this);
-		
+		//v.singletonVisit(this);
+		v.visit(this);
+		for(IClass c:this.classes){
+			c.accept(v);
+		}
+		v.postVisit(this);
 	}
 }

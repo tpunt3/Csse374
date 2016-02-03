@@ -138,8 +138,7 @@ public class Method implements IMethod {
 
 	@Override
 	public void accept(IPatternVisitor v) {
-		// TODO Auto-generated method stub
-		
+		v.visit(this);
 	}
 
 }

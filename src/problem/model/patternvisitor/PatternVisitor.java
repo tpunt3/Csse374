@@ -15,10 +15,19 @@ public class PatternVisitor implements IPatternVisitor {
 		this.keyToCommandMap = new HashMap<>();
 	}
 	
+//	@Override
+//	public void singletonVisit(ITraverser t) {
+//		this.doVisit(VisitType.SingletonPattern, t);
+//	}
+	
 	@Override
-	public void singletonVisit(ITraverser t) {
-		this.doVisit(VisitType.SingletonPattern, t);
-
+	public void visit(ITraverser t){
+		this.doVisit(VisitType.Visit, t);
+	}
+	
+	@Override
+	public void postVisit(ITraverser t){
+		this.doVisit(VisitType.PostVisit, t);
 	}
 	
 	private void doVisit(VisitType vType, ITraverser t){

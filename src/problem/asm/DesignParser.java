@@ -106,6 +106,10 @@ public class DesignParser {
 			"problem.model.detectors.DecoratorDetector",
 			"problem.model.detectors.IPatternDetector",
 			"problem.model.detectors.SingletonDetector",
+			"problem.model.patternvisitor.IPatternVisitMethod",
+			"problem.model.patternvisitor.IPatternVisitor",
+			"problem.model.patternvisitor.ModelPatternVisitor",
+			"problem.model.patternvisitor.PatternVisitor",
 			"problem.model.visitor.ITraverser",
 			"problem.model.visitor.IVisitor",
 			"problem.model.visitor.Visitor",
@@ -270,10 +274,10 @@ public class DesignParser {
 		gv.write(model);
 		gv.close();
 
-		 ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		 "\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
-	//	ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		//		"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		// ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+		 //"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+				"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;
