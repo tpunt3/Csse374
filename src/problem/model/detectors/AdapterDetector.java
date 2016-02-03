@@ -36,13 +36,13 @@ public class AdapterDetector implements IPatternDetector {
 				for (String s : splitArgs) {
 					s = s.trim();
 					for (IField f : c.getFields()) {
-						if (s.equals(f.getType()) && !f.getIsCollection()) {
+						if (s.equals(f.getType())) {
 							// this has a field that is passed in through the
 							// constructor
 
 							IClass adaptee = null;
 							for (IClass c2 : this.model.getClasses()) {
-								if (c2.getName().equals(f.getType()) && !f.getIsCollection()) {
+								if (c2.getName().equals(f.getType())) {
 									adaptee = c2;
 									break;
 								}

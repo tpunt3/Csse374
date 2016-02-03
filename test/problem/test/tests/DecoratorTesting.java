@@ -36,7 +36,7 @@ private DesignParser parser;
 		
 		for(IClass c: m.getClasses()){
 			if(c.getName().equals("OutputStreamWriter")){
-				assertTrue(c instanceof DecoratorDecorator);
+				assertFalse(c instanceof DecoratorDecorator);
 			}
 		}
 	}
@@ -52,7 +52,7 @@ private DesignParser parser;
 		
 		for(IClass c: m.getClasses()){
 			if(c.getName().equals("InputStreamReader")){
-				assertTrue(c instanceof DecoratorDecorator);
+				assertFalse(c instanceof DecoratorDecorator);
 			}
 		}
 	}

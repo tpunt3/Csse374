@@ -26,10 +26,7 @@ public class ModelPatternVisitor {
 		this.setVisitClass();
 		this.setVisitMethod();
 		this.setVisitField();
-		this.setPostVisitModel();
-		
-		//this.setSingletonVisit();
-
+		this.setPostVisitModel();\
 	}
 
 	public void detect(IModel m) {
