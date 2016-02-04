@@ -48,5 +48,29 @@ public class UnitAdapterTesting {
 			}
 		}
 	}
+	
+	@Test
+	public void testFalseUnitAdapter() throws IOException {
+		Model m = Model.getInstance();
+		m.clearModel();
+		String[] classes = { "problem.test.patternClasses.AdapteeClass", "problem.test.patternClasses.FalseAdapterClass",
+				"problem.test.patternClasses.TargetInterface" };
+		parser.visitClasses(classes, m);
+		IPatternDetector pd = new AdapterDetector(m);
+		pd.detectPatterns();
+
+		for (IClass c : m.getClasses()) {
+			if (c.getName().equals("AdapteeClass")) {
+				assertFalse(c instanceof AdapteeDecorator);
+			}
+
+			if (c.getName().equals("AdapterClass")) {
+				assertFalse(c instanceof AdapterDecorator);
+			}
+			if (c.getName().equals("TargetInterface")) {
+				assertFalse(c instanceof TargetDecorator);
+			}
+		}
+	}
 
 }

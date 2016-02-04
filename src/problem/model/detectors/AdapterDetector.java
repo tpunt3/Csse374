@@ -10,6 +10,7 @@ import problem.models.api.IField;
 import problem.models.api.IMethod;
 import problem.models.api.IModel;
 import problem.models.api.IRelation;
+import problem.models.api.ISubMethod;
 import problem.models.api.RelationType;
 import problem.models.impl.Relation;
 
@@ -52,7 +53,7 @@ public class AdapterDetector implements IPatternDetector {
 							// hierarchy
 							IClass target = null;
 
-							boolean isAdapter = false;
+							boolean isAlmostAdapter = false;
 							int extendsImplementsCount = 0;
 							int associationCount = 0;
 							if (adaptee != null && c != null) {
@@ -73,10 +74,26 @@ public class AdapterDetector implements IPatternDetector {
 										}
 									}
 									if (extendsImplementsCount == 1 && associationCount == 1) {
-										isAdapter = true;
+										isAlmostAdapter = true;
 									}
 								}
 							}
+							
+							boolean isAdapter = false;
+							if(isAlmostAdapter){
+								for(IMethod m2 : c.getMethods()){
+									if(!m2.getName().equals("init")){
+										//check that it uses the field we have
+										for(ISubMethod sub: m2.getSubMethods()){
+											System.out.println("submethod name: "+sub.getClazzName()+" type: "+f.getType());
+											if(sub.getClazzName().equals(f.getType())){
+												isAdapter = true;
+											}
+										}
+									}
+								}
+							}
+							
 							if (isAdapter) {
 								this.adapters.add(c);
 								this.adaptees.add(adaptee);

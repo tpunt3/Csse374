@@ -1,14 +1,14 @@
 package problem.test.patternClasses;
 
-public class AdapterClass implements TargetInterface {
+public class FalseAdapterClass implements TargetInterface {
 	private AdapteeClass adaptee;
-
-	public AdapterClass(AdapteeClass adaptee) {
+	
+	public FalseAdapterClass() {
 		this.adaptee = adaptee;
 	}
 
 	@Override
 	public void doSomething() {
-		this.adaptee.doingSomething();
 	}
+
 }

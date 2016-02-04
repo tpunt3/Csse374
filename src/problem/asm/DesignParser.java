@@ -89,49 +89,49 @@ public class DesignParser {
 			// "headfirst.factory.pizzas.SimplePizzaFactory",
 			// "headfirst.factory.pizzas.VeggiePizza",
 //
-			"problem.asm.ClassDeclarationVisitor", 
-			"problem.asm.ClassFieldVisitor", 
-			"problem.asm.ClassMethodVisitor",
-			"problem.asm.DesignParser", 
-			"problem.asm.IClazzGetter", 
-			"problem.asm.MyMethodVisitor",
-			"problem.asm.DocType", 
-			"problem.model.decorators.AdapteeDecorator",
-			"problem.model.decorators.AdapterDecorator",
-			"problem.model.decorators.ClassDecorator",
-			"problem.model.decorators.ComponentDecorator",
-			"problem.model.decorators.DecoratorDecorator",
-			"problem.model.decorators.SingletonDecorator",
-			"problem.model.decorators.TargetDecorator",
-			"problem.model.detectors.AdapterDetector",
-			"problem.model.detectors.DecoratorDetector",
-			"problem.model.detectors.IPatternDetector",
-			"problem.model.detectors.SingletonDetector",
-			"problem.model.patternvisitor.IPatternVisitMethod",
-			"problem.model.patternvisitor.IPatternVisitor",
-			"problem.model.patternvisitor.ModelPatternVisitor",
-			"problem.model.patternvisitor.PatternVisitor",
-			"problem.model.visitor.ITraverser",
-			"problem.model.visitor.IVisitor",
-			"problem.model.visitor.Visitor",
-			"problem.model.visitor.LookupKey",
-			"problem.model.visitor.VisitType",
-			"problem.model.visitor.IVisitMethod",
-			"problem.models.api.IClass", 
-			"problem.models.api.IField",
-			"problem.models.api.IMethod", 
-			"problem.models.api.IModel", 
-			"problem.models.api.IRelation",
-			"problem.models.api.ISubMethod", 
-			"problem.models.api.RelationType", 
-			"problem.models.impl.Class",
-			"problem.models.impl.Field", 
-			"problem.models.impl.Method", 
-			"problem.models.impl.Model",
-			"problem.models.impl.ModelGVOutputStream", 
-			"problem.models.impl.ModelSDOutputStream",
-			"problem.models.impl.Relation",
-			"problem.models.impl.SubMethod"
+//			"problem.asm.ClassDeclarationVisitor", 
+//			"problem.asm.ClassFieldVisitor", 
+//			"problem.asm.ClassMethodVisitor",
+//			"problem.asm.DesignParser", 
+//			"problem.asm.IClazzGetter", 
+//			"problem.asm.MyMethodVisitor",
+//			"problem.asm.DocType", 
+//			"problem.model.decorators.AdapteeDecorator",
+//			"problem.model.decorators.AdapterDecorator",
+//			"problem.model.decorators.ClassDecorator",
+//			"problem.model.decorators.ComponentDecorator",
+//			"problem.model.decorators.DecoratorDecorator",
+//			"problem.model.decorators.SingletonDecorator",
+//			"problem.model.decorators.TargetDecorator",
+//			"problem.model.detectors.AdapterDetector",
+//			"problem.model.detectors.DecoratorDetector",
+//			"problem.model.detectors.IPatternDetector",
+//			"problem.model.detectors.SingletonDetector",
+//			"problem.model.patternvisitor.IPatternVisitMethod",
+//			"problem.model.patternvisitor.IPatternVisitor",
+//			"problem.model.patternvisitor.ModelPatternVisitor",
+//			"problem.model.patternvisitor.PatternVisitor",
+//			"problem.model.visitor.ITraverser",
+//			"problem.model.visitor.IVisitor",
+//			"problem.model.visitor.Visitor",
+//			"problem.model.visitor.LookupKey",
+//			"problem.model.visitor.VisitType",
+//			"problem.model.visitor.IVisitMethod",
+//			"problem.models.api.IClass", 
+//			"problem.models.api.IField",
+//			"problem.models.api.IMethod", 
+//			"problem.models.api.IModel", 
+//			"problem.models.api.IRelation",
+//			"problem.models.api.ISubMethod", 
+//			"problem.models.api.RelationType", 
+//			"problem.models.impl.Class",
+//			"problem.models.impl.Field", 
+//			"problem.models.impl.Method", 
+//			"problem.models.impl.Model",
+//			"problem.models.impl.ModelGVOutputStream", 
+//			"problem.models.impl.ModelSDOutputStream",
+//			"problem.models.impl.Relation",
+//			"problem.models.impl.SubMethod"
 
 		//	 "java.util.Collections",
 
@@ -162,11 +162,11 @@ public class DesignParser {
 //			"headfirst.decorator.starbuzz.StarbuzzCoffee",
 //			"headfirst.decorator.starbuzz.Whip",
 			
-//			"problem.client.App",
-//			"problem.client.IteratorToEnumerationAdapter",
-//			"problem.lib.LinearTransformer",
-//			"java.util.Iterator",
-//			"java.util.Enumeration"
+			"problem.client.App",
+			"problem.client.IteratorToEnumerationAdapter",
+			"problem.lib.LinearTransformer",
+			"java.util.Iterator",
+			"java.util.Enumeration"
 			
 //			"java.lang.Runtime", 
 //			"java.awt.Desktop",
@@ -195,6 +195,11 @@ public class DesignParser {
 //			"problem.sprites.RectangleSprite",
 //			"problem.sprites.SpriteFactory",
 //			"problem.sprites.StackSprite",
+			
+			,"problem.test.patternClasses.AdapteeClass", 
+			"problem.test.patternClasses.AdapterClass",
+			"problem.test.patternClasses.FalseAdapterClass",
+			"problem.test.patternClasses.TargetInterface" 
 	};
 
 	/**
@@ -295,10 +300,10 @@ public class DesignParser {
 		gv.write(model);
 		gv.close();
 
-		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		//"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-				"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+			//	"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;
