@@ -1,4 +1,4 @@
-package problem.test.classes;
+package problem.test.patternClasses;
 
 public class ComponentDecorator implements ComponentInterface {
 

@@ -9,7 +9,7 @@ import problem.models.api.IClass;
 import problem.models.api.IField;
 import problem.models.api.IMethod;
 
-public class SingletonDecorator implements IClass {
+public class SingletonDecorator extends ClassDecorator {
 	private IClass thisClass;
 	
 	public SingletonDecorator(IClass c) {

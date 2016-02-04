@@ -1,4 +1,4 @@
-package problem.test.tests;
+package problem.test.patternTests;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package problem.test.tests;
+package problem.test.patternTests;
 
 import static org.junit.Assert.*;
 
@@ -27,7 +27,7 @@ public class SingletonLogicTesting {
 	@Test
 	public void testLazySingleton() throws IOException {
 		Model m = Model.getInstance();
-		String[] classes = {"problem.test.classes.LazySingleton", "problem.test.classes.EmptyClass"};
+		String[] classes = {"problem.test.patternClasses.LazySingleton", "problem.test.classes.EmptyClass"};
 		parser.visitClasses(classes,m);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
@@ -45,7 +45,7 @@ public class SingletonLogicTesting {
 	public void testEagerSingleton() throws IOException {
 		Model m = Model.getInstance();
 		m.clearModel();
-		String[] classes = {"problem.test.classes.EagerSingleton", "problem.test.classes.FieldClass"};
+		String[] classes = {"problem.test.patternClasses.EagerSingleton", "problem.test.classes.FieldClass"};
 		parser.visitClasses(classes,m);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
@@ -63,7 +63,7 @@ public class SingletonLogicTesting {
 	public void testAlmostSingleton() throws IOException {
 		Model m = Model.getInstance();
 		m.clearModel();
-		String[] classes = {"problem.test.classes.EagerSingleton", "problem.test.classes.AlmostSingleton"};
+		String[] classes = {"problem.test.patternClasses.EagerSingleton", "problem.test.patternClasses.AlmostSingleton"};
 		parser.visitClasses(classes,m);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();

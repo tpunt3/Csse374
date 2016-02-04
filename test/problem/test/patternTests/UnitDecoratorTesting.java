@@ -1,4 +1,4 @@
-package problem.test.tests;
+package problem.test.patternTests;
 
 import static org.junit.Assert.*;
 
@@ -28,9 +28,9 @@ private DesignParser parser;
 	public void testUnitDecorator() throws IOException {
 		Model m = Model.getInstance();
 		m.clearModel();
-		String[] classes = {"problem.test.classes.ConcreteComponentDecorator",
-				"problem.test.classes.ComponentInterface",
-				"problem.test.classes.ComponentDecorator"};
+		String[] classes = {"problem.test.patternClasses.ConcreteComponentDecorator",
+				"problem.test.patternClasses.ComponentInterface",
+				"problem.test.patternClasses.ComponentDecorator"};
 		parser.visitClasses(classes,m);
 		IPatternDetector pd = new DecoratorDetector(m);
 		pd.detectPatterns();

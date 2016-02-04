@@ -5,9 +5,9 @@ shape="record",
 label = "{DecoratorDetector| - model: IModel\l- decorators: IClass\l- components: IClass\l|- findComponent(IClass; IClass) : boolean\l+ init(IModel) : void\l+ detectPatterns() : void\l}"
 ];
 
-AdapterDecorator [
+AdapteeDecorator [
 shape="record",style = filled,fillcolor=green
-label = "{AdapterDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getMethods() : IMethod\l+ addMethod(IMethod) : void\l+ getSuperClass() : String\l+ getIsClass() : boolean\l+ accept(IPatternVisitor) : void\l+ getName() : String\l+ getFields() : IField\l+ addField(IField) : void\l+ init(IClass) : void\l+ getSignature() : String\l+ accept(IVisitor) : void\l+ getInterfaceList() : String\l}"
+label = "{AdapteeDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getMethods() : IMethod\l+ accept(IVisitor) : void\l+ accept(IPatternVisitor) : void\l+ getIsClass() : boolean\l+ addMethod(IMethod) : void\l+ getSignature() : String\l+ getSuperClass() : String\l+ init(IClass) : void\l+ getName() : String\l+ getFields() : IField\l+ getInterfaceList() : String\l+ addField(IField) : void\l}"
 ];
 
 IVisitor [
@@ -15,9 +15,9 @@ shape="record",
 label = "{\<\<interface\>\>\nIVisitor| + postVisit(ITraverser) : void\l+ visit(ITraverser) : void\l+ removeVisit(VisitType; Class) : void\l+ addVisit(VisitType; Class; IVisitMethod) : void\l+ preVisit(ITraverser) : void\l+ visitRelations(ITraverser) : void\l+ intermediateVisit(ITraverser) : void\l}"
 ];
 
-AdapteeDecorator [
+TargetDecorator [
 shape="record",style = filled,fillcolor=green
-label = "{AdapteeDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getMethods() : IMethod\l+ accept(IVisitor) : void\l+ accept(IPatternVisitor) : void\l+ getIsClass() : boolean\l+ addMethod(IMethod) : void\l+ getSignature() : String\l+ getSuperClass() : String\l+ init(IClass) : void\l+ getName() : String\l+ getFields() : IField\l+ getInterfaceList() : String\l+ addField(IField) : void\l}"
+label = "{TargetDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getSignature() : String\l+ accept(IPatternVisitor) : void\l+ init(IClass) : void\l+ getName() : String\l+ addField(IField) : void\l+ getIsClass() : boolean\l+ getMethods() : IMethod\l+ getFields() : IField\l+ getInterfaceList() : String\l+ addMethod(IMethod) : void\l+ getSuperClass() : String\l+ accept(IVisitor) : void\l}"
 ];
 
 ClassMethodVisitor [
@@ -30,9 +30,9 @@ shape="record",
 label = "{LookupKey| ~ visitType: VisitType\l~ clazz: Class\l|+ init(VisitType; Class) : void\l+ equals(Object) : boolean\l+ hashCode() : int\l}"
 ];
 
-DecoratorDecorator [
+IClass [
 shape="record",style = filled,fillcolor=green
-label = "{DecoratorDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getSignature() : String\l+ getInterfaceList() : String\l+ addField(IField) : void\l+ getIsClass() : boolean\l+ accept(IPatternVisitor) : void\l+ init(IClass) : void\l+ getName() : String\l+ accept(IVisitor) : void\l+ getMethods() : IMethod\l+ getFields() : IField\l+ getSuperClass() : String\l+ addMethod(IMethod) : void\l}"
+label = "{\<\<interface\>\>\nIClass\n\<\<component\>\>| + getSignature() : String\l+ getInterfaceList() : String\l+ addField(IField) : void\l+ getName() : String\l+ getIsClass() : boolean\l+ addMethod(IMethod) : void\l+ getMethods() : IMethod\l+ getSuperClass() : String\l+ getFields() : IField\l}"
 ];
 
 ModelPatternVisitor [
@@ -43,6 +43,11 @@ label = "{ModelPatternVisitor| ~ visitor: PatternVisitor\l- toReplace: IClass\l|
 Method [
 shape="record",
 label = "{Method| - access: String\l- accessNumber: int\l- name: String\l- args: String\l- returnType: String\l- signature: String\l- clazz: IClass\l- subMethods: ISubMethod\l|+ getAccessNumber() : int\l+ setName(String) : void\l+ getSignature() : String\l+ getArgs() : String\l+ equals(Object) : boolean\l+ getName() : String\l+ accept(IPatternVisitor) : void\l+ getClazz() : IClass\l+ setAccessNumber(int) : void\l+ getSubMethods() : ISubMethod\l+ hashCode() : int\l+ init(String; int; String; String; String; IClass; String; String; String; String; IClass; ISubMethod) : void\l+ accept(IVisitor) : void\l+ setClazz(IClass) : void\l+ getReturnType() : String\l+ setSignature(String) : void\l+ getAccess() : String\l}"
+];
+
+Model [
+shape="record",color=blue
+label = "{Model\n\<\<Singleton\>\>|- uniqueInstance: Model\l- callDepth: int\l- classes: IClass\l- relations: IRelation\l- classStrings: String\l- methodStrings: String\l- classesToAdd: String\l- classNames: String\l|+ getMethodStrings() : String\l+ getRelations() : IRelation\l+ accept(IVisitor) : void\l+ addRelation(IRelation) : void\l+ setRelations(IRelation) : IRelation\l+ getClazz(String) : IClass\l+ clearModel() : void\l+ clearSD() : void\l+ setCallDepth(int) : void\l+ toString() : String\l+ getClassStrings() : String\l- init() : void\l+ getClassNames() : void\l+ findNewClasses(ISubMethod; int) : String[]\l+ replaceClass(IClass; IClass) : void\l+ getInstance() : Model\l+ accept(IPatternVisitor) : void\l+ writeFile(IVisitor) : void\l+ acceptSequence(IVisitor; ISubMethod; int) : void\l+ getClasses() : IClass\l+ addClazz(IClass) : void\l+ getCallDepth() : int\l+ init(IClass) : void\l}"
 ];
 
 SingletonDetector [
@@ -60,11 +65,6 @@ shape="record",
 label = "{ModelSDOutputStream| ~ out: OutputStream\l~ s: StringBuilder\l~ visitor: Visitor\l|- lambda$2(ITraverser) : void\l- setPreVisitModel() : void\l- lambda$1(ITraverser) : void\l- setPreVisitMethod() : void\l- lambda$0(ITraverser) : void\l- setVisitModel() : void\l- write(String) : void\l+ init(OutputStream) : void\l}"
 ];
 
-Model [
-shape="record",color=blue
-label = "{Model\n\<\<Singleton\>\>|- uniqueInstance: Model\l- callDepth: int\l- classes: IClass\l- relations: IRelation\l- classStrings: String\l- methodStrings: String\l- classesToAdd: String\l- classNames: String\l|+ getMethodStrings() : String\l+ getRelations() : IRelation\l+ accept(IVisitor) : void\l+ addRelation(IRelation) : void\l+ setRelations(IRelation) : IRelation\l+ getClazz(String) : IClass\l+ clearModel() : void\l+ clearSD() : void\l+ setCallDepth(int) : void\l+ toString() : String\l+ getClassStrings() : String\l- init() : void\l+ getClassNames() : void\l+ findNewClasses(ISubMethod; int) : String[]\l+ replaceClass(IClass; IClass) : void\l+ getInstance() : Model\l+ accept(IPatternVisitor) : void\l+ writeFile(IVisitor) : void\l+ acceptSequence(IVisitor; ISubMethod; int) : void\l+ getClasses() : IClass\l+ addClazz(IClass) : void\l+ getCallDepth() : int\l+ init(IClass) : void\l}"
-];
-
 ISubMethod [
 shape="record",
 label = "{\<\<interface\>\>\nISubMethod| + getMethodName() : String\l+ getClazzName() : String\l+ getQualifiedClassName() : String\l+ getReturnType() : String\l+ isVisited() : boolean\l+ getArgs() : String\l+ setVisited(boolean) : void\l}"
@@ -73,11 +73,6 @@ label = "{\<\<interface\>\>\nISubMethod| + getMethodName() : String\l+ getClazzN
 IVisitMethod [
 shape="record",
 label = "{\<\<interface\>\>\nIVisitMethod| + execute(ITraverser) : void\l}"
-];
-
-IClass [
-shape="record",style = filled,fillcolor=green
-label = "{\<\<interface\>\>\nIClass\n\<\<component\>\>| + getSignature() : String\l+ getInterfaceList() : String\l+ addField(IField) : void\l+ getName() : String\l+ getIsClass() : boolean\l+ addMethod(IMethod) : void\l+ getMethods() : IMethod\l+ getSuperClass() : String\l+ getFields() : IField\l}"
 ];
 
 AdapterDetector [
@@ -125,9 +120,9 @@ shape="record",
 label = "{SubMethod| - clazzName: String\l- name: String\l- args: String\l- qualifiedClassName: String\l- returnType: String\l- visited: boolean\l|+ getClazzName() : String\l+ getQualifiedClassName() : String\l+ init(String; String; String; String; String) : void\l+ getMethodName() : String\l+ accept(IVisitor) : void\l+ accept(IPatternVisitor) : void\l+ getReturnType() : String\l+ getArgs() : String\l+ isVisited() : boolean\l+ setVisited(boolean) : void\l}"
 ];
 
-ClassDecorator [
+ComponentDecorator [
 shape="record",style = filled,fillcolor=green
-label = "{ClassDecorator\n\<\<decorator\>\>|+ init() : void\l}"
+label = "{ComponentDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getIsClass() : boolean\l+ accept(IVisitor) : void\l+ getName() : String\l+ getMethods() : IMethod\l+ accept(IPatternVisitor) : void\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getSuperClass() : String\l+ getInterfaceList() : String\l+ getFields() : IField\l+ getSignature() : String\l+ init(IClass) : void\l}"
 ];
 
 Visitor [
@@ -135,9 +130,9 @@ shape="record",
 label = "{Visitor| ~ keyToCommandMap: Map\l|+ visitRelations(ITraverser) : void\l+ init() : void\l- doVisit(VisitType; ITraverser) : void\l+ visit(ITraverser) : void\l+ postVisit(ITraverser) : void\l+ preVisit(ITraverser) : void\l+ removeVisit(VisitType; Class) : void\l+ addVisit(VisitType; Class; IVisitMethod) : void\l+ intermediateVisit(ITraverser) : void\l}"
 ];
 
-ComponentDecorator [
+AdapterDecorator [
 shape="record",style = filled,fillcolor=green
-label = "{ComponentDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getIsClass() : boolean\l+ accept(IVisitor) : void\l+ getName() : String\l+ getMethods() : IMethod\l+ accept(IPatternVisitor) : void\l+ addMethod(IMethod) : void\l+ addField(IField) : void\l+ getSuperClass() : String\l+ getInterfaceList() : String\l+ getFields() : IField\l+ getSignature() : String\l+ init(IClass) : void\l}"
+label = "{AdapterDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getMethods() : IMethod\l+ addMethod(IMethod) : void\l+ getSuperClass() : String\l+ getIsClass() : boolean\l+ accept(IPatternVisitor) : void\l+ getName() : String\l+ getFields() : IField\l+ addField(IField) : void\l+ init(IClass) : void\l+ getSignature() : String\l+ accept(IVisitor) : void\l+ getInterfaceList() : String\l}"
 ];
 
 ClassDeclarationVisitor [
@@ -175,9 +170,9 @@ shape="record",
 label = "{RelationType| + superclass: RelationType\l+ interfaces: RelationType\l+ uses: RelationType\l+ singleton: RelationType\l+ association: RelationType\l+ decorates: RelationType\l+ adapts: RelationType\l- ENUM$VALUES: RelationType[]\l|- init(String; int) : void\l+ values() : RelationType[]\l% clinit() : void\l+ valueOf(String) : RelationType\l}"
 ];
 
-SingletonDecorator [
+DecoratorDecorator [
 shape="record",style = filled,fillcolor=green
-label = "{SingletonDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getSignature() : String\l+ accept(IVisitor) : void\l+ getInterfaceList() : String\l+ accept(IPatternVisitor) : void\l+ getIsClass() : boolean\l+ init(IClass) : void\l+ getName() : String\l+ addField(IField) : void\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ getSuperClass() : String\l}"
+label = "{DecoratorDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getSignature() : String\l+ getInterfaceList() : String\l+ addField(IField) : void\l+ getIsClass() : boolean\l+ accept(IPatternVisitor) : void\l+ init(IClass) : void\l+ getName() : String\l+ accept(IVisitor) : void\l+ getMethods() : IMethod\l+ getFields() : IField\l+ getSuperClass() : String\l+ addMethod(IMethod) : void\l}"
 ];
 
 MyMethodVisitor [
@@ -210,9 +205,14 @@ shape="record",
 label = "{\<\<interface\>\>\nIModel| + getClasses() : IClass\l+ getMethodStrings() : String\l+ getClassStrings() : String\l+ replaceClass(IClass; IClass) : void\l+ getRelations() : IRelation\l+ addRelation(IRelation) : void\l+ addClazz(IClass) : void\l+ getClazz(String) : IClass\l}"
 ];
 
-TargetDecorator [
+ClassDecorator [
 shape="record",style = filled,fillcolor=green
-label = "{TargetDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getSignature() : String\l+ accept(IPatternVisitor) : void\l+ init(IClass) : void\l+ getName() : String\l+ addField(IField) : void\l+ getIsClass() : boolean\l+ getMethods() : IMethod\l+ getFields() : IField\l+ getInterfaceList() : String\l+ addMethod(IMethod) : void\l+ getSuperClass() : String\l+ accept(IVisitor) : void\l}"
+label = "{ClassDecorator\n\<\<decorator\>\>|+ init() : void\l}"
+];
+
+SingletonDecorator [
+shape="record",style = filled,fillcolor=green
+label = "{SingletonDecorator\n\<\<decorator\>\>|- thisClass: IClass\l|+ getSignature() : String\l+ accept(IVisitor) : void\l+ getInterfaceList() : String\l+ accept(IPatternVisitor) : void\l+ getIsClass() : boolean\l+ init(IClass) : void\l+ getName() : String\l+ addField(IField) : void\l+ getMethods() : IMethod\l+ getFields() : IField\l+ addMethod(IMethod) : void\l+ getSuperClass() : String\l}"
 ];
 
 //writing relations between classes now
@@ -277,7 +277,7 @@ DecoratorDecorator -> IVisitor [arrowhead = "vee", style = "dashed"];
 DecoratorDecorator -> IField [arrowhead = "vee", style = "dashed"];
 DecoratorDecorator -> IMethod [arrowhead = "vee", style = "dashed"];
 DecoratorDecorator -> IPatternVisitor [arrowhead = "vee", style = "dashed"];
-SingletonDecorator -> IClass [arrowhead = "empty", style = "dashed"];
+SingletonDecorator -> ClassDecorator [arrowhead = "empty"];
 SingletonDecorator -> IClass [arrowhead = "vee"];
 SingletonDecorator -> IVisitor [arrowhead = "vee", style = "dashed"];
 SingletonDecorator -> IField [arrowhead = "vee", style = "dashed"];

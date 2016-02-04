@@ -1,4 +1,4 @@
-package problem.test.classes;
+package problem.test.patternClasses;
 
 public class AdapterClass implements TargetInterface {
 	private AdapteeClass adaptee;
