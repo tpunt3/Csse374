@@ -1,9 +1,9 @@
 package problem.test.patternClasses;
 
-public class MyComposite implements ICompositeComponent{
+public class MyComposite extends CompositeComponent{
 	
-	private Leaf leaf1;
-	private Leaf leaf2;
+	private CompositeComponent leaf1;
+	private CompositeComponent leaf2;
 	
 	public MyComposite(){
 		leaf1 = new Leaf();

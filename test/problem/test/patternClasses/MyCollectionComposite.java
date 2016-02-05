@@ -2,15 +2,15 @@ package problem.test.patternClasses;
 
 import java.util.ArrayList;
 
-public class MyCollectionComposite {
+public class MyCollectionComposite extends CompositeComponent{
 	
-	private ArrayList<Leaf> leaves;
+	private ArrayList<CompositeComponent> leaves;
 	
 	public MyCollectionComposite(){
-		this.leaves = new ArrayList<Leaf>();
+		this.leaves = new ArrayList<CompositeComponent>();
 	}
 	
-	private void method1(){
+	public void method1(){
 		
 	}
 

@@ -1,12 +1,12 @@
 package problem.test.patternClasses;
 
-public class Leaf implements ICompositeComponent{
+public class Leaf extends CompositeComponent{
 
 	public Leaf(){
 		
 	}
 	
-	private void method1(){
+	public void method1(){
 		
 	}
 	

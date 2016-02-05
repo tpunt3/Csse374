@@ -1,35 +1,22 @@
 digraph model{
 rankdir = BT;
-App [
-shape="record",
-label = "{App| + init() : void\l+ main(String[]) : void\l}"
+CompositeComponent [
+shape="record",style = filled,fillcolor=yellow
+label = "{CompositeComponent\n\<\<component\>\>|+ init() : void\l}"
 ];
 
-IteratorToEnumerationAdapter [
-shape="record",style = filled,fillcolor=red
-label = "{IteratorToEnumerationAdapter\n\<\<adapter\>\>|- itr: Iterator\l|+ init(Iterator) : void\l+ nextElement() : E\l+ hasMoreElements() : boolean\l}"
+Leaf [
+shape="record",style = filled,fillcolor=yellow
+label = "{Leaf\n\<\<leaf\>\>|- method1() : void\l+ init() : void\l}"
 ];
 
-Enumeration [
-shape="record",style = filled,fillcolor=red
-label = "{\<\<interface\>\>\nEnumeration\n\<\<target\>\>| + nextElement() : E\l+ hasMoreElements() : boolean\l}"
-];
-
-LinearTransformer [
-shape="record",
-label = "{LinearTransformer| - enumTion: Enumeration\l|+ init(Enumeration) : void\l+ transform(OutputStream) : void\l}"
-];
-
-Iterator [
-shape="record",style = filled,fillcolor=red
-label = "{\<\<interface\>\>\nIterator\n\<\<adaptee\>\>| + next() : E\l+ forEachRemaining(Consumer) : Consumer\l+ hasNext() : boolean\l+ remove() : void\l}"
+MyCollectionComposite [
+shape="record",style = filled,fillcolor=yellow
+label = "{MyCollectionComposite\n\<\<composite\>\>|- leaves: CompositeComponent\l|- method1() : void\l+ init() : void\l}"
 ];
 
 //writing relations between classes now
-App -> IteratorToEnumerationAdapter [arrowhead = "vee", style = "dashed"];
-App -> Iterator [arrowhead = "vee", style = "dashed"];
-App -> LinearTransformer [arrowhead = "vee", style = "dashed"];
-IteratorToEnumerationAdapter -> Enumeration [arrowhead = "empty", style = "dashed"];
-LinearTransformer -> Enumeration [arrowhead = "vee"];
-IteratorToEnumerationAdapter -> Iterator [arrowhead = "vee", label = "\<\<adapts\>\>"];
+Leaf -> CompositeComponent [arrowhead = "empty"];
+MyCollectionComposite -> CompositeComponent [arrowhead = "empty"];
+MyCollectionComposite -> CompositeComponent [arrowhead = "vee"];
 }

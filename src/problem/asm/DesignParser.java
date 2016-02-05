@@ -162,11 +162,11 @@ public class DesignParser {
 //			"headfirst.decorator.starbuzz.StarbuzzCoffee",
 //			"headfirst.decorator.starbuzz.Whip",
 			
-			"problem.client.App",
-			"problem.client.IteratorToEnumerationAdapter",
-			"problem.lib.LinearTransformer",
-			"java.util.Iterator",
-			"java.util.Enumeration"
+//			"problem.client.App",
+//			"problem.client.IteratorToEnumerationAdapter",
+//			"problem.lib.LinearTransformer",
+//			"java.util.Iterator",
+//			"java.util.Enumeration"
 			
 //			"java.lang.Runtime", 
 //			"java.awt.Desktop",
@@ -196,10 +196,13 @@ public class DesignParser {
 //			"problem.sprites.SpriteFactory",
 //			"problem.sprites.StackSprite",
 			
-			,"problem.test.patternClasses.AdapteeClass", 
-			"problem.test.patternClasses.AdapterClass",
-			"problem.test.patternClasses.FalseAdapterClass",
-			"problem.test.patternClasses.TargetInterface" 
+//			"problem.test.patternClasses.AdapteeClass", 
+//			"problem.test.patternClasses.AdapterClass",
+//			"problem.test.patternClasses.FalseAdapterClass",
+//			"problem.test.patternClasses.TargetInterface" 
+			
+			"problem.test.patternClasses.Leaf", "problem.test.patternClasses.MyCollectionComposite",
+			"problem.test.patternClasses.CompositeComponent"
 	};
 
 	/**
@@ -300,10 +303,10 @@ public class DesignParser {
 		gv.write(model);
 		gv.close();
 
-		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-		"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		//ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-			//	"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		//"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
+		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+				"\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\" -Tpng input_output/model.gv > input_output/graph1.png");
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		String line;
