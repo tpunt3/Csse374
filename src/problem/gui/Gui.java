@@ -12,14 +12,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-public class Gui{
+public class Gui implements ActionListener{
 	
 	JFrame frame;
 	JPanel panel;
-	GuiActionListener listener;
 	
 	public Gui(){
-		listener = GuiActionListener.getInstance();
 	}
 	
 	public void createLandingScreen(){
@@ -35,7 +33,7 @@ public class Gui{
 		//create content for panel
 		JButton loadConfigButton =  new JButton("Load Config");
 		loadConfigButton.setActionCommand("loadConfig");
-		loadConfigButton.addActionListener(listener);
+		loadConfigButton.addActionListener(this);
 		JButton analyzeButton = new JButton("Analyze");
 		
 		//create panel and add content
@@ -64,7 +62,7 @@ public class Gui{
 		saveItem.setMnemonic(KeyEvent.VK_S);
 		saveItem.setText("Save");
 		saveItem.setActionCommand("save");
-		saveItem.addActionListener(listener);
+		saveItem.addActionListener(this);
 		fileMenu.add(saveItem);
 		
 		menuBar.add(fileMenu);
@@ -75,6 +73,16 @@ public class Gui{
 	
 	public void disableFrame(){
 		System.out.println("disabling");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		if(cmd.equals("save")){
+			System.out.println("Trent is a nerd");
+		}else if(cmd.equals("loadConfig")){
+			ConfigFrame config = ConfigFrame.getInstance();
+		}
 	}
 
 }
