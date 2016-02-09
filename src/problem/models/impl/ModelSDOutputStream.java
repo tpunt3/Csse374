@@ -64,14 +64,4 @@ public class ModelSDOutputStream extends FilterOutputStream{
 			this.write(s);
 		});
 	}
-
-
-	private void setPreVisitMethod() {
-		this.visitor.addVisit(VisitType.PreVisit, IMethod.class, (ITraverser t) ->{
-			IMethod m = (IMethod) t;
-			String s = String.format("%s:%s", m.getClazz().getName(), m.getClazz());
-			this.write(s);
-		});
-	}
-
 }

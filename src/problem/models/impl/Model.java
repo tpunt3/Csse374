@@ -77,11 +77,11 @@ public class Model implements IModel {
 	@Override
 	public void addRelation(IRelation r) {
 
-		//boolean inClasses = false;
+		boolean inClasses = false;
 
 		// If you are running the UnitTesting JUNIT tests in ProjectGVTesting, uncomment this next
 		// line and comment out the one above:
-		 boolean inClasses = true;
+		 //boolean inClasses = true;
 		for (String s : DesignParser.CLASSES) {
 
 			String[] split = s.split("\\.");
