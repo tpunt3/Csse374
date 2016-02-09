@@ -92,7 +92,7 @@ public class DesignParser {
 			// "problem.asm.ClassDeclarationVisitor",
 			// "problem.asm.ClassFieldVisitor",
 			// "problem.asm.ClassMethodVisitor",
-			// "problem.asm.DesignParser",
+			 "problem.asm.DesignParser",
 			// "problem.asm.IClazzGetter",
 			// "problem.asm.MyMethodVisitor",
 			// "problem.asm.DocType",
@@ -201,8 +201,9 @@ public class DesignParser {
 			// "problem.test.patternClasses.FalseAdapterClass",
 			// "problem.test.patternClasses.TargetInterface"
 
-			"problem.test.patternClasses.Leaf", "problem.test.patternClasses.MyCollectionComposite",
-			"problem.test.patternClasses.CompositeComponent" };
+//			"problem.test.patternClasses.Leaf", "problem.test.patternClasses.MyCollectionComposite",
+//			"problem.test.patternClasses.CompositeComponent" 
+			 };
 
 	private String pathToDot;
 	private String pathToSDEdit;
@@ -217,17 +218,18 @@ public class DesignParser {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		DesignParser parser = new DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
-				"\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
+//		DesignParser parser = new DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
+	//			"\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
 		DesignParser parser2 = new DesignParser("\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\"",
 				"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\"");
-		parser.generateDocuments(DocType.uml,
+		//parser.generateDocuments(DocType.uml,
+		parser2.generateDocuments(DocType.sd,
 				// "problem.asm.DesignParser,DesignParser,generateDocuments,DocType;
 				// String; int; String[]", 5, CLASSES);
 				// "problem.asm.Class,Class,accept,IModelVisitor", 5, CLASSES);
 				// "java.util.Collections,Collections,shuffle,List", 5,
 				// CLASSES);
-				"problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod; int", 2, CLASSES);
+				"problem.asm.DesignParser,DesignParser,generateSD,String; Model; ISubMethod; int", 2, CLASSES);
 	}
 
 	public DesignParser(String pathToDot, String pathToSDEdit) {
@@ -340,16 +342,20 @@ public class DesignParser {
 				visitClasses(newArray, model);
 
 			} catch (IOException e) {
+				e.printStackTrace();
 				System.out.println("IO Exception");
 			}
 		}
 
 		OutputStream out = new FileOutputStream("input_output/sequence.sd");
-		IVisitor sdWriter = new ModelSDOutputStream(out);
-		ITraverser traverser = (ITraverser) model;
+		ModelSDOutputStream sd = new ModelSDOutputStream(new FileOutputStream("input_output/sequence.sd"));
 		model.clearSD();
-		model.acceptSequence(sdWriter, sm, depth);
-		model.writeFile(sdWriter);
+
+		model.acceptSequence(sm, depth);
+		sd.write(model);
+		ITraverser traverser = (ITraverser) model;
+		
+		//model.writeFile(sdWriter);
 		out.close();
 
 		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",

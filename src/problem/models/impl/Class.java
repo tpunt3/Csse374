@@ -141,7 +141,5 @@ public class Class implements IClass {
 		for(IField f : this.fields){
 			f.accept(v);
 		}
-		
 	}
-
 }

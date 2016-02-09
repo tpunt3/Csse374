@@ -1,5 +1,7 @@
 package problem.model.visitor;
 
+import problem.models.api.ISubMethod;
+
 public interface IVisitor {
 	public void preVisit(ITraverser t);
 	public void visit(ITraverser t);
@@ -9,4 +11,5 @@ public interface IVisitor {
 	
 	public void addVisit(VisitType vType, Class clazz, IVisitMethod m);
 	public void removeVisit(VisitType vType, Class clazz);
+	public void acceptSequence(IVisitor v, ISubMethod sm, int depth);
 }

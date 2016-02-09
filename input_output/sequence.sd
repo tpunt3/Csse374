@@ -1,1 +1,25 @@
-//writing relations between classes now
+Collection:Collection[a]
+HashSet:HashSet[a]
+Class:Class[a]
+IVisitor:IVisitor[a]
+Iterator:Iterator[a]
+IField:IField[a]
+IMethod:IMethod[a]
+Set:Set[a]
+HashMap:HashMap[a]
+
+Class:void=IVisitor.preVisit(ITraverser)
+Class:void=IVisitor.visit(ITraverser)
+Class:Iterator=Collection.iterator()
+Class:Object=Iterator.next()
+Class:void=IField.accept(IVisitor)
+Class:boolean=Iterator.hasNext()
+Class:boolean=Collection.isEmpty()
+Class:void=IVisitor.intermediateVisit(ITraverser)
+Class:Iterator=HashSet.iterator()
+HashSet:Set=HashMap.keySet()
+HashSet:Iterator=Set.iterator()
+Class:Object=Iterator.next()
+Class:void=IMethod.accept(IVisitor)
+Class:boolean=Iterator.hasNext()
+Class:void=IVisitor.postVisit(ITraverser)

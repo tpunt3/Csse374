@@ -1,14 +1,22 @@
 digraph model{
 rankdir = BT;
-MainGui [
-shape="record",
-label = "{MainGui| ~ frame: JFrame\l~ panel: JPanel\l~ inputClasses: String\l~ dotPath: String\l~ sdPath: String\l|+ actionPerformed(ActionEvent) : void\l+ init() : void\l+ addMenu() : JMenuBar\l+ disableFrame() : void\l+ createLandingScreen() : void\l- readProperties() : void\l}"
+CompositeComponent [
+shape="record",style = filled,fillcolor=yellow
+label = "{CompositeComponent\n\<\<component\>\>|+ init() : void\l+ remove(CompositeComponent) : void\l+ method1() : void\l+ add(CompositeComponent) : void\l}"
 ];
 
-GuiDriver [
-shape="record",
-label = "{GuiDriver| + main(String[]) : void\l+ init() : void\l}"
+Leaf [
+shape="record",style = filled,fillcolor=yellow
+label = "{Leaf\n\<\<leaf\>\>|+ init() : void\l+ method1() : void\l}"
+];
+
+MyCollectionComposite [
+shape="record",style = filled,fillcolor=yellow
+label = "{MyCollectionComposite\n\<\<composite\>\>|- leaves: CompositeComponent\l|+ method1() : void\l+ init() : void\l}"
 ];
 
 //writing relations between classes now
+Leaf -> CompositeComponent [arrowhead = "empty"];
+MyCollectionComposite -> CompositeComponent [arrowhead = "empty"];
+MyCollectionComposite -> CompositeComponent [arrowhead = "vee"];
 }

@@ -77,11 +77,11 @@ public class Model implements IModel {
 	@Override
 	public void addRelation(IRelation r) {
 
-		boolean inClasses = false;
+		//boolean inClasses = false;
 
 		// If you are running the UnitTesting JUNIT tests in ProjectGVTesting, uncomment this next
 		// line and comment out the one above:
-		 //boolean inClasses = true;
+		 boolean inClasses = true;
 		for (String s : DesignParser.CLASSES) {
 
 			String[] split = s.split("\\.");
@@ -146,6 +146,8 @@ public class Model implements IModel {
 	@Override
 	public void accept(IVisitor v) {
 		v.preVisit(this);
+		
+		v.visit(this);
 		for (IClass c : this.classes) {
 			c.accept(v);
 		}
@@ -199,7 +201,7 @@ public class Model implements IModel {
 		return this.classesToAdd.toArray(new String[classesToAdd.size()]);
 	}
 
-	public void acceptSequence(IVisitor v, ISubMethod sm, int depth) {
+	public void acceptSequence(ISubMethod sm, int depth) {
 
 		if (depth > 0) {
 			for (IClass clazz : classes) {
@@ -217,7 +219,7 @@ public class Model implements IModel {
 										this.methodStrings.add(s2);
 										
 										//innerSM.setVisited(true);
-										this.acceptSequence(v, innerSM, depth - 1);
+										this.acceptSequence(innerSM, depth - 1);
 									}
 								}
 								break;

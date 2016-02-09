@@ -5,6 +5,7 @@ import java.util.Map;
 
 import problem.models.api.IClass;
 import problem.models.api.IModel;
+import problem.models.api.ISubMethod;
 
 public class Visitor implements IVisitor{
 	Map<LookupKey, IVisitMethod> keyToCommandMap;
@@ -57,6 +58,12 @@ public class Visitor implements IVisitor{
 	public void removeVisit(VisitType vType, Class clazz) {
 		LookupKey key = new LookupKey(vType, clazz);
 		this.keyToCommandMap.remove(key);
+	}
+
+	@Override
+	public void acceptSequence(IVisitor v, ISubMethod sm, int depth) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
