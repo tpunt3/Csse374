@@ -4,7 +4,7 @@ public class GuiDriver {
 
 	public static void main(String[] args) {
 
-		Gui gui = new Gui();
+		MainGui gui = new MainGui();
 		gui.createLandingScreen();
 		
 	}

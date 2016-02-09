@@ -24,7 +24,7 @@ public class CompositeTesting {
 
 	@Before
 	public void setUp() throws Exception {
-		parser = new DesignParser();
+		parser = new DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"","\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
 
 	}
 

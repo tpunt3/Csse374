@@ -15,7 +15,7 @@ public class ProjectSDTesting {
 
 	@Test
 	public void testClassAccept() throws IOException {
-		DesignParser parser= new DesignParser();
+		DesignParser parser= new DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"","\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
 		String[] classes = {"problem.models.impl.Class"};
 		parser.generateDocuments(DocType.sd, "problem.asm.Class,Class,accept,IModelVisitor", 5, classes);
 		

@@ -4,24 +4,23 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-public class Gui implements ActionListener{
+import problem.asm.DesignParser;
+import problem.asm.DocType;
+
+public class ResultsGui implements ActionListener {
 	
 	JFrame frame;
 	JPanel panel;
 	
-	public Gui(){
-	}
-	
-	public void createLandingScreen(){
-		//create frame
+	public ResultsGui(DesignParser dp){
 		this.frame = new JFrame("Team Alpaca's Design Parser");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -30,25 +29,24 @@ public class Gui implements ActionListener{
 		//create menu bar
 		JMenuBar menuBar = addMenu();
 		
-		//create content for panel
-		JButton loadConfigButton =  new JButton("Load Config");
-		loadConfigButton.setActionCommand("loadConfig");
-		loadConfigButton.addActionListener(this);
-		JButton analyzeButton = new JButton("Analyze");
-		
-		//create panel and add content
 		this.panel = new JPanel();
-		panel.add(loadConfigButton);
-		panel.add(analyzeButton);
 		
 		//add panel to frame
 		panel.setVisible(true);		
 		frame.add(panel);
 		frame.setJMenuBar(menuBar);
 		frame.pack();
+		
+		String[] classes = {"problem.gui.GuiDriver","problem.gui.MainGui"};
+		
+		try {
+			dp.generateDocuments(DocType.uml, "problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod; int", 2, classes);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public JMenuBar addMenu(){
+	private JMenuBar addMenu(){
 		//create MenuBar
 		JMenuBar menuBar = new JMenuBar();
 		JMenu fileMenu = new JMenu("File");
@@ -70,19 +68,10 @@ public class Gui implements ActionListener{
 		return menuBar;
 	}
 
-	
-	public void disableFrame(){
-		System.out.println("disabling");
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String cmd = e.getActionCommand();
-		if(cmd.equals("save")){
-			System.out.println("Trent is a nerd");
-		}else if(cmd.equals("loadConfig")){
-			ConfigFrame config = ConfigFrame.getInstance();
-		}
+		// TODO Auto-generated method stub
+		
 	}
 
 }

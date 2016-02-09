@@ -20,6 +20,7 @@ public class NewConfigFrame implements ActionListener{
 	private JTextField inputClassesField;
 	private JTextField outputDirField;
 	private JTextField dotPathField;
+	private JTextField sdPathField;
 	private JTextField phasesField;
 	
 	
@@ -28,7 +29,7 @@ public class NewConfigFrame implements ActionListener{
 	
 	public void createNewConfig(){
 		frame = new JFrame("New Config");
-		frame.setMinimumSize(new Dimension(300,300));
+		frame.setMinimumSize(new Dimension(300,400));
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
@@ -36,11 +37,13 @@ public class NewConfigFrame implements ActionListener{
 		inputClasses.setAlignmentX(Component.CENTER_ALIGNMENT);
 		JLabel outputDir = new JLabel("Output Directory: ");
 		JLabel dotPath = new JLabel("Dot Path: ");
+		JLabel sdPath = new JLabel("SDEdit Path: ");
 		JLabel phases = new JLabel("Phases: ");
 		
 		inputClassesField = new JTextField();
 		outputDirField = new JTextField();
 		dotPathField = new JTextField();
+		sdPathField = new JTextField();
 		phasesField = new JTextField();
 		
 		JButton createConfig = new JButton("Create Config");
@@ -53,6 +56,8 @@ public class NewConfigFrame implements ActionListener{
 		panel.add(outputDirField);
 		panel.add(dotPath);
 		panel.add(dotPathField);
+		panel.add(sdPath);
+		panel.add(sdPathField);
 		panel.add(phases);
 		panel.add(phasesField);
 		panel.add(createConfig);
@@ -72,6 +77,7 @@ public class NewConfigFrame implements ActionListener{
 			userConfig.setInputClasses(inputClassesField.getText());
 			userConfig.setOutputDir(outputDirField.getText());
 			userConfig.setDotPath(dotPathField.getText());
+			userConfig.setSDPath(sdPathField.getText());
 			userConfig.setPhases(phasesField.getText());
 			
 			userConfig.writeProperties();
