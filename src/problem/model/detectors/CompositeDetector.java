@@ -154,6 +154,25 @@ public class CompositeDetector implements IPatternDetector {
 
 				return false;
 			}
+			
+		}else if(!clazz.getInterfaceList().isEmpty() && !clazz.getSuperClass().equals("")){
+			if (clazz.getSuperClass().equals(fieldType.getName())) {
+				return true;
+			} else {
+				IClass superClass = null;
+				for (IClass c : this.model.getClasses()) {
+					if (clazz.getSuperClass().equals(c.getName())) {
+						superClass = c;
+					}
+				}
+				if (superClass != null) {
+					if (checkHierarchy(superClass, fieldType, false)) {
+						return true;
+					}
+				}
+
+				return false;
+			}
 
 		} else {
 			return false;
