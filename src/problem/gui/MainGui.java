@@ -23,9 +23,7 @@ public class MainGui implements ActionListener{
 	
 	JFrame frame;
 	JPanel panel;
-	String inputClasses;
-	String dotPath;
-	String sdPath;
+	
 	
 	public MainGui(){
 	}
@@ -91,15 +89,13 @@ public class MainGui implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if(cmd.equals("analyze")){
-			try {
-				readProperties();
-			} catch (IOException e1) {
-				System.out.println("make sure there is a config.properties in the input_output folder");
-			}
-
-			DesignParser dp = new DesignParser(this.dotPath,this.sdPath);
-			
-			ResultsGui results = new ResultsGui(dp);
+			Thread resultGui = new Thread(new Runnable(){
+				@Override
+				public void run() {
+					ResultsGui results = new ResultsGui();
+				}
+			});
+			resultGui.start();
 			this.frame.dispose();
 			
 		}else if(cmd.equals("loadConfig")){
@@ -107,25 +103,6 @@ public class MainGui implements ActionListener{
 		}else{
 			System.out.println("Katie is a nerd");
 		}
-	}
-	
-	private void readProperties() throws IOException{
-		try{
-			File file = new File("resources/config.properties");
-			FileInputStream fInput = new FileInputStream(file);
-			Properties p = new Properties();
-			
-			if(fInput != null){
-				p.load(fInput);
-				fInput.close();
-			}
-			
-			this.dotPath = p.getProperty("Dot-Path");
-			this.sdPath = p.getProperty("SD-Path");
-			
-		} catch(Exception e){
-			System.out.println("Exception: " + e);
-		} 
 	}
 
 }

@@ -46,7 +46,6 @@ public class OurConfig {
 			p.setProperty("Input-Classes", this.inputClasses);
 			p.setProperty("Output-Directory", this.outputDir);
 			p.setProperty("Dot-Path", this.dotPath);
-			p.setProperty("SD-Path", this.sdPath);
 			p.setProperty("Phases", this.phases);
 			
 			File file = new File("resources/config.properties");

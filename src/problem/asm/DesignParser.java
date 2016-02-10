@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -92,7 +93,7 @@ public class DesignParser {
 			// "problem.asm.ClassDeclarationVisitor",
 			// "problem.asm.ClassFieldVisitor",
 			// "problem.asm.ClassMethodVisitor",
-			 "problem.asm.DesignParser",
+			//"problem.asm.DesignParser",
 			// "problem.asm.IClazzGetter",
 			// "problem.asm.MyMethodVisitor",
 			// "problem.asm.DocType",
@@ -195,18 +196,24 @@ public class DesignParser {
 			// "problem.sprites.RectangleSprite",
 			// "problem.sprites.SpriteFactory",
 			// "problem.sprites.StackSprite",
+			
 
 			// "problem.test.patternClasses.AdapteeClass",
 			// "problem.test.patternClasses.AdapterClass",
 			// "problem.test.patternClasses.FalseAdapterClass",
 			// "problem.test.patternClasses.TargetInterface"
 
-//			"problem.test.patternClasses.Leaf", "problem.test.patternClasses.MyCollectionComposite",
-//			"problem.test.patternClasses.CompositeComponent" 
-			 };
+			// "problem.test.patternClasses.Leaf",
+			// "problem.test.patternClasses.MyCollectionComposite",
+			// "problem.test.patternClasses.CompositeComponent"
+	};
 
 	private String pathToDot;
 	private String pathToSDEdit;
+	private String outputDir = "input_output/";
+	private ArrayList<String> phases;
+	private volatile int completedPhases = 0;
+	private String currentPhase = "";
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -218,11 +225,13 @@ public class DesignParser {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-//		DesignParser parser = new DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
-	//			"\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
+		// DesignParser parser = new
+		// DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
+		// "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
 		DesignParser parser2 = new DesignParser("\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\"",
 				"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\"");
-		//parser.generateDocuments(DocType.uml,
+		// parser.generateDocuments(DocType.uml,
+		parser2.setDefaults();
 		parser2.generateDocuments(DocType.sd,
 				// "problem.asm.DesignParser,DesignParser,generateDocuments,DocType;
 				// String; int; String[]", 5, CLASSES);
@@ -235,6 +244,7 @@ public class DesignParser {
 	public DesignParser(String pathToDot, String pathToSDEdit) {
 		this.pathToDot = pathToDot;
 		this.pathToSDEdit = pathToSDEdit;
+		this.phases = new ArrayList<String>();
 	}
 
 	public void generateDocuments(DocType type, String methodSig, int depth, String[] classes) throws IOException {
@@ -257,16 +267,23 @@ public class DesignParser {
 			sm = new SubMethod(qualifiedClassName, clazzName, methodName, args, "");
 		}
 
-		visitClasses(classes, model);
+		if (phases.contains("visit")) {
+			System.out.println(completedPhases);
+			visitClasses(classes, model);
+			this.currentPhase = "Visiting Classes...";
+			completedPhases++;
+			System.out.println(completedPhases);
+			if (type.equals(DocType.uml) || type.equals(DocType.both)) {
+				generateUML(pathToDot, model);
+			}
 
-		if (type.equals(DocType.uml) || type.equals(DocType.both)) {
-			generateUML(pathToDot, model);
+			if (type.equals(DocType.sd) || type.equals(DocType.both)) {
+				generateSD(pathToSDEdit, model, sm, depth);
+			}
 		}
-
-		if (type.equals(DocType.sd) || type.equals(DocType.both)) {
-			generateSD(pathToSDEdit, model, sm, depth);
-		}
-
+		
+		this.currentPhase = "finished";
+		
 		System.out.println("done");
 	}
 
@@ -297,37 +314,59 @@ public class DesignParser {
 
 	public void generateUML(String pathToDot, Model model) throws IOException {
 
-		// IPatternDetector singletonDetector = new SingletonDetector(model);
-		// singletonDetector.detectPatterns();
+		if (phases.contains("singleton")) {
+			this.currentPhase = "Detecting Singleton Pattern...";
+			IPatternDetector singletonDetector = new SingletonDetector(model);
+			singletonDetector.detectPatterns();
+			this.completedPhases++;
+			System.out.println(completedPhases);
+		}
 
-		IPatternDetector decoratorDetector = new DecoratorDetector(model);
-		decoratorDetector.detectPatterns();
+		if (phases.contains("decorator")) {
+			this.currentPhase = "Detecting Decorator Pattern...";
+			IPatternDetector decoratorDetector = new DecoratorDetector(model);
+			decoratorDetector.detectPatterns();
+			this.completedPhases++;
+			System.out.println(completedPhases);
+		}
 
-		IPatternDetector adapterDetector = new AdapterDetector(model);
-		adapterDetector.detectPatterns();
+		if (phases.contains("adapter")) {
+			this.currentPhase = "Detecting Adapter Pattern...";
+			IPatternDetector adapterDetector = new AdapterDetector(model);
+			adapterDetector.detectPatterns();
+			this.completedPhases++;
+			System.out.println(completedPhases);
+		}
 
-		IPatternDetector compositeDetector = new CompositeDetector(model);
-		compositeDetector.detectPatterns();
+		if (phases.contains("composite")) {
+			this.currentPhase = "Detecting Composite Pattern...";
+			IPatternDetector compositeDetector = new CompositeDetector(model);
+			compositeDetector.detectPatterns();
+			this.completedPhases++;
+			System.out.println(completedPhases);
+		}
+		// ModelPatternVisitor mpv = new ModelPatternVisitor();
+		// mpv.detect(model);
 
-		ModelPatternVisitor mpv = new ModelPatternVisitor();
-		mpv.detect(model);
+		if (phases.contains("dot")) {
+			this.currentPhase = "Generating Dot File...";
+			ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream(this.outputDir + "model.gv"));
+			gv.write(model);
+			gv.close();
 
-		ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream("input_output/model.gv"));
-		gv.write(model);
-		gv.close();
-
-		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-				pathToDot + " -Tpng input_output/model.gv > input_output/graph1.png");
-		builder.redirectErrorStream(true);
-		Process p = builder.start();
-		String line;
-		BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		while (true) {
-			line = r.readLine();
-			if (line == null) {
-				break;
+			ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+					pathToDot + " -Tpng input_output/model.gv > " + this.outputDir + "graph1.png");
+			builder.redirectErrorStream(true);
+			Process p = builder.start();
+			String line;
+			BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			while (true) {
+				line = r.readLine();
+				if (line == null) {
+					break;
+				}
+				System.out.println(line);
 			}
-			System.out.println(line);
 		}
 	}
 
@@ -354,8 +393,8 @@ public class DesignParser {
 		model.acceptSequence(sm, depth);
 		sd.write(model);
 		ITraverser traverser = (ITraverser) model;
-		
-		//model.writeFile(sdWriter);
+
+		// model.writeFile(sdWriter);
 		out.close();
 
 		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
@@ -371,6 +410,33 @@ public class DesignParser {
 			}
 			System.out.println(line);
 		}
+	}
+
+	private void setDefaults() {
+		setOutputDir("input_output");
+		phases.add("Decorator");
+		phases.add("Composite");
+		phases.add("Singleton");
+		phases.add("Adapter");
+	}
+
+	public void setOutputDir(String outputDir) {
+		this.outputDir = outputDir;
+	}
+
+	public void setPhases(ArrayList<String> phases) {
+		this.phases = phases;
+		for (String s : phases) {
+			s = s.toLowerCase();
+		}
+	}
+	
+	public String getCurrentPhase(){
+		return currentPhase;
+	}
+
+	public int getProgress() {
+		return completedPhases;
 	}
 
 }
