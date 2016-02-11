@@ -12,8 +12,13 @@ import problem.models.api.IMethod;
 public class LeafDecorator extends ClassDecorator {
 	private IClass thisClass;
 
+	private String color;
+	private String patternName;
+	
 	public LeafDecorator(IClass c) {
 		this.thisClass = c;
+		this.setColor("yellow");
+		this.setPatternName("leaf");
 	}
 
 	@Override

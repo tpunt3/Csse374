@@ -10,10 +10,15 @@ import problem.models.api.IField;
 import problem.models.api.IMethod;
 
 public class ComponentDecorator extends ClassDecorator {
-private IClass thisClass;
-	
+	private IClass thisClass;
+
+	private String color;
+	private String patternName;
+
 	public ComponentDecorator(IClass c) {
 		this.thisClass = c;
+		this.setColor("green");
+		this.setPatternName("component");
 	}
 
 	@Override
@@ -82,6 +87,6 @@ private IClass thisClass;
 	@Override
 	public void accept(IPatternVisitor v) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

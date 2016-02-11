@@ -11,9 +11,14 @@ import problem.models.api.IMethod;
 
 public class CompositeDecorator extends ClassDecorator {
 	private IClass thisClass;
+	
+	private String color;
+	private String patternName;
 
 	public CompositeDecorator(IClass c) {
 		this.thisClass = c;
+		this.setColor("yellow");
+		this.setPatternName("composite");
 	}
 	@Override
 	public String getName() {

@@ -13,8 +13,13 @@ public class AdapterDecorator extends ClassDecorator {
 
 private IClass thisClass;
 	
+	private String color;
+	private String patternName;
+	
 	public AdapterDecorator(IClass c) {
 		this.thisClass = c;
+		this.setColor("red");
+		this.setPatternName("adapter");
 	}
 
 	@Override

@@ -12,8 +12,13 @@ import problem.models.api.IMethod;
 public class SingletonDecorator extends ClassDecorator {
 	private IClass thisClass;
 	
+	private String color;
+	private String patternName;
+	
 	public SingletonDecorator(IClass c) {
 		this.thisClass = c;
+		this.setColor("blue");
+		this.setPatternName("singleton");
 	}
 
 	@Override

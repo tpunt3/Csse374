@@ -11,10 +11,15 @@ import problem.models.api.IMethod;
 
 public class TargetDecorator extends ClassDecorator {
 
-private IClass thisClass;
-	
+	private IClass thisClass;
+
+	private String color;
+	private String patternName;
+
 	public TargetDecorator(IClass c) {
 		this.thisClass = c;
+		this.setColor("red");
+		this.setPatternName("target");
 	}
 
 	@Override
@@ -83,7 +88,7 @@ private IClass thisClass;
 	@Override
 	public void accept(IPatternVisitor v) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
