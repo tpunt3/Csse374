@@ -92,7 +92,11 @@ public class MainGui implements ActionListener{
 			Thread resultGui = new Thread(new Runnable(){
 				@Override
 				public void run() {
-					ResultsGui results = new ResultsGui();
+					try {
+						ResultsGui results = new ResultsGui();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			});
 			resultGui.start();

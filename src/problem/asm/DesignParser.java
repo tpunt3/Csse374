@@ -185,17 +185,17 @@ public class DesignParser {
 			// "headfirst.composite.menu.MenuTestDrive",
 			// "headfirst.composite.menu.Waitress"
 
-			// "problem.sprites.AbstractSprite",
-			// "problem.sprites.CircleSprite",
-			// "problem.sprites.CompositeCompositeSprite",
-			// "problem.sprites.CompositeIterator",
-			// "problem.sprites.CompositeSprite",
-			// "problem.sprites.ISprite",
-			// "problem.sprites.NullIterator",
-			// "problem.sprites.PyramidSprite",
-			// "problem.sprites.RectangleSprite",
-			// "problem.sprites.SpriteFactory",
-			// "problem.sprites.StackSprite",
+			 "problem.sprites.AbstractSprite",
+			 "problem.sprites.CircleSprite",
+			 "problem.sprites.CompositeCompositeSprite",
+			 "problem.sprites.CompositeIterator",
+			 "problem.sprites.CompositeSprite",
+			 "problem.sprites.ISprite",
+			 "problem.sprites.NullIterator",
+			 "problem.sprites.PyramidSprite",
+			 "problem.sprites.RectangleSprite",
+			 "problem.sprites.SpriteFactory",
+			 "problem.sprites.StackSprite",
 			
 
 			// "problem.test.patternClasses.AdapteeClass",
@@ -225,14 +225,13 @@ public class DesignParser {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		// DesignParser parser = new
-		// DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
-		// "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
-		DesignParser parser2 = new DesignParser("\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\"",
-				"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\"");
+		 DesignParser parser = new DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
+		 "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
+		//DesignParser parser2 = new DesignParser("\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\"",
+			//	"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\"");
 		// parser.generateDocuments(DocType.uml,
-		parser2.setDefaults();
-		parser2.generateDocuments(DocType.sd,
+		parser.setDefaults();
+		parser.generateDocuments(DocType.uml,
 				// "problem.asm.DesignParser,DesignParser,generateDocuments,DocType;
 				// String; int; String[]", 5, CLASSES);
 				// "problem.asm.Class,Class,accept,IModelVisitor", 5, CLASSES);
@@ -413,11 +412,13 @@ public class DesignParser {
 	}
 
 	private void setDefaults() {
-		setOutputDir("input_output");
-		phases.add("Decorator");
-		phases.add("Composite");
-		phases.add("Singleton");
-		phases.add("Adapter");
+		setOutputDir("input_output/");
+		phases.add("visit");
+		phases.add("decorator");
+		phases.add("composite");
+		phases.add("singleton");
+		phases.add("adapter");
+		phases.add("dot");
 	}
 
 	public void setOutputDir(String outputDir) {

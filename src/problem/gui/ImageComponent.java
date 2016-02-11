@@ -1,6 +1,5 @@
 package problem.gui;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.Icon;
@@ -20,13 +19,10 @@ public class ImageComponent extends JComponent {
 	}
 
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.fillRect(0, 0, 50, 50);
-		g.setColor(Color.BLUE);
 		int w = icon.getIconWidth();
 		int h = icon.getIconHeight();
-		int x = (800 - w)/2;
-		int y = (600 - h)/2;
+		int x = 0;
+		int y = 0;
 		icon.paintIcon(this, g, x, y);
 		System.out.println("paintComponent");
 	}

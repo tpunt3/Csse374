@@ -1,12 +1,1 @@
-C:C[a]
-B:B[a]
-E:E[a]
-A:A[a]
-D:D[a]
-F:F[a]
 
-A:void=B.b1()
-B:void=C.c1()
-C:void=D.d1()
-D:void=E.e1()
-E:void=F.f1()
