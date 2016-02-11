@@ -21,8 +21,12 @@ class ImageProxy implements Icon {
 		if (imageIcon != null) {
             return imageIcon.getIconWidth();
         } else {
-			return 800;
+			return 1000;
 		}
+	}
+	
+	public boolean isPicNull(){
+		return (imageIcon == null);
 	}
  
 	public int getIconHeight() {
@@ -39,7 +43,12 @@ class ImageProxy implements Icon {
 			System.out.println("painting");
 			imageIcon.paintIcon(c, g, x, y);
 		} else {
-			g.drawString("Loading CD cover, please wait...", x+100, y+90);
+			g.drawString("Loading picture, please wait...", x+100, y+20);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
 			if (!retrieving) {
 				retrieving = true;
 

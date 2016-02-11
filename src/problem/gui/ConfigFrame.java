@@ -17,7 +17,7 @@ public class ConfigFrame implements ActionListener{
 	private JFrame frame;
 	
 	public ConfigFrame(){
-		frame = new JFrame("Config shit");
+		frame = new JFrame("Configurations");
 		createConfigFrame();
 	}
 	

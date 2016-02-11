@@ -8,6 +8,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -29,6 +33,17 @@ public class MainGui implements ActionListener{
 	}
 	
 	public void createLandingScreen(){
+		
+			Path graphPath = FileSystems.getDefault().getPath("input_output/graph1.png");
+			Path configPath = FileSystems.getDefault().getPath("resources/config.properties");
+			
+//			try {
+//				Files.deleteIfExists(graphPath);
+//				Files.deleteIfExists(configPath);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+		
 		//create frame
 		this.frame = new JFrame("Team Alpaca's Design Parser");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

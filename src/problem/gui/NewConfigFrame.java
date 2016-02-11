@@ -48,10 +48,10 @@ public class NewConfigFrame implements ActionListener{
 		createConfig.addActionListener(this);
 		createConfig.setActionCommand("createNewConfig");
 		
-		inputClassesField.setText("problem.sprites.AbstractSprite,problem.sprites.CircleSprite,problem.sprites.CompositeCompositeSprite,problem.sprites.CompositeIterator,problem.sprites.CompositeSprite,problem.sprites.ISprite,problem.sprites.NullIterator,problem.sprites.PyramidSprite,problem.sprites.RectangleSprite, problem.sprites.SpriteFactory,problem.sprites.StackSprite");
+		inputClassesField.setText("problem.sprites.AbstractSprite,problem.sprites.CircleSprite");
 		outputDirField.setText("input_output/");
 		dotPathField.setText("C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot");
-		phasesField.setText("visit,composite,adapter,singleton,decorator");
+		phasesField.setText("visit,composite,adapter,singleton,decorator,dot");
 		
 		panel.add(inputClasses);
 		panel.add(inputClassesField);

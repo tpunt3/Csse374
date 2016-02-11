@@ -32,7 +32,7 @@ import problem.asm.DocType;
 public class ResultsGui implements ActionListener {
 	
 	JFrame frame;
-	JPanel panel;
+	//JPanel panel;
 	JScrollPane pane;
 	String inputClasses;
 	String[] classes;
@@ -47,22 +47,33 @@ public class ResultsGui implements ActionListener {
 		this.frame = new JFrame("RESULTSTIME");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.setPreferredSize(new Dimension(1000, 1000));
+		frame.setPreferredSize(new Dimension(750, 750));
 		
 		//create menu bar
 		JMenuBar menuBar = addMenu();
 		
-		this.panel = new JPanel();
-		this.panel.setPreferredSize(new Dimension(500,500));
-		this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
-		pane = new JScrollPane(panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		pane.setPreferredSize(new Dimension(1000,1000));
-		pane.setVisible(true);
+//		this.panel = new JPanel();
+//		this.panel.setPreferredSize(new Dimension(500,500));
+//		this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
 		
 		//add panel to frame
-		panel.setVisible(true);		
-		frame.add(pane);
+		frame.setVisible(true);
 		frame.setJMenuBar(menuBar);
+		
+		pane = new JScrollPane(imageComponent, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		pane.setPreferredSize(new Dimension(750,750));
+		pane.setVisible(true);
+		frame.add(pane);
+		
+
+		Icon icon = new ImageProxy(this.outputDir+"graph1.png");
+		imageComponent = new ImageComponent(icon);
+		imageComponent.setIcon(new ImageProxy(this.outputDir+"graph1.png"));
+
+
+		pane.revalidate();
+		pane.repaint();
+		frame.repaint();
 		frame.pack();
 		
 		
@@ -75,31 +86,28 @@ public class ResultsGui implements ActionListener {
 		DesignParser dp = new DesignParser(this.dotPath,"");
 		dp.setOutputDir(outputDir);
 		dp.setPhases(this.parserPhases);
-		
-		
-		JLabel progressLabel = new JLabel("Doing stuff");
-		JProgressBar jpb = new JProgressBar();
-		jpb.setMaximum(this.parserPhases.size());
-		jpb.setMinimum(0);
-		jpb.setLocation(20, 20);
 		System.out.println(this.parserPhases.size());
-		panel.add(progressLabel);
-		panel.add(jpb);
-		panel.repaint();
+				
 		
-		Icon icon = new ImageProxy(this.outputDir+"graph1.png");
-		imageComponent = new ImageComponent(icon);
-		imageComponent.setIcon(new ImageProxy(this.outputDir+"graph1.png"));
-		panel.add(imageComponent);
-		panel.repaint();
+		System.out.println("images dimensions: "+imageComponent.getSize());
+		pane.setViewportView(imageComponent);
 		
+
+		System.out.println(pane.getViewport().getView().toString());
+		
+		
+		
+		pane.revalidate();
+		pane.repaint();
+		frame.repaint();
 		frame.pack();
+		
 		try {
 			dp.generateDocuments(DocType.uml, "problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod; int", 2, classes);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		panel.repaint();
+		frame.repaint();
 		System.out.println("second repaint");
 		
 //		
@@ -124,14 +132,12 @@ public class ResultsGui implements ActionListener {
 //			}
 //		}
 		
-		//bullshit
 //		dp.generateDocuments(DocType.uml, "problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod; int", 2, classes);
 //		System.out.println("making image now");
 //		BufferedImage myPic = ImageIO.read(new File(outputDir + "graph1.png"));
 //		JLabel picLabel = new JLabel(new ImageIcon(myPic));
 //		this.panel.add(picLabel);
 //		this.panel.repaint();
-//		this.panel.add(new JLabel("this project sucks ass"));
 //		this.panel.repaint();
 				
 		frame.pack();

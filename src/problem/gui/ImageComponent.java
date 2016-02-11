@@ -1,11 +1,20 @@
 package problem.gui;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
 
 public class ImageComponent extends JComponent {
+	
+	
+
+	@Override
+	public Dimension getSize() {
+		return new Dimension(icon.getIconWidth(), icon.getIconHeight());
+	}
+
 	private static final long serialVersionUID = -842221943124881051L;
 
 	private Icon icon;
