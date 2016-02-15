@@ -20,7 +20,6 @@ public class NewConfigFrame implements ActionListener{
 	private JTextField inputClassesField;
 	private JTextField outputDirField;
 	private JTextField dotPathField;
-	private JTextField sdPathField;
 	private JTextField phasesField;
 	
 	

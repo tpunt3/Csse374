@@ -7,11 +7,9 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
-import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -21,12 +19,17 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import problem.asm.DesignParser;
-
 public class MainGui implements ActionListener{
 	
 	JFrame frame;
 	JPanel panel;
+	String inputClasses;
+	String[] classes;
+	String dotPath;
+	String sdPath;
+	String outputDir;
+	String phases;
+	private ArrayList<String> parserPhases;
 	
 	
 	public MainGui(){
@@ -104,23 +107,71 @@ public class MainGui implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if(cmd.equals("analyze")){
-			Thread resultGui = new Thread(new Runnable(){
-				@Override
-				public void run() {
-					try {
-						ResultsGui results = new ResultsGui();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			});
-			resultGui.start();
-			this.frame.dispose();
-			
+			analyzeClicked();			
 		}else if(cmd.equals("loadConfig")){
 			ConfigFrame config = ConfigFrame.getInstance();
 		}else{
 			System.out.println("Katie is a nerd");
+		}
+	}
+	
+	public void analyzeClicked(){
+		
+		try {
+			readProperties();
+		} catch (IOException e1) {
+			System.out.println("make sure there is a config.properties in the input_output folder");
+		}
+		
+		
+		Thread resultGui = new Thread(new Runnable(){
+			@Override
+			public void run() {
+				try {
+					ResultsGui results = new ResultsGui();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		resultGui.start();
+		this.frame.dispose();
+	}
+	
+	private void readProperties() throws IOException{
+		try{
+			File file = new File("resources/config.properties");
+			FileInputStream fInput = new FileInputStream(file);
+			Properties p = new Properties();
+			
+			if(fInput != null){
+				p.load(fInput);
+				fInput.close();
+			}
+			
+			this.dotPath = p.getProperty("Dot-Path");
+			this.inputClasses = p.getProperty("Input-Classes");
+			this.outputDir = p.getProperty("Output-Directory");
+			this.phases = p.getProperty("Phases");
+			splitPhases();
+			
+			this.classes = this.inputClasses.split(",");
+			for(String s: this.classes){
+				s = s.trim();
+			}
+			
+			
+		} catch(Exception e){
+			System.out.println("Exception: " + e);
+		} 
+	}
+	
+	private void splitPhases(){
+		parserPhases = new ArrayList<String>();
+		String[] phase = this.phases.split(",");
+		for(String s: phase){
+			s=s.trim();
+			this.parserPhases.add(s);
 		}
 	}
 
