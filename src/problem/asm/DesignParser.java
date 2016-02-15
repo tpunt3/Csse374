@@ -20,9 +20,8 @@ import problem.model.detectors.CompositeDetector;
 import problem.model.detectors.DecoratorDetector;
 import problem.model.detectors.IPatternDetector;
 import problem.model.detectors.SingletonDetector;
-import problem.model.patternvisitor.ModelPatternVisitor;
 import problem.model.visitor.ITraverser;
-import problem.model.visitor.IVisitor;
+import problem.models.api.IModel;
 import problem.models.api.ISubMethod;
 import problem.models.impl.Model;
 import problem.models.impl.ModelGVOutputStream;
@@ -290,6 +289,7 @@ public class DesignParser {
 
 		for (String className : classes) {
 			if (!className.contains("[")) {
+				this.currentPhase = "Visiting " + className + "...";
 
 				// ASM's ClassReader does the heavy lifting of parsing the
 				// compiled
@@ -311,61 +311,83 @@ public class DesignParser {
 		}
 	}
 
-	public void generateUML(String pathToDot, Model model) throws IOException {
+	public void generateUML(String pathToDot, Model model){
 
 		if (phases.contains("singleton")) {
-			this.currentPhase = "Detecting Singleton Pattern...";
-			IPatternDetector singletonDetector = new SingletonDetector(model);
-			singletonDetector.detectPatterns();
-			this.completedPhases++;
-			System.out.println(completedPhases);
+			detectSingletonPattern(model);
 		}
 
 		if (phases.contains("decorator")) {
-			this.currentPhase = "Detecting Decorator Pattern...";
-			IPatternDetector decoratorDetector = new DecoratorDetector(model);
-			decoratorDetector.detectPatterns();
-			this.completedPhases++;
-			System.out.println(completedPhases);
+			detectDecoratorPattern(model);
 		}
 
 		if (phases.contains("adapter")) {
-			this.currentPhase = "Detecting Adapter Pattern...";
-			IPatternDetector adapterDetector = new AdapterDetector(model);
-			adapterDetector.detectPatterns();
-			this.completedPhases++;
-			System.out.println(completedPhases);
+			detectAdapterPattern(model);
 		}
 
 		if (phases.contains("composite")) {
-			this.currentPhase = "Detecting Composite Pattern...";
-			IPatternDetector compositeDetector = new CompositeDetector(model);
-			compositeDetector.detectPatterns();
-			this.completedPhases++;
-			System.out.println(completedPhases);
+			detectCompositePattern(model);
 		}
-		// ModelPatternVisitor mpv = new ModelPatternVisitor();
-		// mpv.detect(model);
 
 		if (phases.contains("dot")) {
-			this.currentPhase = "Generating Dot File...";
-			ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream(this.outputDir + "model.gv"));
-			gv.write(model);
-			gv.close();
-
-			ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
-					pathToDot + " -Tpng input_output/model.gv > " + this.outputDir + "graph1.png");
-			builder.redirectErrorStream(true);
-			Process p = builder.start();
-			String line;
-			BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			while (true) {
-				line = r.readLine();
-				if (line == null) {
-					break;
-				}
-				System.out.println(line);
+			try {
+				generateDot(model);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
+		}
+	}
+	
+	public void detectSingletonPattern(IModel model){
+		this.currentPhase = "Detecting Singleton Pattern...";
+		IPatternDetector singletonDetector = new SingletonDetector(model);
+		singletonDetector.detectPatterns();
+		this.completedPhases++;
+		System.out.println(completedPhases);
+	}
+	
+	public void detectDecoratorPattern(IModel model){
+		this.currentPhase = "Detecting Decorator Pattern...";
+		IPatternDetector decoratorDetector = new DecoratorDetector(model);
+		decoratorDetector.detectPatterns();
+		this.completedPhases++;
+		System.out.println(completedPhases);
+	}
+	
+	public void detectAdapterPattern(IModel model){
+		this.currentPhase = "Detecting Adapter Pattern...";
+		IPatternDetector adapterDetector = new AdapterDetector(model);
+		adapterDetector.detectPatterns();
+		this.completedPhases++;
+		System.out.println(completedPhases);
+	}
+	
+	public void detectCompositePattern(IModel model){
+		this.currentPhase = "Detecting Composite Pattern...";
+		IPatternDetector compositeDetector = new CompositeDetector(model);
+		compositeDetector.detectPatterns();
+		this.completedPhases++;
+		System.out.println(completedPhases);
+	}
+	
+	public void generateDot(IModel model) throws IOException{
+		this.currentPhase = "Generating Dot File...";
+		ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream(this.outputDir + "model.gv"));
+		gv.write(model);
+		gv.close();
+
+		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c",
+				pathToDot + " -Tpng input_output/model.gv > " + this.outputDir + "graph1.png");
+		builder.redirectErrorStream(true);
+		Process p = builder.start();
+		String line;
+		BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+		while (true) {
+			line = r.readLine();
+			if (line == null) {
+				break;
+			}
+			System.out.println(line);
 		}
 	}
 
