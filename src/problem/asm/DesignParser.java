@@ -89,49 +89,49 @@ public class DesignParser {
 			// "headfirst.factory.pizzas.SimplePizzaFactory",
 			// "headfirst.factory.pizzas.VeggiePizza",
 			//
-//			 "problem.asm.ClassDeclarationVisitor",
-//			 "problem.asm.ClassFieldVisitor",
-//			 "problem.asm.ClassMethodVisitor",
-//			"problem.asm.DesignParser",
-//			 "problem.asm.IClazzGetter",
-//			 "problem.asm.MyMethodVisitor",
-//			 "problem.asm.DocType",
-//			 "problem.model.decorators.AdapteeDecorator",
-//			 "problem.model.decorators.AdapterDecorator",
-//			 "problem.model.decorators.ClassDecorator",
-//			 "problem.model.decorators.ComponentDecorator",
-//			 "problem.model.decorators.DecoratorDecorator",
-//			 "problem.model.decorators.SingletonDecorator",
-//			 "problem.model.decorators.TargetDecorator",
-//			 "problem.model.detectors.AdapterDetector",
-//			 "problem.model.detectors.DecoratorDetector",
-//			 "problem.model.detectors.IPatternDetector",
-//			 "problem.model.detectors.SingletonDetector",
-//			 "problem.model.patternvisitor.IPatternVisitMethod",
-//			 "problem.model.patternvisitor.IPatternVisitor",
-//			 "problem.model.patternvisitor.ModelPatternVisitor",
-//			 "problem.model.patternvisitor.PatternVisitor",
-//			 "problem.model.visitor.ITraverser",
-//			 "problem.model.visitor.IVisitor",
-//			 "problem.model.visitor.Visitor",
-//			 "problem.model.visitor.LookupKey",
-//			 "problem.model.visitor.VisitType",
-//			 "problem.model.visitor.IVisitMethod",
-//			 "problem.models.api.IClass",
-//			 "problem.models.api.IField",
-//			 "problem.models.api.IMethod",
-//			 "problem.models.api.IModel",
-//			 "problem.models.api.IRelation",
-//			 "problem.models.api.ISubMethod",
-//			 "problem.models.api.RelationType",
-//			 "problem.models.impl.Class",
-//			 "problem.models.impl.Field",
-//			 "problem.models.impl.Method",
-//			 "problem.models.impl.Model",
-//			 "problem.models.impl.ModelGVOutputStream",
-//			 "problem.models.impl.ModelSDOutputStream",
-//			 "problem.models.impl.Relation",
-//			 "problem.models.impl.SubMethod"
+			// "problem.asm.ClassDeclarationVisitor",
+			// "problem.asm.ClassFieldVisitor",
+			// "problem.asm.ClassMethodVisitor",
+			// "problem.asm.DesignParser",
+			// "problem.asm.IClazzGetter",
+			// "problem.asm.MyMethodVisitor",
+			// "problem.asm.DocType",
+			// "problem.model.decorators.AdapteeDecorator",
+			// "problem.model.decorators.AdapterDecorator",
+			// "problem.model.decorators.ClassDecorator",
+			// "problem.model.decorators.ComponentDecorator",
+			// "problem.model.decorators.DecoratorDecorator",
+			// "problem.model.decorators.SingletonDecorator",
+			// "problem.model.decorators.TargetDecorator",
+			// "problem.model.detectors.AdapterDetector",
+			// "problem.model.detectors.DecoratorDetector",
+			// "problem.model.detectors.IPatternDetector",
+			// "problem.model.detectors.SingletonDetector",
+			// "problem.model.patternvisitor.IPatternVisitMethod",
+			// "problem.model.patternvisitor.IPatternVisitor",
+			// "problem.model.patternvisitor.ModelPatternVisitor",
+			// "problem.model.patternvisitor.PatternVisitor",
+			// "problem.model.visitor.ITraverser",
+			// "problem.model.visitor.IVisitor",
+			// "problem.model.visitor.Visitor",
+			// "problem.model.visitor.LookupKey",
+			// "problem.model.visitor.VisitType",
+			// "problem.model.visitor.IVisitMethod",
+			// "problem.models.api.IClass",
+			// "problem.models.api.IField",
+			// "problem.models.api.IMethod",
+			// "problem.models.api.IModel",
+			// "problem.models.api.IRelation",
+			// "problem.models.api.ISubMethod",
+			// "problem.models.api.RelationType",
+			// "problem.models.impl.Class",
+			// "problem.models.impl.Field",
+			// "problem.models.impl.Method",
+			// "problem.models.impl.Model",
+			// "problem.models.impl.ModelGVOutputStream",
+			// "problem.models.impl.ModelSDOutputStream",
+			// "problem.models.impl.Relation",
+			// "problem.models.impl.SubMethod"
 
 			// "java.util.Collections",
 
@@ -150,23 +150,23 @@ public class DesignParser {
 			// "headfirst.singleton.chocolate.ChocolateBoiler",
 			// "headfirst.singleton.chocolate.ChocolateController"
 
-//			 "headfirst.decorator.starbuzz.Beverage",
-//			 "headfirst.decorator.starbuzz.CondimentDecorator",
-//			 "headfirst.decorator.starbuzz.DarkRoast",
-//			 "headfirst.decorator.starbuzz.Decaf",
-//			 "headfirst.decorator.starbuzz.Espresso",
-//			 "headfirst.decorator.starbuzz.HouseBlend",
-//			 "headfirst.decorator.starbuzz.Milk",
-//			 "headfirst.decorator.starbuzz.Mocha",
-//			 "headfirst.decorator.starbuzz.Soy",
-//			 "headfirst.decorator.starbuzz.StarbuzzCoffee",
-//			 "headfirst.decorator.starbuzz.Whip",
+			// "headfirst.decorator.starbuzz.Beverage",
+			// "headfirst.decorator.starbuzz.CondimentDecorator",
+			// "headfirst.decorator.starbuzz.DarkRoast",
+			// "headfirst.decorator.starbuzz.Decaf",
+			// "headfirst.decorator.starbuzz.Espresso",
+			// "headfirst.decorator.starbuzz.HouseBlend",
+			// "headfirst.decorator.starbuzz.Milk",
+			// "headfirst.decorator.starbuzz.Mocha",
+			// "headfirst.decorator.starbuzz.Soy",
+			// "headfirst.decorator.starbuzz.StarbuzzCoffee",
+			// "headfirst.decorator.starbuzz.Whip",
 
-//			 "problem.client.App",
-//			 "problem.client.IteratorToEnumerationAdapter",
-//			 "problem.lib.LinearTransformer",
-//			 "java.util.Iterator",
-//			 "java.util.Enumeration"
+			// "problem.client.App",
+			// "problem.client.IteratorToEnumerationAdapter",
+			// "problem.lib.LinearTransformer",
+			// "java.util.Iterator",
+			// "java.util.Enumeration"
 
 			// "java.lang.Runtime",
 			// "java.awt.Desktop",
@@ -184,18 +184,17 @@ public class DesignParser {
 			// "headfirst.composite.menu.MenuTestDrive",
 			// "headfirst.composite.menu.Waitress"
 
-//			 "problem.sprites.AbstractSprite",
-//			 "problem.sprites.CircleSprite",
-//			 "problem.sprites.CompositeCompositeSprite",
-//			 "problem.sprites.CompositeIterator",
-//			 "problem.sprites.CompositeSprite",
-//			 "problem.sprites.ISprite",
-//			 "problem.sprites.NullIterator",
-//			 "problem.sprites.PyramidSprite",
-//			 "problem.sprites.RectangleSprite",
-//			 "problem.sprites.SpriteFactory",
-//			 "problem.sprites.StackSprite",
-			
+			 "problem.sprites.AbstractSprite",
+			 "problem.sprites.CircleSprite",
+			 "problem.sprites.CompositeCompositeSprite",
+			 "problem.sprites.CompositeIterator",
+			 "problem.sprites.CompositeSprite",
+			 "problem.sprites.ISprite",
+			 "problem.sprites.NullIterator",
+			 "problem.sprites.PyramidSprite",
+			 "problem.sprites.RectangleSprite",
+			 "problem.sprites.SpriteFactory",
+			 "problem.sprites.StackSprite",
 
 			// "problem.test.patternClasses.AdapteeClass",
 			// "problem.test.patternClasses.AdapterClass",
@@ -224,19 +223,31 @@ public class DesignParser {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		// DesignParser parser = new DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
+		// DesignParser parser = new
+		// DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
 		// "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
 		DesignParser parser = new DesignParser("\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\"",
 				"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\"");
 		// parser.generateDocuments(DocType.uml,
 		parser.setDefaults();
-		parser.generateDocuments(DocType.uml,
-				// "problem.asm.DesignParser,DesignParser,generateDocuments,DocType;
-				// String; int; String[]", 5, CLASSES);
-				// "problem.asm.Class,Class,accept,IModelVisitor", 5, CLASSES);
-				// "java.util.Collections,Collections,shuffle,List", 5,
-				// CLASSES);
-				"problem.asm.DesignParser,DesignParser,generateSD,String; Model; ISubMethod; int", 2, CLASSES);
+		
+		String methodSig = "problem.asm.DesignParser,DesignParser,generateSD,String; Model; ISubMethod; int";
+		int depth = 2;
+		DocType type = DocType.uml;
+		
+		
+		
+		ISubMethod sm = null;
+		
+		sm = parser.setUpSD(methodSig);
+
+		Model model = parser.visitClasses(CLASSES);
+		if (type.equals(DocType.uml) || type.equals(DocType.both)) {
+			parser.generateUML(parser.getPathToDot(), model);
+		}
+		if (type.equals(DocType.sd) || type.equals(DocType.both)) {
+			parser.generateSD(parser.getPathToSD(), model, sm, depth);
+		}
 	}
 
 	public DesignParser(String pathToDot, String pathToSDEdit) {
@@ -244,49 +255,36 @@ public class DesignParser {
 		this.pathToSDEdit = pathToSDEdit;
 		this.phases = new ArrayList<String>();
 	}
-
-	public void generateDocuments(DocType type, String methodSig, int depth, String[] classes) throws IOException {
-
-		Model model = Model.getInstance();
+	
+	public ISubMethod setUpSD(String methodSig){
+		DocType type = DocType.sd;
+		
 		ISubMethod sm = null;
-		String args;
+		String arguments;
 
+		// sequence diagrams
 		if (type.equals(DocType.sd) || type.equals(DocType.both)) {
 			String[] sigSplit = methodSig.split(",");
 			String qualifiedClassName = sigSplit[0];
 			String clazzName = sigSplit[1];
 			String methodName = sigSplit[2];
 			if (sigSplit.length == 4) {
-				args = sigSplit[3];
+				arguments = sigSplit[3];
 			} else {
-				args = "";
+				arguments = "";
 			}
 
-			sm = new SubMethod(qualifiedClassName, clazzName, methodName, args, "");
+			sm = new SubMethod(qualifiedClassName, clazzName, methodName, arguments, "");
+			return sm;
 		}
+		return null;
 
-		if (phases.contains("visit")) {
-			System.out.println(completedPhases);
-			visitClasses(classes, model);
-			this.currentPhase = "Visiting Classes...";
-			completedPhases++;
-			System.out.println(completedPhases);
-			if (type.equals(DocType.uml) || type.equals(DocType.both)) {
-				generateUML(pathToDot, model);
-			}
-
-			if (type.equals(DocType.sd) || type.equals(DocType.both)) {
-				generateSD(pathToSDEdit, model, sm, depth);
-			}
-		}
-		
-		this.currentPhase = "finished";
-		
-		System.out.println("done");
 	}
 
-	public void visitClasses(String[] classes, Model model) throws IOException {
+	public Model visitClasses(String[] classes) throws IOException {
 
+		Model model = Model.getInstance();
+		
 		for (String className : classes) {
 			if (!className.contains("[")) {
 				this.currentPhase = "Visiting " + className + "...";
@@ -309,68 +307,57 @@ public class DesignParser {
 				reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			}
 		}
+		
+		return model;
 	}
 
-	public void generateUML(String pathToDot, Model model){
+	public void generateUML(String pathToDot, Model model) throws IOException {
 
-		if (phases.contains("singleton")) {
-			detectSingletonPattern(model);
-		}
+		detectSingletonPattern(model);
 
-		if (phases.contains("decorator")) {
-			detectDecoratorPattern(model);
-		}
+		detectDecoratorPattern(model);
 
-		if (phases.contains("adapter")) {
-			detectAdapterPattern(model);
-		}
+		detectAdapterPattern(model);
 
-		if (phases.contains("composite")) {
-			detectCompositePattern(model);
-		}
+		detectCompositePattern(model);
 
-		if (phases.contains("dot")) {
-			try {
-				generateDot(model);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		generateDot(model);
+
 	}
-	
-	public void detectSingletonPattern(IModel model){
+
+	public void detectSingletonPattern(IModel model) {
 		this.currentPhase = "Detecting Singleton Pattern...";
 		IPatternDetector singletonDetector = new SingletonDetector(model);
 		singletonDetector.detectPatterns();
 		this.completedPhases++;
 		System.out.println(completedPhases);
 	}
-	
-	public void detectDecoratorPattern(IModel model){
+
+	public void detectDecoratorPattern(IModel model) {
 		this.currentPhase = "Detecting Decorator Pattern...";
 		IPatternDetector decoratorDetector = new DecoratorDetector(model);
 		decoratorDetector.detectPatterns();
 		this.completedPhases++;
 		System.out.println(completedPhases);
 	}
-	
-	public void detectAdapterPattern(IModel model){
+
+	public void detectAdapterPattern(IModel model) {
 		this.currentPhase = "Detecting Adapter Pattern...";
 		IPatternDetector adapterDetector = new AdapterDetector(model);
 		adapterDetector.detectPatterns();
 		this.completedPhases++;
 		System.out.println(completedPhases);
 	}
-	
-	public void detectCompositePattern(IModel model){
+
+	public void detectCompositePattern(IModel model) {
 		this.currentPhase = "Detecting Composite Pattern...";
 		IPatternDetector compositeDetector = new CompositeDetector(model);
 		compositeDetector.detectPatterns();
 		this.completedPhases++;
 		System.out.println(completedPhases);
 	}
-	
-	public void generateDot(IModel model) throws IOException{
+
+	public void generateDot(IModel model) throws IOException {
 		this.currentPhase = "Generating Dot File...";
 		ModelGVOutputStream gv = new ModelGVOutputStream(new FileOutputStream(this.outputDir + "model.gv"));
 		gv.write(model);
@@ -389,6 +376,7 @@ public class DesignParser {
 			}
 			System.out.println(line);
 		}
+		System.out.println("done");
 	}
 
 	public void generateSD(String pathToSDEdit, Model model, ISubMethod sm, int depth) throws IOException {
@@ -399,7 +387,7 @@ public class DesignParser {
 
 			try {
 				String[] newArray = mySet.toArray(new String[mySet.size()]);
-				visitClasses(newArray, model);
+				visitClasses(newArray);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -454,12 +442,24 @@ public class DesignParser {
 		}
 	}
 	
-	public String getCurrentPhase(){
+	public ArrayList<String> getPhases(){
+		return this.phases;
+	}
+
+	public String getCurrentPhase() {
 		return currentPhase;
 	}
 
 	public int getProgress() {
 		return completedPhases;
+	}
+
+	public String getPathToDot() {
+		return pathToDot;
+	}
+	
+	public String getPathToSD() {
+		return this.pathToSDEdit;
 	}
 
 }

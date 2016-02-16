@@ -33,7 +33,7 @@ public class AdapterTesting {
 		Model m = Model.getInstance();
 		m.clearModel();
 		String[] classes = {"problem.client.App","problem.client.IteratorToEnumerationAdapter","problem.lib.LinearTransformer", "java.util.Iterator", "java.util.Enumeration"};
-		parser.visitClasses(classes,m);
+		m = parser.visitClasses(classes);
 		IPatternDetector pd = new AdapterDetector(m);
 		pd.detectPatterns();
 		
@@ -57,7 +57,7 @@ public class AdapterTesting {
 		Model m = Model.getInstance();
 		m.clearModel();
 		String[] classes = {"java.awt.event.MouseAdapter", "java.awt.event.MouseListener","java.awt.event.MouseWheelListener", "java.awt.event.MouseMotionListener"};
-		parser.visitClasses(classes,m);
+		m= parser.visitClasses(classes);
 		IPatternDetector pd = new AdapterDetector(m);
 		pd.detectPatterns();
 		

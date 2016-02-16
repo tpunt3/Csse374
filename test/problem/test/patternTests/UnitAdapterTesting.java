@@ -32,7 +32,7 @@ public class UnitAdapterTesting {
 		m.clearModel();
 		String[] classes = { "problem.test.patternClasses.AdapteeClass", "problem.test.patternClasses.AdapterClass",
 				"problem.test.patternClasses.TargetInterface" };
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new AdapterDetector(m);
 		pd.detectPatterns();
 
@@ -56,7 +56,7 @@ public class UnitAdapterTesting {
 		m.clearModel();
 		String[] classes = { "problem.test.patternClasses.AdapteeClass", "problem.test.patternClasses.FalseAdapterClass",
 				"problem.test.patternClasses.TargetInterface" };
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new AdapterDetector(m);
 		pd.detectPatterns();
 

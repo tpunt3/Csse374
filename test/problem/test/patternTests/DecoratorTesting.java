@@ -31,7 +31,7 @@ private DesignParser parser;
 		Model m = Model.getInstance();
 		m.clearModel();
 		String[] classes = {"java.lang.Object","java.io.OutputStreamWriter","java.io.Writer"};
-		parser.visitClasses(classes,m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new DecoratorDetector(m);
 		pd.detectPatterns();
 		
@@ -47,7 +47,7 @@ private DesignParser parser;
 		Model m = Model.getInstance();
 		m.clearModel();
 		String[] classes = {"java.lang.Object","java.io.InputStreamReader","java.io.Reader"};
-		parser.visitClasses(classes,m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new DecoratorDetector(m);
 		pd.detectPatterns();
 		
@@ -73,7 +73,7 @@ private DesignParser parser;
 				"headfirst.decorator.starbuzz.Soy",
 				"headfirst.decorator.starbuzz.StarbuzzCoffee",
 				"headfirst.decorator.starbuzz.Whip"};
-		parser.visitClasses(classes,m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new DecoratorDetector(m);
 		pd.detectPatterns();
 		
@@ -105,7 +105,7 @@ private DesignParser parser;
 				"problem.model.decorators.TargetDecorator",
 				"problem.models.api.IClass"};
 		
-		parser.visitClasses(classes,m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new DecoratorDetector(m);
 		pd.detectPatterns();
 		

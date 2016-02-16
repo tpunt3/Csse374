@@ -35,7 +35,7 @@ public class CompositeTesting {
 		String[] classes = { "headfirst.composite.menu.Menu", "headfirst.composite.menu.MenuComponent",
 				"headfirst.composite.menu.MenuItem", "headfirst.composite.menu.MenuTestDrive",
 				"headfirst.composite.menu.Waitress" };
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new CompositeDetector(m);
 		pd.detectPatterns();
 
@@ -62,7 +62,7 @@ public class CompositeTesting {
 				"problem.sprites.CompositeSprite", "problem.sprites.CompositeSpriteIterator",
 				"problem.sprites.CrystalBall", "problem.sprites.ISprite", "problem.sprites.NullSpriteIterator",
 				"problem.sprites.RectangleSprite", "problem.sprites.RectangleTower", "problem.sprites.SpriteFactory" };
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new CompositeDetector(m);
 		pd.detectPatterns();
 

@@ -1,35 +1,79 @@
 digraph model{
 rankdir = BT;
-Enumeration [
-shape="record",style="filled",fillcolor=red
-label = "{\<\<interface\>\>\nEnumeration\n\<\<target\>\>| + nextElement() : E\l+ hasMoreElements() : boolean\l}"
+CompositeCompositeSprite [
+shape="record",style="filled",fillcolor=yellow
+label = "{CompositeCompositeSprite\n\<\<composite\>\>|+ init(double; double; double; double) : void\l+ move(Dimension) : void\l}"
 ];
 
-App [
+AbstractSprite [
+shape="record",style="filled",fillcolor=yellow
+label = "{AbstractSprite\n\<\<component\>\>|# dx: double\l# dy: double\l# shape: Shape\l|# computeNewBoundsAfterMoving(Dimension) : Rectangle2D\l+ createIterator() : Iterator\l+ move(Dimension) : void\l+ getShape() : Shape\l+ init(double; double; double; double) : void\l}"
+];
+
+NullIterator [
 shape="record",
-label = "{App| + init() : void\l+ main(String[]) : void\l}"
+label = "{NullIterator| + remove() : void\l+ next() : Object\l+ hasNext() : boolean\l+ init() : void\l}"
 ];
 
-LinearTransformer [
+SpriteFactory [
 shape="record",
-label = "{LinearTransformer| - enumTion: Enumeration\l|+ init(Enumeration) : void\l+ transform(OutputStream) : void\l}"
+label = "{SpriteFactory| + DX: double\l+ DY: double\l+ WIDTH: double\l+ HEIGHT: double\l- random: Random\l- sprites: ISprite\l|+ init() : void\l% clinit() : void\l+ computeRandomLocation(Dimension) : Point2D\l+ createRandomSprite(Dimension) : ISprite\l}"
 ];
 
-IteratorToEnumerationAdapter [
-shape="record",style="filled",fillcolor=red
-label = "{IteratorToEnumerationAdapter\n\<\<adapter\>\>|- itr: Iterator\l|+ init(Iterator) : void\l+ nextElement() : E\l+ hasMoreElements() : boolean\l}"
+CompositeIterator [
+shape="record",
+label = "{CompositeIterator| ~ stack: Stack\l|+ hasNext() : boolean\l+ init(Iterator) : void\l+ remove() : void\l+ next() : Object\l}"
 ];
 
-Iterator [
-shape="record",style="filled",fillcolor=red
-label = "{\<\<interface\>\>\nIterator\n\<\<adaptee\>\>| + next() : E\l+ forEachRemaining(Consumer) : Consumer\l+ hasNext() : boolean\l+ remove() : void\l}"
+CircleSprite [
+shape="record",style="filled",fillcolor=yellow
+label = "{CircleSprite\n\<\<leaf\>\>|+ move(Dimension) : void\l+ init(double; double; double; double) : void\l+ createIterator() : Iterator\l}"
+];
+
+ISprite [
+shape="record",style="filled",fillcolor=yellow
+label = "{\<\<interface\>\>\nISprite\n\<\<component\>\>| + getShape() : Shape\l+ move(Dimension) : void\l}"
+];
+
+PyramidSprite [
+shape="record",style="filled",fillcolor=yellow
+label = "{PyramidSprite\n\<\<composite\>\>|+ move(Dimension) : void\l+ init(double; double; double; double) : void\l}"
+];
+
+StackSprite [
+shape="record",style="filled",fillcolor=yellow
+label = "{StackSprite\n\<\<composite\>\>|+ move(Dimension) : void\l+ init(double; double; double; double) : void\l}"
+];
+
+CompositeSprite [
+shape="record",style="filled",fillcolor=yellow
+label = "{CompositeSprite\n\<\<composite\>\>|# spriteList: ISprite\l|+ createIterator() : Iterator\l+ getSprites() : ISprite\l+ init(double; double; double; double) : void\l+ addSprite(ISprite) : void\l+ move(Dimension) : void\l}"
+];
+
+RectangleSprite [
+shape="record",style="filled",fillcolor=yellow
+label = "{RectangleSprite\n\<\<leaf\>\>|+ createIterator() : Iterator\l+ init(double; double; double; double) : void\l+ move(Dimension) : void\l}"
 ];
 
 //writing relations between classes now
-App -> IteratorToEnumerationAdapter [arrowhead = "vee", style = "dashed"];
-App -> Iterator [arrowhead = "vee", style = "dashed"];
-App -> LinearTransformer [arrowhead = "vee", style = "dashed"];
-IteratorToEnumerationAdapter -> Enumeration [arrowhead = "empty", style = "dashed"];
-LinearTransformer -> Enumeration [arrowhead = "vee"];
-IteratorToEnumerationAdapter -> Iterator [arrowhead = "vee", label = "\<\<adapts\>\>"];
+AbstractSprite -> ISprite [arrowhead = "empty", style = "dashed"];
+CircleSprite -> AbstractSprite [arrowhead = "empty"];
+CircleSprite -> NullIterator [arrowhead = "vee", style = "dashed"];
+CompositeCompositeSprite -> CompositeSprite [arrowhead = "empty"];
+CompositeCompositeSprite -> StackSprite [arrowhead = "vee", style = "dashed"];
+CompositeCompositeSprite -> ISprite [arrowhead = "vee", style = "dashed"];
+CompositeIterator -> AbstractSprite [arrowhead = "vee", style = "dashed"];
+CompositeIterator -> CompositeSprite [arrowhead = "vee", style = "dashed"];
+CompositeSprite -> AbstractSprite [arrowhead = "empty"];
+CompositeSprite -> ISprite [arrowhead = "vee"];
+CompositeSprite -> CompositeIterator [arrowhead = "vee", style = "dashed"];
+PyramidSprite -> CompositeSprite [arrowhead = "empty"];
+PyramidSprite -> RectangleSprite [arrowhead = "vee", style = "dashed"];
+PyramidSprite -> ISprite [arrowhead = "vee", style = "dashed"];
+RectangleSprite -> AbstractSprite [arrowhead = "empty"];
+RectangleSprite -> NullIterator [arrowhead = "vee", style = "dashed"];
+SpriteFactory -> ISprite [arrowhead = "vee"];
+StackSprite -> CompositeSprite [arrowhead = "empty"];
+StackSprite -> RectangleSprite [arrowhead = "vee", style = "dashed"];
+StackSprite -> ISprite [arrowhead = "vee", style = "dashed"];
 }

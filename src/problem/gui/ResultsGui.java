@@ -37,10 +37,12 @@ public class ResultsGui implements ActionListener {
 	String phases;
 	ArrayList<String> parserPhases;
 	ImageComponent imageComponent;
+	DesignParser dp;
 
 	ArrayList<JCheckBox> patternBoxes;
 
-	public ResultsGui() throws IOException {
+	public ResultsGui(DesignParser parser) throws IOException {
+		this.dp = parser;
 		this.frame = new JFrame("RESULTSTIME");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -72,6 +74,7 @@ public class ResultsGui implements ActionListener {
 		patternBoxes = new ArrayList<JCheckBox>();
 
 		JPanel checkBoxPanel = new JPanel(new GridLayout(0, 1));
+		this.parserPhases = dp.getPhases();
 
 		for (int i = 1; i < parserPhases.size() - 1; i++) {
 			JCheckBox p = new JCheckBox(parserPhases.get(i) + " pattern");
@@ -106,9 +109,6 @@ public class ResultsGui implements ActionListener {
 		listScrollPane.setMinimumSize(minimumSize);
 		this.panel.setMinimumSize(minimumSize);
 
-		DesignParser dp = new DesignParser(this.dotPath, "");
-		dp.setOutputDir(outputDir);
-		dp.setPhases(this.parserPhases);
 		System.out.println(this.parserPhases.size());
 
 		System.out.println("images dimensions: " + imageComponent.getSize());
@@ -121,12 +121,12 @@ public class ResultsGui implements ActionListener {
 		frame.repaint();
 		frame.pack();
 
-		try {
-			dp.generateDocuments(DocType.uml, "problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod; int",
-					2, classes);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			dp.generateDocuments(DocType.uml, "problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod; int",
+//					2, classes);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		frame.repaint();
 		System.out.println("second repaint");
 

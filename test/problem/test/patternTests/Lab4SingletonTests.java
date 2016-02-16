@@ -32,7 +32,7 @@ public class Lab4SingletonTests {
 		Model m = Model.getInstance();
 		String[] classes = { "headfirst.singleton.chocolate.ChocolateBoiler",
 				"headfirst.singleton.chocolate.ChocolateController" };
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 
@@ -50,7 +50,7 @@ public class Lab4SingletonTests {
 	public void testSingletonClassic() throws IOException {
 		Model m = Model.getInstance();
 		String[] classes = { "headfirst.singleton.classic.Singleton" };
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 
@@ -66,7 +66,7 @@ public class Lab4SingletonTests {
 	public void testSingletonDcl() throws IOException {
 		Model m = Model.getInstance();
 		String[] classes = { "headfirst.singleton.dcl.Singleton", "headfirst.singleton.dcl.SingletonClient" };
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 
@@ -84,7 +84,7 @@ public class Lab4SingletonTests {
 	public void testSingletonStat() throws IOException {
 		Model m = Model.getInstance();
 		String[] classes = { "headfirst.singleton.stat.Singleton", "headfirst.singleton.stat.SingletonClient" };
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 
@@ -102,7 +102,7 @@ public class Lab4SingletonTests {
 	public void testSingletonSubClass() throws IOException {
 		Model m = Model.getInstance();
 		String[] classes = { "headfirst.singleton.subclass.Singleton", "headfirst.singleton.subclass.CoolerSingleton","headfirst.singleton.subclass.HotterSingleton","headfirst.singleton.subclass.SingletonTestDrive" };
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 
@@ -120,7 +120,7 @@ public class Lab4SingletonTests {
 	public void testSingletonThreadSafe() throws IOException {
 		Model m = Model.getInstance();
 		String[] classes = { "headfirst.singleton.threadsafe.Singleton"};
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 

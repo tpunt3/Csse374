@@ -32,7 +32,7 @@ private DesignParser parser;
 		String[] classes = {"problem.test.patternClasses.ConcreteComponentDecorator",
 				"problem.test.patternClasses.ComponentInterface",
 				"problem.test.patternClasses.ComponentDecorator"};
-		parser.visitClasses(classes,m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new DecoratorDetector(m);
 		pd.detectPatterns();
 		

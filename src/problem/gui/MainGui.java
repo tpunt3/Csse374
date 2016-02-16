@@ -19,6 +19,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import problem.asm.DesignParser;
+
 public class MainGui implements ActionListener{
 	
 	JFrame frame;
@@ -123,12 +125,15 @@ public class MainGui implements ActionListener{
 			System.out.println("make sure there is a config.properties in the input_output folder");
 		}
 		
+		DesignParser dp = new DesignParser(this.dotPath, "");
+		dp.setPhases(this.parserPhases);
+		dp.setOutputDir(this.outputDir);
 		
 		Thread resultGui = new Thread(new Runnable(){
 			@Override
 			public void run() {
 				try {
-					ResultsGui results = new ResultsGui();
+					ResultsGui results = new ResultsGui(dp);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

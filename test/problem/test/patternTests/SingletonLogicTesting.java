@@ -29,7 +29,7 @@ public class SingletonLogicTesting {
 	public void testLazySingleton() throws IOException {
 		Model m = Model.getInstance();
 		String[] classes = {"problem.test.patternClasses.LazySingleton", "problem.test.classes.EmptyClass"};
-		parser.visitClasses(classes,m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 		
@@ -47,7 +47,7 @@ public class SingletonLogicTesting {
 		Model m = Model.getInstance();
 		m.clearModel();
 		String[] classes = {"problem.test.patternClasses.EagerSingleton", "problem.test.classes.FieldClass"};
-		parser.visitClasses(classes,m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 		
@@ -65,7 +65,7 @@ public class SingletonLogicTesting {
 		Model m = Model.getInstance();
 		m.clearModel();
 		String[] classes = {"problem.test.patternClasses.EagerSingleton", "problem.test.patternClasses.AlmostSingleton"};
-		parser.visitClasses(classes,m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new SingletonDetector(m);
 		pd.detectPatterns();
 		

@@ -36,7 +36,7 @@ public class UnitCompositeTesting {
 		m.clearModel();
 		String[] classes = { "problem.test.patternClasses.Leaf", "problem.test.patternClasses.MyComposite",
 				"problem.test.patternClasses.CompositeComponent" };
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new CompositeDetector(m);
 		pd.detectPatterns();
 		
@@ -61,7 +61,7 @@ public class UnitCompositeTesting {
 		m.clearModel();
 		String[] classes = { "problem.test.patternClasses.Leaf", "problem.test.patternClasses.MyCollectionComposite",
 				"problem.test.patternClasses.CompositeComponent" };
-		parser.visitClasses(classes, m);
+		m=parser.visitClasses(classes);
 		IPatternDetector pd = new CompositeDetector(m);
 		pd.detectPatterns();
 		
