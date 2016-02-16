@@ -191,37 +191,20 @@ public class ResultsGui implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("singleton")) {
-			JCheckBox source = (JCheckBox) e.getSource();
-			if (source.isSelected()) {
-				//recreate pic with 
-			} else {
-
-			}
-
-		} else if (e.getActionCommand().equals("adapter")) {
-			JCheckBox source = (JCheckBox) e.getSource();
-			if (source.isSelected()) {
-
-			} else {
-
-			}
-		} else if (e.getActionCommand().equals("composite")) {
-			JCheckBox source = (JCheckBox) e.getSource();
-			if (source.isSelected()) {
-
-			} else {
-
-			}
-		} else if (e.getActionCommand().equals("decorator")) {
-			JCheckBox source = (JCheckBox) e.getSource();
-			if (source.isSelected()) {
-
-			} else {
-
-			}
+		JCheckBox source = (JCheckBox) e.getSource();
+		if (source.isSelected()) {
+			dp.addPattern(e.getActionCommand());
+			//add check boxes for the selected classes?
+		} else {
+			dp.removePattern(e.getActionCommand());
+			//remove check boxes for the selected classes?
 		}
-
+		
+		try {
+			dp.regenerateModel();
+		} catch (IOException e1) {
+			System.out.println("IO Exception while regenerating the model");
+		}
 	}
 
 //	private void readProperties() throws IOException {

@@ -184,17 +184,11 @@ public class DesignParser {
 			// "headfirst.composite.menu.MenuTestDrive",
 			// "headfirst.composite.menu.Waitress"
 
-			 "problem.sprites.AbstractSprite",
-			 "problem.sprites.CircleSprite",
-			 "problem.sprites.CompositeCompositeSprite",
-			 "problem.sprites.CompositeIterator",
-			 "problem.sprites.CompositeSprite",
-			 "problem.sprites.ISprite",
-			 "problem.sprites.NullIterator",
-			 "problem.sprites.PyramidSprite",
-			 "problem.sprites.RectangleSprite",
-			 "problem.sprites.SpriteFactory",
-			 "problem.sprites.StackSprite",
+			"problem.sprites.AbstractSprite", "problem.sprites.CircleSprite",
+			"problem.sprites.CompositeCompositeSprite", "problem.sprites.CompositeIterator",
+			"problem.sprites.CompositeSprite", "problem.sprites.ISprite", "problem.sprites.NullIterator",
+			"problem.sprites.PyramidSprite", "problem.sprites.RectangleSprite", "problem.sprites.SpriteFactory",
+			"problem.sprites.StackSprite",
 
 			// "problem.test.patternClasses.AdapteeClass",
 			// "problem.test.patternClasses.AdapterClass",
@@ -212,6 +206,7 @@ public class DesignParser {
 	private ArrayList<String> phases;
 	private volatile int completedPhases = 0;
 	private String currentPhase = "";
+	private ArrayList<String> patternsToDetect;
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -230,15 +225,13 @@ public class DesignParser {
 				"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\"");
 		// parser.generateDocuments(DocType.uml,
 		parser.setDefaults();
-		
+
 		String methodSig = "problem.asm.DesignParser,DesignParser,generateSD,String; Model; ISubMethod; int";
 		int depth = 2;
 		DocType type = DocType.uml;
-		
-		
-		
+
 		ISubMethod sm = null;
-		
+
 		sm = parser.setUpSD(methodSig);
 
 		Model model = parser.visitClasses(CLASSES);
@@ -254,11 +247,12 @@ public class DesignParser {
 		this.pathToDot = pathToDot;
 		this.pathToSDEdit = pathToSDEdit;
 		this.phases = new ArrayList<String>();
+		this.patternsToDetect = new ArrayList<String>();
 	}
-	
-	public ISubMethod setUpSD(String methodSig){
+
+	public ISubMethod setUpSD(String methodSig) {
 		DocType type = DocType.sd;
-		
+
 		ISubMethod sm = null;
 		String arguments;
 
@@ -284,7 +278,7 @@ public class DesignParser {
 	public Model visitClasses(String[] classes) throws IOException {
 
 		Model model = Model.getInstance();
-		
+
 		for (String className : classes) {
 			if (!className.contains("[")) {
 				this.currentPhase = "Visiting " + className + "...";
@@ -307,7 +301,7 @@ public class DesignParser {
 				reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			}
 		}
-		
+
 		return model;
 	}
 
@@ -420,6 +414,28 @@ public class DesignParser {
 			System.out.println(line);
 		}
 	}
+	
+	public void regenerateModel() throws IOException{
+		
+		System.out.println("regenerating the model");
+		Model model = Model.getInstance();
+		model.clearModel();
+		
+		if(this.patternsToDetect.contains("singleton")){
+			detectSingletonPattern(model);
+		}
+		if(this.patternsToDetect.contains("adapter")){
+			detectAdapterPattern(model);
+		}
+		if(this.patternsToDetect.contains("composite")){
+			detectCompositePattern(model);
+		}
+		if(this.patternsToDetect.contains("decorator")){
+			detectDecoratorPattern(model);
+		}
+		
+		generateDot(model);
+	}
 
 	private void setDefaults() {
 		setOutputDir("input_output/");
@@ -441,8 +457,8 @@ public class DesignParser {
 			s = s.toLowerCase();
 		}
 	}
-	
-	public ArrayList<String> getPhases(){
+
+	public ArrayList<String> getPhases() {
 		return this.phases;
 	}
 
@@ -457,9 +473,21 @@ public class DesignParser {
 	public String getPathToDot() {
 		return pathToDot;
 	}
-	
+
 	public String getPathToSD() {
 		return this.pathToSDEdit;
+	}
+
+	public void addPattern(String p) {
+		if (!this.patternsToDetect.contains(p)) {
+			this.patternsToDetect.add(p);
+		}
+	}
+	
+	public void removePattern(String p) {
+		if(this.patternsToDetect.contains(p)){
+			this.patternsToDetect.remove(p);
+		}
 	}
 
 }
