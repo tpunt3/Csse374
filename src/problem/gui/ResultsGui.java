@@ -52,7 +52,7 @@ public class ResultsGui implements ActionListener {
 
 	public ResultsGui(DesignParser parser) throws IOException {
 		this.dp = parser;
-		this.frame = new JFrame("RESULTSTIME");
+		this.frame = new JFrame("UMLLAMA Results");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setPreferredSize(new Dimension(750, 750));
@@ -61,7 +61,7 @@ public class ResultsGui implements ActionListener {
 		JMenuBar menuBar = addMenu();
 
 		this.panel = new JPanel();
-		this.panel.setPreferredSize(new Dimension(500, 500));
+		this.panel.setPreferredSize(new Dimension(750, 750));
 		this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
 
 		// add panel to frame
@@ -72,14 +72,6 @@ public class ResultsGui implements ActionListener {
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		pane.setPreferredSize(new Dimension(750, 750));
 		pane.setVisible(true);
-		// frame.add(pane);
-
-		// try {
-		// readProperties();
-		// } catch (IOException e1) {
-		// System.out.println("make sure there is a config.properties in the
-		// input_output folder");
-		// }
 
 		patternBoxes = new ArrayList<JCheckBox>();
 
@@ -101,7 +93,6 @@ public class ResultsGui implements ActionListener {
 
 		Icon icon = new ImageProxy(dp.getOutputDir() + "graph1.png");
 		imageComponent = new ImageComponent(icon);
-		// imageComponent = new JLabel(icon);
 		this.pane.add(imageComponent);
 		this.pane.add(new JButton("Test"));
 		this.pane.setVisible(true);
@@ -119,61 +110,11 @@ public class ResultsGui implements ActionListener {
 		Dimension minimumSize = new Dimension(100, 50);
 		listScrollPane.setMinimumSize(minimumSize);
 
-		// System.out.println("images dimensions: " + imageComponent.getSize());
 		pane.setViewportView(imageComponent);
-		//
-		// System.out.println(pane.getViewport().getView().toString());
 
 		pane.revalidate();
 		pane.repaint();
 		frame.repaint();
-		frame.pack();
-
-		// try {
-		// dp.generateDocuments(DocType.uml,
-		// "problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod;
-		// int",
-		// 2, classes);
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		frame.repaint();
-
-		//
-		// Thread generateThread = new Thread(new Runnable(){
-		// @Override
-		// public void run() {
-		// try {
-		// dp.generateDocuments(DocType.uml,
-		// "problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod;
-		// int", 2, classes);
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		// }
-		// });
-		// generateThread.start();
-		// while(dp.getProgress()<this.parserPhases.size()){
-		// progressLabel.setText(dp.getCurrentPhase());
-		// System.out.println(dp.getProgress() + " out of " + jpb.getMaximum());
-		// jpb.setValue(dp.getProgress()/this.parserPhases.size());
-		// panel.repaint();
-		// if(dp.getCurrentPhase().equals("finished")){
-		// break;
-		// }
-		// }
-
-		// dp.generateDocuments(DocType.uml,
-		// "problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod;
-		// int", 2, classes);
-		// System.out.println("making image now: "+dp.getOutputDir());
-		// BufferedImage myPic = ImageIO.read(new
-		// File(dp.getOutputDir()+"test.png"));
-		// JLabel picLabel = new JLabel(new ImageIcon(myPic));
-		// this.panel.add(picLabel);
-		// this.panel.repaint();
-		// this.panel.repaint();
-
 		frame.pack();
 	}
 
