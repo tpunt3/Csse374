@@ -15,12 +15,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SpringLayout;
@@ -60,7 +62,11 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		// }
 
 		// create frame
-		this.frame = new JFrame("Team Alpaca's Design Parser");
+		this.frame = new JFrame("UMLLAMA");
+		ImageIcon img = new ImageIcon("resources/alpacaLogo.jpg");
+		frame.setBackground(Color.white);
+		frame.setForeground(Color.black);
+		frame.setIconImage(img.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setMinimumSize(new Dimension(300, 200));
@@ -81,7 +87,7 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		jpb.setMinimumSize(new Dimension(150, 50));
 		jpb.setStringPainted(true);
 		jpb.setBorderPainted(true);
-		
+
 		moveOn = new JButton("Go to results");
 		moveOn.setActionCommand("results");
 		moveOn.addActionListener(this);
@@ -105,7 +111,7 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		layout.putConstraint(SpringLayout.NORTH, moveOn, 100, SpringLayout.NORTH, this.panel);
 
 		moveOn.setVisible(false);
-		
+
 		// add panel to frame
 		panel.setVisible(true);
 		frame.add(panel);
@@ -121,6 +127,20 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		JMenu helpMenu = new JMenu("Help");
 		helpMenu.setMnemonic(KeyEvent.VK_H);
 		helpMenu.getAccessibleContext().setAccessibleDescription("Use this menu to get more information or help");
+
+		JMenuItem helpItem = new JMenuItem();
+		helpItem.setMnemonic(KeyEvent.VK_S);
+		helpItem.setText("Help");
+		helpItem.setActionCommand("help");
+		helpItem.addActionListener(this);
+		helpMenu.add(helpItem);
+		
+		JMenuItem aboutItem = new JMenuItem();
+		aboutItem.setMnemonic(KeyEvent.VK_S);
+		aboutItem.setText("About");
+		aboutItem.setActionCommand("about");
+		aboutItem.addActionListener(this);
+		helpMenu.add(aboutItem);
 
 		JMenuItem saveItem = new JMenuItem();
 		saveItem.setMnemonic(KeyEvent.VK_S);
@@ -145,9 +165,30 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 			analyzeClicked();
 		} else if (cmd.equals("loadConfig")) {
 			ConfigFrame config = ConfigFrame.getInstance();
-		} else if(cmd.equals("results")) {
+		} else if (cmd.equals("results")) {
 			startResults();
+		} else if (cmd.equals("help")) {
+			showHelp();
+		} else if (cmd.equals("about")) {
+			showAbout();
 		}
+	}
+
+	private void showAbout() {
+		ImageIcon img = new ImageIcon("resources/alpacaLogo.jpg");
+		JOptionPane.showMessageDialog(null,
+				"This product, UMLLAMA(TM), was developed by Katie Lee and Trent Punt as a service "
+						+ " to help users \n generate documentation for code and help understanding and visualization of design patterns. Copyright 2016.", "UMLLAMA About", JOptionPane.INFORMATION_MESSAGE,img);
+	}
+
+	private void showHelp() {
+		JOptionPane.showMessageDialog(null,
+				"Load config: clicking this button brings up a new window where you can load an existing configuration \n"
+				+ " for UMLLAMA or create a new configuration. If you choose to load an existing configuration, please choose a \n"
+				+ "file that ends in .properties. To create a new configuration, enter fully qualified classnames of every class,\n"
+				+ " a valid output directory ending in a slash(/), a fully qualified path to your dot.exe, and a list of phases that\n"
+				+ " you would like the product to complete (valid phases are: visit,composite,adapter,singleton,decorator,dot)","UMLLAMA Help", JOptionPane.QUESTION_MESSAGE);
+
 	}
 
 	private void startResults() {
@@ -163,7 +204,7 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		});
 		resultGui.start();
 		this.frame.dispose();
-		
+
 	}
 
 	public void analyzeClicked() {
@@ -173,14 +214,14 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		} catch (IOException e1) {
 			System.out.println("make sure there is a config.properties in the input_output folder");
 		}
-		
+
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		
-		System.out.println(classes.length+1);
+
+		System.out.println(classes.length + 1);
 		jpb.setMaximum(classes.length + 1);
 		jpb.setMinimum(0);
 		jpb.setVisible(true);
@@ -223,7 +264,7 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 				} catch (Exception e) {
 					System.out.println("Exception: " + e);
 				}
-				
+
 			}
 		});
 		t.start();
@@ -246,7 +287,7 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 			int progress = (int) evt.getNewValue();
 			jpb.setValue(progress);
 			jpb.setString(dp.getCurrentPhase());
-		}else if("done" == evt.getPropertyName()){
+		} else if ("done" == evt.getPropertyName()) {
 			moveOn.setVisible(true);
 		}
 	}
