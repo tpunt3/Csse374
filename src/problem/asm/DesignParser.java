@@ -212,6 +212,9 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	private String currentPhase = "";
 	private ArrayList<String> patternsToDetect;
 	private JProgressBar jpb;
+	private int adapterDelegation;
+	private int decoratorDelegation;
+	private boolean getInstance;
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -255,6 +258,8 @@ public class DesignParser extends SwingWorker<Void, Void> {
 		this.patternsToDetect = new ArrayList<String>();
 		this.currentPhase = "Preparing to visit classes...";
 		this.completedPhases = 0;
+		this.adapterDelegation = 1;
+		this.getInstance = true;
 	}
 
 	public DesignParser(String dotPath, String string, JProgressBar jpb) {
@@ -264,6 +269,7 @@ public class DesignParser extends SwingWorker<Void, Void> {
 		this.patternsToDetect = new ArrayList<String>();
 		this.currentPhase = "Preparing to visit classes...";
 		this.completedPhases = 0;
+		this.adapterDelegation = 1;
 		this.jpb = jpb;
 	}
 
@@ -353,7 +359,7 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	}
 
 	public void detectAdapterPattern(IModel model) {
-		IPatternDetector adapterDetector = new AdapterDetector(model);
+		IPatternDetector adapterDetector = new AdapterDetector(model,this.adapterDelegation);
 		adapterDetector.detectPatterns();
 		this.currentPhase = "Detecting Adapter Pattern";
 		updateProgress();
@@ -438,21 +444,6 @@ public class DesignParser extends SwingWorker<Void, Void> {
 
 		System.out.println("regenerating the model");
 		Model model = Model.getInstance();
-		model.clearModel();
-		visitClasses(CLASSES);
-
-		if (this.patternsToDetect.contains("singleton")) {
-			detectSingletonPattern(model);
-		}
-		if (this.patternsToDetect.contains("adapter")) {
-			detectAdapterPattern(model);
-		}
-		if (this.patternsToDetect.contains("composite")) {
-			detectCompositePattern(model);
-		}
-		if (this.patternsToDetect.contains("decorator")) {
-			detectDecoratorPattern(model);
-		}
 
 		generateDot(model);
 	}
@@ -505,6 +496,18 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	public String getOutputDir() {
 		return outputDir;
 	}
+	
+	public void setAdapterDelegation(int delegation){
+		this.adapterDelegation = delegation;
+	}
+	
+	public void setDecoratorDelegation(int delegation){
+		this.decoratorDelegation = delegation;
+	}
+	
+	public void setSingletonGetInstance(boolean require){
+		this.getInstance = require;
+	}
 
 	public void addPattern(String p) {
 		if (!this.patternsToDetect.contains(p)) {
@@ -522,16 +525,16 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	protected Void doInBackground() throws Exception {
 
 		IModel m = this.visitClasses(CLASSES);
-		if (this.patternsToDetect.contains("singleton")) {
+		if (this.phases.contains("singleton")) {
 			detectSingletonPattern(m);
 		}
-		if (this.patternsToDetect.contains("adapter")) {
+		if (this.phases.contains("adapter")) {
 			detectAdapterPattern(m);
 		}
-		if (this.patternsToDetect.contains("composite")) {
+		if (this.phases.contains("composite")) {
 			detectCompositePattern(m);
 		}
-		if (this.patternsToDetect.contains("decorator")) {
+		if (this.phases.contains("decorator")) {
 			detectDecoratorPattern(m);
 		}
 		
