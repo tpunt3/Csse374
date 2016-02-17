@@ -19,12 +19,21 @@ public class AdapterDetector implements IPatternDetector {
 	private ArrayList<IClass> adapters;
 	private ArrayList<IClass> adaptees;
 	private ArrayList<IClass> targets;
+	private int methodDelegation;
 
 	public AdapterDetector(IModel model) {
 		this.model = model;
 		this.adapters = new ArrayList<IClass>();
 		this.adaptees = new ArrayList<IClass>();
 		this.targets = new ArrayList<IClass>();
+		this.methodDelegation = 1;
+	}
+	public AdapterDetector(IModel model, int methodDelegationNum) {
+		this.model = model;
+		this.adapters = new ArrayList<IClass>();
+		this.adaptees = new ArrayList<IClass>();
+		this.targets = new ArrayList<IClass>();
+		this.methodDelegation = methodDelegationNum;
 	}
 
 	@Override
@@ -79,6 +88,7 @@ public class AdapterDetector implements IPatternDetector {
 								}
 							}
 							
+							int usedMethodCount=0;
 							boolean isAdapter = false;
 							if(isAlmostAdapter){
 								for(IMethod m2 : c.getMethods()){
@@ -87,8 +97,11 @@ public class AdapterDetector implements IPatternDetector {
 										for(ISubMethod sub: m2.getSubMethods()){
 											System.out.println("submethod name: "+sub.getClazzName()+" type: "+f.getType());
 											if(sub.getClazzName().equals(f.getType())){
-												isAdapter = true;
+												usedMethodCount++;
 											}
+										}
+										if(usedMethodCount >= methodDelegation){
+											isAdapter=true;
 										}
 									}
 								}
