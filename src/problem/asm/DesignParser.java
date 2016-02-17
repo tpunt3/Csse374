@@ -6,10 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -28,9 +32,9 @@ import problem.models.impl.ModelGVOutputStream;
 import problem.models.impl.ModelSDOutputStream;
 import problem.models.impl.SubMethod;
 
-public class DesignParser {
+public class DesignParser extends SwingWorker<Void, Void> {
 
-	public static final String[] CLASSES = {
+	public static String[] CLASSES = {
 			// "headfirst.factory.pizzaaf.BlackOlives",
 			// "headfirst.factory.pizzaaf.Cheese",
 			// "headfirst.factory.pizzaaf.CheesePizza",
@@ -204,9 +208,10 @@ public class DesignParser {
 	private String pathToSDEdit;
 	private String outputDir = "input_output/";
 	private ArrayList<String> phases;
-	private volatile int completedPhases = 0;
+	private volatile int completedPhases;
 	private String currentPhase = "";
 	private ArrayList<String> patternsToDetect;
+	private JProgressBar jpb;
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -218,11 +223,11 @@ public class DesignParser {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		// DesignParser parser = new
-		// DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
-		// "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
-		DesignParser parser = new DesignParser("\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\"",
-				"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\"");
+		 DesignParser parser = new
+		 DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
+		 "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
+		//DesignParser parser = new DesignParser("\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\"",
+		//		"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\"");
 		// parser.generateDocuments(DocType.uml,
 		parser.setDefaults();
 
@@ -248,6 +253,18 @@ public class DesignParser {
 		this.pathToSDEdit = pathToSDEdit;
 		this.phases = new ArrayList<String>();
 		this.patternsToDetect = new ArrayList<String>();
+		this.currentPhase = "Preparing to visit classes...";
+		this.completedPhases = 0;
+	}
+
+	public DesignParser(String dotPath, String string, JProgressBar jpb) {
+		this.pathToDot = dotPath;
+		this.pathToSDEdit = string;
+		this.phases = new ArrayList<String>();
+		this.patternsToDetect = new ArrayList<String>();
+		this.currentPhase = "Preparing to visit classes...";
+		this.completedPhases = 0;
+		this.jpb = jpb;
 	}
 
 	public ISubMethod setUpSD(String methodSig) {
@@ -299,8 +316,17 @@ public class DesignParser {
 				ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, model);
 
 				reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+				this.completedPhases++;
 			}
+			firePropertyChange("progress", completedPhases, completedPhases);
+			if (jpb != null) {
+				jpb.setValue(completedPhases);
+				jpb.setString(this.currentPhase);
+			}
+			setProgress(completedPhases);
 		}
+		setProgress(completedPhases);
+		firePropertyChange("progress", completedPhases, completedPhases);
 
 		return model;
 	}
@@ -320,35 +346,23 @@ public class DesignParser {
 	}
 
 	public void detectSingletonPattern(IModel model) {
-		this.currentPhase = "Detecting Singleton Pattern...";
 		IPatternDetector singletonDetector = new SingletonDetector(model);
 		singletonDetector.detectPatterns();
-		this.completedPhases++;
-		System.out.println(completedPhases);
 	}
 
 	public void detectDecoratorPattern(IModel model) {
-		this.currentPhase = "Detecting Decorator Pattern...";
 		IPatternDetector decoratorDetector = new DecoratorDetector(model);
 		decoratorDetector.detectPatterns();
-		this.completedPhases++;
-		System.out.println(completedPhases);
 	}
 
 	public void detectAdapterPattern(IModel model) {
-		this.currentPhase = "Detecting Adapter Pattern...";
 		IPatternDetector adapterDetector = new AdapterDetector(model);
 		adapterDetector.detectPatterns();
-		this.completedPhases++;
-		System.out.println(completedPhases);
 	}
 
 	public void detectCompositePattern(IModel model) {
-		this.currentPhase = "Detecting Composite Pattern...";
 		IPatternDetector compositeDetector = new CompositeDetector(model);
 		compositeDetector.detectPatterns();
-		this.completedPhases++;
-		System.out.println(completedPhases);
 	}
 
 	public void generateDot(IModel model) throws IOException {
@@ -370,7 +384,16 @@ public class DesignParser {
 			}
 			System.out.println(line);
 		}
+
+		this.completedPhases++;
+		setProgress(completedPhases);
+		firePropertyChange("progress", completedPhases, completedPhases);
+		if (jpb != null) {
+			jpb.setValue(completedPhases);
+			jpb.setString(this.currentPhase);
+		}
 		System.out.println("done");
+		this.done();
 	}
 
 	public void generateSD(String pathToSDEdit, Model model, ISubMethod sm, int depth) throws IOException {
@@ -414,26 +437,27 @@ public class DesignParser {
 			System.out.println(line);
 		}
 	}
-	
-	public void regenerateModel() throws IOException{
-		
+
+	public void regenerateModel() throws IOException {
+
 		System.out.println("regenerating the model");
 		Model model = Model.getInstance();
 		model.clearModel();
-		
-		if(this.patternsToDetect.contains("singleton")){
+		visitClasses(CLASSES);
+
+		if (this.patternsToDetect.contains("singleton")) {
 			detectSingletonPattern(model);
 		}
-		if(this.patternsToDetect.contains("adapter")){
+		if (this.patternsToDetect.contains("adapter")) {
 			detectAdapterPattern(model);
 		}
-		if(this.patternsToDetect.contains("composite")){
+		if (this.patternsToDetect.contains("composite")) {
 			detectCompositePattern(model);
 		}
-		if(this.patternsToDetect.contains("decorator")){
+		if (this.patternsToDetect.contains("decorator")) {
 			detectDecoratorPattern(model);
 		}
-		
+
 		generateDot(model);
 	}
 
@@ -458,6 +482,10 @@ public class DesignParser {
 		}
 	}
 
+	public void setClasses(String[] classes) {
+		DesignParser.CLASSES = classes;
+	}
+
 	public ArrayList<String> getPhases() {
 		return this.phases;
 	}
@@ -466,7 +494,7 @@ public class DesignParser {
 		return currentPhase;
 	}
 
-	public int getProgress() {
+	public int getMyProgress() {
 		return completedPhases;
 	}
 
@@ -478,16 +506,38 @@ public class DesignParser {
 		return this.pathToSDEdit;
 	}
 
+	public String getOutputDir() {
+		return outputDir;
+	}
+
 	public void addPattern(String p) {
 		if (!this.patternsToDetect.contains(p)) {
 			this.patternsToDetect.add(p);
 		}
 	}
-	
+
 	public void removePattern(String p) {
-		if(this.patternsToDetect.contains(p)){
+		if (this.patternsToDetect.contains(p)) {
 			this.patternsToDetect.remove(p);
 		}
+	}
+
+	@Override
+	protected Void doInBackground() throws Exception {
+
+		IModel m = this.visitClasses(CLASSES);
+		this.generateDot(m);
+
+		return null;
+	}
+
+	@Override
+	public void done() {
+		if (jpb != null) {
+			jpb.setValue(jpb.getMaximum());
+			jpb.setString("finished!");
+		}
+		firePropertyChange("done", 0, 1);
 	}
 
 }
