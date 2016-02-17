@@ -80,16 +80,18 @@ public class ModelGVOutputStream extends FilterOutputStream {
 		this.visitor.addVisit(VisitType.PreVisit, IClass.class, (ITraverser t) -> {
 			IClass c = (IClass) t;
 			String s;
-			if(c instanceof ClassDecorator){
-				if(c instanceof SingletonDecorator){
-					s = String.format("%s [\nshape=\"record\",color=%s\n", c.getName(),((ClassDecorator) c).getColor());
-				}else{
-					s = String.format("%s [\nshape=\"record\",style=\"filled\",fillcolor=%s\n", c.getName(),((ClassDecorator) c).getColor());
+			if (c instanceof ClassDecorator) {
+				if (c instanceof SingletonDecorator) {
+					s = String.format("%s [\nshape=\"record\",color=%s\n", c.getName(),
+							((ClassDecorator) c).getColor());
+				} else {
+					s = String.format("%s [\nshape=\"record\",style=\"filled\",fillcolor=%s\n", c.getName(),
+							((ClassDecorator) c).getColor());
 				}
-			}else{
+			} else {
 				s = String.format("%s [\nshape=\"record\",\n", c.getName());
 			}
-			
+
 			this.write(s);
 		});
 	}
@@ -101,17 +103,19 @@ public class ModelGVOutputStream extends FilterOutputStream {
 			String s;
 			if (!c.getIsClass()) {
 
-				if(c instanceof ClassDecorator){
-					//interface
-					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<%s\\>\\>| ", c.getName(), ((ClassDecorator) c).getPatternName());
-				}else {
+				if (c instanceof ClassDecorator) {
+					// interface
+					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s\\n\\<\\<%s\\>\\>| ", c.getName(),
+							((ClassDecorator) c).getPatternName());
+				} else {
 					s = String.format("label = \"{\\<\\<interface\\>\\>\\n%s| ", c.getName());
 				}
-			} else{
-				//not an interface
-				if(c instanceof ClassDecorator){
-					s = String.format("label = \"{%s\\n\\<\\<%s\\>\\>|", c.getName(), ((ClassDecorator) c).getPatternName());
-				}else{
+			} else {
+				// not an interface
+				if (c instanceof ClassDecorator) {
+					s = String.format("label = \"{%s\\n\\<\\<%s\\>\\>|", c.getName(),
+							((ClassDecorator) c).getPatternName());
+				} else {
 					s = String.format("label = \"{%s| ", c.getName());
 				}
 			}
@@ -163,28 +167,31 @@ public class ModelGVOutputStream extends FilterOutputStream {
 			this.write(comment);
 
 			for (IRelation r : relations) {
-				switch (r.getType()) {
-				case association:
-					visitAssociations(r);
-					break;
-				case uses:
-					visitUses(r);
-					break;
-				case superclass:
-					visitSuperClasses(r);
-					break;
-				case interfaces:
-					visitInterfaces(r);
-					break;
-				case decorates:
-					visitDecorates(r);
-					break;
-				case adapts:
-					visitAdapts(r);
-					break;
-				case singleton:
-					visitSingletons(r);
-					break;
+				if (((Model) m).getClassesToVisit().contains(r.getName())
+						&& ((Model) m).getClassesToVisit().contains(r.getRelatedClass())) {
+					switch (r.getType()) {
+					case association:
+						visitAssociations(r);
+						break;
+					case uses:
+						visitUses(r);
+						break;
+					case superclass:
+						visitSuperClasses(r);
+						break;
+					case interfaces:
+						visitInterfaces(r);
+						break;
+					case decorates:
+						visitDecorates(r);
+						break;
+					case adapts:
+						visitAdapts(r);
+						break;
+					case singleton:
+						visitSingletons(r);
+						break;
+					}
 				}
 			}
 		});

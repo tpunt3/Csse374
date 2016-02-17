@@ -27,6 +27,7 @@ public class Model implements IModel {
 	private ArrayList<String> methodStrings;
 	private ArrayList<String> classesToAdd;
 	private ArrayList<String> classNames;
+	private ArrayList<String> classesToVisit;
 
 	private Model() {
 		this.classes = new HashSet<IClass>();
@@ -36,6 +37,7 @@ public class Model implements IModel {
 		this.methodStrings = new ArrayList<String>();
 		this.classesToAdd = new ArrayList<String>();
 		this.classNames = new ArrayList<String>();
+		this.classesToVisit = new ArrayList<String>();
 	}
 	
 	public static Model getInstance(){
@@ -149,6 +151,7 @@ public class Model implements IModel {
 		
 		v.visit(this);
 		for (IClass c : this.classes) {
+			//if(classesToVisit.contains(c.getName())){
 			c.accept(v);
 		}
 		v.visitRelations(this);
@@ -161,6 +164,7 @@ public class Model implements IModel {
 
 	public void addClazz(IClass clazz) {
 		classes.add(clazz);
+		this.classesToVisit.add(clazz.getName());
 	}
 
 	public IClass getClazz(String key) {
@@ -258,6 +262,22 @@ public class Model implements IModel {
 			this.classes.remove(oldC);
 			this.classes.add(newC);
 		}
+	}
+	
+	public void addClassToVisit(String className){
+		classesToVisit.add(className);
+	}
+	
+	public void removeClassToVisit(String className){
+		classesToVisit.remove(className);
+	}
+	
+	public void setClassesToVisit(ArrayList<String> classesToVisit){
+		this.classesToVisit = classesToVisit;
+	}
+	
+	public ArrayList<String> getClassesToVisit(){
+		return this.classesToVisit;
 	}
 
 	@Override
