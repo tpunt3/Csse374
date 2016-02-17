@@ -19,7 +19,7 @@ import problem.test.tests.TestDesignParser;
 public class Model implements IModel {
 
 	private static Model uniqueInstance;
-	
+
 	private int callDepth;
 	private HashSet<IClass> classes;
 	private ArrayList<IRelation> relations;
@@ -39,9 +39,9 @@ public class Model implements IModel {
 		this.classNames = new ArrayList<String>();
 		this.classesToVisit = new ArrayList<String>();
 	}
-	
-	public static Model getInstance(){
-		if(uniqueInstance == null){
+
+	public static Model getInstance() {
+		if (uniqueInstance == null) {
 			uniqueInstance = new Model();
 		}
 		return uniqueInstance;
@@ -81,9 +81,10 @@ public class Model implements IModel {
 
 		boolean inClasses = false;
 
-		// If you are running the UnitTesting JUNIT tests in ProjectGVTesting, uncomment this next
+		// If you are running the UnitTesting JUNIT tests in ProjectGVTesting,
+		// uncomment this next
 		// line and comment out the one above:
-		 //boolean inClasses = true;
+		// boolean inClasses = true;
 		for (String s : DesignParser.CLASSES) {
 
 			String[] split = s.split("\\.");
@@ -97,7 +98,7 @@ public class Model implements IModel {
 		if (inClasses) {
 
 			if (r.getName().equals(r.getRelatedClass())) {
-				if(!r.getType().equals(RelationType.singleton)){
+				if (!r.getType().equals(RelationType.singleton)) {
 					return;
 				}
 			}
@@ -122,7 +123,7 @@ public class Model implements IModel {
 						this.relations.remove(i);
 						this.relations.add(r);
 						return;
-					}else if ((r.getType().equals(RelationType.decorates) || r.getType().equals(RelationType.adapts))
+					} else if ((r.getType().equals(RelationType.decorates) || r.getType().equals(RelationType.adapts))
 							&& this.relations.get(i).getType().equals(RelationType.association)) {
 						this.relations.remove(i);
 						this.relations.add(r);
@@ -148,11 +149,12 @@ public class Model implements IModel {
 	@Override
 	public void accept(IVisitor v) {
 		v.preVisit(this);
-		
+
 		v.visit(this);
 		for (IClass c : this.classes) {
-			//if(classesToVisit.contains(c.getName())){
-			c.accept(v);
+			if (classesToVisit.contains(c.getName())) {
+				c.accept(v);
+			}
 		}
 		v.visitRelations(this);
 		v.postVisit(this);
@@ -218,11 +220,12 @@ public class Model implements IModel {
 							if (m.getArgs().equals(sm.getArgs())) {
 								for (ISubMethod innerSM : m.getSubMethods()) {
 									if (!innerSM.isVisited()) {
-										String s2 = clazz.getName() + ":" + innerSM.getReturnType() +"="+ innerSM.getClazzName() + "."
-												+ innerSM.getMethodName() + "(" + innerSM.getArgs() + ")";
+										String s2 = clazz.getName() + ":" + innerSM.getReturnType() + "="
+												+ innerSM.getClazzName() + "." + innerSM.getMethodName() + "("
+												+ innerSM.getArgs() + ")";
 										this.methodStrings.add(s2);
-										
-										//innerSM.setVisited(true);
+
+										// innerSM.setVisited(true);
 										this.acceptSequence(innerSM, depth - 1);
 									}
 								}
@@ -237,13 +240,13 @@ public class Model implements IModel {
 		}
 		return;
 	}
-	
-	public void clearSD(){
+
+	public void clearSD() {
 		this.classStrings.clear();
 		this.methodStrings.clear();
 	}
-	
-	public void clearModel(){
+
+	public void clearModel() {
 		this.classes.clear();
 		this.relations.clear();
 		this.classStrings.clear();
@@ -256,35 +259,35 @@ public class Model implements IModel {
 		v.preVisit(this);
 		v.visit(this);
 	}
-	
-	public void replaceClass(IClass oldC, IClass newC){
-		if(this.classes.contains(oldC)){
+
+	public void replaceClass(IClass oldC, IClass newC) {
+		if (this.classes.contains(oldC)) {
 			this.classes.remove(oldC);
 			this.classes.add(newC);
 		}
 	}
-	
-	public void addClassToVisit(String className){
+
+	public void addClassToVisit(String className) {
 		classesToVisit.add(className);
 	}
-	
-	public void removeClassToVisit(String className){
+
+	public void removeClassToVisit(String className) {
 		classesToVisit.remove(className);
 	}
-	
-	public void setClassesToVisit(ArrayList<String> classesToVisit){
+
+	public void setClassesToVisit(ArrayList<String> classesToVisit) {
 		this.classesToVisit = classesToVisit;
 	}
-	
-	public ArrayList<String> getClassesToVisit(){
+
+	public ArrayList<String> getClassesToVisit() {
 		return this.classesToVisit;
 	}
 
 	@Override
 	public void accept(IPatternVisitor v) {
-		//v.singletonVisit(this);
+		// v.singletonVisit(this);
 		v.visit(this);
-		for(IClass c:this.classes){
+		for (IClass c : this.classes) {
 			c.accept(v);
 		}
 		v.postVisit(this);

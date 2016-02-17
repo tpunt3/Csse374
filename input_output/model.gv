@@ -1,28 +1,21 @@
 digraph model{
 rankdir = BT;
-FalseAdapterClass [
-shape="record",
-label = "{FalseAdapterClass| - adaptee: AdapteeClass\l|+ doSomething() : void\l+ init() : void\l}"
-];
-
-TargetInterface [
-shape="record",
-label = "{\<\<interface\>\>\nTargetInterface| + doSomething() : void\l}"
-];
-
 AdapterClass [
-shape="record",
-label = "{AdapterClass| - adaptee: AdapteeClass\l|+ doSomething() : void\l+ init(AdapteeClass) : void\l}"
+shape="record",style="filled",fillcolor=red
+label = "{AdapterClass\n\<\<adapter\>\>|- adaptee: AdapteeClass\l|+ doSomething() : void\l+ init(AdapteeClass) : void\l}"
 ];
 
 AdapteeClass [
-shape="record",
-label = "{AdapteeClass| + init() : void\l+ doingSomething() : void\l}"
+shape="record",style="filled",fillcolor=red
+label = "{AdapteeClass\n\<\<adaptee\>\>|+ init() : void\l+ doingSomething() : void\l}"
+];
+
+TargetInterface [
+shape="record",style="filled",fillcolor=red
+label = "{\<\<interface\>\>\nTargetInterface\n\<\<target\>\>| + doSomething() : void\l}"
 ];
 
 //writing relations between classes now
 AdapterClass -> TargetInterface [arrowhead = "empty", style = "dashed"];
-AdapterClass -> AdapteeClass [arrowhead = "vee"];
-FalseAdapterClass -> TargetInterface [arrowhead = "empty", style = "dashed"];
-FalseAdapterClass -> AdapteeClass [arrowhead = "vee"];
+AdapterClass -> AdapteeClass [arrowhead = "vee", label = "\<\<adapts\>\>"];
 }
