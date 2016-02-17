@@ -318,15 +318,8 @@ public class DesignParser extends SwingWorker<Void, Void> {
 				reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 				this.completedPhases++;
 			}
-			firePropertyChange("progress", completedPhases, completedPhases);
-			if (jpb != null) {
-				jpb.setValue(completedPhases);
-				jpb.setString(this.currentPhase);
-			}
-			setProgress(completedPhases);
+			updateProgress();
 		}
-		setProgress(completedPhases);
-		firePropertyChange("progress", completedPhases, completedPhases);
 
 		return model;
 	}
@@ -348,21 +341,29 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	public void detectSingletonPattern(IModel model) {
 		IPatternDetector singletonDetector = new SingletonDetector(model);
 		singletonDetector.detectPatterns();
+		this.currentPhase = "Detecting Singleton Pattern";
+		updateProgress();
 	}
 
 	public void detectDecoratorPattern(IModel model) {
 		IPatternDetector decoratorDetector = new DecoratorDetector(model);
 		decoratorDetector.detectPatterns();
+		this.currentPhase = "Detecting Decorator Pattern";
+		updateProgress();
 	}
 
 	public void detectAdapterPattern(IModel model) {
 		IPatternDetector adapterDetector = new AdapterDetector(model);
 		adapterDetector.detectPatterns();
+		this.currentPhase = "Detecting Adapter Pattern";
+		updateProgress();
 	}
 
 	public void detectCompositePattern(IModel model) {
 		IPatternDetector compositeDetector = new CompositeDetector(model);
 		compositeDetector.detectPatterns();
+		this.currentPhase = "Detecting Composite Pattern";
+		updateProgress();
 	}
 
 	public void generateDot(IModel model) throws IOException {
@@ -385,13 +386,7 @@ public class DesignParser extends SwingWorker<Void, Void> {
 			System.out.println(line);
 		}
 
-		this.completedPhases++;
-		setProgress(completedPhases);
-		firePropertyChange("progress", completedPhases, completedPhases);
-		if (jpb != null) {
-			jpb.setValue(completedPhases);
-			jpb.setString(this.currentPhase);
-		}
+		
 		System.out.println("done");
 		this.done();
 	}
@@ -527,7 +522,20 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	protected Void doInBackground() throws Exception {
 
 		IModel m = this.visitClasses(CLASSES);
-		this.generateDot(m);
+		if (this.patternsToDetect.contains("singleton")) {
+			detectSingletonPattern(m);
+		}
+		if (this.patternsToDetect.contains("adapter")) {
+			detectAdapterPattern(m);
+		}
+		if (this.patternsToDetect.contains("composite")) {
+			detectCompositePattern(m);
+		}
+		if (this.patternsToDetect.contains("decorator")) {
+			detectDecoratorPattern(m);
+		}
+		
+		done();
 
 		return null;
 	}
@@ -539,6 +547,16 @@ public class DesignParser extends SwingWorker<Void, Void> {
 			jpb.setString("finished!");
 		}
 		firePropertyChange("done", 0, 1);
+	}
+	
+	private void updateProgress(){
+		this.completedPhases++;
+		setProgress(completedPhases);
+		firePropertyChange("progress", completedPhases, completedPhases);
+		if (jpb != null) {
+			jpb.setValue(completedPhases);
+			jpb.setString(this.currentPhase);
+		}
 	}
 
 }
