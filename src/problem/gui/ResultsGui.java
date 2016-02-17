@@ -1,14 +1,11 @@
 package problem.gui;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -17,7 +14,6 @@ import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,8 +40,7 @@ public class ResultsGui implements ActionListener {
 	String outputDir;
 	String phases;
 	ArrayList<String> parserPhases;
-	ImageComponent imageComponent;
-	// JLabel imageComponent;
+	JLabel imageLabel;
 	DesignParser dp;
 
 	ArrayList<JCheckBox> patternBoxes;
@@ -68,7 +63,7 @@ public class ResultsGui implements ActionListener {
 		frame.setVisible(true);
 		frame.setJMenuBar(menuBar);
 
-		pane = new JScrollPane(imageComponent, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+		pane = new JScrollPane(imageLabel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		pane.setPreferredSize(new Dimension(750, 750));
 		pane.setVisible(true);
@@ -92,9 +87,8 @@ public class ResultsGui implements ActionListener {
 		JScrollPane listScrollPane = new JScrollPane(checkBoxPanel);
 
 		Icon icon = new ImageProxy(dp.getOutputDir() + "graph1.png");
-		imageComponent = new ImageComponent(icon);
-		this.pane.add(imageComponent);
-		this.pane.add(new JButton("Test"));
+		imageLabel = new JLabel(icon);
+		this.pane.add(imageLabel);
 		this.pane.setVisible(true);
 
 		this.splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listScrollPane, this.pane);
@@ -110,12 +104,10 @@ public class ResultsGui implements ActionListener {
 		Dimension minimumSize = new Dimension(100, 50);
 		listScrollPane.setMinimumSize(minimumSize);
 
-		pane.setViewportView(imageComponent);
+		pane.setViewportView(imageLabel);
 
-		pane.revalidate();
-		pane.repaint();
-		frame.repaint();
 		frame.pack();
+		frame.repaint();
 	}
 
 	private JMenuBar addMenu() {
@@ -143,7 +135,6 @@ public class ResultsGui implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JCheckBox source = (JCheckBox) e.getSource();
 
-		imageComponent.setIcon(new ImageProxy(dp.getOutputDir() + "graph1.png"));
 		if (source.isSelected()) {
 			dp.addPattern(e.getActionCommand());
 			// add check boxes for the selected classes?
@@ -169,7 +160,12 @@ public class ResultsGui implements ActionListener {
 				} catch (IOException e1) {
 					System.out.println("IO Exception while regenerating the model");
 				}
-				imageComponent.setIcon(new ImageProxy(dp.getOutputDir() + "graph1.png"));
+
+				if(imageLabel.getIcon() instanceof ImageProxy){
+					ImageProxy proxy = (ImageProxy)imageLabel.getIcon();
+					proxy.flushImageProxy();
+				}
+				imageLabel.setIcon(new ImageProxy(dp.getOutputDir() + "graph1.png"));
 				frame.pack();
 				frame.repaint();
 			}
