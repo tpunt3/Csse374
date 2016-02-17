@@ -1,17 +1,26 @@
 package problem.gui;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JList;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -19,14 +28,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.ScrollPaneConstants;
+
 import problem.asm.DesignParser;
-import problem.asm.DocType;
 
 public class ResultsGui implements ActionListener {
 
 	JFrame frame;
 	JPanel panel;
-	JList list;
 	JScrollPane pane;
 	JSplitPane splitPane;
 	String inputClasses;
@@ -37,6 +45,7 @@ public class ResultsGui implements ActionListener {
 	String phases;
 	ArrayList<String> parserPhases;
 	ImageComponent imageComponent;
+	// JLabel imageComponent;
 	DesignParser dp;
 
 	ArrayList<JCheckBox> patternBoxes;
@@ -59,17 +68,18 @@ public class ResultsGui implements ActionListener {
 		frame.setVisible(true);
 		frame.setJMenuBar(menuBar);
 
-		pane = new JScrollPane(imageComponent, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		pane = new JScrollPane(imageComponent, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		pane.setPreferredSize(new Dimension(750, 750));
 		pane.setVisible(true);
 		// frame.add(pane);
 
-//		try {
-//			readProperties();
-//		} catch (IOException e1) {
-//			System.out.println("make sure there is a config.properties in the input_output folder");
-//		}
+		// try {
+		// readProperties();
+		// } catch (IOException e1) {
+		// System.out.println("make sure there is a config.properties in the
+		// input_output folder");
+		// }
 
 		patternBoxes = new ArrayList<JCheckBox>();
 
@@ -89,46 +99,45 @@ public class ResultsGui implements ActionListener {
 
 		JScrollPane listScrollPane = new JScrollPane(checkBoxPanel);
 
-		this.splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listScrollPane, this.panel);
+		Icon icon = new ImageProxy(dp.getOutputDir() + "graph1.png");
+		imageComponent = new ImageComponent(icon);
+		// imageComponent = new JLabel(icon);
+		this.pane.add(imageComponent);
+		this.pane.add(new JButton("Test"));
+		this.pane.setVisible(true);
+
+		this.splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listScrollPane, this.pane);
 		splitPane.setOneTouchExpandable(true);
 		splitPane.setDividerLocation(150);
 
+		Component xyz = this.splitPane.getRightComponent();
+		xyz.setVisible(true);
+
 		frame.add(this.splitPane);
-
-		Icon icon = new ImageProxy(this.outputDir + "graph1.png");
-		imageComponent = new ImageComponent(icon);
-		imageComponent.setIcon(new ImageProxy(this.outputDir + "graph1.png"));
-
-		pane.revalidate();
-		pane.repaint();
-		frame.repaint();
-		frame.pack();
 
 		// Provide minimum sizes for the two components in the split pane
 		Dimension minimumSize = new Dimension(100, 50);
 		listScrollPane.setMinimumSize(minimumSize);
-		this.panel.setMinimumSize(minimumSize);
 
-		System.out.println(this.parserPhases.size());
-
-		System.out.println("images dimensions: " + imageComponent.getSize());
+		// System.out.println("images dimensions: " + imageComponent.getSize());
 		pane.setViewportView(imageComponent);
-
-		System.out.println(pane.getViewport().getView().toString());
+		//
+		// System.out.println(pane.getViewport().getView().toString());
 
 		pane.revalidate();
 		pane.repaint();
 		frame.repaint();
 		frame.pack();
 
-//		try {
-//			dp.generateDocuments(DocType.uml, "problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod; int",
-//					2, classes);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		// try {
+		// dp.generateDocuments(DocType.uml,
+		// "problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod;
+		// int",
+		// 2, classes);
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
 		frame.repaint();
-		System.out.println("second repaint");
 
 		//
 		// Thread generateThread = new Thread(new Runnable(){
@@ -157,9 +166,9 @@ public class ResultsGui implements ActionListener {
 		// dp.generateDocuments(DocType.uml,
 		// "problem.asm.DesignParser,DesignParser,generateSD,Model; ISubMethod;
 		// int", 2, classes);
-		// System.out.println("making image now");
-		// BufferedImage myPic = ImageIO.read(new File(outputDir +
-		// "graph1.png"));
+		// System.out.println("making image now: "+dp.getOutputDir());
+		// BufferedImage myPic = ImageIO.read(new
+		// File(dp.getOutputDir()+"test.png"));
 		// JLabel picLabel = new JLabel(new ImageIcon(myPic));
 		// this.panel.add(picLabel);
 		// this.panel.repaint();
@@ -192,55 +201,38 @@ public class ResultsGui implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JCheckBox source = (JCheckBox) e.getSource();
+
+		imageComponent.setIcon(new ImageProxy(dp.getOutputDir() + "graph1.png"));
 		if (source.isSelected()) {
 			dp.addPattern(e.getActionCommand());
-			//add check boxes for the selected classes?
+			// add check boxes for the selected classes?
 		} else {
 			dp.removePattern(e.getActionCommand());
-			//remove check boxes for the selected classes?
+			// remove check boxes for the selected classes?
 		}
-		
-		try {
-			dp.regenerateModel();
-		} catch (IOException e1) {
-			System.out.println("IO Exception while regenerating the model");
-		}
+
+		Thread runner = new Thread() {
+			public void run() {
+				Path graphPath = FileSystems.getDefault().getPath("input_output/graph1.png");
+
+				try {
+					Files.deleteIfExists(graphPath);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				frame.pack();
+				frame.repaint();
+				try {
+					dp.regenerateModel();
+				} catch (IOException e1) {
+					System.out.println("IO Exception while regenerating the model");
+				}
+				imageComponent.setIcon(new ImageProxy(dp.getOutputDir() + "graph1.png"));
+				frame.pack();
+				frame.repaint();
+			}
+		};
+		runner.start();
 	}
-
-//	private void readProperties() throws IOException {
-//		try {
-//			File file = new File("resources/config.properties");
-//			FileInputStream fInput = new FileInputStream(file);
-//			Properties p = new Properties();
-//
-//			if (fInput != null) {
-//				p.load(fInput);
-//				fInput.close();
-//			}
-//
-//			this.dotPath = p.getProperty("Dot-Path");
-//			this.inputClasses = p.getProperty("Input-Classes");
-//			this.outputDir = p.getProperty("Output-Directory");
-//			this.phases = p.getProperty("Phases");
-//			splitPhases();
-//
-//			this.classes = this.inputClasses.split(",");
-//			for (String s : this.classes) {
-//				s = s.trim();
-//			}
-//
-//		} catch (Exception e) {
-//			System.out.println("Exception: " + e);
-//		}
-//	}
-//
-//	private void splitPhases() {
-//		parserPhases = new ArrayList<String>();
-//		String[] phase = this.phases.split(",");
-//		for (String s : phase) {
-//			s = s.trim();
-//			this.parserPhases.add(s);
-//		}
-//	}
-
 }

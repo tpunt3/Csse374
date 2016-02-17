@@ -188,16 +188,16 @@ public class DesignParser extends SwingWorker<Void, Void> {
 			// "headfirst.composite.menu.MenuTestDrive",
 			// "headfirst.composite.menu.Waitress"
 
-			"problem.sprites.AbstractSprite", "problem.sprites.CircleSprite",
-			"problem.sprites.CompositeCompositeSprite", "problem.sprites.CompositeIterator",
-			"problem.sprites.CompositeSprite", "problem.sprites.ISprite", "problem.sprites.NullIterator",
-			"problem.sprites.PyramidSprite", "problem.sprites.RectangleSprite", "problem.sprites.SpriteFactory",
-			"problem.sprites.StackSprite",
+//			"problem.sprites.AbstractSprite", "problem.sprites.CircleSprite",
+//			"problem.sprites.CompositeCompositeSprite", "problem.sprites.CompositeIterator",
+//			"problem.sprites.CompositeSprite", "problem.sprites.ISprite", "problem.sprites.NullIterator",
+//			"problem.sprites.PyramidSprite", "problem.sprites.RectangleSprite", "problem.sprites.SpriteFactory",
+//			"problem.sprites.StackSprite",
 
-			// "problem.test.patternClasses.AdapteeClass",
-			// "problem.test.patternClasses.AdapterClass",
-			// "problem.test.patternClasses.FalseAdapterClass",
-			// "problem.test.patternClasses.TargetInterface"
+			 "problem.test.patternClasses.AdapteeClass",
+			 "problem.test.patternClasses.AdapterClass",
+			 "problem.test.patternClasses.FalseAdapterClass",
+			 "problem.test.patternClasses.TargetInterface"
 
 			// "problem.test.patternClasses.Leaf",
 			// "problem.test.patternClasses.MyCollectionComposite",
@@ -223,11 +223,11 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		 DesignParser parser = new
-		 DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
-		 "\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
-		//DesignParser parser = new DesignParser("\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\"",
-		//		"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\"");
+		 //DesignParser parser = new
+		// DesignParser("\"C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot\"",
+		 //"\"C:\\Users\\punttj\\Desktop\\csse374\\finalProject\\sdedit-4.2-beta1.exe\"");
+		DesignParser parser = new DesignParser("\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\release\\bin\\dot\"",
+				"\"C:\\Users\\leekf\\Documents\\JUNIOR\\CSSE374\\sdedit-4.2-beta1.exe\"");
 		// parser.generateDocuments(DocType.uml,
 		parser.setDefaults();
 
@@ -439,6 +439,7 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	}
 
 	public void regenerateModel() throws IOException {
+		this.completedPhases = 0;
 
 		System.out.println("regenerating the model");
 		Model model = Model.getInstance();

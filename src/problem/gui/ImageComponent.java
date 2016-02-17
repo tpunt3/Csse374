@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 public class ImageComponent extends JComponent {
 	
@@ -24,7 +25,16 @@ public class ImageComponent extends JComponent {
 	}
 
 	public void setIcon(Icon icon) {
+		//this should be in a method in ImageProxy
+		if(this.icon instanceof ImageProxy) {
+			ImageProxy proxy = (ImageProxy)this.icon;
+			proxy.flushImageProxy();
+		}
 		this.icon = icon;
+	}
+	
+	public Icon getIcon(){
+		return this.icon;
 	}
 
 	public void paintComponent(Graphics g) {
@@ -33,6 +43,5 @@ public class ImageComponent extends JComponent {
 		int x = 0;
 		int y = 0;
 		icon.paintIcon(this, g, x, y);
-		System.out.println("paintComponent");
 	}
 }
