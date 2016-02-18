@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2198</x>
+      <x>2100</x>
       <y>700</y>
       <w>147</w>
       <h>84</h>
@@ -23,7 +23,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1911</x>
+      <x>1813</x>
       <y>826</y>
       <w>70</w>
       <h>21</h>
@@ -34,7 +34,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1841</x>
+      <x>1743</x>
       <y>756</y>
       <w>84</w>
       <h>49</h>
@@ -48,7 +48,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1932</x>
+      <x>1834</x>
       <y>840</y>
       <w>21</w>
       <h>259</h>
@@ -59,7 +59,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1932</x>
+      <x>1834</x>
       <y>896</y>
       <w>84</w>
       <h>21</h>
@@ -70,7 +70,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1932</x>
+      <x>1834</x>
       <y>987</y>
       <w>56</w>
       <h>21</h>
@@ -81,7 +81,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1876</x>
+      <x>1778</x>
       <y>798</y>
       <w>70</w>
       <h>434</h>
@@ -92,7 +92,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1876</x>
+      <x>1778</x>
       <y>910</y>
       <w>140</w>
       <h>21</h>
@@ -103,7 +103,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1876</x>
+      <x>1778</x>
       <y>1001</y>
       <w>112</w>
       <h>21</h>
@@ -114,7 +114,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3241</x>
+      <x>3143</x>
       <y>1036</y>
       <w>224</w>
       <h>280</h>
@@ -149,7 +149,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2422</x>
+      <x>2324</x>
       <y>1659</y>
       <w>21</w>
       <h>91</h>
@@ -160,7 +160,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2646</x>
+      <x>2548</x>
       <y>1666</y>
       <w>21</w>
       <h>357</h>
@@ -171,7 +171,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2842</x>
+      <x>2744</x>
       <y>1666</y>
       <w>21</w>
       <h>336</h>
@@ -182,7 +182,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3220</x>
+      <x>3122</x>
       <y>1666</y>
       <w>126</w>
       <h>343</h>
@@ -193,7 +193,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3038</x>
+      <x>2940</x>
       <y>1631</y>
       <w>21</w>
       <h>161</h>
@@ -204,7 +204,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2835</x>
+      <x>2737</x>
       <y>1302</y>
       <w>21</w>
       <h>259</h>
@@ -215,7 +215,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2814</x>
+      <x>2716</x>
       <y>1512</y>
       <w>455</w>
       <h>49</h>
@@ -226,7 +226,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2457</x>
+      <x>2359</x>
       <y>1512</y>
       <w>378</w>
       <h>42</h>
@@ -237,7 +237,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2667</x>
+      <x>2569</x>
       <y>1512</y>
       <w>21</w>
       <h>49</h>
@@ -248,7 +248,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3038</x>
+      <x>2940</x>
       <y>1512</y>
       <w>21</w>
       <h>49</h>
@@ -259,7 +259,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3367</x>
+      <x>3269</x>
       <y>1729</y>
       <w>308</w>
       <h>217</h>
@@ -291,7 +291,7 @@ getClazz(): IClass</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3444</x>
+      <x>3346</x>
       <y>1547</y>
       <w>161</w>
       <h>133</h>
@@ -314,7 +314,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3521</x>
+      <x>3423</x>
       <y>1673</y>
       <w>21</w>
       <h>70</h>
@@ -325,7 +325,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3248</x>
+      <x>3150</x>
       <y>1512</y>
       <w>287</w>
       <h>49</h>
@@ -336,7 +336,7 @@ ISubMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3528</x>
+      <x>3430</x>
       <y>1036</y>
       <w>231</w>
       <h>273</h>
@@ -373,7 +373,7 @@ ISubMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2793</x>
+      <x>2695</x>
       <y>2296</y>
       <w>168</w>
       <h>112</h>
@@ -394,7 +394,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2870</x>
+      <x>2772</x>
       <y>2212</y>
       <w>21</w>
       <h>98</h>
@@ -405,7 +405,7 @@ ISubMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1890</x>
+      <x>1792</x>
       <y>1316</y>
       <w>385</w>
       <h>196</h>
@@ -433,7 +433,7 @@ ISubMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1785</x>
+      <x>1687</x>
       <y>931</y>
       <w>70</w>
       <h>21</h>
@@ -444,7 +444,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1813</x>
+      <x>1715</x>
       <y>945</y>
       <w>112</w>
       <h>385</h>
@@ -455,7 +455,7 @@ ISubMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1995</x>
+      <x>1897</x>
       <y>707</y>
       <w>161</w>
       <h>70</h>
@@ -473,7 +473,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2149</x>
+      <x>2051</x>
       <y>735</y>
       <w>63</w>
       <h>21</h>
@@ -484,7 +484,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2065</x>
+      <x>1967</x>
       <y>1267</y>
       <w>21</w>
       <h>63</h>
@@ -495,7 +495,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2254</x>
+      <x>2156</x>
       <y>777</y>
       <w>21</w>
       <h>322</h>
@@ -506,7 +506,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2205</x>
+      <x>2107</x>
       <y>882</y>
       <w>70</w>
       <h>21</h>
@@ -517,7 +517,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2226</x>
+      <x>2128</x>
       <y>994</y>
       <w>49</w>
       <h>21</h>
@@ -528,7 +528,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2338</x>
+      <x>2240</x>
       <y>728</y>
       <w>1008</w>
       <h>322</h>
@@ -539,7 +539,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3325</x>
+      <x>3227</x>
       <y>1001</y>
       <w>336</w>
       <h>49</h>
@@ -550,7 +550,7 @@ ISubMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2842</x>
+      <x>2744</x>
       <y>700</y>
       <w>616</w>
       <h>560</h>
@@ -561,7 +561,7 @@ ISubMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1932</x>
+      <x>1834</x>
       <y>1085</y>
       <w>350</w>
       <h>189</h>
@@ -589,7 +589,7 @@ ISubMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1974</x>
+      <x>1876</x>
       <y>952</y>
       <w>259</w>
       <h>105</h>
@@ -610,7 +610,7 @@ ISubMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2002</x>
+      <x>1904</x>
       <y>833</y>
       <w>210</w>
       <h>112</h>
@@ -631,7 +631,7 @@ ISubMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2555</x>
+      <x>2457</x>
       <y>1547</y>
       <w>203</w>
       <h>126</h>
@@ -654,7 +654,7 @@ IMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2324</x>
+      <x>2226</x>
       <y>1540</y>
       <w>175</w>
       <h>126</h>
@@ -677,7 +677,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3157</x>
+      <x>3059</x>
       <y>1547</y>
       <w>175</w>
       <h>126</h>
@@ -699,7 +699,7 @@ IModel
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2793</x>
+      <x>2695</x>
       <y>1547</y>
       <w>147</w>
       <h>126</h>
@@ -721,7 +721,7 @@ problem.models.api::IRelation
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2982</x>
+      <x>2884</x>
       <y>1547</y>
       <w>126</w>
       <h>91</h>
@@ -740,7 +740,7 @@ IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3178</x>
+      <x>3080</x>
       <y>1995</y>
       <w>301</w>
       <h>315</h>
@@ -782,7 +782,7 @@ fg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2394</x>
+      <x>2296</x>
       <y>2009</y>
       <w>301</w>
       <h>315</h>
@@ -820,7 +820,7 @@ fg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2198</x>
+      <x>2100</x>
       <y>1736</y>
       <w>301</w>
       <h>245</h>
@@ -852,7 +852,7 @@ fg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2744</x>
+      <x>2646</x>
       <y>1988</y>
       <w>308</w>
       <h>231</h>
@@ -883,7 +883,7 @@ fg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2961</x>
+      <x>2863</x>
       <y>1778</y>
       <w>301</w>
       <h>175</h>
@@ -909,7 +909,7 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2492</x>
+      <x>2394</x>
       <y>1631</y>
       <w>539</w>
       <h>140</h>
@@ -920,7 +920,7 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2590</x>
+      <x>2492</x>
       <y>1666</y>
       <w>21</w>
       <h>105</h>
@@ -931,7 +931,7 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2814</x>
+      <x>2716</x>
       <y>665</y>
       <w>644</w>
       <h>595</h>
@@ -942,7 +942,7 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1953</x>
+      <x>1855</x>
       <y>224</y>
       <w>343</w>
       <h>154</h>
@@ -953,7 +953,7 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
+      <x>2170</x>
       <y>483</y>
       <w>21</w>
       <h>231</h>
@@ -964,7 +964,7 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1393</x>
+      <x>1295</x>
       <y>1659</y>
       <w>994</w>
       <h>182</h>
@@ -975,7 +975,7 @@ fg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1050</x>
+      <x>952</x>
       <y>2002</y>
       <w>217</w>
       <h>182</h>
@@ -1003,7 +1003,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1372</x>
+      <x>1274</x>
       <y>2002</y>
       <w>210</w>
       <h>182</h>
@@ -1031,7 +1031,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1659</x>
+      <x>1561</x>
       <y>2002</y>
       <w>231</w>
       <h>182</h>
@@ -1059,7 +1059,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>910</x>
+      <x>812</x>
       <y>2233</y>
       <w>217</w>
       <h>182</h>
@@ -1087,7 +1087,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1225</x>
+      <x>1127</x>
       <y>2233</y>
       <w>217</w>
       <h>182</h>
@@ -1115,7 +1115,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1540</x>
+      <x>1442</x>
       <y>2233</y>
       <w>203</w>
       <h>182</h>
@@ -1143,7 +1143,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1344</x>
+      <x>1246</x>
       <y>1827</y>
       <w>112</w>
       <h>42</h>
@@ -1159,7 +1159,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>966</x>
+      <x>868</x>
       <y>1862</y>
       <w>448</w>
       <h>385</h>
@@ -1170,7 +1170,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1162</x>
+      <x>1064</x>
       <y>1897</y>
       <w>21</w>
       <h>119</h>
@@ -1181,7 +1181,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1316</x>
+      <x>1218</x>
       <y>1897</y>
       <w>21</w>
       <h>350</h>
@@ -1192,7 +1192,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1393</x>
+      <x>1295</x>
       <y>1897</y>
       <w>392</w>
       <h>119</h>
@@ -1203,7 +1203,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1463</x>
+      <x>1365</x>
       <y>1897</y>
       <w>21</w>
       <h>119</h>
@@ -1214,7 +1214,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1610</x>
+      <x>1512</x>
       <y>1897</y>
       <w>21</w>
       <h>350</h>
@@ -1225,7 +1225,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2121</x>
+      <x>2023</x>
       <y>364</y>
       <w>315</w>
       <h>126</h>
@@ -1247,7 +1247,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1813</x>
+      <x>1715</x>
       <y>364</y>
       <w>287</w>
       <h>112</h>
@@ -1268,7 +1268,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2457</x>
+      <x>2359</x>
       <y>364</y>
       <w>203</w>
       <h>98</h>
@@ -1288,7 +1288,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2205</x>
+      <x>2107</x>
       <y>168</y>
       <w>147</w>
       <h>63</h>
@@ -1305,7 +1305,7 @@ IPatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2275</x>
+      <x>2177</x>
       <y>287</y>
       <w>21</w>
       <h>91</h>
@@ -1316,7 +1316,7 @@ IPatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2275</x>
+      <x>2177</x>
       <y>287</y>
       <w>301</w>
       <h>91</h>
@@ -1327,7 +1327,7 @@ IPatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2268</x>
+      <x>2170</x>
       <y>455</y>
       <w>315</w>
       <h>133</h>
@@ -1338,7 +1338,7 @@ IPatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1953</x>
+      <x>1855</x>
       <y>469</y>
       <w>336</w>
       <h>119</h>
@@ -1349,7 +1349,7 @@ IPatternDetector
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3444</x>
+      <x>3346</x>
       <y>609</y>
       <w>280</w>
       <h>133</h>
@@ -1372,7 +1372,7 @@ IVisitor
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3857</x>
+      <x>3759</x>
       <y>826</y>
       <w>238</w>
       <h>98</h>
@@ -1392,7 +1392,7 @@ IVisitor
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2765</x>
+      <x>2667</x>
       <y>1246</y>
       <w>161</w>
       <h>63</h>
@@ -1409,7 +1409,7 @@ ITraverser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2590</x>
+      <x>2492</x>
       <y>1246</y>
       <w>140</w>
       <h>63</h>
@@ -1426,7 +1426,7 @@ IVisitMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3899</x>
+      <x>3801</x>
       <y>966</y>
       <w>168</w>
       <h>112</h>
@@ -1446,7 +1446,7 @@ IVisitMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3969</x>
+      <x>3871</x>
       <y>917</y>
       <w>21</w>
       <h>63</h>
@@ -1457,7 +1457,7 @@ IVisitMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2723</x>
+      <x>2625</x>
       <y>1274</y>
       <w>56</w>
       <h>21</h>
@@ -1468,7 +1468,7 @@ IVisitMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3808</x>
+      <x>3710</x>
       <y>616</y>
       <w>280</w>
       <h>147</h>
@@ -1493,7 +1493,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3717</x>
+      <x>3619</x>
       <y>672</y>
       <w>105</w>
       <h>21</h>
@@ -1504,7 +1504,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3969</x>
+      <x>3871</x>
       <y>756</y>
       <w>21</w>
       <h>84</h>
@@ -1515,7 +1515,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2653</x>
+      <x>2555</x>
       <y>756</y>
       <w>1190</w>
       <h>616</h>
@@ -1526,7 +1526,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3472</x>
+      <x>3374</x>
       <y>2121</y>
       <w>35</w>
       <h>98</h>
@@ -1537,7 +1537,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>294</x>
+      <x>196</x>
       <y>1995</y>
       <w>231</w>
       <h>189</h>
@@ -1566,7 +1566,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>462</x>
+      <x>364</x>
       <y>2233</y>
       <w>224</w>
       <h>189</h>
@@ -1595,7 +1595,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>665</x>
+      <x>567</x>
       <y>1995</y>
       <w>196</w>
       <h>189</h>
@@ -1624,7 +1624,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>399</x>
+      <x>301</x>
       <y>1897</y>
       <w>588</w>
       <h>112</h>
@@ -1635,7 +1635,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
+      <x>658</x>
       <y>1897</y>
       <w>21</w>
       <h>112</h>
@@ -1646,7 +1646,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>574</x>
+      <x>476</x>
       <y>1897</y>
       <w>21</w>
       <h>350</h>
@@ -1657,7 +1657,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1428</x>
+      <x>1330</x>
       <y>350</y>
       <w>322</w>
       <h>133</h>
@@ -1680,7 +1680,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1589</x>
+      <x>1491</x>
       <y>287</y>
       <w>385</w>
       <h>77</h>
@@ -1691,7 +1691,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1589</x>
+      <x>1491</x>
       <y>476</y>
       <w>385</w>
       <h>112</h>
@@ -1702,7 +1702,7 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4186</x>
+      <x>4088</x>
       <y>434</y>
       <w>315</w>
       <h>98</h>
@@ -1722,7 +1722,7 @@ IPatternVisitor
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2590</x>
+      <x>2492</x>
       <y>1148</y>
       <w>140</w>
       <h>63</h>
@@ -1739,7 +1739,7 @@ IPatternVisitMethod
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2723</x>
+      <x>2625</x>
       <y>1176</y>
       <w>77</w>
       <h>84</h>
@@ -1750,7 +1750,7 @@ IPatternVisitMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4207</x>
+      <x>4109</x>
       <y>609</y>
       <w>280</w>
       <h>147</h>
@@ -1775,7 +1775,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>4333</x>
+      <x>4235</x>
       <y>525</y>
       <w>21</w>
       <h>98</h>
@@ -1786,7 +1786,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>4088</x>
+      <x>3990</x>
       <y>749</y>
       <w>280</w>
       <h>147</h>
@@ -1797,7 +1797,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2814</x>
+      <x>2716</x>
       <y>476</y>
       <w>1386</w>
       <h>210</h>
@@ -1808,7 +1808,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2919</x>
+      <x>2821</x>
       <y>1253</y>
       <w>336</w>
       <h>21</h>
@@ -1819,7 +1819,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2989</x>
+      <x>2891</x>
       <y>1036</y>
       <w>224</w>
       <h>147</h>
@@ -1843,7 +1843,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3094</x>
+      <x>2996</x>
       <y>1001</y>
       <w>252</w>
       <h>49</h>
@@ -1854,7 +1854,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3094</x>
+      <x>2996</x>
       <y>1176</y>
       <w>21</w>
       <h>98</h>
@@ -1865,7 +1865,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>854</x>
+      <x>756</x>
       <y>532</y>
       <w>231</w>
       <h>364</h>
@@ -1909,7 +1909,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>700</x>
+      <x>602</x>
       <y>98</y>
       <w>238</w>
       <h>343</h>
@@ -1951,7 +1951,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>602</x>
+      <x>504</x>
       <y>532</y>
       <w>189</w>
       <h>238</h>
@@ -1984,7 +1984,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>175</x>
+      <x>77</x>
       <y>714</y>
       <w>336</w>
       <h>238</h>
@@ -2017,7 +2017,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>315</x>
+      <x>217</x>
       <y>427</y>
       <w>189</w>
       <h>182</h>
@@ -2045,7 +2045,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>833</x>
+      <x>735</x>
       <y>945</y>
       <w>273</w>
       <h>147</h>
@@ -2070,7 +2070,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>763</x>
+      <x>665</x>
       <y>0</y>
       <w>119</w>
       <h>49</h>
@@ -2086,7 +2086,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>812</x>
+      <x>714</x>
       <y>42</y>
       <w>21</w>
       <h>70</h>
@@ -2097,7 +2097,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>812</x>
+      <x>714</x>
       <y>434</y>
       <w>168</w>
       <h>112</h>
@@ -2108,7 +2108,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
+      <x>595</x>
       <y>483</y>
       <w>140</w>
       <h>63</h>
@@ -2119,7 +2119,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>497</x>
+      <x>399</x>
       <y>525</y>
       <w>119</w>
       <h>147</h>
@@ -2130,7 +2130,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>504</x>
+      <x>406</x>
       <y>651</y>
       <w>77</w>
       <h>147</h>
@@ -2141,7 +2141,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>959</x>
+      <x>861</x>
       <y>889</y>
       <w>21</w>
       <h>70</h>
@@ -2152,7 +2152,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1099</x>
+      <x>1001</x>
       <y>637</y>
       <w>1162</w>
       <h>399</h>
@@ -2163,7 +2163,7 @@ keyToCommandMap: Map&lt;LookupKey, IVisitMethod&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>392</x>
+      <x>294</x>
       <y>602</y>
       <w>21</w>
       <h>126</h>

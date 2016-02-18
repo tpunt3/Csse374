@@ -45,13 +45,17 @@ public class DesignParser extends SwingWorker<Void, Void> {
 			 "problem.model.decorators.AdapterDecorator",
 			 "problem.model.decorators.ClassDecorator",
 			 "problem.model.decorators.ComponentDecorator",
+			 "problem.model.decorators.CompositeComponentDecorator",
 			 "problem.model.decorators.DecoratorDecorator",
 			 "problem.model.decorators.SingletonDecorator",
 			 "problem.model.decorators.TargetDecorator",
+			 "problem.model.decorators.LeafDecorator",
+			 "problem.model.decorators.CompositeDecorator",
 			 "problem.model.detectors.AdapterDetector",
 			 "problem.model.detectors.DecoratorDetector",
 			 "problem.model.detectors.IPatternDetector",
 			 "problem.model.detectors.SingletonDetector",
+			 "problem.model.detectors.CompositeDetector",
 			 "problem.model.patternvisitor.IPatternVisitMethod",
 			 "problem.model.patternvisitor.IPatternVisitor",
 			 "problem.model.patternvisitor.ModelPatternVisitor",
@@ -500,7 +504,6 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	}
 	
 	private void updateProgress(){
-		this.completedPhases++;
 		System.out.println(completedPhases);
 		setProgress(completedPhases);
 		firePropertyChange("progress", completedPhases, completedPhases);
