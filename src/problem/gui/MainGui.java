@@ -60,7 +60,7 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 
 		 try {
 		 Files.deleteIfExists(graphPath);
-		 Files.deleteIfExists(configPath);
+		 //Files.deleteIfExists(configPath);
 		 } catch (IOException e) {
 		 e.printStackTrace();
 		 }

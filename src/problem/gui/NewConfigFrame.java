@@ -60,6 +60,10 @@ public class NewConfigFrame implements ActionListener{
 		outputDirField.setText("input_output/");
 		dotPathField.setText("C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot");
 		phasesField.setText("visit,composite,adapter,singleton,decorator,dot");
+		adapterField.setText("1");
+		decoratorField.setText("1");
+		singletonField.setText("true");
+		
 		
 		panel.add(inputClasses);
 		panel.add(inputClassesField);
@@ -93,6 +97,9 @@ public class NewConfigFrame implements ActionListener{
 			userConfig.setOutputDir(outputDirField.getText());
 			userConfig.setDotPath(dotPathField.getText());
 			userConfig.setPhases(phasesField.getText());
+			userConfig.setAdapterMethodDelegation(adapterField.getText());
+			userConfig.setDecoratorMethodDelegation(decoratorField.getText());
+			userConfig.setSingletonRequireGetInstance(singletonField.getText());
 			
 			userConfig.writeProperties();
 			frame.dispose();
