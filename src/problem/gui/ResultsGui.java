@@ -1,5 +1,6 @@
 package problem.gui;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -90,7 +91,7 @@ public class ResultsGui implements ActionListener {
 		this.frame = new JFrame("UMLLAMA Results");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.setPreferredSize(new Dimension(750, 750));
+		frame.setPreferredSize(new Dimension(1050, 750));
 
 		// create menu bar
 		JMenuBar menuBar = addMenu();
@@ -208,6 +209,7 @@ public class ResultsGui implements ActionListener {
 				if (c instanceof AdapterDecorator || c instanceof AdapteeDecorator || c instanceof TargetDecorator) {
 					JCheckBox pClass = new JCheckBox("- " + c.getName());
 					pClass.setName(c.getName());
+					pClass.setForeground(Color.red);
 					pClass.addActionListener(this);
 					pClass.setActionCommand(c.getName());
 					pClass.setIconTextGap(20);
@@ -223,6 +225,7 @@ public class ResultsGui implements ActionListener {
 				if (c instanceof DecoratorDecorator || c instanceof ComponentDecorator) {
 					JCheckBox pClass = new JCheckBox("- " + c.getName());
 					pClass.setName(c.getName());
+					pClass.setForeground(Color.green);
 					pClass.addActionListener(this);
 					pClass.setActionCommand(c.getName());
 					pClass.setIconTextGap(20);
@@ -239,6 +242,7 @@ public class ResultsGui implements ActionListener {
 						|| c instanceof LeafDecorator) {
 					JCheckBox pClass = new JCheckBox("- " + c.getName());
 					pClass.setName(c.getName());
+					pClass.setForeground(Color.yellow);
 					pClass.addActionListener(this);
 					pClass.setActionCommand(c.getName());
 					pClass.setIconTextGap(20);
@@ -254,6 +258,7 @@ public class ResultsGui implements ActionListener {
 				if (c instanceof SingletonDecorator) {
 					JCheckBox pClass = new JCheckBox("- " + c.getName());
 					pClass.setName(c.getName());
+					pClass.setForeground(Color.blue);
 					pClass.addActionListener(this);
 					pClass.setActionCommand(c.getName());
 					pClass.setIconTextGap(20);
@@ -269,6 +274,7 @@ public class ResultsGui implements ActionListener {
 				if (!this.classesInPatterns.contains(c.getName())) {
 					JCheckBox pClass = new JCheckBox("- " + c.getName());
 					pClass.setName(c.getName());
+					pClass.setForeground(Color.cyan);
 					pClass.addActionListener(this);
 					pClass.setActionCommand(c.getName());
 					pClass.setIconTextGap(20);
@@ -457,7 +463,7 @@ public class ResultsGui implements ActionListener {
 
 	private void showHelp() {
 		JOptionPane.showMessageDialog(null,
-				"clicking boxes on the left side will add those classes to the uml displayed\n "
+				"Clicking boxes on the left side will add those classes to the uml displayed\n "
 				+ "on the right side. Clicking patterns on the left will add all the classes in that\n"
 				+ "pattern to the uml on the right side. Export the png to your computer by selecting\n "
 				+ "File->Export","UMLLAMA Help", JOptionPane.QUESTION_MESSAGE);

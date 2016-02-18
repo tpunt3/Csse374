@@ -1,15 +1,9 @@
 digraph model{
 rankdir = BT;
-AbstractSprite [
+DecoratorDetector [
 shape="record",
-label = "{AbstractSprite| # dx: double\l# dy: double\l# shape: Shape\l|# computeNewBoundsAfterMoving(Dimension) : Rectangle2D\l+ createIterator() : Iterator\l+ move(Dimension) : void\l+ getShape() : Shape\l+ init(double; double; double; double) : void\l}"
-];
-
-CircleSprite [
-shape="record",
-label = "{CircleSprite| + move(Dimension) : void\l+ init(double; double; double; double) : void\l+ createIterator() : Iterator\l}"
+label = "{DecoratorDetector| - model: IModel\l- decorators: IClass\l- components: IClass\l|- findComponent(IClass; IClass) : boolean\l+ init(IModel) : void\l+ detectPatterns() : void\l}"
 ];
 
 //writing relations between classes now
-CircleSprite -> AbstractSprite [arrowhead = "empty"];
 }

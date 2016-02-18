@@ -49,7 +49,6 @@ class ImageProxy implements Icon {
 			imageIcon.paintIcon(c, g, x, y);
 		} else {
 			g.drawString("Loading picture, please wait...", x + 100, y + 20);
-			System.out.println("Loading picture, please wait...");
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e1) {

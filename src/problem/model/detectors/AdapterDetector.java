@@ -95,7 +95,6 @@ public class AdapterDetector implements IPatternDetector {
 									if(!m2.getName().equals("init")){
 										//check that it uses the field we have
 										for(ISubMethod sub: m2.getSubMethods()){
-											System.out.println("submethod name: "+sub.getClazzName()+" type: "+f.getType());
 											if(sub.getClazzName().equals(f.getType())){
 												usedMethodCount++;
 											}

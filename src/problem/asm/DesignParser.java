@@ -35,64 +35,7 @@ import problem.models.impl.SubMethod;
 public class DesignParser extends SwingWorker<Void, Void> {
 
 	public static String[] CLASSES = {
-			// "headfirst.factory.pizzaaf.BlackOlives",
-			// "headfirst.factory.pizzaaf.Cheese",
-			// "headfirst.factory.pizzaaf.CheesePizza",
-			// "headfirst.factory.pizzaaf.ChicagoPizzaIngredientFactory",
-			// "headfirst.factory.pizzaaf.ChicagoPizzaStore",
-			// "headfirst.factory.pizzaaf.ClamPizza",
-			// "headfirst.factory.pizzaaf.Clams",
-			// "headfirst.factory.pizzaaf.Dough",
-			// "headfirst.factory.pizzaaf.Eggplant",
-			// "headfirst.factory.pizzaaf.FreshClams",
-			// "headfirst.factory.pizzaaf.FrozenClams",
-			// "headfirst.factory.pizzaaf.Garlic",
-			// "headfirst.factory.pizzaaf.MarinaraSauce",
-			// "headfirst.factory.pizzaaf.MozzarellaCheese",
-			// "headfirst.factory.pizzaaf.Mushroom",
-			// "headfirst.factory.pizzaaf.NYPizzaIngredientFactory",
-			// "headfirst.factory.pizzaaf.NYPizzaStore",
-			// "headfirst.factory.pizzaaf.Onion",
-			// "headfirst.factory.pizzaaf.ParmesanCheese",
-			// "headfirst.factory.pizzaaf.Pepperoni",
-			// "headfirst.factory.pizzaaf.PepperoniPizza",
-			// "headfirst.factory.pizzaaf.Pizza",
-			// "headfirst.factory.pizzaaf.PizzaIngredientFactory",
-			// "headfirst.factory.pizzaaf.PizzaStore",
-			// "headfirst.factory.pizzaaf.PizzaTestDrive",
-			// "headfirst.factory.pizzaaf.PlumTomatoSauce",
-			// "headfirst.factory.pizzaaf.RedPepper",
-			// "headfirst.factory.pizzaaf.ReggianoCheese",
-			// "headfirst.factory.pizzaaf.Sauce",
-			// "headfirst.factory.pizzaaf.SlicedPepperoni",
-			// "headfirst.factory.pizzaaf.Spinach",
-			// "headfirst.factory.pizzaaf.ThickCrustDough",
-			// "headfirst.factory.pizzaaf.ThinCrustDough",
-			// "headfirst.factory.pizzaaf.VeggiePizza",
-			// "headfirst.factory.pizzaaf.Veggies",
-			// "headfirst.factory.pizzafm.ChicagoPizzaStore",
-			// "headfirst.factory.pizzafm.ChicagoStyleCheesePizza",
-			// "headfirst.factory.pizzafm.ChicagoStyleClamPizza",
-			// "headfirst.factory.pizzafm.ChicagoStylePepperoniPizza",
-			// "headfirst.factory.pizzafm.ChicagoStyleVeggiePizza",
-			// "headfirst.factory.pizzafm.DependentPizzaStore",
-			// "headfirst.factory.pizzafm.NYPizzaStore",
-			// "headfirst.factory.pizzafm.NYStyleCheesePizza",
-			// "headfirst.factory.pizzafm.NYStyleClamPizza",
-			// "headfirst.factory.pizzafm.NYStylePepperoniPizza",
-			// "headfirst.factory.pizzafm.NYStyleVeggiePizza",
-			// "headfirst.factory.pizzafm.Pizza",
-			// "headfirst.factory.pizzafm.PizzaStore",
-			// "headfirst.factory.pizzafm.PizzaTestDrive",
-			// "headfirst.factory.pizzas.CheesePizza",
-			// "headfirst.factory.pizzas.ClamPizza",
-			// "headfirst.factory.pizzas.PepperoniPizza",
-			// "headfirst.factory.pizzas.Pizza",
-			// "headfirst.factory.pizzas.PizzaStore",
-			// "headfirst.factory.pizzas.PizzaTestDrive",
-			// "headfirst.factory.pizzas.SimplePizzaFactory",
-			// "headfirst.factory.pizzas.VeggiePizza",
-			//
+
 			// "problem.asm.ClassDeclarationVisitor",
 			// "problem.asm.ClassFieldVisitor",
 			// "problem.asm.ClassMethodVisitor",
@@ -442,7 +385,6 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	public void regenerateModel() throws IOException {
 		this.completedPhases = 0;
 
-		System.out.println("regenerating the model");
 		Model model = Model.getInstance();
 
 		generateDot(model);
