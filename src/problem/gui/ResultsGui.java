@@ -1,21 +1,15 @@
 package problem.gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.image.ReplicateScaleFilter;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.CopyOption;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,9 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import problem.asm.DesignParser;
 import problem.model.decorators.AdapteeDecorator;
@@ -49,7 +41,6 @@ import problem.model.decorators.DecoratorDecorator;
 import problem.model.decorators.LeafDecorator;
 import problem.model.decorators.SingletonDecorator;
 import problem.model.decorators.TargetDecorator;
-import problem.model.detectors.AdapterDetector;
 import problem.models.api.IClass;
 import problem.models.impl.Model;
 
@@ -62,19 +53,13 @@ public class ResultsGui implements ActionListener {
 	JPanel checkBoxPanel;
 	JScrollPane pane;
 	JSplitPane splitPane;
-	String inputClasses;
-	String dotPath;
-	String sdPath;
 	String outputDir;
-	String phases;
 	ArrayList<String> parserPhases;
 	ArrayList<String> classesInPatterns;
 	JLabel imageLabel;
 	DesignParser dp;
 	Model model;
-
 	Map<String, ArrayList<Class>> patternToClasses;
-
 	ArrayList<JCheckBox> patternBoxes;
 
 	public ResultsGui(DesignParser parser) throws IOException {
@@ -111,10 +96,8 @@ public class ResultsGui implements ActionListener {
 
 		patternBoxes = new ArrayList<JCheckBox>();
 
-		// checkBoxPanel = new JPanel(new GridLayout(0, 1));
 		checkBoxPanel = new JPanel();
 		checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.Y_AXIS));
-		// checkBoxPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		this.parserPhases = dp.getPhases();
 
 		for (int i = 1; i < parserPhases.size() - 1; i++) {
@@ -126,10 +109,10 @@ public class ResultsGui implements ActionListener {
 			checkBoxPanel.add(p);
 			createNodes(parserPhases.get(i));
 		}
-		
+
 		addPatternsToMap();
-		
-		//add in the classes that are not part of a pattern
+
+		// add in the classes that are not part of a pattern
 		JCheckBox p = new JCheckBox("no pattern");
 		p.setName("none");
 		p.addActionListener(this);
@@ -138,9 +121,7 @@ public class ResultsGui implements ActionListener {
 		checkBoxPanel.add(p);
 		createNodes("none");
 
-		// checkBoxPanel.add(patternTree);
 		checkBoxPanel.setVisible(true);
-		// checkBoxPanel.setPreferredSize(new Dimension(170, 50));
 
 		JScrollPane listScrollPane = new JScrollPane(checkBoxPanel);
 		listScrollPane.setPreferredSize(new Dimension(150, 150));
@@ -154,14 +135,9 @@ public class ResultsGui implements ActionListener {
 		splitPane.setOneTouchExpandable(true);
 		splitPane.setDividerLocation(180);
 
-		Component xyz = this.splitPane.getRightComponent();
-		xyz.setVisible(true);
-
 		frame.add(this.splitPane);
 
-		// Provide minimum sizes for the two components in the split pane
-		Dimension minimumSize = new Dimension(170, 50);
-		listScrollPane.setMinimumSize(minimumSize);
+		listScrollPane.setMinimumSize(new Dimension(170, 50));
 
 		pane.setViewportView(imageLabel);
 
@@ -175,34 +151,33 @@ public class ResultsGui implements ActionListener {
 		adapterClasses.add(AdapteeDecorator.class);
 		adapterClasses.add(TargetDecorator.class);
 		this.patternToClasses.put("adapter", adapterClasses);
-		
+
 		ArrayList<Class> compositeClasses = new ArrayList<Class>();
 		compositeClasses.add(LeafDecorator.class);
 		compositeClasses.add(CompositeComponentDecorator.class);
 		compositeClasses.add(CompositeDecorator.class);
 		this.patternToClasses.put("composite", compositeClasses);
-		
+
 		ArrayList<Class> singletonClasses = new ArrayList<Class>();
 		singletonClasses.add(SingletonDecorator.class);
 		this.patternToClasses.put("singleton", singletonClasses);
-		
+
 		ArrayList<Class> decoratorClasses = new ArrayList<Class>();
 		decoratorClasses.add(DecoratorDecorator.class);
 		decoratorClasses.add(ComponentDecorator.class);
 		this.patternToClasses.put("decorator", decoratorClasses);
-		
+
 		ArrayList<Class> patternlessClasses = new ArrayList<Class>();
-		for(IClass c : model.getClasses()){
-			if(!this.classesInPatterns.contains(c.getName())){
+		for (IClass c : model.getClasses()) {
+			if (!this.classesInPatterns.contains(c.getName())) {
 				patternlessClasses.add(c.getClass());
 			}
 		}
 		this.patternToClasses.put("none", patternlessClasses);
-		
+
 	}
 
 	private void createNodes(String root) {
-		Model model = Model.getInstance();
 
 		if (root.equals("adapter")) {
 			for (IClass c : model.getClasses()) {
@@ -216,7 +191,6 @@ public class ResultsGui implements ActionListener {
 					this.checkBoxPanel.add(pClass);
 					this.patternBoxes.add(pClass);
 					this.classesInPatterns.add(c.getName());
-					this.checkBoxPanel.revalidate();
 				}
 			}
 		}
@@ -232,7 +206,6 @@ public class ResultsGui implements ActionListener {
 					this.checkBoxPanel.add(pClass);
 					this.patternBoxes.add(pClass);
 					this.classesInPatterns.add(c.getName());
-					this.checkBoxPanel.revalidate();
 				}
 			}
 		}
@@ -249,7 +222,6 @@ public class ResultsGui implements ActionListener {
 					this.checkBoxPanel.add(pClass);
 					this.patternBoxes.add(pClass);
 					this.classesInPatterns.add(c.getName());
-					this.checkBoxPanel.revalidate();
 				}
 			}
 		}
@@ -265,7 +237,6 @@ public class ResultsGui implements ActionListener {
 					this.checkBoxPanel.add(pClass);
 					this.patternBoxes.add(pClass);
 					this.classesInPatterns.add(c.getName());
-					this.checkBoxPanel.revalidate();
 				}
 			}
 		}
@@ -281,10 +252,10 @@ public class ResultsGui implements ActionListener {
 					this.checkBoxPanel.add(pClass);
 					this.patternBoxes.add(pClass);
 					this.classesInPatterns.add(c.getName());
-					this.checkBoxPanel.revalidate();
 				}
 			}
 		}
+		this.checkBoxPanel.revalidate();
 	}
 
 	private JMenuBar addMenu() {
@@ -302,7 +273,7 @@ public class ResultsGui implements ActionListener {
 		helpItem.setActionCommand("help");
 		helpItem.addActionListener(this);
 		helpMenu.add(helpItem);
-		
+
 		JMenuItem aboutItem = new JMenuItem();
 		aboutItem.setMnemonic(KeyEvent.VK_S);
 		aboutItem.setText("About");
@@ -316,7 +287,7 @@ public class ResultsGui implements ActionListener {
 		exportItem.setActionCommand("export");
 		exportItem.addActionListener(this);
 		fileMenu.add(exportItem);
-		
+
 		JMenuItem restartItem = new JMenuItem();
 		restartItem.setMnemonic(KeyEvent.VK_R);
 		restartItem.setText("Restart");
@@ -346,11 +317,11 @@ public class ResultsGui implements ActionListener {
 			showHelp();
 		} else if (cmd.equals("about")) {
 			showAbout();
-		} else if(cmd.equals("export")){
+		} else if (cmd.equals("export")) {
 			export();
-		}else if(cmd.equals("restart")){
+		} else if (cmd.equals("restart")) {
 			restart();
-		}else {
+		} else {
 			JCheckBox source = (JCheckBox) e.getSource();
 			if (source.isSelected()) {
 				model.addClassToVisit(e.getActionCommand());
@@ -361,8 +332,8 @@ public class ResultsGui implements ActionListener {
 		}
 
 	}
-	
-	public void regenerate(){
+
+	public void regenerate() {
 		Thread runner = new Thread() {
 			public void run() {
 				Path graphPath = FileSystems.getDefault().getPath("input_output/graph1.png");
@@ -422,51 +393,61 @@ public class ResultsGui implements ActionListener {
 			}
 		}
 	}
-	
-	private void restart(){
+
+	private void restart() {
+		if (imageLabel.getIcon() instanceof ImageProxy) {
+			ImageProxy proxy = (ImageProxy) imageLabel.getIcon();
+			proxy.flushImageProxy();
+		}
+		model.clearModel();
 		frame.dispose();
 		MainGui main = new MainGui();
 		main.createLandingScreen();
 	}
-	
-	private void export(){
+
+	private void export() {
 		File source = new File(outputDir + "/graph1.png");
 		File target = null;
 		JFileChooser chooser = new JFileChooser();
 		chooser.setCurrentDirectory(new java.io.File("."));
-	    chooser.setDialogTitle("Choose Location");
-	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-	    chooser.setAcceptAllFileFilterUsed(false);
+		chooser.setDialogTitle("Choose Location");
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		chooser.setAcceptAllFileFilterUsed(false);
 
-	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-	    	target = chooser.getSelectedFile();
-	    }
-	    if(target != null){
-	    	String fileName = JOptionPane.showInputDialog("Enter your new file name");
-	    	System.out.println(target.getPath()+"\\"+fileName);
-	    	File newFile = new File(target.getPath() +"\\"+fileName);
-	    	try {
-	    		System.out.println(source.toPath().toString() + "  " + newFile.toString().toString());
+		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			target = chooser.getSelectedFile();
+		}
+		if (target != null) {
+			String fileName = JOptionPane.showInputDialog("Enter your new file name ending in .png");
+			if (!fileName.endsWith("png")) {
+				fileName = fileName + ".png";
+			}
+			File newFile = new File(target.getPath() + "\\" + fileName);
+			try {
+				System.out.println(source.toPath().toString() + "  " + newFile.toString().toString());
 				Files.copy(source.toPath(), newFile.toPath(), REPLACE_EXISTING);
 			} catch (IOException e) {
 				System.out.println("IO Exception exporting file");
 			}
-	    }
+		}
+
 	}
-	
+
 	private void showAbout() {
 		ImageIcon img = new ImageIcon("resources/alpacaLogo.jpg");
 		JOptionPane.showMessageDialog(null,
 				"This product, UMLLAMA(TM), was developed by Katie Lee and Trent Punt as a service "
-						+ " to help users \n generate documentation for code and help understanding and visualization of design patterns. Copyright 2016.", "UMLLAMA About", JOptionPane.INFORMATION_MESSAGE,img);
+						+ " to help users \n generate documentation for code and help understanding and visualization of design patterns. Copyright 2016.",
+				"UMLLAMA About", JOptionPane.INFORMATION_MESSAGE, img);
 	}
 
 	private void showHelp() {
 		JOptionPane.showMessageDialog(null,
 				"Clicking boxes on the left side will add those classes to the uml displayed\n "
-				+ "on the right side. Clicking patterns on the left will add all the classes in that\n"
-				+ "pattern to the uml on the right side. Export the png to your computer by selecting\n "
-				+ "File->Export","UMLLAMA Help", JOptionPane.QUESTION_MESSAGE);
-		
+						+ "on the right side. Clicking patterns on the left will add all the classes in that\n"
+						+ "pattern to the uml on the right side. Export the png to your computer by selecting\n "
+						+ "File->Export",
+				"UMLLAMA Help", JOptionPane.QUESTION_MESSAGE);
+
 	}
 }

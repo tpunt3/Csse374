@@ -19,7 +19,6 @@ import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -27,10 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SpringLayout;
-import javax.swing.SwingUtilities;
 
 import problem.asm.DesignParser;
-import problem.models.api.IModel;
 
 public class MainGui implements ActionListener, PropertyChangeListener {
 
@@ -56,14 +53,12 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 	public void createLandingScreen() {
 
 		Path graphPath = FileSystems.getDefault().getPath("input_output/graph1.png");
-		Path configPath = FileSystems.getDefault().getPath("resources/config.properties");
 
-		 try {
-		 Files.deleteIfExists(graphPath);
-		 //Files.deleteIfExists(configPath);
-		 } catch (IOException e) {
-		 e.printStackTrace();
-		 }
+		try {
+			Files.deleteIfExists(graphPath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		// create frame
 		this.frame = new JFrame("UMLLAMA");
@@ -138,7 +133,7 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		helpItem.setActionCommand("help");
 		helpItem.addActionListener(this);
 		helpMenu.add(helpItem);
-		
+
 		JMenuItem aboutItem = new JMenuItem();
 		aboutItem.setMnemonic(KeyEvent.VK_S);
 		aboutItem.setText("About");
@@ -175,7 +170,7 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 			showHelp();
 		} else if (cmd.equals("about")) {
 			showAbout();
-		} else if(cmd.equals("quit")){
+		} else if (cmd.equals("quit")) {
 			frame.dispose();
 			System.exit(0);
 		}
@@ -185,16 +180,18 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		ImageIcon img = new ImageIcon("resources/alpacaLogo.jpg");
 		JOptionPane.showMessageDialog(null,
 				"This product, UMLLAMA(TM), was developed by Katie Lee and Trent Punt as a service "
-						+ " to help users \n generate documentation for code and help understanding and visualization of design patterns. Copyright 2016.", "UMLLAMA About", JOptionPane.INFORMATION_MESSAGE,img);
+						+ " to help users \n generate documentation for code and help understanding and visualization of design patterns. Copyright 2016.",
+				"UMLLAMA About", JOptionPane.INFORMATION_MESSAGE, img);
 	}
 
 	private void showHelp() {
 		JOptionPane.showMessageDialog(null,
 				"Load config: clicking this button brings up a new window where you can load an existing configuration \n"
-				+ " for UMLLAMA or create a new configuration. If you choose to load an existing configuration, please choose a \n"
-				+ "file that ends in .properties. To create a new configuration, enter fully qualified classnames of every class,\n"
-				+ " a valid output directory ending in a slash(/), a fully qualified path to your dot.exe, and a list of phases that\n"
-				+ " you would like the product to complete (valid phases are: visit,composite,adapter,singleton,decorator,dot)","UMLLAMA Help", JOptionPane.QUESTION_MESSAGE);
+						+ " for UMLLAMA or create a new configuration. If you choose to load an existing configuration, please choose a \n"
+						+ "file that ends in .properties. To create a new configuration, enter fully qualified classnames of every class,\n"
+						+ " a valid output directory ending in a slash(/), a fully qualified path to your dot.exe, and a list of phases that\n"
+						+ " you would like the product to complete (valid phases are: visit,composite,adapter,singleton,decorator,dot)",
+				"UMLLAMA Help", JOptionPane.QUESTION_MESSAGE);
 
 	}
 
@@ -219,30 +216,34 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		try {
 			readProperties();
 		} catch (IOException e1) {
+			JOptionPane.showMessageDialog(null, "You do not have a config.properties file. Please load or create one.",
+					"Error", JOptionPane.ERROR_MESSAGE);
 			System.out.println("make sure there is a config.properties in the input_output folder");
 		}
 
 		try {
-			Thread.sleep(100);
+			Thread.sleep(200);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
 
-		System.out.println(classes.length + 1);
-		jpb.setMaximum(classes.length + 1);
-		jpb.setMinimum(0);
-		jpb.setVisible(true);
-		dp = new DesignParser(this.dotPath, "", jpb);
-		dp.addPropertyChangeListener(this);
-		dp.setPhases(this.parserPhases);
-		dp.setOutputDir(this.outputDir);
-		jpb.setValue(dp.getProgress());
-		dp.setClasses(classes);
-		dp.setAdapterDelegation(adapterDelegation);
-		dp.setDecoratorDelegation(decoratorDelegation);
-		dp.setSingletonGetInstance(singletonGetInstance);
+		if (classes != null) {
 
-		dp.execute();
+			jpb.setMaximum(classes.length + 1);
+			jpb.setMinimum(0);
+			jpb.setVisible(true);
+			dp = new DesignParser(this.dotPath, "", jpb);
+			dp.addPropertyChangeListener(this);
+			dp.setPhases(this.parserPhases);
+			dp.setOutputDir(this.outputDir);
+			jpb.setValue(dp.getProgress());
+			dp.setClasses(classes);
+			dp.setAdapterDelegation(adapterDelegation);
+			dp.setDecoratorDelegation(decoratorDelegation);
+			dp.setSingletonGetInstance(singletonGetInstance);
+
+			dp.execute();
+		}
 	}
 
 	private void readProperties() throws IOException {
@@ -274,7 +275,10 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 					}
 
 				} catch (Exception e) {
-					System.out.println("Exception: " + e);
+					JOptionPane.showMessageDialog(null,
+							"You do not have a config.properties file. Please load or create one.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+					return;
 				}
 
 			}
@@ -295,7 +299,6 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if ("progress" == evt.getPropertyName()) {
-			System.out.println("updating progress " + jpb.getValue());
 			int progress = (int) evt.getNewValue();
 			jpb.setValue(progress);
 			jpb.setString(dp.getCurrentPhase());

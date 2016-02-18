@@ -1,12 +1,10 @@
 package problem.asm;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -36,49 +34,56 @@ public class DesignParser extends SwingWorker<Void, Void> {
 
 	public static String[] CLASSES = {
 
-			// "problem.asm.ClassDeclarationVisitor",
-			// "problem.asm.ClassFieldVisitor",
-			// "problem.asm.ClassMethodVisitor",
-			// "problem.asm.DesignParser",
-			// "problem.asm.IClazzGetter",
-			// "problem.asm.MyMethodVisitor",
-			// "problem.asm.DocType",
-			// "problem.model.decorators.AdapteeDecorator",
-			// "problem.model.decorators.AdapterDecorator",
-			// "problem.model.decorators.ClassDecorator",
-			// "problem.model.decorators.ComponentDecorator",
-			// "problem.model.decorators.DecoratorDecorator",
-			// "problem.model.decorators.SingletonDecorator",
-			// "problem.model.decorators.TargetDecorator",
-			// "problem.model.detectors.AdapterDetector",
-			// "problem.model.detectors.DecoratorDetector",
-			// "problem.model.detectors.IPatternDetector",
-			// "problem.model.detectors.SingletonDetector",
-			// "problem.model.patternvisitor.IPatternVisitMethod",
-			// "problem.model.patternvisitor.IPatternVisitor",
-			// "problem.model.patternvisitor.ModelPatternVisitor",
-			// "problem.model.patternvisitor.PatternVisitor",
-			// "problem.model.visitor.ITraverser",
-			// "problem.model.visitor.IVisitor",
-			// "problem.model.visitor.Visitor",
-			// "problem.model.visitor.LookupKey",
-			// "problem.model.visitor.VisitType",
-			// "problem.model.visitor.IVisitMethod",
-			// "problem.models.api.IClass",
-			// "problem.models.api.IField",
-			// "problem.models.api.IMethod",
-			// "problem.models.api.IModel",
-			// "problem.models.api.IRelation",
-			// "problem.models.api.ISubMethod",
-			// "problem.models.api.RelationType",
-			// "problem.models.impl.Class",
-			// "problem.models.impl.Field",
-			// "problem.models.impl.Method",
-			// "problem.models.impl.Model",
-			// "problem.models.impl.ModelGVOutputStream",
-			// "problem.models.impl.ModelSDOutputStream",
-			// "problem.models.impl.Relation",
-			// "problem.models.impl.SubMethod"
+			 "problem.asm.ClassDeclarationVisitor",
+			 "problem.asm.ClassFieldVisitor",
+			 "problem.asm.ClassMethodVisitor",
+			 "problem.asm.DesignParser",
+			 "problem.asm.IClazzGetter",
+			 "problem.asm.MyMethodVisitor",
+			 "problem.asm.DocType",
+			 "problem.model.decorators.AdapteeDecorator",
+			 "problem.model.decorators.AdapterDecorator",
+			 "problem.model.decorators.ClassDecorator",
+			 "problem.model.decorators.ComponentDecorator",
+			 "problem.model.decorators.DecoratorDecorator",
+			 "problem.model.decorators.SingletonDecorator",
+			 "problem.model.decorators.TargetDecorator",
+			 "problem.model.detectors.AdapterDetector",
+			 "problem.model.detectors.DecoratorDetector",
+			 "problem.model.detectors.IPatternDetector",
+			 "problem.model.detectors.SingletonDetector",
+			 "problem.model.patternvisitor.IPatternVisitMethod",
+			 "problem.model.patternvisitor.IPatternVisitor",
+			 "problem.model.patternvisitor.ModelPatternVisitor",
+			 "problem.model.patternvisitor.PatternVisitor",
+			 "problem.model.visitor.ITraverser",
+			 "problem.model.visitor.IVisitor",
+			 "problem.model.visitor.Visitor",
+			 "problem.model.visitor.LookupKey",
+			 "problem.model.visitor.VisitType",
+			 "problem.model.visitor.IVisitMethod",
+			 "problem.models.api.IClass",
+			 "problem.models.api.IField",
+			 "problem.models.api.IMethod",
+			 "problem.models.api.IModel",
+			 "problem.models.api.IRelation",
+			 "problem.models.api.ISubMethod",
+			 "problem.models.api.RelationType",
+			 "problem.models.impl.Class",
+			 "problem.models.impl.Field",
+			 "problem.models.impl.Method",
+			 "problem.models.impl.Model",
+			 "problem.models.impl.ModelGVOutputStream",
+			 "problem.models.impl.ModelSDOutputStream",
+			 "problem.models.impl.Relation",
+			 "problem.models.impl.SubMethod",
+			 "problem.gui.ConfigFrame",
+			 "problem.gui.ImageProxy",
+			 "problem.gui.MainGui",
+			 "problem.gui.NewConfigFrame",
+			 "problem.gui.OurConfig",
+			 "problem.gui.ResultsGui",
+			 "problem.gui.UMLLAMA"
 
 			// "java.util.Collections",
 
@@ -137,10 +142,10 @@ public class DesignParser extends SwingWorker<Void, Void> {
 //			"problem.sprites.PyramidSprite", "problem.sprites.RectangleSprite", "problem.sprites.SpriteFactory",
 //			"problem.sprites.StackSprite",
 
-			 "problem.test.patternClasses.AdapteeClass",
-			 "problem.test.patternClasses.AdapterClass",
-			 "problem.test.patternClasses.FalseAdapterClass",
-			 "problem.test.patternClasses.TargetInterface"
+//			 "problem.test.patternClasses.AdapteeClass",
+//			 "problem.test.patternClasses.AdapterClass",
+//			 "problem.test.patternClasses.FalseAdapterClass",
+//			 "problem.test.patternClasses.TargetInterface"
 
 			// "problem.test.patternClasses.Leaf",
 			// "problem.test.patternClasses.MyCollectionComposite",
@@ -496,6 +501,7 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	
 	private void updateProgress(){
 		this.completedPhases++;
+		System.out.println(completedPhases);
 		setProgress(completedPhases);
 		firePropertyChange("progress", completedPhases, completedPhases);
 		if (jpb != null) {
