@@ -4,9 +4,12 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +27,7 @@ public class NewConfigFrame implements ActionListener{
 	private JTextField adapterField;
 	private JTextField decoratorField;
 	private JTextField singletonField;
+	private String files;
 	
 	public NewConfigFrame(){
 	}
@@ -56,6 +60,10 @@ public class NewConfigFrame implements ActionListener{
 		createConfig.addActionListener(this);
 		createConfig.setActionCommand("createNewConfig");
 		
+		JButton loadClasses = new JButton("Load in a folder of classes");
+		loadClasses.addActionListener(this);
+		loadClasses.setActionCommand("loadClasses");
+		
 		inputClassesField.setText("problem.sprites.AbstractSprite,problem.sprites.CircleSprite");
 		outputDirField.setText("input_output/");
 		dotPathField.setText("C:\\Users\\punttj\\Desktop\\csse374\\release\\bin\\dot");
@@ -67,6 +75,7 @@ public class NewConfigFrame implements ActionListener{
 		
 		panel.add(inputClasses);
 		panel.add(inputClassesField);
+		panel.add(loadClasses);
 		panel.add(outputDir);
 		panel.add(outputDirField);
 		panel.add(dotPath);
@@ -103,6 +112,30 @@ public class NewConfigFrame implements ActionListener{
 			
 			userConfig.writeProperties();
 			frame.dispose();
+		}else if(cmd.equals("loadClasses")){
+			files = "";
+			JFileChooser chooser = new JFileChooser();
+			chooser.setCurrentDirectory(new java.io.File("."));
+		    chooser.setDialogTitle("load Folder");
+		    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		    chooser.setAcceptAllFileFilterUsed(false);
+
+		    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+		    	File[] folder = chooser.getSelectedFile().listFiles();
+		    	addFiles(folder);
+		    	inputClassesField.setText(this.files);
+		    }
+		}
+	}
+	
+	private void addFiles(File[] folder){
+		for(File file: folder){
+			if(file.getName().endsWith(".java")){
+				this.files+= file.getName()+",";
+			}
+			if(file.isDirectory()){
+				addFiles(file.listFiles());
+			}
 		}
 	}
 
