@@ -1,12 +1,9 @@
 package problem.gui;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -14,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 
 public class NewConfigFrame implements ActionListener{
 	
@@ -39,7 +35,6 @@ public class NewConfigFrame implements ActionListener{
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		JLabel inputClasses = new JLabel("Enter Fully Qualified Input Classes (separated by comma and no space): ");
-		//inputClasses.setAlignmentX(Component.CENTER_ALIGNMENT);
 		JLabel outputDir = new JLabel("Output Directory: ");
 		JLabel dotPath = new JLabel("Dot Path: ");
 		JLabel phases = new JLabel("Phases: ");
@@ -122,19 +117,26 @@ public class NewConfigFrame implements ActionListener{
 
 		    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 		    	File[] folder = chooser.getSelectedFile().listFiles();
-		    	addFiles(folder);
+		    	addFiles(folder,chooser.getSelectedFile(),"");
 		    	inputClassesField.setText(this.files);
 		    }
 		}
 	}
 	
-	private void addFiles(File[] folder){
+	private void addFiles(File[] folder, File oneAbove, String prefix){
+		
+		prefix += oneAbove.getName()+".";
+				
 		for(File file: folder){
 			if(file.getName().endsWith(".java")){
-				this.files+= file.getName()+",";
+				int dotIndex = file.getName().indexOf(".");
+				String fileName = file.getName().substring(0, dotIndex);
+
+				System.out.println(prefix+fileName+",");
+				this.files+= prefix+fileName+",";
 			}
 			if(file.isDirectory()){
-				addFiles(file.listFiles());
+				addFiles(file.listFiles(),file,prefix);
 			}
 		}
 	}
