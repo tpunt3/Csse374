@@ -25,6 +25,9 @@ public class ConfigFrame implements ActionListener{
 	private String phases;
 	private String[] classes;
 	private ArrayList<String> parserPhases;
+	private String adapterDelegation;
+	private String decoratorDelegation;
+	private String singletonGetInstance;
 	
 	public ConfigFrame(){
 		frame = new JFrame("Configurations");
@@ -98,6 +101,10 @@ public class ConfigFrame implements ActionListener{
 		oc.setOutputDir(outputDir);
 		oc.setDotPath(dotPath);
 		oc.setPhases(phases);
+		oc.setAdapterMethodDelegation(adapterDelegation);
+		oc.setDecoratorMethodDelegation(decoratorDelegation);
+		oc.setSingletonRequireGetInstance(singletonGetInstance);
+		
 		oc.writeProperties();
 	}
 
@@ -115,6 +122,10 @@ public class ConfigFrame implements ActionListener{
 			this.inputClasses = p.getProperty("Input-Classes");
 			this.outputDir = p.getProperty("Output-Directory");
 			this.phases = p.getProperty("Phases");
+			adapterDelegation = p.getProperty("Adapter-MethodDelegation");
+			decoratorDelegation = p.getProperty("Decorator-MethodDelegation");
+			singletonGetInstance = p.getProperty("Singleton-RequireGetInstance");
+			
 			
 			this.classes = this.inputClasses.split(",");
 			for(String s: this.classes){
