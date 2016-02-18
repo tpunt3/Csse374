@@ -27,7 +27,7 @@ public class Model implements IModel {
 	private ArrayList<String> methodStrings;
 	private ArrayList<String> classesToAdd;
 	private ArrayList<String> classNames;
-	private ArrayList<String> classesToVisit;
+	private Set<String> classesToVisit;
 
 	private Model() {
 		this.classes = new HashSet<IClass>();
@@ -37,7 +37,7 @@ public class Model implements IModel {
 		this.methodStrings = new ArrayList<String>();
 		this.classesToAdd = new ArrayList<String>();
 		this.classNames = new ArrayList<String>();
-		this.classesToVisit = new ArrayList<String>();
+		this.classesToVisit = new HashSet<String>();
 	}
 
 	public static Model getInstance() {
@@ -275,11 +275,11 @@ public class Model implements IModel {
 		classesToVisit.remove(className);
 	}
 
-	public void setClassesToVisit(ArrayList<String> classesToVisit) {
+	public void setClassesToVisit(HashSet<String> classesToVisit) {
 		this.classesToVisit = classesToVisit;
 	}
 
-	public ArrayList<String> getClassesToVisit() {
+	public Set<String> getClassesToVisit() {
 		return this.classesToVisit;
 	}
 

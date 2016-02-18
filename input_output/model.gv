@@ -1,21 +1,10 @@
 digraph model{
 rankdir = BT;
-AdapterClass [
-shape="record",style="filled",fillcolor=red
-label = "{AdapterClass\n\<\<adapter\>\>|- adaptee: AdapteeClass\l|+ doSomething() : void\l+ init(AdapteeClass) : void\l}"
-];
-
-AdapteeClass [
-shape="record",style="filled",fillcolor=red
-label = "{AdapteeClass\n\<\<adaptee\>\>|+ init() : void\l+ doingSomething() : void\l}"
-];
-
-TargetInterface [
-shape="record",style="filled",fillcolor=red
-label = "{\<\<interface\>\>\nTargetInterface\n\<\<target\>\>| + doSomething() : void\l}"
+Model [
+shape="record",color=blue
+label = "{Model\n\<\<singleton\>\>|- uniqueInstance: Model\l- callDepth: int\l- classes: IClass\l- relations: IRelation\l- classStrings: String\l- methodStrings: String\l- classesToAdd: String\l- classNames: String\l- classesToVisit: String\l|+ getMethodStrings() : String\l+ acceptSequence(ISubMethod; int) : void\l+ getRelations() : IRelation\l+ getClassesToVisit() : String\l+ accept(IVisitor) : void\l+ addClassToVisit(String) : void\l+ getClazz(String) : IClass\l+ clearModel() : void\l+ clearSD() : void\l+ toString() : String\l+ getClassStrings() : String\l- init() : void\l+ replaceClass(IClass; IClass) : void\l+ getInstance() : Model\l+ writeFile(IVisitor) : void\l+ setClassesToVisit(String) : String\l+ addClazz(IClass) : void\l+ init(IClass) : void\l+ addRelation(IRelation) : void\l+ setRelations(IRelation) : IRelation\l+ setCallDepth(int) : void\l+ getClassNames() : void\l+ findNewClasses(ISubMethod; int) : String[]\l+ accept(IPatternVisitor) : void\l+ getClasses() : IClass\l+ removeClassToVisit(String) : void\l+ getCallDepth() : int\l}"
 ];
 
 //writing relations between classes now
-AdapterClass -> TargetInterface [arrowhead = "empty", style = "dashed"];
-AdapterClass -> AdapteeClass [arrowhead = "vee", label = "\<\<adapts\>\>"];
+Model -> Model [arrowhead = "vee"];
 }

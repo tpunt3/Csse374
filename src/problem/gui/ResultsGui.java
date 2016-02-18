@@ -12,6 +12,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -38,6 +41,7 @@ import problem.model.decorators.DecoratorDecorator;
 import problem.model.decorators.LeafDecorator;
 import problem.model.decorators.SingletonDecorator;
 import problem.model.decorators.TargetDecorator;
+import problem.model.detectors.AdapterDetector;
 import problem.models.api.IClass;
 import problem.models.impl.Model;
 
@@ -49,30 +53,31 @@ public class ResultsGui implements ActionListener {
 	JScrollPane pane;
 	JSplitPane splitPane;
 	String inputClasses;
-	String[] classes;
 	String dotPath;
 	String sdPath;
 	String outputDir;
 	String phases;
 	ArrayList<String> parserPhases;
+	ArrayList<String> classesInPatterns;
 	JLabel imageLabel;
 	DesignParser dp;
-	JTree patternTree;
 	Model model;
-	
-	
+
+	Map<String, ArrayList<Class>> patternToClasses;
 
 	ArrayList<JCheckBox> patternBoxes;
 
 	public ResultsGui(DesignParser parser) throws IOException {
 		this.model = Model.getInstance();
-		model.setClassesToVisit(new ArrayList<String>());
+		model.setClassesToVisit(new HashSet<String>());
+
 		this.dp = parser;
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
-		patternTree = new JTree(root);
-		patternTree.setCellRenderer(new CheckBoxRenderer());
-		patternTree.setCellEditor(new CheckBoxNodeEditor(patternTree));
-		patternTree.setEditable(true);
+
+		this.patternToClasses = new HashMap<String, ArrayList<Class>>();
+		addPatternsToMap();
+		
+		this.classesInPatterns = new ArrayList<String>();
+
 		this.frame = new JFrame("UMLLAMA Results");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -106,12 +111,20 @@ public class ResultsGui implements ActionListener {
 			JCheckBox p = new JCheckBox(parserPhases.get(i) + " pattern");
 			p.setName(parserPhases.get(i));
 			p.addActionListener(this);
-			p.setActionCommand(parserPhases.get(i) + "patternAction");
+			p.setActionCommand(parserPhases.get(i) + "_patternAction");
 			patternBoxes.add(p);
 			checkBoxPanel.add(p);
 			createNodes(parserPhases.get(i));
-			patternTree.setRootVisible(true);
 		}
+		
+		//add in the classes that are not part of a pattern
+		JCheckBox p = new JCheckBox("no pattern");
+		p.setName("none");
+		p.addActionListener(this);
+		p.setActionCommand("no_patternAction");
+		patternBoxes.add(p);
+		checkBoxPanel.add(p);
+		createNodes("none");
 
 		// checkBoxPanel.add(patternTree);
 		checkBoxPanel.setVisible(true);
@@ -144,6 +157,30 @@ public class ResultsGui implements ActionListener {
 		frame.repaint();
 	}
 
+	private void addPatternsToMap() {
+		ArrayList<Class> adapterClasses = new ArrayList<Class>();
+		adapterClasses.add(AdapterDecorator.class);
+		adapterClasses.add(AdapteeDecorator.class);
+		adapterClasses.add(TargetDecorator.class);
+		this.patternToClasses.put("adapter", adapterClasses);
+		
+		ArrayList<Class> compositeClasses = new ArrayList<Class>();
+		compositeClasses.add(LeafDecorator.class);
+		compositeClasses.add(CompositeComponentDecorator.class);
+		compositeClasses.add(CompositeDecorator.class);
+		this.patternToClasses.put("composite", compositeClasses);
+		
+		ArrayList<Class> singletonClasses = new ArrayList<Class>();
+		singletonClasses.add(SingletonDecorator.class);
+		this.patternToClasses.put("singleton", singletonClasses);
+		
+		ArrayList<Class> decoratorClasses = new ArrayList<Class>();
+		decoratorClasses.add(DecoratorDecorator.class);
+		decoratorClasses.add(ComponentDecorator.class);
+		this.patternToClasses.put("decorator", decoratorClasses);
+		
+	}
+
 	private void createNodes(String root) {
 		Model model = Model.getInstance();
 
@@ -157,6 +194,7 @@ public class ResultsGui implements ActionListener {
 					pClass.setIconTextGap(20);
 					this.checkBoxPanel.add(pClass);
 					this.patternBoxes.add(pClass);
+					this.classesInPatterns.add(c.getName());
 					this.checkBoxPanel.revalidate();
 				}
 			}
@@ -171,6 +209,7 @@ public class ResultsGui implements ActionListener {
 					pClass.setIconTextGap(20);
 					this.checkBoxPanel.add(pClass);
 					this.patternBoxes.add(pClass);
+					this.classesInPatterns.add(c.getName());
 					this.checkBoxPanel.revalidate();
 				}
 			}
@@ -186,6 +225,7 @@ public class ResultsGui implements ActionListener {
 					pClass.setIconTextGap(20);
 					this.checkBoxPanel.add(pClass);
 					this.patternBoxes.add(pClass);
+					this.classesInPatterns.add(c.getName());
 					this.checkBoxPanel.revalidate();
 				}
 			}
@@ -200,6 +240,22 @@ public class ResultsGui implements ActionListener {
 					pClass.setIconTextGap(20);
 					this.checkBoxPanel.add(pClass);
 					this.patternBoxes.add(pClass);
+					this.classesInPatterns.add(c.getName());
+					this.checkBoxPanel.revalidate();
+				}
+			}
+		}
+		if (root.equals("none")) {
+			for (IClass c : model.getClasses()) {
+				if (!this.classesInPatterns.contains(c.getName())) {
+					JCheckBox pClass = new JCheckBox("- " + c.getName());
+					pClass.setName(c.getName());
+					pClass.addActionListener(this);
+					pClass.setActionCommand(c.getName());
+					pClass.setIconTextGap(20);
+					this.checkBoxPanel.add(pClass);
+					this.patternBoxes.add(pClass);
+					this.classesInPatterns.add(c.getName());
 					this.checkBoxPanel.revalidate();
 				}
 			}
@@ -232,10 +288,11 @@ public class ResultsGui implements ActionListener {
 
 		JCheckBox source = (JCheckBox) e.getSource();
 		if (e.getActionCommand().contains("patternAction")) {
+			int index = e.getActionCommand().indexOf("_");
 			if (source.isSelected()) {
-				addPatternClasses(e.getActionCommand());
+				addPatternClasses(e.getActionCommand().substring(0, index));
 			} else {
-				removePatternClasses(e.getActionCommand());
+				removePatternClasses(e.getActionCommand().substring(0, index));
 			}
 		} else {
 			if (source.isSelected()) {
@@ -276,51 +333,15 @@ public class ResultsGui implements ActionListener {
 		runner.start();
 	}
 
-	public void addPatternClasses(String patternName){
-		if (patternName.equals("adapterpatternAction")) {
-			for (IClass c : model.getClasses()) {
-				if (c instanceof AdapterDecorator || c instanceof AdapteeDecorator || c instanceof TargetDecorator) {
+	public void addPatternClasses(String patternName) {
+		
+		for (IClass c : model.getClasses()) {
+			for (int i = 0; i < this.patternToClasses.get(patternName).size(); i++) {
+				if (c.getClass().equals(this.patternToClasses.get(patternName).get(i))) {
 					model.addClassToVisit(c.getName());
-					for(JCheckBox j : this.patternBoxes){
+					for (JCheckBox j : this.patternBoxes) {
 						System.out.println(j.getName());
-						if(j.getName().equals(c.getName())){
-							j.setSelected(true);
-						}
-					}
-				}
-			}
-		}
-		if (patternName.equals("decoratorpatternAction")) {
-			for (IClass c : model.getClasses()) {
-				if (c instanceof DecoratorDecorator || c instanceof ComponentDecorator) {
-					model.addClassToVisit(c.getName());
-					for(JCheckBox j : patternBoxes){
-						if(j.getName().equals(c.getName())){
-							j.setSelected(true);
-						}
-					}
-				}
-			}
-		}
-		if (patternName.equals("compositepatternAction")) {
-			for (IClass c : model.getClasses()) {
-				if (c instanceof CompositeComponentDecorator || c instanceof CompositeDecorator
-						|| c instanceof LeafDecorator) {
-					model.addClassToVisit(c.getName());
-					for(JCheckBox j : patternBoxes){
-						if(j.getName().equals(c.getName())){
-							j.setSelected(true);
-						}
-					}
-				}
-			}
-		}
-		if (patternName.equals("singletonpatternAction")) {
-			for (IClass c : model.getClasses()) {
-				if (c instanceof SingletonDecorator) {
-					model.addClassToVisit(c.getName());
-					for(JCheckBox j : patternBoxes){
-						if(j.getName().equals(c.getName())){
+						if (j.getName().equals(c.getName())) {
 							j.setSelected(true);
 						}
 					}
@@ -329,51 +350,15 @@ public class ResultsGui implements ActionListener {
 		}
 	}
 
-	public void removePatternClasses(String patternName){
-		System.out.println(patternName);
-		if (patternName.equals("adapterpatternAction")) {
-			for (IClass c : model.getClasses()) {
-				if (c instanceof AdapterDecorator || c instanceof AdapteeDecorator || c instanceof TargetDecorator) {
+	public void removePatternClasses(String patternName) {
+		
+		for (IClass c : model.getClasses()) {
+			for (int i = 0; i < this.patternToClasses.get(patternName).size(); i++) {
+				if (c.getClass().equals(this.patternToClasses.get(patternName).get(i))) {
 					model.removeClassToVisit(c.getName());
-					for(JCheckBox j : this.patternBoxes){
-						if(j.getName().equals(c.getName())){
-							j.setSelected(false);
-						}
-					}
-				}
-			}
-		}
-		if (patternName.equals("decoratorpatternAction")) {
-			for (IClass c : model.getClasses()) {
-				if (c instanceof DecoratorDecorator || c instanceof ComponentDecorator) {
-					model.removeClassToVisit(c.getName());
-					for(JCheckBox j : this.patternBoxes){
-						if(j.getName().equals(c.getName())){
-							j.setSelected(false);
-						}
-					}
-				}
-			}
-		}
-		if (patternName.equals("compositepatternAction")) {
-			for (IClass c : model.getClasses()) {
-				if (c instanceof CompositeComponentDecorator || c instanceof CompositeDecorator
-						|| c instanceof LeafDecorator) {
-					model.removeClassToVisit(c.getName());
-					for(JCheckBox j : this.patternBoxes){
-						if(j.getName().equals(c.getName())){
-							j.setSelected(false);
-						}
-					}
-				}
-			}
-		}
-		if (patternName.equals("singletonpatternAction")) {
-			for (IClass c : model.getClasses()) {
-				if (c instanceof SingletonDecorator) {
-					model.removeClassToVisit(c.getName());
-					for(JCheckBox j : this.patternBoxes){
-						if(j.getName().equals(c.getName())){
+					for (JCheckBox j : this.patternBoxes) {
+						System.out.println(j.getName());
+						if (j.getName().equals(c.getName())) {
 							j.setSelected(false);
 						}
 					}
