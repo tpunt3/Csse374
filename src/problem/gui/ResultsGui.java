@@ -7,10 +7,14 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.ReplicateScaleFilter;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.CopyOption;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,12 +22,15 @@ import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -44,6 +51,8 @@ import problem.model.decorators.TargetDecorator;
 import problem.model.detectors.AdapterDetector;
 import problem.models.api.IClass;
 import problem.models.impl.Model;
+
+import static java.nio.file.StandardCopyOption.*;
 
 public class ResultsGui implements ActionListener {
 
@@ -76,7 +85,7 @@ public class ResultsGui implements ActionListener {
 		this.patternToClasses = new HashMap<String, ArrayList<Class>>();
 		this.classesInPatterns = new ArrayList<String>();
 
-		
+		this.outputDir = dp.getOutputDir();
 
 		this.frame = new JFrame("UMLLAMA Results");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -281,12 +290,33 @@ public class ResultsGui implements ActionListener {
 		helpMenu.setMnemonic(KeyEvent.VK_H);
 		helpMenu.getAccessibleContext().setAccessibleDescription("Use this menu to get more information or help");
 
-		JMenuItem saveItem = new JMenuItem();
-		saveItem.setMnemonic(KeyEvent.VK_S);
-		saveItem.setText("Save");
-		saveItem.setActionCommand("save");
-		saveItem.addActionListener(this);
-		fileMenu.add(saveItem);
+		JMenuItem helpItem = new JMenuItem();
+		helpItem.setMnemonic(KeyEvent.VK_S);
+		helpItem.setText("Help");
+		helpItem.setActionCommand("help");
+		helpItem.addActionListener(this);
+		helpMenu.add(helpItem);
+		
+		JMenuItem aboutItem = new JMenuItem();
+		aboutItem.setMnemonic(KeyEvent.VK_S);
+		aboutItem.setText("About");
+		aboutItem.setActionCommand("about");
+		aboutItem.addActionListener(this);
+		helpMenu.add(aboutItem);
+
+		JMenuItem exportItem = new JMenuItem();
+		exportItem.setMnemonic(KeyEvent.VK_E);
+		exportItem.setText("Export");
+		exportItem.setActionCommand("export");
+		exportItem.addActionListener(this);
+		fileMenu.add(exportItem);
+		
+		JMenuItem restartItem = new JMenuItem();
+		restartItem.setMnemonic(KeyEvent.VK_R);
+		restartItem.setText("Restart");
+		restartItem.setActionCommand("restart");
+		restartItem.addActionListener(this);
+		fileMenu.add(restartItem);
 
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu);
@@ -296,22 +326,37 @@ public class ResultsGui implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		JCheckBox source = (JCheckBox) e.getSource();
-		if (e.getActionCommand().contains("patternAction")) {
+		String cmd = e.getActionCommand();
+		if (cmd.contains("patternAction")) {
+			JCheckBox source = (JCheckBox) e.getSource();
 			int index = e.getActionCommand().indexOf("_");
 			if (source.isSelected()) {
 				addPatternClasses(e.getActionCommand().substring(0, index));
 			} else {
 				removePatternClasses(e.getActionCommand().substring(0, index));
 			}
-		} else {
+			regenerate();
+		} else if (cmd.equals("help")) {
+			showHelp();
+		} else if (cmd.equals("about")) {
+			showAbout();
+		} else if(cmd.equals("export")){
+			export();
+		}else if(cmd.equals("restart")){
+			restart();
+		}else {
+			JCheckBox source = (JCheckBox) e.getSource();
 			if (source.isSelected()) {
 				model.addClassToVisit(e.getActionCommand());
 			} else {
 				model.removeClassToVisit(e.getActionCommand());
 			}
+			regenerate();
 		}
 
+	}
+	
+	public void regenerate(){
 		Thread runner = new Thread() {
 			public void run() {
 				Path graphPath = FileSystems.getDefault().getPath("input_output/graph1.png");
@@ -343,8 +388,6 @@ public class ResultsGui implements ActionListener {
 	}
 
 	public void addPatternClasses(String patternName) {
-		
-		
 		for (IClass c : model.getClasses()) {
 			for (int i = 0; i < this.patternToClasses.get(patternName).size(); i++) {
 				if (c.getClass().equals(this.patternToClasses.get(patternName).get(i))) {
@@ -360,7 +403,6 @@ public class ResultsGui implements ActionListener {
 	}
 
 	public void removePatternClasses(String patternName) {
-		
 		for (IClass c : model.getClasses()) {
 			for (int i = 0; i < this.patternToClasses.get(patternName).size(); i++) {
 				if (c.getClass().equals(this.patternToClasses.get(patternName).get(i))) {
@@ -373,5 +415,52 @@ public class ResultsGui implements ActionListener {
 				}
 			}
 		}
+	}
+	
+	private void restart(){
+		frame.dispose();
+		MainGui main = new MainGui();
+		main.createLandingScreen();
+	}
+	
+	private void export(){
+		File source = new File(outputDir + "/graph1.png");
+		File target = null;
+		JFileChooser chooser = new JFileChooser();
+		chooser.setCurrentDirectory(new java.io.File("."));
+	    chooser.setDialogTitle("Choose Location");
+	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	    chooser.setAcceptAllFileFilterUsed(false);
+
+	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+	    	target = chooser.getSelectedFile();
+	    }
+	    if(target != null){
+	    	String fileName = JOptionPane.showInputDialog("Enter your new file name");
+	    	System.out.println(target.getPath()+"\\"+fileName);
+	    	File newFile = new File(target.getPath() +"\\"+fileName);
+	    	try {
+	    		System.out.println(source.toPath().toString() + "  " + newFile.toString().toString());
+				Files.copy(source.toPath(), newFile.toPath(), REPLACE_EXISTING);
+			} catch (IOException e) {
+				System.out.println("IO Exception exporting file");
+			}
+	    }
+	}
+	
+	private void showAbout() {
+		ImageIcon img = new ImageIcon("resources/alpacaLogo.jpg");
+		JOptionPane.showMessageDialog(null,
+				"This product, UMLLAMA(TM), was developed by Katie Lee and Trent Punt as a service "
+						+ " to help users \n generate documentation for code and help understanding and visualization of design patterns. Copyright 2016.", "UMLLAMA About", JOptionPane.INFORMATION_MESSAGE,img);
+	}
+
+	private void showHelp() {
+		JOptionPane.showMessageDialog(null,
+				"clicking boxes on the left side will add those classes to the uml displayed\n "
+				+ "on the right side. Clicking patterns on the left will add all the classes in that\n"
+				+ "pattern to the uml on the right side. Export the png to your computer by selecting\n "
+				+ "File->Export","UMLLAMA Help", JOptionPane.QUESTION_MESSAGE);
+		
 	}
 }

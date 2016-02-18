@@ -146,12 +146,12 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		aboutItem.addActionListener(this);
 		helpMenu.add(aboutItem);
 
-		JMenuItem saveItem = new JMenuItem();
-		saveItem.setMnemonic(KeyEvent.VK_S);
-		saveItem.setText("Save");
-		saveItem.setActionCommand("save");
-		saveItem.addActionListener(this);
-		fileMenu.add(saveItem);
+		JMenuItem quitItem = new JMenuItem();
+		quitItem.setMnemonic(KeyEvent.VK_S);
+		quitItem.setText("Quit");
+		quitItem.setActionCommand("quit");
+		quitItem.addActionListener(this);
+		fileMenu.add(quitItem);
 
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu);
@@ -175,6 +175,9 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 			showHelp();
 		} else if (cmd.equals("about")) {
 			showAbout();
+		} else if(cmd.equals("quit")){
+			frame.dispose();
+			System.exit(0);
 		}
 	}
 
