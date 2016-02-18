@@ -4,7 +4,7 @@ Katie Lee and Trent Punt
 
 Description of Project
 
-Our design is similar to the car example from class. We used the Visitor Pattern. We have a Model object that gets created through ASM. Our code makes a first pass through the specified classes and generates our Model based on the classes, methods, and fields it finds. This is done using the DesignParser, and various ClassVisitor classes that we created in class. We then traverse our Model (making a second pass) and generate a .gv file titled "model.gv" by going through all of the classes, fields, and methods in our Model. This pass is made by the classes in all the problem.model.* that we created. We then run dot on our .gv file to generate a png file with the UML of the desired classes. The .png is called "graph1.png" and is located in the input_output folder. 
+Our design is similar to the car example from class. We used the Visitor Pattern. We have a Model object that gets created through ASM. Our code makes a first pass through the specified classes and generates our Model based on the classes, methods, and fields it finds. This is done using the DesignParser, and various ClassVisitor classes that we created in class. We then traverse our Model (making a second pass) and generate a .gv file titled "model.gv" by going through all of the classes, fields, and methods in our Model. This pass is made by the classes in all the problem.model.* that we created. We then run dot on our .gv file to generate a png file with the UML of the desired classes. The .png is called "graph1.png" and is located in the input_output folder. We also have a gui that makes use of our design parser to generate uml's with user-specified configurations.
 
 Who Did What:
 Milestone 1
@@ -25,11 +25,23 @@ During this milestone, Trent was sick so we had to skype call to pair program. W
 Milestone 6
 During this milestone, Katie and I could meet again in person which was helpful. We both worked very closely on the pattern detection and then we split up a little bit of the testing to make writing tests go faster. We continue to work very closely together on almost every commit. 
 
+Milestone 7
+During this milestone, Katie and I worked together very closely to finish up the project. We worked together the entire time and feel very good about our product.
+
 Instructions to use our code:
 1.) Go to the DesignParser.java class in problem.asm
 2.) Change the array of strings called CLASSES to reflect which classes you'd like to generate a UML for
 3.) In the main() method, change the parameters for generateDocuments() to the DocType you want to generate (a UML, a sequence diagram, or both), the method information for the starting method of your sequence diagram, and the call depth for your sequence diagram
 4.) Run DesignParser
+
+Insructions to use our code through the GUI:
+1.) Run UMLLAMA
+2.) load in an existing configuration file or create a new one
+3.) click "analyze" and then "go to results".
+4.) click on check boxes on the side to generate the desired uml
+5.) pet llamas
+6.) ???
+7.) profit
 
 Instructions to use our tests:
 For BasicGVTesting and ProjectGVTesting you must go into model.java and change "DesignParser" to "TestDesignParser" for relations to show up. For UnitGVTesting you need to comment out the line in the addRelation method of Model that sets inClasses to false, and uncomment the line that sets inClasses to true.
@@ -70,6 +82,12 @@ In this milestone, we added composite detection to our project. This included ad
 
 Picture of Milestone 6:
 ![Milestone6](./UML_diagrams/our_project/FinalProjectUML_M6.png)
+
+Milestone 7:
+During this milestone, we added a Graphical User Interface to our project. We implemented a main landing screen that contains two buttons, "Load Config" and "Analyze". Users can either load in an existing configuration, create a new configuration, or analyze if there is already a config.properties file in the resources folder. Pressing the analyze button triggers the class visitor which detects all the patterns in the specified classes. After users press analyze, users should click "Go To Results", which will open a new window with all of the specified patterns and classes on the left and a blank window on the right. Clicking on classes on the left will generate a uml of the specified classes on the right. Users can export their file to a png in a user-specified location or restart using the file menu.
+
+Picture of Milestone 7:
+![Milestone7](./UML_diagrams/our_project/FinalProjectUML_M7.png)
 
 Locations and names of important documents:
 
