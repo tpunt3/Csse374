@@ -59,6 +59,8 @@ public class ResultsGui implements ActionListener {
 	DesignParser dp;
 	JTree patternTree;
 	Model model;
+	
+	
 
 	ArrayList<JCheckBox> patternBoxes;
 
@@ -102,6 +104,7 @@ public class ResultsGui implements ActionListener {
 
 		for (int i = 1; i < parserPhases.size() - 1; i++) {
 			JCheckBox p = new JCheckBox(parserPhases.get(i) + " pattern");
+			p.setName(parserPhases.get(i));
 			p.addActionListener(this);
 			p.setActionCommand(parserPhases.get(i) + "patternAction");
 			patternBoxes.add(p);
@@ -148,10 +151,12 @@ public class ResultsGui implements ActionListener {
 			for (IClass c : model.getClasses()) {
 				if (c instanceof AdapterDecorator || c instanceof AdapteeDecorator || c instanceof TargetDecorator) {
 					JCheckBox pClass = new JCheckBox("- " + c.getName());
+					pClass.setName(c.getName());
 					pClass.addActionListener(this);
 					pClass.setActionCommand(c.getName());
 					pClass.setIconTextGap(20);
 					this.checkBoxPanel.add(pClass);
+					this.patternBoxes.add(pClass);
 					this.checkBoxPanel.revalidate();
 				}
 			}
@@ -160,10 +165,12 @@ public class ResultsGui implements ActionListener {
 			for (IClass c : model.getClasses()) {
 				if (c instanceof DecoratorDecorator || c instanceof ComponentDecorator) {
 					JCheckBox pClass = new JCheckBox("- " + c.getName());
+					pClass.setName(c.getName());
 					pClass.addActionListener(this);
 					pClass.setActionCommand(c.getName());
 					pClass.setIconTextGap(20);
 					this.checkBoxPanel.add(pClass);
+					this.patternBoxes.add(pClass);
 					this.checkBoxPanel.revalidate();
 				}
 			}
@@ -173,10 +180,12 @@ public class ResultsGui implements ActionListener {
 				if (c instanceof CompositeComponentDecorator || c instanceof CompositeDecorator
 						|| c instanceof LeafDecorator) {
 					JCheckBox pClass = new JCheckBox("- " + c.getName());
+					pClass.setName(c.getName());
 					pClass.addActionListener(this);
 					pClass.setActionCommand(c.getName());
 					pClass.setIconTextGap(20);
 					this.checkBoxPanel.add(pClass);
+					this.patternBoxes.add(pClass);
 					this.checkBoxPanel.revalidate();
 				}
 			}
@@ -185,10 +194,12 @@ public class ResultsGui implements ActionListener {
 			for (IClass c : model.getClasses()) {
 				if (c instanceof SingletonDecorator) {
 					JCheckBox pClass = new JCheckBox("- " + c.getName());
+					pClass.setName(c.getName());
 					pClass.addActionListener(this);
 					pClass.setActionCommand(c.getName());
 					pClass.setIconTextGap(20);
 					this.checkBoxPanel.add(pClass);
+					this.patternBoxes.add(pClass);
 					this.checkBoxPanel.revalidate();
 				}
 			}
@@ -218,23 +229,21 @@ public class ResultsGui implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		JCheckBox source = (JCheckBox) e.getSource();
 		if (e.getActionCommand().contains("patternAction")) {
 			if (source.isSelected()) {
-				dp.addPattern(e.getActionCommand());
-				// add check boxes for the selected classes?
+				addPatternClasses(e.getActionCommand());
 			} else {
-				dp.removePattern(e.getActionCommand());
-				// remove check boxes for the selected classes?
+				removePatternClasses(e.getActionCommand());
 			}
-		}else{
+		} else {
 			if (source.isSelected()) {
 				System.out.println(e.getActionCommand());
 				model.addClassToVisit(e.getActionCommand());
 			} else {
 				model.removeClassToVisit(e.getActionCommand());
-			}	
+			}
 		}
 
 		Thread runner = new Thread() {
@@ -265,5 +274,111 @@ public class ResultsGui implements ActionListener {
 			}
 		};
 		runner.start();
+	}
+
+	public void addPatternClasses(String patternName){
+		if (patternName.equals("adapterpatternAction")) {
+			for (IClass c : model.getClasses()) {
+				if (c instanceof AdapterDecorator || c instanceof AdapteeDecorator || c instanceof TargetDecorator) {
+					model.addClassToVisit(c.getName());
+					for(JCheckBox j : this.patternBoxes){
+						System.out.println(j.getName());
+						if(j.getName().equals(c.getName())){
+							j.setSelected(true);
+						}
+					}
+				}
+			}
+		}
+		if (patternName.equals("decoratorpatternAction")) {
+			for (IClass c : model.getClasses()) {
+				if (c instanceof DecoratorDecorator || c instanceof ComponentDecorator) {
+					model.addClassToVisit(c.getName());
+					for(JCheckBox j : patternBoxes){
+						if(j.getName().equals(c.getName())){
+							j.setSelected(true);
+						}
+					}
+				}
+			}
+		}
+		if (patternName.equals("compositepatternAction")) {
+			for (IClass c : model.getClasses()) {
+				if (c instanceof CompositeComponentDecorator || c instanceof CompositeDecorator
+						|| c instanceof LeafDecorator) {
+					model.addClassToVisit(c.getName());
+					for(JCheckBox j : patternBoxes){
+						if(j.getName().equals(c.getName())){
+							j.setSelected(true);
+						}
+					}
+				}
+			}
+		}
+		if (patternName.equals("singletonpatternAction")) {
+			for (IClass c : model.getClasses()) {
+				if (c instanceof SingletonDecorator) {
+					model.addClassToVisit(c.getName());
+					for(JCheckBox j : patternBoxes){
+						if(j.getName().equals(c.getName())){
+							j.setSelected(true);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public void removePatternClasses(String patternName){
+		System.out.println(patternName);
+		if (patternName.equals("adapterpatternAction")) {
+			for (IClass c : model.getClasses()) {
+				if (c instanceof AdapterDecorator || c instanceof AdapteeDecorator || c instanceof TargetDecorator) {
+					model.removeClassToVisit(c.getName());
+					for(JCheckBox j : this.patternBoxes){
+						if(j.getName().equals(c.getName())){
+							j.setSelected(false);
+						}
+					}
+				}
+			}
+		}
+		if (patternName.equals("decoratorpatternAction")) {
+			for (IClass c : model.getClasses()) {
+				if (c instanceof DecoratorDecorator || c instanceof ComponentDecorator) {
+					model.removeClassToVisit(c.getName());
+					for(JCheckBox j : this.patternBoxes){
+						if(j.getName().equals(c.getName())){
+							j.setSelected(false);
+						}
+					}
+				}
+			}
+		}
+		if (patternName.equals("compositepatternAction")) {
+			for (IClass c : model.getClasses()) {
+				if (c instanceof CompositeComponentDecorator || c instanceof CompositeDecorator
+						|| c instanceof LeafDecorator) {
+					model.removeClassToVisit(c.getName());
+					for(JCheckBox j : this.patternBoxes){
+						if(j.getName().equals(c.getName())){
+							j.setSelected(false);
+						}
+					}
+				}
+			}
+		}
+		if (patternName.equals("singletonpatternAction")) {
+			for (IClass c : model.getClasses()) {
+				if (c instanceof SingletonDecorator) {
+					model.removeClassToVisit(c.getName());
+					for(JCheckBox j : this.patternBoxes){
+						if(j.getName().equals(c.getName())){
+							j.setSelected(false);
+						}
+					}
+				}
+			}
+		}
 	}
 }

@@ -46,7 +46,6 @@ class ImageProxy implements Icon {
 
 	public void paintIcon(final Component c, Graphics g, int x, int y) {
 		if (imageIcon != null) {
-			System.out.println("painting");
 			imageIcon.paintIcon(c, g, x, y);
 		} else {
 			g.drawString("Loading picture, please wait...", x + 100, y + 20);
