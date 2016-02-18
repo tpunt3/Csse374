@@ -74,9 +74,9 @@ public class ResultsGui implements ActionListener {
 		this.dp = parser;
 
 		this.patternToClasses = new HashMap<String, ArrayList<Class>>();
-		addPatternsToMap();
-		
 		this.classesInPatterns = new ArrayList<String>();
+
+		
 
 		this.frame = new JFrame("UMLLAMA Results");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,11 +117,13 @@ public class ResultsGui implements ActionListener {
 			createNodes(parserPhases.get(i));
 		}
 		
+		addPatternsToMap();
+		
 		//add in the classes that are not part of a pattern
 		JCheckBox p = new JCheckBox("no pattern");
 		p.setName("none");
 		p.addActionListener(this);
-		p.setActionCommand("no_patternAction");
+		p.setActionCommand("none_patternAction");
 		patternBoxes.add(p);
 		checkBoxPanel.add(p);
 		createNodes("none");
@@ -178,6 +180,14 @@ public class ResultsGui implements ActionListener {
 		decoratorClasses.add(DecoratorDecorator.class);
 		decoratorClasses.add(ComponentDecorator.class);
 		this.patternToClasses.put("decorator", decoratorClasses);
+		
+		ArrayList<Class> patternlessClasses = new ArrayList<Class>();
+		for(IClass c : model.getClasses()){
+			if(!this.classesInPatterns.contains(c.getName())){
+				patternlessClasses.add(c.getClass());
+			}
+		}
+		this.patternToClasses.put("none", patternlessClasses);
 		
 	}
 
@@ -296,7 +306,6 @@ public class ResultsGui implements ActionListener {
 			}
 		} else {
 			if (source.isSelected()) {
-				System.out.println(e.getActionCommand());
 				model.addClassToVisit(e.getActionCommand());
 			} else {
 				model.removeClassToVisit(e.getActionCommand());
@@ -335,12 +344,12 @@ public class ResultsGui implements ActionListener {
 
 	public void addPatternClasses(String patternName) {
 		
+		
 		for (IClass c : model.getClasses()) {
 			for (int i = 0; i < this.patternToClasses.get(patternName).size(); i++) {
 				if (c.getClass().equals(this.patternToClasses.get(patternName).get(i))) {
 					model.addClassToVisit(c.getName());
 					for (JCheckBox j : this.patternBoxes) {
-						System.out.println(j.getName());
 						if (j.getName().equals(c.getName())) {
 							j.setSelected(true);
 						}
@@ -357,7 +366,6 @@ public class ResultsGui implements ActionListener {
 				if (c.getClass().equals(this.patternToClasses.get(patternName).get(i))) {
 					model.removeClassToVisit(c.getName());
 					for (JCheckBox j : this.patternBoxes) {
-						System.out.println(j.getName());
 						if (j.getName().equals(c.getName())) {
 							j.setSelected(false);
 						}
