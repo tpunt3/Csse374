@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -42,6 +43,9 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 	String sdPath;
 	String outputDir;
 	String phases;
+	int adapterDelegation;
+	int decoratorDelegation;
+	boolean singletonGetInstance;
 	private ArrayList<String> parserPhases;
 	DesignParser dp;
 	JButton moveOn;
@@ -54,12 +58,12 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		Path graphPath = FileSystems.getDefault().getPath("input_output/graph1.png");
 		Path configPath = FileSystems.getDefault().getPath("resources/config.properties");
 
-		// try {
-		// Files.deleteIfExists(graphPath);
-		// Files.deleteIfExists(configPath);
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
+		 try {
+		 Files.deleteIfExists(graphPath);
+		 Files.deleteIfExists(configPath);
+		 } catch (IOException e) {
+		 e.printStackTrace();
+		 }
 
 		// create frame
 		this.frame = new JFrame("UMLLAMA");
@@ -229,7 +233,6 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		dp.addPropertyChangeListener(this);
 		dp.setPhases(this.parserPhases);
 		dp.setOutputDir(this.outputDir);
-
 		jpb.setValue(dp.getProgress());
 		dp.setClasses(classes);
 
@@ -254,6 +257,9 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 					inputClasses = p.getProperty("Input-Classes");
 					outputDir = p.getProperty("Output-Directory");
 					phases = p.getProperty("Phases");
+					adapterDelegation = Integer.parseInt(p.getProperty("Adapter-MethodDelegation"));
+					decoratorDelegation = Integer.parseInt(p.getProperty("Decorator-MethodDelegation"));
+					singletonGetInstance = Boolean.parseBoolean(p.getProperty("Singleton-RequireGetInstance"));
 					splitPhases();
 
 					classes = inputClasses.split(",");

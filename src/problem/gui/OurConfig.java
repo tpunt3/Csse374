@@ -12,9 +12,24 @@ public class OurConfig {
 	private String dotPath;
 	private String sdPath;
 	private String phases;
+	private String adapterMethodDelegation;
+	private String decoratorMethodDelegation;
+	private String singletonRequireGetInstance;
 
 	public OurConfig() {
 		
+	}
+
+	public void setAdapterMethodDelegation(String adapterMethodDelegation) {
+		this.adapterMethodDelegation = adapterMethodDelegation;
+	}
+
+	public void setDecoratorMethodDelegation(String decoratorMethodDelegation) {
+		this.decoratorMethodDelegation = decoratorMethodDelegation;
+	}
+
+	public void setSingletonRequireGetInstance(String singletonRequireGetInstance) {
+		this.singletonRequireGetInstance = singletonRequireGetInstance;
 	}
 
 	public void setInputClasses(String inputClasses) {
@@ -47,6 +62,9 @@ public class OurConfig {
 			p.setProperty("Output-Directory", this.outputDir);
 			p.setProperty("Dot-Path", this.dotPath);
 			p.setProperty("Phases", this.phases);
+			p.setProperty("Adapter-MethodDelegation", this.adapterMethodDelegation);
+			p.setProperty("Decorator-MethodDelegation", this.decoratorMethodDelegation);
+			p.setProperty("Singleton-RequireGetInstance", this.singletonRequireGetInstance);
 			
 			File file = new File("resources/config.properties");
 			FileOutputStream fos = new FileOutputStream(file);
