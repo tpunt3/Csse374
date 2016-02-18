@@ -1,6 +1,6 @@
 package problem.gui;
 
-public class GuiDriver {
+public class UMLLAMA {
 
 	public static void main(String[] args) {
 
