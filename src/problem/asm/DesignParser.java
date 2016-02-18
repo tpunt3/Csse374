@@ -345,7 +345,7 @@ public class DesignParser extends SwingWorker<Void, Void> {
 	}
 
 	public void detectSingletonPattern(IModel model) {
-		IPatternDetector singletonDetector = new SingletonDetector(model);
+		IPatternDetector singletonDetector = new SingletonDetector(model, getInstance);
 		singletonDetector.detectPatterns();
 		this.currentPhase = "Detecting Singleton Pattern";
 		updateProgress();

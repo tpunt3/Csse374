@@ -13,10 +13,17 @@ import problem.models.impl.Relation;
 public class SingletonDetector implements IPatternDetector {
 	private IModel model;
 	private ArrayList<IClass> toReplace;
+	boolean instanceRequired;
 	
 	public SingletonDetector(IModel model) {
 		this.model = model;
 		this.toReplace = new ArrayList<IClass>();
+	}
+	
+	public SingletonDetector(IModel model, boolean instanceRequired) {
+		this.model = model;
+		this.toReplace = new ArrayList<IClass>();
+		this.instanceRequired = instanceRequired;
 	}
 	
 	@Override
@@ -53,6 +60,7 @@ public class SingletonDetector implements IPatternDetector {
 		boolean privateConstructor = false;
 		boolean returnsSelf = false;
 		boolean isEnum = false;
+		boolean hasGetInstance = false;
 		
 		if(c.getSignature() != null && c.getSignature().contains("Enum")){
 			isEnum = true;
@@ -66,9 +74,17 @@ public class SingletonDetector implements IPatternDetector {
 			if((m.getAccess().equals("-") || m.getAccess().equals("#")) && m.getName().equals("init")){
 				privateConstructor = true;
 			}
+			
+			if(m.getAccess().equals("+") && m.getName().equals("getInstance")){
+				hasGetInstance = true;
+			}
 		}
 		
-		if(privateConstructor && returnsSelf && !isEnum){
+		if(instanceRequired && privateConstructor && returnsSelf && !isEnum && hasGetInstance){
+			return true;
+		}
+		
+		if(!instanceRequired && privateConstructor && returnsSelf && !isEnum){
 			return true;
 		}
 		return false;

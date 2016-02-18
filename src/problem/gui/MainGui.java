@@ -235,6 +235,9 @@ public class MainGui implements ActionListener, PropertyChangeListener {
 		dp.setOutputDir(this.outputDir);
 		jpb.setValue(dp.getProgress());
 		dp.setClasses(classes);
+		dp.setAdapterDelegation(adapterDelegation);
+		dp.setDecoratorDelegation(decoratorDelegation);
+		dp.setSingletonGetInstance(singletonGetInstance);
 
 		dp.execute();
 	}
